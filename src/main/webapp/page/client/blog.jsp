@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 14:41
+  Time: 19:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,161 +14,164 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Services - HomeCleaner</title>
+    <title>Blog List - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/mmenu/dist/mmenu.css"/>
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<%=path%>page/client/style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
+
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
+    <%--    我的css--%>
+    <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
+
 </head>
 
 <body>
+
 <!--header-top-->
 <jsp:include page="top1.jsp" flush="true"/>
 <!--header-bottom-->
 <jsp:include page="top2.jsp" flush="true"/>
 <!--header-ends-->
 
-<!--services-area start-->
-<div class="services-area bg-f3f4f7 pt-108 pt-sm-65 pb-90 pb-sm-50">
+<!--page-banner-start-->
+<div class="page-banner-area bg-1">
     <div class="container">
-        <div class="row">
+        <div class="row height-400 align-items-center">
             <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Our Main Services</h2>
-                    <p>With an outstanding reputation for quality, integrity and service, <br/> we can clean anything you throw at us!</p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-65 mt-sm-55">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/1.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You didn't have to lift a finger...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/2.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Office Cleaning</h4>
-                        <p>We provide full office cleaning services from highly trained cleaning staff. Offering businesses after hours daily office cleaning..</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/3.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Window Cleaning</h4>
-                        <p>Contract us for ongoing window cleaning services and we can make sure your building is always sparkling whatever the weather...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/4.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Upholstery Cleaning</h4>
-                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/5.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Carpet Cleaning</h4>
-                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/6.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Clutter Cleanup</h4>
-                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
-                        <a href="#" class="btn-common">READ MORE</a>
+                <div class="page-banner text-center">
+                    <h2>Blog Listing</h2>
+                    <div class="site-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog Listing</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--services-area end-->
+<!--page-banner-end-->
 
-<!--contact-area start-->
-<div class="contact-area bg-1 pt-100 pt-sm-80 pb-100 pb-sm-80">
+<!--blog-area start-->
+<div class="blog-area mt-120 mt-sm-80 mb-105 mb-sm-65">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6"></div>
+        <div class="row blog-single style-2">
             <div class="col-lg-6">
-                <div class="contact-form style-3">
-                    <h2>Ask Us Anything</h2>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Name*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Phone*">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Message *"></textarea>
-                        </div>
-                        <button type="button" class="btn-common mt-20">BOOK NOW</button>
-                    </form>
+                <div class="blog-thumb">
+                    <a href="#"><img src="assets/images/blog/lg/1.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>28 April 2018</small>
+                    <h4><a href="#">Which Cleaning Service Is Best For You?</a></h4>
+                    <p>One of the most important parts of any healthy lifestyle, though, is a willingness to learn from those who’ve already been around for a bit. It seems like a good place to start. You might notice there’s a bit of a variety, almost as if one lifestyle doesn’t fit all...</p>
+                    <div class="blog-author">
+                        <img src="assets/images/blog/authors/1.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="assets/images/blog/lg/2.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>28 April 2018</small>
+                    <h4><a href="#">How To Clean Grout and Remove Stains</a></h4>
+                    <p>The workplace keyboard can have more than 200 times as many bacteria as a toilet seat.  To begin with, it is often touched throughout the day, so wherever those fingers have been,  it’s likely the computer keyboard has been there too. It is also the perfect surface for catching sneezes.</p>
+                    <div class="blog-author">
+                        <img src="assets/images/blog/authors/3.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="assets/images/blog/lg/3.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>26 April 2018</small>
+                    <h4><a href="#">The Three Rules of Maid Service Etiquette</a></h4>
+                    <p>To begin with, it is often touched throughout the day, so wherever those fingers have been. Every service industry has a list of do’s and don’ts to make sure both the customer and the provider can benefit from the relationship...</p>
+                    <div class="blog-author">
+                        <img src="assets/images/blog/authors/2.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="assets/images/blog/lg/4.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>26 April 2018</small>
+                    <h4><a href="#">Cleaning Tip: How to Clean Stainless Steel</a></h4>
+                    <p>To begin with, it is often touched throughout the day, so wherever those fingers have been. Every service industry has a list of do’s and don’ts to make sure both the customer and the provider can benefit from the relationship...</p>
+                    <div class="blog-author">
+                        <img src="assets/images/blog/authors/3.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-80 mt-sm-50">
+            <div class="col-lg-12">
+                <div class="site-pagination style-3 text-center">
+                    <ul>
+                        <li><a href="#"><i class="arrow_carrot-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#"><i class="arrow_carrot-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--contact-area end-->
+<!--blog-area end-->
 
 <!--footer-area start-->
 <footer>
@@ -297,4 +300,3 @@
 
 </body>
 </html>
-

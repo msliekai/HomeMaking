@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.hm.entity.TblUser" %><%--
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/20
@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath() + "/";
+%>
 <html>
 <head>
     <title>-</title>
@@ -22,55 +27,57 @@
                     <div class="mainmenu">
                         <nav>
                             <ul class="list-none">
-                                <li><a href="#">首页</a></li>
+                                <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
                                 <li><a href="#">其他界面
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="about.html">关于我们</a></li>
-                                        <li><a href="testimonials.html">推荐</a></li>
-                                        <li><a href="pricing.html">定价和计划</a></li>
-                                        <li><a href="order-form.html">订单表格</a></li>
-                                        <li><a href="faq.html">常见问题/解答</a></li>
-                                        <li><a href="404.html">404 Error</a></li>
-                                        <li><a href="coming-soon.html">即将推出</a></li>
+                                        <li><a href="<%=path%>page/client/about.jsp">关于我们</a></li>
+                                        <li><a href="<%=path%>page/client/testimonials.jsp">推荐</a></li>
+                                        <li><a href="<%=path%>page/client/pricing.jsp">定价和计划</a></li>
+                                        <li><a href="<%=path%>page/client/order-form.jsp">订单表格</a></li>
+                                        <li><a href="<%=path%>page/client/faq.jsp">常见问题/解答</a></li>
+                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>
+                                        <li><a href="<%=path%>page/client/coming-soon.jsp">即将推出</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">服务
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="services.html">品类保洁</a></li>
-                                        <li><a href="service-details.html">日常保洁</a></li>
-                                        <li><a href="service-details.html">保姆</a></li>
-                                        <li><a href="service-details.html">月嫂</a></li>
-                                        <li><a href="service-details.html">育儿嫂</a></li>
+                                        <li><a href="<%=path%>page/client/services.jsp">所有服务</a></li>
+                                        <li><a href="<%=path%>page/client/services.jsp">品类保洁</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">日常保洁</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Projects
+                                <li><a href="#">项目
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="projects-grid.html">Projects Grid</a></li>
-                                        <li><a href="projects-grid-fullwidth.html">Projects Fullwidth</a></li>
-                                        <li><a href="project-details.html">Project Details</a></li>
+                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>
+                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects
+                                            Fullwidth</a></li>
+                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Shop
+                                <li><a href="#">店
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="shop.html">Shop Grid</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li>
-                                        <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>
+                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>
+                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>
+                                        <li><a href="<%=path%>page/client/checkout.jsp">Checkout</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Blog
+                                <li><a href="#">微博
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-sidebar.html">Blog With Sidebar</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>
+                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>
+                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -79,112 +86,91 @@
                     <div class="d-hidden mobile-menu">
                         <nav id="mobile-menu">
                             <ul class="list-none">
-                                <li><a href="#">首页</a>
+                                <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
+                                <li><a href="#">其他界面</a>
                                     <ul>
-                                        <li><a href="index.html">Home Default</a></li>
-                                        <li><a href="index-2.html">Home With Caculator</a></li>
-                                        <li><a href="index-3.html">Home With Booking</a></li>
+                                        <li><a href="<%=path%>page/client/about.jsp">About Us</a></li>
+                                        <li><a href="<%=path%>page/client/testimonials.jsp">Testimonials</a></li>
+                                        <li><a href="<%=path%>page/client/pricing.jsp">Pricing & Plan</a></li>
+                                        <li><a href="<%=path%>page/client/order-form.jsp">Order Form</a></li>
+                                        <li><a href="<%=path%>page/client/faq.jsp">FAQS</a></li>
+                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>
+                                        <li><a href="<%=path%>page/client/coming-soon.jsp">Coming soon</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="#">服务</a>
                                     <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="testimonials.html">Testimonials</a></li>
-                                        <li><a href="pricing.html">Pricing & Plan</a></li>
-                                        <li><a href="order-form.html">Order Form</a></li>
-                                        <li><a href="faq.html">FAQS</a></li>
-                                        <li><a href="404.html">404 Error</a></li>
-                                        <li><a href="coming-soon.html">Coming soon</a></li>
+                                        <li><a href="<%=path%>page/client/services.jsp">品类保洁</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">日常保洁</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Services</a>
+                                <li><a href="#">项目</a>
                                     <ul>
-                                        <li><a href="services.html">Services</a></li>
-                                        <li><a href="service-details.html">Service Details</a></li>
+                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>
+                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects
+                                            Fullwidth</a></li>
+                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Projects</a>
+                                <li><a href="#">店</a>
                                     <ul>
-                                        <li><a href="projects-grid.html">Projects Grid</a></li>
-                                        <li><a href="projects-grid-fullwidth.html">Projects Fullwidth</a></li>
-                                        <li><a href="project-details.html">Project Details</a></li>
+                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>
+                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>
+                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>
+                                        <li><a href="<%=path%>page/client/checkout.jsp">Checout</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Shop</a>
+                                <li><a href="#">微博</a>
                                     <ul>
-                                        <li><a href="shop.html">Shop Grid</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li>
-                                        <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checout</a></li>
+                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>
+                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>
+                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Blog</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-sidebar.html">Blog With Sidebar</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>
                             </ul>
                         </nav>
                     </div>
                     <!--mobile logo-->
                     <div class="d-hidden mobile-logo">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt=""/></a>
+                            <a href="<%=path%>page/client/chome.jsp"><img
+                                    src="<%=path%>page/client/assets/images/logo.png" alt=""/></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="cart-search text-right">
                         <ul class="list-none">
-                            <li class="ml-25"><a href="#">登陆</a></li>
-                            <li class="ml-25"><a href="#">注册</a></li>
+                            <c:if test="${null==userbacc}">
+                                <li class="ml-25"><a href="<%=path%>page/client/signin.jsp">登陆</a></li>
+                                <li class="ml-25"><a href="<%=path%>page/client/signup.jsp">注册</a></li>
+                            </c:if>
+                            <c:if test="${null!=userbacc}">
+                                <li class="ml-25">
+                                    <a href="#" onclick="alert('这里是个人中心')">
+                                    <figure style="width: 50px;height: 0px;">
+                                        <img class="img-circle" src="<%=path%>portrait/M.jpg" alt="头像"/>
+                                     </figure>
+                                     </a>
+                                </li>
+                                <li class="ml-25"><a href="#" onclick="alert('这里是个人中心')">${sessionScope.userbacc.username}</a></li>
+                                <li class="mmenu-icon"><a href="#mobile-menu"><i class="icon_menu"></i></a></li>
+                                <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i> </a>
 
-                            <li class="mmenu-icon"><a href="#mobile-menu"><i class="icon_menu"></i></a></li>
-                            <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i><span>2</span></a>
-                                <div class="cart-dropdown">
-                                    <ul class="list-none">
-                                        <li>
-                                            <div class="mini-cart-thumb">
-                                                <a href="#"><img src="assets/images/products/cart/1.jpg" alt=""/></a>
-                                            </div>
-                                            <div class="mini-cart-heading">
-                                                <h5><a href="#">Cleaning Mop</a></h5>
-                                                <small>Qty: 02</small>
-                                                <span>$29.00</span>
-                                            </div>
-                                            <div class="mini-cart-remove">
-                                                <button><i class="icon_close"></i></button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="minicart-total fix">
-                                        <ul class="list-none">
-                                            <li>
-                                                <span>SHIPPING:</span>
-                                                <span>$0.00</span>
-                                            </li>
-                                            <li>
-                                                <span>TOTAL:</span>
-                                                <span>$34.50</span>
-                                            </li>
-                                        </ul>
+                                </li>
+                                <%--                            下面是搜索框--%>
+                                <li class="ml-25"><a href="#" class="search-icon"><i class="lnr lnr-magnifier"></i></a>
+                                    <div class="search-box">
+                                        <input type="text" placeholder="Enter Keyword..."/>
+                                        <button><i class="lnr lnr-magnifier"></i></button>
                                     </div>
-<%--                                    按钮--%>
-                                    <div class="mini-cart-checkout">
-                                        <a href="shopping-cart.html" class="btn-common">VIEW CARD</a>
-                                        <a href="checkout.html" class="btn-common checkout mt-10">CHECK OUT</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="ml-25"><a href="#" class="search-icon"><i class="lnr lnr-magnifier"></i></a>
-                                <div class="search-box">
-                                    <input type="text" placeholder="Enter Keyword..."/>
-                                    <button><i class="lnr lnr-magnifier"></i></button>
-                                </div>
-                            </li>
+                                </li>
+                            </c:if>
+
                         </ul>
                     </div>
                 </div>

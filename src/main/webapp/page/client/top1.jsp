@@ -44,7 +44,7 @@
                                         <i class="lnr lnr-map-marker"></i>
                                         <ul class="list-none">
                                             <li><span>当前位置</span></li>
-                                            <li><a href="http://www.baidu.com">点击改变位置</a></li>
+                                            <li><a href="" onclick="alert('冲')">点击改变位置</a></li>
                                         </ul>
                                     </div>
                                 </div>

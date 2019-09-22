@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 14:41
+  Time: 19:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Services - HomeCleaner</title>
+    <title>Testimonials - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -51,124 +51,170 @@
 <jsp:include page="top2.jsp" flush="true"/>
 <!--header-ends-->
 
-<!--services-area start-->
-<div class="services-area bg-f3f4f7 pt-108 pt-sm-65 pb-90 pb-sm-50">
+<!--page-banner-start-->
+<div class="page-banner-area bg-1">
+    <div class="container">
+        <div class="row height-400 align-items-center">
+            <div class="col-lg-12">
+                <div class="page-banner text-center">
+                    <h2>Testimonials</h2>
+                    <div class="site-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Testimonials</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--page-banner-end-->
+
+<!--testimonial-area start-->
+<div class="testimonial-area pt-105 pt-sm-65 pb-120 pb-sm-80">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2>Our Main Services</h2>
-                    <p>With an outstanding reputation for quality, integrity and service, <br/> we can clean anything you throw at us!</p>
+                    <h2>What Clients Say About Us</h2>
+                    <p>We rigorously vet all of our Cleaners, please see a selection of quotes from our <br/> Channel Partners below.</p>
                 </div>
             </div>
         </div>
-        <div class="row mt-65 mt-sm-55">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/1.jpg" alt="" />
+        <div class="row mt-120">
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center mb-85">
+                    <img src="assets/images/testimonials/1.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Caleigh Jerde</h5>
+                        <small>Physician</small>
                     </div>
-                    <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You didn't have to lift a finger...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/2.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Office Cleaning</h4>
-                        <p>We provide full office cleaning services from highly trained cleaning staff. Offering businesses after hours daily office cleaning..</p>
-                        <a href="#" class="btn-common">READ MORE</a>
+                    <p>I just started with the cleaning authority and so far have been pleasantly surprised. They did an awesome job and really went above and beyond for an every day cleaning. They set the standard so I hope I get this team back and the same quality every other week!</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/3.jpg" alt="" />
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center mb-85">
+                    <img src="assets/images/testimonials/2.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Mary Katherine</h5>
+                        <small>Accountant</small>
                     </div>
-                    <div class="service-desc">
-                        <h4>Window Cleaning</h4>
-                        <p>Contract us for ongoing window cleaning services and we can make sure your building is always sparkling whatever the weather...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/4.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Upholstery Cleaning</h4>
-                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
+                    <p>Yes we have had CleanPro cleaning our house for a year now and I just want to say that they really do an excellent job taking care of our house. They take care of all the things listed on their Tasks Sheet and they are a very professional group of people.</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/5.jpg" alt="" />
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center mb-85">
+                    <img src="assets/images/testimonials/3.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Lars Sambo</h5>
+                        <small>Lawyer</small>
                     </div>
-                    <div class="service-desc">
-                        <h4>Carpet Cleaning</h4>
-                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
+                    <p>I've used a lot of cleaners and am so happy with first service! CleanPro showed up personally to see job, supervised and totally over delivered. They worked within my budget and I haven't found any forgotten dirty spots! Reasonable price, thorough service. Can't ask for more!</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/6.jpg" alt="" />
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center mb-85">
+                    <img src="assets/images/testimonials/4.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Evelien Sambo</h5>
+                        <small>Educator</small>
                     </div>
-                    <div class="service-desc">
-                        <h4>Clutter Cleanup</h4>
-                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
-                        <a href="#" class="btn-common">READ MORE</a>
+                    <p>All of my friends insisted that I use your service when I needed a cleaning service. Boy, am I glad I listened. You were prompt and I felt I was getting an honest deal. Thanks for the great service! Thorough service. Can't ask for more! CleanPro showed up personally to see job, supervised and totally over delivered.</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center mb-85">
+                    <img src="assets/images/testimonials/5.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Jayden Feenstra</h5>
+                        <small>Chemist</small>
+                    </div>
+                    <p>Thank you so much for making my home glow before our big party. It has never looked so good. I couldn't believe how quickly you had everything clean!</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="testimonial-single style-2 text-center">
+                    <img src="assets/images/testimonials/6.png" alt="" />
+                    <div class="testimonial-title">
+                        <h5>Amina Mohan</h5>
+                        <small>Educator</small>
+                    </div>
+                    <p>I have used CleanPro service for about four years. I describe myself very picky and difficult to be pleased. CleanPro exceeded my expectations. The manager is professional, flexible and very reasonable. I really like the work of the two ladies who clean our house. I trust them and their service has been consistently high quality. Thank you.</p>
+                    <div class="item-rating">
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                        <i class="icon_star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 text-center mt-50">
+                <a href="#" class="btn-common">Load More</a>
             </div>
         </div>
     </div>
 </div>
-<!--services-area end-->
+<!--testimonial-area end-->
 
-<!--contact-area start-->
-<div class="contact-area bg-1 pt-100 pt-sm-80 pb-100 pb-sm-80">
+<!--cta-area start-->
+<div class="cta-area bg-3669b4">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-6">
-                <div class="contact-form style-3">
-                    <h2>Ask Us Anything</h2>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Name*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Phone*">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Message *"></textarea>
-                        </div>
-                        <button type="button" class="btn-common mt-20">BOOK NOW</button>
-                    </form>
+        <div class="row height-250 align-items-center">
+            <div class="col-lg-9">
+                <div class="cta-text">
+                    <h2>Best House Cleaning Service in Netherlands</h2>
+                    <p> Ready to free up your time and let us do the dirty work!</p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cta-btn">
+                    <a href="#" class="btn-common">BOOK ONLINE</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--contact-area end-->
+<!--cta-area end-->
 
 <!--footer-area start-->
 <footer>
@@ -297,4 +343,3 @@
 
 </body>
 </html>
-

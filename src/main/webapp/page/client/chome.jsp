@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -14,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>HomeCleaner - Home One</title>
+    <title>LK家政</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -43,6 +44,7 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
 
+<%--layui--%>
     <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
 <%--    我的css--%>
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
@@ -50,8 +52,6 @@
 </head>
 
 <body>
-
-<!--header-starts-->
 
 <!--header-top-->
 <jsp:include page="top1.jsp" flush="true"/>
@@ -63,9 +63,9 @@
 <%--后续这里改掉img的地址--%>
 <div class="layui-carousel divimg" lay-filter="test1" id="sliderarea">
     <div carousel-item>
+        <div ><img src="<%=path%>page/client/img/weixin01.jpg" ></div>
         <div ><img src="<%=path%>page/client/img/M.jpg" ></div>
-        <div ><img src="<%=path%>page/client/img/M.jpg" ></div>
-        <div><img src="<%=path%>page/client/img/M.jpg" ></div>
+        <div><img src="<%=path%>page/client/img/qq01.png" ></div>
         <div><img src="<%=path%>page/client/img/M.jpg" ></div>
         <div><img src="<%=path%>page/client/img/M.jpg" ></div>
     </div>
@@ -78,117 +78,101 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2>Our Main Services</h2>
-                    <p>With an outstanding reputation for quality, integrity and service, <br/> we can clean anything
-                        you throw at us!</p>
+                    <h2>我们的主要服务</h2>
+                    <p>以质量、诚信、服务著称，你扔给我们的东西我们都能清理！</p>
                 </div>
             </div>
         </div>
         <div class="row services-carousel mt-65 mt-sm-55">
+
             <div class="col-lg-4">
                 <div class="service-single text-center">
                     <div class="service-thumb">
                         <img src="<%=path%>page/client/assets/images/services/1.jpg" alt=""/>
                     </div>
                     <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You
-                            didn't have to lift a finger...</p>
+                        <h4>日常保洁</h4>
+                        <p>日常家庭清洁和整理
+                            不包括：外窗清洁、橱柜内部及家电深度清洁。</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="service-single text-center">
                     <div class="service-thumb">
                         <img src="<%=path%>page/client/assets/images/services/2.jpg" alt=""/>
                     </div>
                     <div class="service-desc">
-                        <h4>Office Cleaning</h4>
+                        <h4>品类保洁</h4>
                         <p>We provide full office cleaning services from highly trained staff. Offering businesses after
                             hours daily office cleaning..</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="service-single text-center">
                     <div class="service-thumb">
                         <img src="<%=path%>page/client/assets/images/services/3.jpg" alt=""/>
                     </div>
                     <div class="service-desc">
-                        <h4>Window Cleaning</h4>
+                        <h4>保姆</h4>
                         <p>Contract us for ongoing window cleaning services and we can make sure your building is always
                             sparkling whatever the weather...</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="service-single text-center">
                     <div class="service-thumb">
-                        <img src="<%=path%>page/client/assets/images/services/1.jpg" alt=""/>
+                        <img src="<%=path%>page/client/assets/images/services/4.jpg" alt=""/>
                     </div>
                     <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You
-                            didn't have to lift a finger...</p>
-                        <a href="#">READ MORE</a>
+                        <h4>月嫂</h4>
+                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
+                        <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-4">
+                <div class="service-single text-center">
+                    <div class="service-thumb">
+                        <img src="<%=path%>page/client/assets/images/services/5.jpg" alt=""/>
+                    </div>
+                    <div class="service-desc">
+                        <h4>育儿嫂</h4>
+                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
+                        <a href="#" class="btn-common">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="service-single text-center">
+                    <div class="service-thumb">
+                        <img src="<%=path%>page/client/assets/images/services/6.jpg" alt=""/>
+                    </div>
+                    <div class="service-desc">
+                        <h4>照顾宠物</h4>
+                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
+                        <a href="#" class="btn-common">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 <!--services-area end-->
 
 <!--about-area start-->
-<div class="about-area pt-105 pt-sm-65 pb-70 pb-sm-45">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Why choose HomeCleaner?</h2>
-                    <p>We know you have a lot of choices when it comes to choosing who to clean <br/> your home, here
-                        are some reasons to consider CleanPro.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-60 mt-sm-50 align-items-center">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-right">
-                    <i class="lnr lnr-lock"></i>
-                    <h4>Professional and Secure</h4>
-                    <p>No one steps foot on your property until they have been background checked, drug screened, and
-                        work-history verified.</p>
-                </div>
-                <div class="service-single text-right">
-                    <i class="lnr lnr-smile"></i>
-                    <h4>Professional and Secure</h4>
-                    <p>No one steps foot on your property until they have been background checked, drug screened, and
-                        work-history verified.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 ds-sm-none">
-                <img src="<%=path%>page/client/assets/images/about/1.jpg" alt=""/>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single">
-                    <i class="lnr lnr-bubble"></i>
-                    <h4>Professional and Secure</h4>
-                    <p>No one steps foot on your property until they have been background checked, drug screened, and
-                        work-history verified.</p>
-                </div>
-                <div class="service-single">
-                    <i class="lnr lnr-tag"></i>
-                    <h4>Professional and Secure</h4>
-                    <p>No one steps foot on your property until they have been background checked, drug screened, and
-                        work-history verified.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!--about-area end-->
 
 <!--projects-area start-->
@@ -853,7 +837,6 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
@@ -884,6 +867,8 @@
 <!-- main js -->
 <script src="<%=path%>page/client/assets/js/main.js"></script>
 
+<%--layui--%>
+<script src="../layui/layui.js"></script>
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
 

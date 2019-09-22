@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 14:41
+  Time: 19:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,161 +14,141 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Services - HomeCleaner</title>
+    <title>Project Details - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/mmenu/dist/mmenu.css"/>
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<%=path%>page/client/style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
+
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
+    <%--    我的css--%>
+    <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
+
 </head>
 
 <body>
+
 <!--header-top-->
 <jsp:include page="top1.jsp" flush="true"/>
 <!--header-bottom-->
 <jsp:include page="top2.jsp" flush="true"/>
 <!--header-ends-->
 
-<!--services-area start-->
-<div class="services-area bg-f3f4f7 pt-108 pt-sm-65 pb-90 pb-sm-50">
+<!--page-banner-start-->
+<div class="page-banner-area bg-1">
+    <div class="container">
+        <div class="row height-400 align-items-center">
+            <div class="col-lg-12">
+                <div class="page-banner text-center">
+                    <h2>Projects Grid</h2>
+                    <div class="site-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--page-banner-end-->
+
+<!--project-details start-->
+<div class="project-details-area pt-120 pt-sm-80 pb-120 pb-sm-80">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Our Main Services</h2>
-                    <p>With an outstanding reputation for quality, integrity and service, <br/> we can clean anything you throw at us!</p>
+                <div class="project-details-carousel">
+                    <div><img src="assets/images/projects/details/1.jpg" alt="" /></div>
+                    <div><img src="assets/images/projects/details/1.jpg" alt="" /></div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-65 mt-sm-55">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/1.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You didn't have to lift a finger...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/2.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Office Cleaning</h4>
-                        <p>We provide full office cleaning services from highly trained cleaning staff. Offering businesses after hours daily office cleaning..</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/3.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Window Cleaning</h4>
-                        <p>Contract us for ongoing window cleaning services and we can make sure your building is always sparkling whatever the weather...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/4.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Upholstery Cleaning</h4>
-                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/5.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Carpet Cleaning</h4>
-                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/6.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Clutter Cleanup</h4>
-                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--services-area end-->
+            <div class="col-lg-8">
+                <div class="project-details mt-40">
+                    <h4>Wood Floor Cleaning Machine  for Home</h4>
+                    <p>Most modern hardwood floors are finished, which means they’re coated in a heavy duty, hard wearing sealant which protects the wood beneath it. Urethane, polyurethane and polyacrylic are common sealants because they’re both stain resistant and waterproof. Being waterproof, this means that you can easily clean your wooden floors using water mixed with a sud-producing soap, such as dishwashing liquid or a mild laundry detergent. Think about all the abuse your wood floors get just because they take it lying down. Grit, dirt, mud, soot, dust, food debris, things stuck to the feet of pets. </p>
 
-<!--contact-area start-->
-<div class="contact-area bg-1 pt-100 pt-sm-80 pb-100 pb-sm-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-6">
-                <div class="contact-form style-3">
-                    <h2>Ask Us Anything</h2>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Name*">
+                    <p>As Benjamin and other experts like to stress, properly cleaned floors are not hard to obtain. Hardwood floors can be easy to take care of with the use of a hardwood floor cleaner machine. You can use these machines to mop and sometimes even sweep without killing your back because they do all the work for you!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="project-info mt-40">
+                    <h4>Project Detail</h4>
+                    <table>
+                        <tr>
+                            <td>Client</td>
+                            <td>Envato Company</td>
+                        </tr>
+                        <tr>
+                            <td>Work Type</td>
+                            <td>Upholstery Cleaning</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>14/Aug/2018</td>
+                        </tr>
+                        <tr>
+                            <td>Categories</td>
+                            <td>Upholstery, Office</td>
+                        </tr>
+                    </table>
+                    <div class="row align-items-center mt-30">
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <a href="#" class="btn-common">BOOK ONLINE</a>
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email*">
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <div class="social-icons">
+                                <a href="#"><i class="social_facebook"></i></a>
+                                <a href="#"><i class="social_twitter"></i></a>
+                                <a href="#"><i class="social_linkedin"></i></a>
+                                <a href="#"><i class="social_pinterest"></i></a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Phone*">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Message *"></textarea>
-                        </div>
-                        <button type="button" class="btn-common mt-20">BOOK NOW</button>
-                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-60">
+            <div class="col-lg-12">
+                <div class="testimonial-single style-3 text-center">
+                    <div class="testimonial-inner">
+                        <img src="assets/images/projects/details/quote.png" alt="" />
+                        <p>Wonderful! Not only were they kind and did a terrific job, but most importantly, one employee found nearly $200 in cash in my dad's pockets.  My dad has Alzheimer's and loses money constantly.  She handed me the money directly which meant a lot to me.  A great business with great employees.  Thank you so much!</p>
+                        <h5>Caleigh Jerde</h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--contact-area end-->
+<!--project-details end-->
 
 <!--footer-area start-->
 <footer>
@@ -297,4 +277,3 @@
 
 </body>
 </html>
-
