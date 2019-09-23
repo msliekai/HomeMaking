@@ -12,9 +12,9 @@
 <head>
     <meta charset="UTF-8">
     <title>欢迎登录</title>
-    <link rel="stylesheet" href="page/Xdamin/css/style1.css">
-    <link rel="stylesheet" href="page/Xdamin/css/swiper.css"/>
-    <link rel="stylesheet" href="page/Xdamin/css/example.css"/>
+    <link rel="stylesheet" href="page/Xadmin/css/style1.css">
+    <link rel="stylesheet" href="page/Xadmin/css/swiper.css"/>
+    <link rel="stylesheet" href="page/Xadmin/css/example.css"/>
 </head>
 <body style="background-color:#000">
 <!-- 代码部分begin -->

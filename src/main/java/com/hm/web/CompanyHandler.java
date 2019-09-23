@@ -77,15 +77,18 @@ public class CompanyHandler {
     public @ResponseBody
     Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session)
     {
-        System.out.println(1111);
-        int count=0;
         Company company1= (Company) session.getAttribute("company");
+        Integer page= company1.getPage();
+        Integer limit=company1.getLimit();
+        //数据库查出条数
+        int count=0;
+
         List<Credential> list=companyBiz.findCreList(company1);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
-        System.out.println(list);
+
         return map;
     }
 }
