@@ -2,15 +2,13 @@ package com.hm.mapper;
 
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
-import com.hm.entity.User;
 import org.apache.ibatis.annotations.Param;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-
-    public User userLogin(@Param("userid") String userid, @Param("pwd") String pwd);
+//
+//    public User userLogin(@Param("userid") String userid, @Param("pwd") String pwd);
 
     //新增普通用户账号
     public Integer cUserReg(TblUser tblUser);

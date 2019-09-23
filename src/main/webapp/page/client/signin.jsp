@@ -82,7 +82,7 @@
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="securityCode">验证码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                <input type="text" class="form-control" autocomplete="off" required="required"
                                        id="securityCode" name="securityCode" placeholder="请输入验证码" data-toggle="tooltip">
                             </div><!--/.form-group -->
                         </form><!--/form -->
