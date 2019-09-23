@@ -23,7 +23,7 @@
 密码：<input type="password" name="fpwd" id="fpwd" onblur="checkfpwd()"/><span id="bbb"></span><p/>
 确认密码；<input type="password" name="nfpwd" id="nfpwd" onblur="checknfpwd()"/><span id="ccc"></span><p/>
 法人代表：<input type="text" name="flaw" id="flaw"/><span id="ddd"></span><p/>
-法人电话：<input type="number" name="flawphone" id="flawphone" onblur="checkflawphone()"/><span id="eee" onblur="checknfpwd()"></span><p/>
+法人电话：<input type="number" name="flawphone" id="flawphone" onblur="checkflawphone()"/><span id="eee" ></span><p/>
 验证码：<input type="text"/><p/>
 公司地址：<input type="text" name="fsite"/>
     <span id="fff"></span><p/>
