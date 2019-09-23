@@ -2,6 +2,7 @@ package com.hm.web;
 
 import com.hm.biz.CompanyBiz;
 import com.hm.entity.Company;
+import com.hm.entity.Credential;
 import javafx.geometry.Pos;
 
 import org.springframework.http.HttpRequest;
@@ -15,16 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+@Component
 @Controller
 @RequestMapping("page")
 public class CompanyHandler {
-
-    @RequestMapping(value = "/Comcredential.actin")
-    public ModelAndView Comcredential(HttpRequest request)
-    {
-
-        return null;
-    }
 
     //公司登录
     private ModelAndView modelAndView=new ModelAndView();
@@ -72,5 +71,20 @@ public class CompanyHandler {
         }
         return modelAndView;
     }
-
+    //公司证书列表
+    @RequestMapping("Comcredential")
+    public @ResponseBody
+    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session)
+    {
+        System.out.println(1111);
+        int count=0;
+        Company company1= (Company) session.getAttribute("company");
+        List<Credential> list=companyBiz.findCreList(company1);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        System.out.println(list);
+        return map;
+    }
 }

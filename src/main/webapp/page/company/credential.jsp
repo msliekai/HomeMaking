@@ -17,10 +17,10 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="<%=path%>page/Xdamin/css/font.css">
-    <link rel="stylesheet" href="<%=path%>page/Xdamin/css/xadmin.css">
-    <script src="<%=path%>page/Xdamin/js/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="<%=path%>page/Xdamin/js/xadmin.js"></script>
+    <link rel="stylesheet" href="<%=path%>page/Xadmin/css/font.css">
+    <link rel="stylesheet" href="<%=path%>page/Xadmin/css/xadmin.css">
+    <script src="<%=path%>page/Xadmin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=path%>page/Xadmin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -60,11 +60,10 @@
 <script>
     layui.use('table', function() {
         var table = layui.table;
-
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '' //数据接口
+            , url:'<%=path%>page/Comcredential.action'//数据接口
             , page: true //开启分页
             ,limit:10
             // ,method:"get"
@@ -94,34 +93,34 @@
             }
         });
 
-        function fal(url,uid) {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: url,
-                dataType: "text",
-                data: {"uid":uid},
-                success: function (dat) {
-                    if(dat==1){
-                        layer.msg("修改成功");
-                    }else{
-                        layer.msg("修改失败");
-                    }
-                    //执行重载
-                    table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
-                    }, 'data');
-                },
-                error: function (dat) {
-                    layer.msg('裂开');
-                }
-            })
-
-        }
+        // function fal(url,uid) {
+        //     $.ajax({
+        //         async: true,
+        //         type: "post",
+        //         url: url,
+        //         dataType: "text",
+        //         data: {"uid":uid},
+        //         success: function (dat) {
+        //             if(dat==1){
+        //                 layer.msg("修改成功");
+        //             }else{
+        //                 layer.msg("修改失败");
+        //             }
+        //             //执行重载
+        //             table.reload('testReload', {
+        //                 where: {
+        //                     uname: uname.value,
+        //                     cong:cong.value,
+        //                     dao:dao.value,
+        //                 }
+        //             }, 'data');
+        //         },
+        //         error: function (dat) {
+        //             layer.msg('裂开');
+        //         }
+        //     })
+        //
+        // }
     });
 
 </script>
