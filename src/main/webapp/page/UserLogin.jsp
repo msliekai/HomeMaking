@@ -14,5 +14,7 @@
     <input type="submit" value="登录">
 </form>
 
+<a href="page/client/chome.jsp">a</a>
+
 </body>
 </html>

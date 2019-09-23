@@ -1,0 +1,11 @@
+/*轮播图片大小*/
+.layui-carousel img {
+    width: auto;
+    height: 100%;
+}
+/*轮播图片文字居中*/
+.layui-carousel div div{
+    align:center;
+    text-align: center;
+}
+
