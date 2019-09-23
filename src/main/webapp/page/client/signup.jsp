@@ -55,9 +55,9 @@
 
     <%--城市--%>
     <!--必要样式-->
-    <link href="<%=path%>page/client/css/city/main.css" rel="stylesheet" type="text/css" />
-<%--    <link href="<%=path%>page/css/city/bootstrap.css" rel="stylesheet" type="text/css" />--%>
-    <link href="<%=path%>page/client/css/city/city-picker.css" rel="stylesheet" type="text/css" />
+    <link href="<%=path%>page/client/css/city/main.css" rel="stylesheet" type="text/css"/>
+    <%--    <link href="<%=path%>page/css/city/bootstrap.css" rel="stylesheet" type="text/css" />--%>
+    <link href="<%=path%>page/client/css/city/city-picker.css" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -77,66 +77,79 @@
 
                         <form action="<%=path%>admin/cUserReq.action" method="post" enctype="multipart/form-data">
                             <div>
-                                <label for="showname"><h4>头像</h4></label>
+                                <label for="showname"><h4>头像：</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
-                                <input id="showname" type="text" style="height:25px;" autocomplete="off" readonly="true">
+                                <input id="showname" type="text" style="height:25px;" autocomplete="off"
+                                       readonly="true">
                                 <!-- 点击触发按钮 -->
-                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>
+                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()"
+                                   id="browse">选择图片</a>
                             </div>
                             <%--                            真头像在这--%>
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
                             <div class="form-group">
-                                <label for="userphone">手机号</label>
+                                <label for="userphone">手机号：</label>
                                 <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="userphone" name="userphone" placeholder="请输入手机号" value="${requestScope.tbluser.userphone}">
+                                       id="userphone" name="userphone" placeholder="请输入手机号"
+                                       value="${requestScope.tbluser.userphone}">
                                 <a style="color: #00a1d6">点我发送短信验证码</a>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="telpwd">短信验证码</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="telpwd" name="telpwd" placeholder="请输入短信验证码">
+                                <label for="telpwd">短信验证码：</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="telpwd" name="telpwd" placeholder="请输入短信验证码">
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="username">用户名</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="username" name="username" placeholder="请输入用户名">
+                                <label for="username">用户名：</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="username" name="username" placeholder="请输入用户名">
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="userpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码">
+                                <label for="userpwd">密码：</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                       id="userpwd" name="userpwd" placeholder="请输入密码">
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="userpwd2">确认密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd2" name="userpwd2" placeholder="再次输入">
+                                <label for="userpwd2">确认密码：</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                       id="userpwd2" name="userpwd2" placeholder="再次输入">
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="usercard">银行卡号</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="usercard" name="usercard" placeholder="请输入正确银行卡信息">
+                                <label for="usercard">银行卡号：</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required"
+                                       id="usercard" name="usercard" placeholder="请输入正确银行卡信息">
                             </div><!--/.form-group -->
 
-                            <div class="form-group">
-                            <label>性别 </label>
-<%--                            <label class="usersex">--%>
-                                <input type="radio" id="usersex1" name="usersex" value="男" checked> <span>男</span>
-<%--                            </label>--%>
-<%--                            <label class="radio-inline">--%>
-                                <input type="radio" id="usersex2" name="usersex" value="女"><span> 女</span>
-<%--                            </label>--%>
+                            <label>性别：</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="usersex" id="optionsRadios1" value="男" checked>男
+                                </label>
                             </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="usersex" id="optionsRadios2" value="女">女
+                                </label>
+                            </div>
+                            <hr/>
 
                             <div class="form-group">
-                                <label for="securityCode">验证码</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="securityCode" name="securityCode" placeholder="输入验证码">
+                                <label for="securityCode">验证码：</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="securityCode" name="securityCode" placeholder="输入验证码">
                             </div><!--/.form-group -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="signin-password">
                                         <div class="password-circle">
                                             <div class="single-password-circle">
-                                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
+                                                <img src="<%=path%>serial/getimage.action" id="Verify"
+                                                     style="cursor:hand;" alt="看不清，换一张"/>
                                                 <label>
 										    		<span class="round-boarder">
 											    		<span id="verclo" class="round-boarder1">看不清？换一张</span>
@@ -148,21 +161,27 @@
                                 </div><!--/.col -->
                             </div><!--/.row -->
 
+                            <div class="form-group">
+                                <label for="usercard">地址：</label>
+                            </div>
+
+                            <br/>
                             <div class="docs-methods">
-                                    <div id="distpicker">
-                                        <div class="form-group">
-                                            <div style="position: relative;">
-                                                <input id="city-picker3" autocomplete="off" required="required" name="scontext" class="form-control" readonly type="text" value="江苏省/常州市/溧阳市" data-toggle="city-picker">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-warning" id="reset" type="button">重置</button>
-                                            <button class="btn btn-danger" id="destroy" type="button">确定</button>
+                                <div id="distpicker">
+                                    <div class="form-group">
+                                        <div style="position: relative;">
+                                            <input id="city-picker3" autocomplete="off" required="required" name="scontext" class="form-control" readonly type="text"
+                                                   value="江苏省/常州市/溧阳市" data-toggle="city-picker">
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-warning" id="reset" type="button">重置</button>
+                                        <button class="btn btn-danger" id="destroy" type="button">确定</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="scontext">详细地址</label>
+                                <label for="scontext">详细地址：</label>
                                 <input type="number" class="form-control" autocomplete="off" required="required"
                                        id="scontext" name="scontext" placeholder="请输入详细地址">
                             </div><!--/.form-group -->
@@ -249,26 +268,26 @@
     //点击切换验证码
     $(function () {
         //点击图片更换验证码
-        $("#verclo").click(function(){
-            $("#Verify").attr("src","<%=path%>serial/getimage.action?timestamp="+new Date().getTime());
+        $("#verclo").click(function () {
+            $("#Verify").attr("src", "<%=path%>serial/getimage.action?timestamp=" + new Date().getTime());
         });
     });
 </script>
 <%
-    if (request.getAttribute("flog")=="success") {%>
+    if (request.getAttribute("flog") == "success") {%>
 <script>
     alert("注册成功");
     <%--location.href="<%=path%>ON/hha.jsp";--%>
 </script>
-<%} else if (request.getAttribute("flog")=="reqerr") {%>
+<%} else if (request.getAttribute("flog") == "reqerr") {%>
 <script>
     alert("注册失败");
 </script>
-<%}else if (request.getAttribute("flog")=="imgerr") {%>
+<%} else if (request.getAttribute("flog") == "imgerr") {%>
 <script>
     alert("头像上传失败");
 </script>
-<%}else if (request.getAttribute("flog")=="codeerr") {%>
+<%} else if (request.getAttribute("flog") == "codeerr") {%>
 <script>
     alert("验证码错误");
 </script>

@@ -33,5 +33,5 @@ public interface UserBiz {
      * @param userphone 电话号码
      * @return 状态id
      */
-    public Integer queryUserState(long userphone);
+    public Integer queryUserState(String userphone);
 }

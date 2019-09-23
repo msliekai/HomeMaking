@@ -35,7 +35,7 @@ public class UserBizImpl implements UserBiz {
     }
 
     @Override
-    public Integer queryUserState(long userphone) {
+    public Integer queryUserState(String userphone) {
 
         return userMapper.queryUserState(userphone);
     }

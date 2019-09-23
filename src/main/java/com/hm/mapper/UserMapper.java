@@ -20,5 +20,5 @@ public interface UserMapper {
     public TblUser cUserLogin(TblUser tblUser);
 
     //查看用户状态
-    public Integer queryUserState(@Param("userphone")Long userphone);
+    public Integer queryUserState(@Param("userphone")String userphone);
 }
