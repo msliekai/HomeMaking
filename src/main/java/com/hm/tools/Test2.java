@@ -12,7 +12,7 @@ public class Test2 {
     private MenuBiz menuBizImpl;
     @Test
     public void test(){
-        menuBizImpl.getMenu("111");
+        menuBizImpl.getMenu(111);
     }
 
 }

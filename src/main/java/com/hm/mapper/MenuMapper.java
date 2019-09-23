@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MenuMapper {
-    public List<Menu> getMenu(@Param("rid")String rid);
+    public List<Menu> getMenu(@Param("rid")int rid);
 }
