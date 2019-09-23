@@ -29,11 +29,11 @@
     <div class="message">家政公司</div>
     <div id="darkbannerwrap"></div>
 
-    <form method="post" class="layui-form">
-        <input id="aname" name="aname" placeholder="用户名" type="text" lay-verify="required" class="layui-input"
+    <form method="post" class="layui-form" action="<%=path%>page/comlogin.action">
+        <input id="facc" name="facc" placeholder="用户名" type="text" lay-verify="required" class="layui-input"
                value="">
         <hr class="hr15">
-        <input name="apwd" lay-verify="required" placeholder="密码" type="password" class="layui-input" value="">
+        <input id="fpwd" name="fpwd" lay-verify="required" placeholder="密码" type="password" class="layui-input" value="">
         <hr class="hr15">
         <span>验证码：
             <img src="serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
@@ -43,7 +43,7 @@
         <hr class="hr15">
         <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
         <span style="color: aliceblue">--</span>
-        <input value="注册" lay-submit  style="width:100%;" type="submit">
+        <a href="<%=path%>page/company/comregister.jsp"><input value="注册" lay-submit  style="width:100%;" type="button"></a>
         <hr class="hr20">
     </form>
 </div>
@@ -102,6 +102,10 @@
             $("#Verify").attr("src","serial/getimage.action?timestamp="+new Date().getTime());
         });
     });
+
+    //公司登陆
+
+
 
 </script>
 
