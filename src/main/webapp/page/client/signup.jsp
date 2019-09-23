@@ -75,7 +75,7 @@
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>admin/cUserReq.action" method="post" enctype="multipart/form-data">
+                        <form action="<%=path%>admin/cUserReq.action" method="post">
                             <div>
                                 <label for="showname"><h4>头像：</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -170,8 +170,7 @@
                                 <div id="distpicker">
                                     <div class="form-group">
                                         <div style="position: relative;">
-                                            <input id="city-picker3" autocomplete="off" required="required" name="scontext" class="form-control" readonly type="text"
-                                                   value="江苏省/常州市/溧阳市" data-toggle="city-picker">
+                                            <input id="city-picker3" autocomplete="off" required="required" name="sa" class="form-control" readonly type="text" value="北京市/北京市/东城区" data-toggle="city-picker">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -182,8 +181,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="scontext">详细地址：</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="请输入详细地址">
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="scontext" name="scontext" placeholder="请输入详细地址">
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
 
