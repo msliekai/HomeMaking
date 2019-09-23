@@ -95,18 +95,19 @@
                     <div class="signin-password">
                         <div class="password-circle">
                             <div class="single-password-circle">
-                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;"
-                                     alt="看不清，换一张"/>
+                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
                                 <label>
 									<span class="round-boarder">
 										<span id="verclo" class="round-boarder1">看不清？换一张</span>
 									</span>
                                 </label>
                             </div><!--/.single-password-circle-->
-                            <div class="single-forgot-password-circle text-right">
-                                <a href="<%=path%>page/client/forgot.jsp">忘记密码</a>
-                            </div><!--/.single-password-circle-->
                         </div><!--/.password-circle-->
+
+                        <div class="single-forgot-password-circle text-right">
+                            <a href="<%=path%>page/client/forgot.jsp">忘记密码</a>
+                        </div><!--/.single-password-circle-->
+                        
                     </div><!--/.signin-password -->
                 </div><!--/.col -->
             </div><!--/.row -->
