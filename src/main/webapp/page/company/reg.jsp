@@ -55,6 +55,9 @@
 
     <%--城市--%>
     <link rel="stylesheet" type="text/css" href="<%=path%>page/client/css/city-picker.css">
+    <style>
+        span{color: red}
+    </style>
 </head>
 
 <body>
@@ -65,13 +68,13 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>注册</h2>
+            <h2>公司注册</h2>
 
             <div class="signin-form">
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>admin/cUserReq.action" method="post" enctype="multipart/form-data">
+                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data">
                             <%--<div>
                                 <label for="showname"><h4>头像</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -110,6 +113,11 @@
                                 <label for="flawphone">法人电话</label>
                                 <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入法人电话" onblur="checkflawphone()">
                                 <span id="eee" ></span><p/>
+                            </div><!--/.form-group -->
+                            <div class="form-group">
+                                <label for="ftime">注册时间</label>
+                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
+                                <span id="fff" ></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">

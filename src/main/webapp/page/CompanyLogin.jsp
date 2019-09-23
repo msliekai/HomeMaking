@@ -43,7 +43,7 @@
         <hr class="hr15">
         <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
         <span style="color: aliceblue">--</span>
-        <a href="<%=path%>page/company/comregister.jsp"><input value="注册" lay-submit  style="width:100%;" type="button"></a>
+        <a href="<%=path%>page/company/reg.jsp"><input value="注册" lay-submit  style="width:100%;" type="button"></a>
         <hr class="hr20">
     </form>
 </div>

@@ -57,7 +57,7 @@ public class CompanyHandler {
             modelAndView.setViewName("CompanyLogin");
         }else{
             System.out.println("注册失败");
-            modelAndView.setViewName("company/comregister");
+            modelAndView.setViewName("company/reg");
         }
         return modelAndView;
     }
