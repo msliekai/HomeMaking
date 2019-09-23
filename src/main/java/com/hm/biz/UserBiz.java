@@ -2,13 +2,15 @@ package com.hm.biz;
 
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
+import com.hm.entity.User;
 
 
 /**
  * 用户操作
  */
 public interface UserBiz {
-//    public User userLogin(String userid,String pwd);
+
+    public User userLogin(String userid, String pwd);
 
     /**
      * 新增普通用户账号
