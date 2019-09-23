@@ -1,10 +1,12 @@
 package com.hm.biz;
 
 import com.hm.entity.Company;
+import com.hm.entity.Credential;
 import com.hm.mapper.CompanyMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("companyBiz")
 public class CompanyBizImpl implements CompanyBiz {
@@ -20,6 +22,13 @@ public class CompanyBizImpl implements CompanyBiz {
     public int addCompany(Company company) {
         return companyMapper.addCompany(company);
     }
+
+    @Override
+    public List<Credential> findCreList(Company company) {
+
+        return companyMapper.findCreList(company);
+    }
+    //------公司证书列表
     @Override
     public Company checkfacc(String facc) {
         return companyMapper.checkfacc(facc);

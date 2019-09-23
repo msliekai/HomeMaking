@@ -18,4 +18,7 @@
         (#{facc},#{fpwd},#{fname},#{flaw},
         #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid});
     </insert>
+    <select id="findCreList" parameterType="com.hm.entity.Company" resultType="java.util.List">
+        SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=#{fid} and c.creid=f.creid GROUP BY c.crename;
+    </select>
 </mapper>
