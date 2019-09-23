@@ -1,8 +1,12 @@
 package com.hm.entity;
 
+import lombok.Data;
+
+@Data
 public class User {
     private String userid;
     private String userpwd;
+    private String rid;
 
     public User(String userid, String userpwd) {
         this.userid = userid;
@@ -27,4 +31,6 @@ public class User {
     public void setUserpwd(String userpwd) {
         this.userpwd = userpwd;
     }
+
+
 }

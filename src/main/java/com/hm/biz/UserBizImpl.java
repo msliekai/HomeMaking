@@ -14,7 +14,7 @@ public class UserBizImpl implements UserBiz {
     private UserMapper userMapper;
     @Override
     public User userLogin(String userid, String pwd) {
-        return userMapper.userLogin(userid,pwd);
+        return null;
     }
 
     @Override

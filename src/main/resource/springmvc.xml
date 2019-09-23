@@ -16,7 +16,7 @@
 		
 		
         <context:component-scan base-package="com.hm"></context:component-scan>
-		
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 		<!-- mvc的注解驱动，通过它可以省去上面的两行bean的配置 -->
 		<mvc:annotation-driven></mvc:annotation-driven>
 		
