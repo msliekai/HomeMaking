@@ -1,7 +1,7 @@
 /* ==============================================================
 
 Template name : Bootsnav - Multi Purpose Header
-Categorie : Bootstrap Menu in CSS
+Categorie : Bootstrap Tblmenu in CSS
 Author : adamnurdin01
 Version : v.1.2
 Created : 2016-06-02
@@ -349,7 +349,7 @@ ul.cart-list > li.total > span{
     cursor: pointer;
 }
 
-/* Side Menu
+/* Side Tblmenu
 =================================*/
 body{
     -webkit-transition: all 0.3s ease-in-out;
@@ -709,7 +709,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked{
         left: -250px;
     }
     
-    /* Menu Center
+    /* Tblmenu Center
     =================================*/
     nav.navbar.bootsnav.menu-center .container{
         position: relative;

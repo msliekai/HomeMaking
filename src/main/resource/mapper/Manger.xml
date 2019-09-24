@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.mapper.MangerMapper">
+    <!--    普通用户登录-->
+    <select id="cUserLogin" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
+         select * from tbluser where rid=1 and userphone=#{userphone} and userpwd=#{userpwd}
+    </select>
+</mapper>

@@ -1,5 +1,7 @@
 package com.hm.biz;
-
+/**
+ * 單元測試，自動加載xml文件可進行測試。
+ */
 
 import junit.framework.TestCase;
 import org.junit.runner.RunWith;
@@ -14,7 +16,7 @@ public class Test extends TestCase {
     MenuBizImpl menuBizImpl;
 
     @org.junit.Test
-    public void test(){
+    public void menuTest(){
         System.out.println();
         menuBizImpl.getMenu(1);
     }

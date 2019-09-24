@@ -1,9 +1,9 @@
 package com.hm.biz;
 
-import com.hm.entity.Menu;
+import com.hm.entity.Tblmenu;
 
 import java.util.List;
 
 public interface MenuBiz {
-    public List<Menu> getMenu(int rid);
+    public List<Tblmenu> getMenu(Integer rid);
 }

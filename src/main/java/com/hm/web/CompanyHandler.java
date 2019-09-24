@@ -35,7 +35,6 @@ public class CompanyHandler {
         Company company = companyBiz.comlogin(facc, fpwd);
 
         if(company!=null){
-
             req.getSession().setAttribute("company",company);
             modelAndView.setViewName("company/head");//成功后跳转的界面
         }else{

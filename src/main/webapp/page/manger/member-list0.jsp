@@ -11,7 +11,6 @@
 <%
     String path = request.getContextPath() + "/page/";
 %>
-
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
