@@ -16,11 +16,11 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="<%=path%>page/Xdamin/css/font.css">
-    <link rel="stylesheet" href="<%=path%>page/Xdamin/css/login.css">
-    <link rel="stylesheet" href="<%=path%>page/Xdamin/css/xadmin.css">
-    <script type="text/javascript" src="<%=path%>page/Xdamin/js/jquery.min.js"></script>
-    <script src="<%=path%>page/Xdamin/js/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="<%=path%>page/Xadmin/css/font.css">
+    <link rel="stylesheet" href="<%=path%>page/Xadmin/css/login.css">
+    <link rel="stylesheet" href="<%=path%>page/Xadmin/css/xadmin.css">
+    <script type="text/javascript" src="<%=path%>page/Xadmin/js/jquery.min.js"></script>
+    <script src="<%=path%>page/Xadmin/js/layui.js" charset="utf-8"></script>
 
 </head>
 <body class="login-bg">
@@ -30,7 +30,7 @@
     <div id="darkbannerwrap"></div>
 
     <form method="post" action="<%=path%>manager/adminLogin.action" >
-        <input id="aname" name="userid" placeholder="用户名" type="text" lay-verify="required" class="layui-input"
+        <input id="aname" name="userphone" placeholder="用户名" type="text" lay-verify="required" class="layui-input"
                value="">
         <hr class="hr15">
         <input name="userpwd" lay-verify="required" placeholder="密码" type="password" class="layui-input" value="">

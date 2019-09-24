@@ -1,6 +1,6 @@
 /**
  * Debugger for mmenu.js
- * Include this file after including the mmenu.js plugin to debug your menu.
+ * Include this file after including the mmenu.js plugin to debug your tblmenu.
  */
 (function() {
     const _console = Mmenu.console ||

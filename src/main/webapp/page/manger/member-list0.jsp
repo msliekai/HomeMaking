@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
-    String path = request.getContextPath() + "/";
+    String path = request.getContextPath() + "/page/";
 %>
 <html class="x-admin-sm">
 <head>
