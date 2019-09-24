@@ -1,7 +1,9 @@
 package com.hm.web;
 
 import com.hm.biz.CompanyBiz;
+import com.hm.biz.MenuBiz;
 import com.hm.entity.Company;
+import com.hm.entity.Menu;
 import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Controller
 @RequestMapping("page")
 public class CompanyHandler {
@@ -19,14 +23,23 @@ public class CompanyHandler {
     private ModelAndView modelAndView=new ModelAndView();
     @Resource
     private CompanyBiz companyBiz;
+    @Resource
+    private MenuBiz menuBizImpl;
     @RequestMapping(value = "comlogin",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public ModelAndView comlogin(HttpServletRequest req, String facc, String fpwd){
 
         Company company = companyBiz.comlogin(facc, fpwd);
 
+        System.out.println(company+"*****");
         if(company!=null){
             req.getSession().setAttribute("company",company);
-            modelAndView.setViewName("company/head");//成功后跳转的界面
+            List<Menu> menu = menuBizImpl.getMenu(company.getRid());
+            System.out.println(menu+"cai菜单");
+            for(Menu menu1:menu){
+                System.out.println(menu1.getMname());
+            }
+            req.setAttribute("umenu", menu);
+            modelAndView.setViewName("baseindex");//成功后跳转的界面
         }else{
             modelAndView.setViewName("CompanyLogin");//失败返回登录页
         }

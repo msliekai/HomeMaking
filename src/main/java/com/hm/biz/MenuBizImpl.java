@@ -14,7 +14,7 @@ public class MenuBizImpl implements MenuBiz {
     @Resource
     private MenuMapper menuMapper;
     @Override
-    public List<Menu> getMenu(String rid) {
+    public List<Menu> getMenu(int rid) {
         //获取所有菜单（无序）
         List<Menu> list = menuMapper.getMenu(rid);
 

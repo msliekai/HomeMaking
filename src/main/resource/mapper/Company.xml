@@ -14,8 +14,14 @@
     <!--公司注册-->
     <insert id="addCompany" parameterType="com.hm.entity.Company">
         INSERT into tblfirm
-        (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid) VALUES
+        (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid,rid) VALUES
         (#{facc},#{fpwd},#{fname},#{flaw},
-        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid});
+        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
     </insert>
+
+    <!--公司的基本信息-->
+    <select id="queryBaseInfo" resultType="com.hm.entity.Company">
+        select * from tblfirm
+        where facc=#{facc};
+    </select>
 </mapper>
