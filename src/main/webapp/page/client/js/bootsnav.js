@@ -77,13 +77,13 @@
                 $postsList.after('<ul class="nav navbar-nav"></ul>').next().html(ListHTML);
                 index.find("ul.nav").last().addClass("navbar-right");
                 
-                //Wrap navigation menu
+                //Wrap navigation tblmenu
                 index.find("ul.nav.navbar-left").wrap("<div class='col-half left'></div>");
                 index.find("ul.nav.navbar-right").wrap("<div class='col-half right'></div>");
                 
                 //Selection Class
                 index.find('ul.navbar-nav > li').each(function(){ 
-                    var dropDown = $("ul.dropdown-menu", this),
+                    var dropDown = $("ul.dropdown-tblmenu", this),
                         megaMenu = $("ul.megamenu-content", this);
                     dropDown.closest("li").addClass("dropdown");
                     megaMenu.closest("li").addClass("megamenu-fw");
@@ -111,7 +111,7 @@
             // Menu Center 
             // ------------------------------------------------------------------------------ //
             if( getNav.find("ul.nav").hasClass("navbar-center")){
-                getNav.addClass("menu-center");
+                getNav.addClass("tblmenu-center");
             }
             
             // ------------------------------------------------------------------------------ //
@@ -119,9 +119,9 @@
             // ------------------------------------------------------------------------------ //
             if( getNav.hasClass("navbar-full")){
                 // Add Class to body
-                $("nav.navbar.bootsnav").find("ul.nav").wrap("<div class='wrap-full-menu'></div>");
-                $(".wrap-full-menu").wrap("<div class='nav-full'></div>");
-                $("ul.nav.navbar-nav").prepend("<li class='close-full-menu'><a href='#'><i class='fa fa-times'></i></a></li>");
+                $("nav.navbar.bootsnav").find("ul.nav").wrap("<div class='wrap-full-tblmenu'></div>");
+                $(".wrap-full-tblmenu").wrap("<div class='nav-full'></div>");
+                $("ul.nav.navbar-nav").prepend("<li class='close-full-tblmenu'><a href='#'><i class='fa fa-times'></i></a></li>");
             }else if( getNav.hasClass("navbar-mobile")){
                 getNav.removeClass("no-full");
             }else{
@@ -197,7 +197,7 @@
             // Toggle Side Menu
             // ------------------------------------------------------------------------------ //
             $("nav.navbar.bootsnav .attr-nav").each(function(){  
-                $("li.side-menu > a", this).on("click", function(e){
+                $("li.side-tblmenu > a", this).on("click", function(e){
                     e.preventDefault();
                     $("nav.navbar.bootsnav > .side").toggleClass("on");
                     $("body").toggleClass("on-side");
@@ -242,36 +242,36 @@
                 
                 // Enable click event
                 $("nav.navbar.bootsnav ul.nav").each(function(){
-                    $(".dropdown-menu", this).addClass("animated");
-                    $(".dropdown-menu", this).removeClass(getOut);
+                    $(".dropdown-tblmenu", this).addClass("animated");
+                    $(".dropdown-tblmenu", this).removeClass(getOut);
                     
                     // Dropdown Fade Toggle
                     $("a.dropdown-toggle", this).off('click');
                     $("a.dropdown-toggle", this).on('click', function (e) {
                         e.stopPropagation();
-                        $(this).closest("li.dropdown").find(".dropdown-menu").first().stop().fadeToggle().toggleClass(getIn);
+                        $(this).closest("li.dropdown").find(".dropdown-tblmenu").first().stop().fadeToggle().toggleClass(getIn);
                         $(this).closest("li.dropdown").first().toggleClass("on");                        
                         return false;
                     });   
                     
                     // Hidden dropdown action
                     $('li.dropdown', this).each(function () {
-                        $(this).find(".dropdown-menu").stop().fadeOut();
+                        $(this).find(".dropdown-tblmenu").stop().fadeOut();
                         $(this).on('hidden.bs.dropdown', function () {
-                            $(this).find(".dropdown-menu").stop().fadeOut();
+                            $(this).find(".dropdown-tblmenu").stop().fadeOut();
                         });
                         return false;
                     });
 
                     // Megamenu style
                     $(".megamenu-fw", this).each(function(){
-                        $(".col-menu", this).each(function(){
+                        $(".col-tblmenu", this).each(function(){
                             $(".content", this).addClass("animated");
                             $(".content", this).stop().fadeOut();
                             $(".title", this).off("click");
                             $(".title", this).on("click", function(){
-                                $(this).closest(".col-menu").find(".content").stop().fadeToggle().addClass(getIn);
-                                $(this).closest(".col-menu").toggleClass("on");
+                                $(this).closest(".col-tblmenu").find(".content").stop().fadeToggle().addClass(getIn);
+                                $(this).closest(".col-tblmenu").toggleClass("on");
                                 return false;
                             });
 
@@ -285,11 +285,11 @@
                 // Hidden dropdown
                 var cleanOpen = function(){
                     $('li.dropdown', this).removeClass("on");
-                    $(".dropdown-menu", this).stop().fadeOut();
-                    $(".dropdown-menu", this).removeClass(getIn);
-                    $(".col-menu", this).removeClass("on");
-                    $(".col-menu .content", this).stop().fadeOut();
-                    $(".col-menu .content", this).removeClass(getIn);
+                    $(".dropdown-tblmenu", this).stop().fadeOut();
+                    $(".dropdown-tblmenu", this).removeClass(getIn);
+                    $(".col-tblmenu", this).removeClass("on");
+                    $(".col-tblmenu .content", this).stop().fadeOut();
+                    $(".col-tblmenu .content", this).removeClass(getIn);
                 }
                 
                 // Hidden om mouse leave
@@ -299,13 +299,13 @@
                 
                 // Enable click atribute navigation
                 $("nav.navbar.bootsnav .attr-nav").each(function(){  
-                    $(".dropdown-menu", this).removeClass("animated");
+                    $(".dropdown-tblmenu", this).removeClass("animated");
                     $("li.dropdown", this).off("mouseenter");
                     $("li.dropdown", this).off("mouseleave");                    
                     $("a.dropdown-toggle", this).off('click');
                     $("a.dropdown-toggle", this).on('click', function (e) {
                         e.stopPropagation();
-                        $(this).closest("li.dropdown").find(".dropdown-menu").first().stop().fadeToggle();
+                        $(this).closest("li.dropdown").find(".dropdown-tblmenu").first().stop().fadeToggle();
                         $(".navbar-toggle").each(function(){
                             $(".fa", this).removeClass("fa-times");
                             $(".fa", this).addClass("fa-bars");
@@ -315,7 +315,7 @@
                     });
                     
                     $(this).on("mouseleave", function(){
-                        $(".dropdown-menu", this).stop().fadeOut();
+                        $(".dropdown-tblmenu", this).stop().fadeOut();
                         $("li.dropdown", this).removeClass("on");
                         return false;
                     });
@@ -344,28 +344,28 @@
                             e.stopPropagation();
                         }); 
 
-                        $(".dropdown-menu", this).addClass("animated");
+                        $(".dropdown-tblmenu", this).addClass("animated");
                         $("li.dropdown", this).on("mouseenter", function(){
-                            $(".dropdown-menu", this).eq(0).removeClass(getOut);
-                            $(".dropdown-menu", this).eq(0).stop().fadeIn().addClass(getIn);
+                            $(".dropdown-tblmenu", this).eq(0).removeClass(getOut);
+                            $(".dropdown-tblmenu", this).eq(0).stop().fadeIn().addClass(getIn);
                             $(this).addClass("on");
                             return false;
                         });
                         
-                        $(".col-menu").each(function(){
+                        $(".col-tblmenu").each(function(){
                             $(".content", this).addClass("animated");
                             $(".title", this).on("mouseenter", function(){
-                                $(this).closest(".col-menu").find(".content").stop().fadeIn().addClass(getIn);
-                                $(this).closest(".col-menu").addClass("on");
+                                $(this).closest(".col-tblmenu").find(".content").stop().fadeIn().addClass(getIn);
+                                $(this).closest(".col-tblmenu").addClass("on");
                                 return false;
                             });
                         });
                         
                         $(this).on("mouseleave", function(){
-                            $(".dropdown-menu", this).stop().removeClass(getIn);
-                            $(".dropdown-menu", this).stop().addClass(getOut).fadeOut();
-                            $(".col-menu", this).find(".content").stop().fadeOut().removeClass(getIn);
-                            $(".col-menu", this).removeClass("on");
+                            $(".dropdown-tblmenu", this).stop().removeClass(getIn);
+                            $(".dropdown-tblmenu", this).stop().addClass(getOut).fadeOut();
+                            $(".col-tblmenu", this).find(".content").stop().fadeOut().removeClass(getIn);
+                            $(".col-tblmenu", this).removeClass("on");
                             $("li.dropdown", this).removeClass("on");
                             return false;
                         });
@@ -384,23 +384,23 @@
                             $(".content").removeClass("animated");
                         });
 
-                        $(".dropdown-menu", this).addClass("animated");
+                        $(".dropdown-tblmenu", this).addClass("animated");
                         $("li.dropdown", this).on("mouseenter", function(){
-                            $(".dropdown-menu", this).eq(0).removeClass(getOut);
-                            $(".dropdown-menu", this).eq(0).stop().fadeIn().addClass(getIn);
+                            $(".dropdown-tblmenu", this).eq(0).removeClass(getOut);
+                            $(".dropdown-tblmenu", this).eq(0).stop().fadeIn().addClass(getIn);
                             $(this).addClass("on");
                             return false;
                         });
 
                         $("li.dropdown", this).on("mouseleave", function(){
-                            $(".dropdown-menu", this).eq(0).removeClass(getIn);
-                            $(".dropdown-menu", this).eq(0).stop().fadeOut().addClass(getOut);
+                            $(".dropdown-tblmenu", this).eq(0).removeClass(getIn);
+                            $(".dropdown-tblmenu", this).eq(0).stop().fadeOut().addClass(getOut);
                             $(this).removeClass("on");
                         });
 
                         $(this).on("mouseleave", function(){
-                            $(".dropdown-menu", this).removeClass(getIn);
-                            $(".dropdown-menu", this).eq(0).stop().fadeOut().addClass(getOut);
+                            $(".dropdown-tblmenu", this).removeClass(getIn);
+                            $(".dropdown-tblmenu", this).eq(0).stop().fadeOut().addClass(getOut);
                             $("li.dropdown", this).removeClass("on");
                             return false;
                         });
@@ -416,23 +416,23 @@
                         e.stopPropagation();
                     }); 
                     
-                    $(".dropdown-menu", this).addClass("animated");
+                    $(".dropdown-tblmenu", this).addClass("animated");
                     $("li.dropdown", this).on("mouseenter", function(){
-                        $(".dropdown-menu", this).eq(0).removeClass(getOut);
-                        $(".dropdown-menu", this).eq(0).stop().fadeIn().addClass(getIn);
+                        $(".dropdown-tblmenu", this).eq(0).removeClass(getOut);
+                        $(".dropdown-tblmenu", this).eq(0).stop().fadeIn().addClass(getIn);
                         $(this).addClass("on");
                         return false;
                     });
 
                     $("li.dropdown", this).on("mouseleave", function(){
-                        $(".dropdown-menu", this).eq(0).removeClass(getIn);
-                        $(".dropdown-menu", this).eq(0).stop().fadeOut().addClass(getOut);
+                        $(".dropdown-tblmenu", this).eq(0).removeClass(getIn);
+                        $(".dropdown-tblmenu", this).eq(0).stop().fadeOut().addClass(getOut);
                         $(this).removeClass("on");
                     });
 
                     $(this).on("mouseleave", function(){
-                        $(".dropdown-menu", this).removeClass(getIn);
-                        $(".dropdown-menu", this).eq(0).stop().fadeOut().addClass(getOut);
+                        $(".dropdown-tblmenu", this).removeClass(getIn);
+                        $(".dropdown-tblmenu", this).eq(0).stop().fadeOut().addClass(getOut);
                         $("li.dropdown", this).removeClass("on");
                         return false;
                     });
@@ -447,8 +447,8 @@
                     windowWidth =  $(window).width();
 
                 $(".nav-full").css("height", windowHeight + "px");
-                $(".wrap-full-menu").css("height", windowHeight + "px");
-                $(".wrap-full-menu").css("width", windowWidth + "px");
+                $(".wrap-full-tblmenu").css("height", windowHeight + "px");
+                $(".wrap-full-tblmenu").css("width", windowWidth + "px");
                 
                 $(".navbar-collapse").addClass("animated");
                 $(".navbar-toggle").each(function(){
@@ -462,7 +462,7 @@
                         return false;
                     });
                     
-                    $("li.close-full-menu").on("click", function(e){
+                    $("li.close-full-tblmenu").on("click", function(e){
                         e.preventDefault();
                         $(getId).addClass(getOut);
                         setTimeout(function(){

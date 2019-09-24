@@ -1,7 +1,7 @@
 package com.hm.entity;
 
 import lombok.Data;
-
+//------员工表
 @Data
 public class Staff {
     private Integer sfid;

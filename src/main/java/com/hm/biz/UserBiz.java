@@ -2,7 +2,6 @@ package com.hm.biz;
 
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
-import com.hm.entity.User;
 
 
 /**

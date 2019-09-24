@@ -29,9 +29,9 @@ $(".minicart-icon").on('click', function(){
 	$(".cart-dropdown").slideToggle();
 });
 /*--------------------------
-mobile-menu
+mobile-tblmenu
 ---------------------------- */	
-$('#mobile-menu').mmenu(); 
+$('#mobile-tblmenu').mmenu();
 /*--------------------------
 scrollUp
 ---------------------------- */	
@@ -42,7 +42,7 @@ $.scrollUp({
 	animation: 'slide'
 });
 /*---------------------
-menu-stick
+tblmenu-stick
 --------------------- */
 var s = $("#sticker");
 var pos = s.position();					   

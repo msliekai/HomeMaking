@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="service-siebar">
-                    <div class="service-menu">
+                    <div class="service-tblmenu">
                         <ul class="list-none">
                             <li><a class="active" href="#">Home Cleaning</a></li>
                             <li><a href="#">Office Cleaning</a></li>
