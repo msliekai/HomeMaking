@@ -21,4 +21,7 @@ public interface UserMapper {
 
     //查看用户状态
     public Integer queryUserState(@Param("userphone")String userphone);
+
+    //查看用户id
+    public Integer queryUserid(@Param("userphone")String userphone);
 }

@@ -30,7 +30,8 @@ public class UserHandler {
 
 
     @RequestMapping(value = "/cUserReq.action")
-    public String cUserReq(HttpServletRequest request, HttpSession session, MultipartFile fileact, TblUser tblUser, TblSite tblSite, String securityCode) throws MalformedURLException, IllegalStateException, IOException {
+    public String cUserReq(HttpServletRequest request, HttpSession session, MultipartFile fileact, TblUser tblUser, TblSite tblSite, String securityCode)
+            throws MalformedURLException, IllegalStateException, IOException {
         String flog = "";
 
         String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
@@ -49,51 +50,51 @@ public class UserHandler {
                 Integer num = biz.cUserReg(tblUser, tblSite);
                 if (num > 0) {
                     flog = "success";
-                    request.setAttribute("flog",flog);
+                    request.setAttribute("flog", flog);
                     return "client/signup";
                 } else {
                     flog = "reqerr";
                 }
             } else {
-                flog="imgerr";
+                flog = "imgerr";
             }
 
-        }else{
-            flog="codeerr";
+        } else {
+            flog = "codeerr";
         }
-        request.setAttribute("tblUser",tblUser);
-        request.setAttribute("tblSite",tblSite);
-        request.setAttribute("flog",flog);
+        request.setAttribute("tblUser", tblUser);
+        request.setAttribute("tblSite", tblSite);
+        request.setAttribute("flog", flog);
         return "client/signup";
     }
 
     @RequestMapping(value = "/cUserLogin.action")
-    public  @ResponseBody
-    Map<String,String> cUserLogin(HttpServletRequest request, HttpSession session, TblUser tblUser, String securityCode){
-        Map<String,String> flog=new HashMap();
+    public @ResponseBody
+    Map<String, String> cUserLogin(HttpServletRequest request, HttpSession session, TblUser tblUser, String securityCode) {
+        Map<String, String> flog = new HashMap();
         String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
         if (securityCode.equalsIgnoreCase(serverCode)) {
-            Integer stid=biz.queryUserState(tblUser.getUserphone());
-            if(null==stid){
-                flog.put("flog","0");
-            }else if(2==stid){
-                flog.put("flog","2");
-            }else if(3==stid){
-                flog.put("flog","3");
-            }else if(1==stid){
+            Integer stid = biz.queryUserState(tblUser.getUserphone());
+            if (null == stid) {
+                flog.put("flog", "0");
+            } else if (2 == stid) {
+                flog.put("flog", "2");
+            } else if (3 == stid) {
+                flog.put("flog", "3");
+            } else if (1 == stid) {
                 //登陆
-                TblUser obj=biz.cUserLogin(tblUser);
-                if(null!=obj){
-                    session.setAttribute("userbacc",obj);
-                    flog.put("flog","success");
-                }else{
-                    flog.put("flog","pw");
+                TblUser obj = biz.cUserLogin(tblUser);
+                if (null != obj) {
+                    session.setAttribute("userbacc", obj);
+                    flog.put("flog", "success");
+                } else {
+                    flog.put("flog", "pw");
                 }
-            }else{
-                flog.put("flog","errc");
+            } else {
+                flog.put("flog", "errc");
             }
-        }else{
-            flog.put("flog","coderr");
+        } else {
+            flog.put("flog", "coderr");
         }
         return flog;
     }

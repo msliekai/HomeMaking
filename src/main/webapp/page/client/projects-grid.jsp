@@ -58,26 +58,26 @@
 <!--header-ends-->
 
 <!--page-banner-start-->
-<div class="page-banner-area bg-1">
-    <div class="container">
-        <div class="row height-400 align-items-center">
-            <div class="col-lg-12">
-                <div class="page-banner text-center">
-                    <h2>Projects Grid</h2>
-                    <div class="site-breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="page-banner-area bg-1">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row height-400 align-items-center">--%>
+<%--            <div class="col-lg-12">--%>
+<%--                <div class="page-banner text-center">--%>
+<%--                    <h2>Projects Grid</h2>--%>
+<%--                    <div class="site-breadcrumb">--%>
+<%--                        <nav aria-label="breadcrumb">--%>
+<%--                            <ol class="breadcrumb">--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Home</a></li>--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Pages</a></li>--%>
+<%--                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>--%>
+<%--                            </ol>--%>
+<%--                        </nav>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!--page-banner-end-->
 
 <!--projects-area start-->
@@ -87,11 +87,13 @@
             <div class="col-lg-12">
                 <div class="projects-nav style-2 text-center">
                     <ul>
-                        <li data-filter="*" class="active">All Projects</li>
-                        <li data-filter=".house">House</li>
-                        <li data-filter=".office">Office</li>
-                        <li data-filter=".garden">Garden</li>
-                        <li data-filter=".apartment">Apartment</li>
+                        <li data-filter="*" class="active">所有服务</li>
+                        <li data-filter=".house">日常保洁</li>
+                        <li data-filter=".office">品类保洁</li>
+                        <li data-filter=".garden">保姆</li>
+                        <li data-filter=".apartment">月嫂</li>
+                        <li data-filter=".apartment">育儿嫂</li>
+                        <li data-filter=".apartment">照顾宠物</li>
                     </ul>
                 </div>
             </div>

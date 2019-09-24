@@ -59,7 +59,7 @@
 <jsp:include page="top2.jsp" flush="true"/>
 <!--header-ends-->
 
-<!--slider-area start-->
+<!--轮播 start-->
 <%--后续这里改掉img的地址--%>
 <div class="layui-carousel divimg" lay-filter="test1" id="sliderarea">
     <div carousel-item>
@@ -70,16 +70,16 @@
         <div><img src="<%=path%>page/client/img/M.jpg" ></div>
     </div>
 </div>
-<!--slider-area end-->
+<!--轮播 end-->
 
-<!--services-area start-->
+<!--主要服务1 start-->
 <div class="services-area bg-f3f4f7 pt-108 pt-sm-68 pb-105 pb-sm-65">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
                     <h2>我们的主要服务</h2>
-                    <p>以质量、诚信、服务著称，你扔给我们的东西我们都能清理！</p>
+                    <p>。。。</p>
                 </div>
             </div>
         </div>
@@ -92,8 +92,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>日常保洁</h4>
-                        <p>日常家庭清洁和整理
-                            不包括：外窗清洁、橱柜内部及家电深度清洁。</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -106,8 +104,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>品类保洁</h4>
-                        <p>We provide full office cleaning services from highly trained staff. Offering businesses after
-                            hours daily office cleaning..</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -120,8 +116,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>保姆</h4>
-                        <p>Contract us for ongoing window cleaning services and we can make sure your building is always
-                            sparkling whatever the weather...</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -134,7 +128,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>月嫂</h4>
-                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -147,7 +140,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>育儿嫂</h4>
-                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -160,7 +152,6 @@
                     </div>
                     <div class="service-desc">
                         <h4>照顾宠物</h4>
-                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
                         <a href="#" class="btn-common">READ MORE</a>
                     </div>
                 </div>
@@ -169,280 +160,14 @@
         </div>
     </div>
 </div>
-<!--services-area end-->
+<!--主要服务1 end-->
+
 
 <!--about-area start-->
 
 <!--about-area end-->
 
 <!--projects-area start-->
-<div class="projects-area bg-f3f4f7 pt-105 pt-sm-65">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Selected Projects</h2>
-                    <p>Here are a few of many projects we have completed for our customers. <br/> We provide a
-                        professional service</p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-68 mt-sm-58">
-            <div class="col-lg-12">
-                <div class="projects-nav text-center">
-                    <ul class="nav nav-tabs">
-                        <li><a class="active" data-toggle="tab" href="#house">House</a></li>
-                        <li><a data-toggle="tab" href="#office">Office</a></li>
-                        <li><a data-toggle="tab" href="#garden">Garden</a></li>
-                        <li><a data-toggle="tab" href="#apartment">Apartment</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content mt-50">
-            <!--single-tab-->
-            <div id="house" class="tab-pane active">
-                <div class="row projects-carousel">
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/2.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Garden Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/3.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Road Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/4.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Factory Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--single-tab-->
-            <div id="office" class="tab-pane fade">
-                <div class="row projects-carousel">
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/4.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Factory Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/3.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Road Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/2.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Garden Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--single-tab-->
-            <div id="garden" class="tab-pane fade">
-                <div class="row projects-carousel">
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/2.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Garden Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/3.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Road Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/4.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Factory Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--single-tab-->
-            <div id="apartment" class="tab-pane fade">
-                <div class="row projects-carousel">
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/4.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Factory Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/3.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Road Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/2.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Garden Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 plr-0">
-                        <div class="project-single">
-                            <div class="project-thumb">
-                                <img src="<%=path%>page/client/assets/images/projects/1.jpg" alt=""/>
-                            </div>
-                            <div class="project-caption">
-                                <small>Office Cleaning</small>
-                                <a href="project-details.html" class="btn-common">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!--projects-area end-->
 
 <!--counterup-area start-->
@@ -562,119 +287,119 @@
 <!--testimonial-area end-->
 
 <!--package-area start-->
-<div class="package-area bg-f3f4f7 pt-100 pt-sm-60 pb-120 pb-sm-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Calculated Form</h2>
-                    <p>This unique tool allows you to easily create price estimation forms to give your <br/> client
-                        idea of the cost of your service.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row calculate-form mt-60 mt-sm-50">
-            <div class="col-lg-6 col-sm-6">
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Choose your service</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Choose</option>
-                        <option>Home Cleaning</option>
-                        <option>Office Cleaning</option>
-                        <option>Window Cleaning</option>
-                    </select>
-                </div>
-                <div class="price_filter mt-40">
-                    <div class="price_slider_amount">
-                        <div class="row align-items-center">
-                            <div class="col-lg-10">
-                                <div id="service-range"></div>
-                            </div>
-                            <div class="col-lg-2 mt-sm-20">
-                                <input type="text" id="square-feets" name="price" placeholder="Add Your Price"
-                                       readonly/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-                <div class="form-group">
-                    <label for="exampleFormControlSelect2">Cleaning frequency</label>
-                    <select class="form-control" id="exampleFormControlSelect2">
-                        <option>Choose</option>
-                        <option>Upholstery Cleaning</option>
-                        <option>Carpet Cleaning</option>
-                        <option>Clutter Cleanup</option>
-                    </select>
-                </div>
-                <div class="price_filter mt-40">
-                    <div class="price_slider_amount">
-                        <div class="row align-items-center">
-                            <div class="col-lg-10">
-                                <div id="cleaning-frequency"></div>
-                            </div>
-                            <div class="col-lg-2 mt-sm-20">
-                                <input type="text" id="total-workers" name="price" placeholder="Add Your Price"
-                                       readonly/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row package-carousel mt-45 mt-sm-35">
-            <div class="col-lg-4">
-                <div class="package-single">
-                    <h4>STANDARD</h4>
-                    <h2>$100.00</h2>
-                    <h5>/ per month</h5>
-                    <ul class="list-none">
-                        <li>3 Bedrooms cleaning</li>
-                        <li>Vacuuming</li>
-                        <li>2 Bathroom cleaning</li>
-                        <li>Mirror Cleaning</li>
-                        <li>1 Livingroom cleaning</li>
-                        <li>Window Sills</li>
-                    </ul>
-                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="package-single">
-                    <h4>PREMIUM</h4>
-                    <h2>$150.00</h2>
-                    <h5>/ per month</h5>
-                    <ul class="list-none">
-                        <li>5 Bedrooms cleaning</li>
-                        <li>Vacuuming</li>
-                        <li>2 Bathroom cleaning</li>
-                        <li>Mirror Cleaning</li>
-                        <li>1 Livingroom cleaning</li>
-                        <li>Window Sills</li>
-                    </ul>
-                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="package-single">
-                    <h4>ENTERPRISE</h4>
-                    <h2>$200.00</h2>
-                    <h5>/ per month</h5>
-                    <ul class="list-none">
-                        <li>7 Bedrooms cleaning</li>
-                        <li>Vacuuming</li>
-                        <li>2 Bathroom cleaning</li>
-                        <li>Mirror Cleaning</li>
-                        <li>1 Livingroom cleaning</li>
-                        <li>Window Sills</li>
-                    </ul>
-                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="package-area bg-f3f4f7 pt-100 pt-sm-60 pb-120 pb-sm-80">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-lg-12">--%>
+<%--                <div class="section-title text-center">--%>
+<%--                    <h2>Calculated Form</h2>--%>
+<%--                    <p>This unique tool allows you to easily create price estimation forms to give your <br/> client--%>
+<%--                        idea of the cost of your service.</p>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row calculate-form mt-60 mt-sm-50">--%>
+<%--            <div class="col-lg-6 col-sm-6">--%>
+<%--                <div class="form-group">--%>
+<%--                    <label for="exampleFormControlSelect1">Choose your service</label>--%>
+<%--                    <select class="form-control" id="exampleFormControlSelect1">--%>
+<%--                        <option>Choose</option>--%>
+<%--                        <option>Home Cleaning</option>--%>
+<%--                        <option>Office Cleaning</option>--%>
+<%--                        <option>Window Cleaning</option>--%>
+<%--                    </select>--%>
+<%--                </div>--%>
+<%--                <div class="price_filter mt-40">--%>
+<%--                    <div class="price_slider_amount">--%>
+<%--                        <div class="row align-items-center">--%>
+<%--                            <div class="col-lg-10">--%>
+<%--                                <div id="service-range"></div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-lg-2 mt-sm-20">--%>
+<%--                                <input type="text" id="square-feets" name="price" placeholder="Add Your Price"--%>
+<%--                                       readonly/>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-6 col-sm-6">--%>
+<%--                <div class="form-group">--%>
+<%--                    <label for="exampleFormControlSelect2">Cleaning frequency</label>--%>
+<%--                    <select class="form-control" id="exampleFormControlSelect2">--%>
+<%--                        <option>Choose</option>--%>
+<%--                        <option>Upholstery Cleaning</option>--%>
+<%--                        <option>Carpet Cleaning</option>--%>
+<%--                        <option>Clutter Cleanup</option>--%>
+<%--                    </select>--%>
+<%--                </div>--%>
+<%--                <div class="price_filter mt-40">--%>
+<%--                    <div class="price_slider_amount">--%>
+<%--                        <div class="row align-items-center">--%>
+<%--                            <div class="col-lg-10">--%>
+<%--                                <div id="cleaning-frequency"></div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-lg-2 mt-sm-20">--%>
+<%--                                <input type="text" id="total-workers" name="price" placeholder="Add Your Price"--%>
+<%--                                       readonly/>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row package-carousel mt-45 mt-sm-35">--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <div class="package-single">--%>
+<%--                    <h4>STANDARD</h4>--%>
+<%--                    <h2>$100.00</h2>--%>
+<%--                    <h5>/ per month</h5>--%>
+<%--                    <ul class="list-none">--%>
+<%--                        <li>3 Bedrooms cleaning</li>--%>
+<%--                        <li>Vacuuming</li>--%>
+<%--                        <li>2 Bathroom cleaning</li>--%>
+<%--                        <li>Mirror Cleaning</li>--%>
+<%--                        <li>1 Livingroom cleaning</li>--%>
+<%--                        <li>Window Sills</li>--%>
+<%--                    </ul>--%>
+<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <div class="package-single">--%>
+<%--                    <h4>PREMIUM</h4>--%>
+<%--                    <h2>$150.00</h2>--%>
+<%--                    <h5>/ per month</h5>--%>
+<%--                    <ul class="list-none">--%>
+<%--                        <li>5 Bedrooms cleaning</li>--%>
+<%--                        <li>Vacuuming</li>--%>
+<%--                        <li>2 Bathroom cleaning</li>--%>
+<%--                        <li>Mirror Cleaning</li>--%>
+<%--                        <li>1 Livingroom cleaning</li>--%>
+<%--                        <li>Window Sills</li>--%>
+<%--                    </ul>--%>
+<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <div class="package-single">--%>
+<%--                    <h4>ENTERPRISE</h4>--%>
+<%--                    <h2>$200.00</h2>--%>
+<%--                    <h5>/ per month</h5>--%>
+<%--                    <ul class="list-none">--%>
+<%--                        <li>7 Bedrooms cleaning</li>--%>
+<%--                        <li>Vacuuming</li>--%>
+<%--                        <li>2 Bathroom cleaning</li>--%>
+<%--                        <li>Mirror Cleaning</li>--%>
+<%--                        <li>1 Livingroom cleaning</li>--%>
+<%--                        <li>Window Sills</li>--%>
+<%--                    </ul>--%>
+<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!--package-area end-->
 
 <!--blog-area start-->

@@ -4,19 +4,24 @@
 <mapper namespace="com.hm.mapper.UserMapper">
 
     <!--    普通用户注册--><!--   并返回id -->
-    <insert id="cUserReg" parameterType="com.hm.entity.TblUser" useGeneratedKeys="true" keyProperty="id">
+    <insert id="cUserReg" parameterType="com.hm.entity.TblUser" useGeneratedKeys="true" keyProperty="userid">
         insert into tbluser
         (username,userpwd,usersex,userphone,usertime,usermoney,usercon,stid,userurl,usercard,rid)
         values
         (#{username},#{userpwd},#{usersex},#{userphone},#{usertime},0,0,1,#{userurl},#{usercard},2)
+
     </insert>
     <!--    普通用户登录-->
     <select id="cUserLogin" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
          select * from tbluser where rid=2 and stid=1 and userphone=#{userphone} and userpwd=#{userpwd}
     </select>
 <!--    查看普通用户是否被禁用-->
-    <select id="queryUserState" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    <select id="queryUserState" parameterType="java.lang.String" resultType="java.lang.Integer">
         select stid from tbluser  where userphone=#{userphone}
+    </select>
+
+    <select id="queryUserid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select userid from tbluser  where userphone=#{userphone}
     </select>
     <!--    增加地址-->
     <insert id="addSite" parameterType="com.hm.entity.TblSite">

@@ -10,7 +10,7 @@ import com.hm.entity.User;
  */
 public interface UserBiz {
 
-    public User userLogin(String userid, String pwd);
+//    public User userLogin(String userid, String pwd);
 
     /**
      * 新增普通用户账号

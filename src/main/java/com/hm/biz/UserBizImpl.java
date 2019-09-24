@@ -12,19 +12,23 @@ import javax.annotation.Resource;
 public class UserBizImpl implements UserBiz {
     @Resource
     private UserMapper userMapper;
-    @Override
-    public User userLogin(String userid, String pwd) {
-        return null;
-    }
+//    @Override
+//    public User userLogin(String userid, String pwd) {
+//        return null;
+//    }
 
     @Override
     public Integer cUserReg(TblUser tblUser,TblSite tblSite) {
+        Integer num=0;
+        Integer coun=userMapper.cUserReg(tblUser);
+        if(0<coun){
+            Integer userid=userMapper.queryUserid(tblUser.getUserphone());
 
-        Integer userid=userMapper.cUserReg(tblUser);
+            tblSite.setUserid(userid);
 
-        tblSite.setUserid(userid);
+            num=userMapper.addSite(tblSite);
+        }
 
-        Integer num=userMapper.addSite(tblSite);
 
         return num;
     }

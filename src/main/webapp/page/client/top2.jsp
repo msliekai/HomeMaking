@@ -49,6 +49,7 @@
                                         <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
                                         <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
                                         <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">项目
@@ -105,6 +106,7 @@
                                         <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
                                         <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
                                         <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
+                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">项目</a>

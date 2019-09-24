@@ -55,9 +55,9 @@
 
     <%--城市--%>
     <!--必要样式-->
-    <link href="<%=path%>page/client/css/city/main.css" rel="stylesheet" type="text/css"/>
+<%--    <link href="<%=path%>page/client/css/city/main.css" rel="stylesheet" type="text/css"/>--%>
     <%--    <link href="<%=path%>page/css/city/bootstrap.css" rel="stylesheet" type="text/css" />--%>
-    <link href="<%=path%>page/client/css/city/city-picker.css" rel="stylesheet" type="text/css"/>
+<%--    <link href="<%=path%>page/client/css/city/city-picker.css" rel="stylesheet" type="text/css"/>--%>
 
 </head>
 
@@ -75,7 +75,7 @@
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>admin/cUserReq.action" method="post">
+                        <form action="<%=path%>admin/cUserReq.action" method="post" enctype="multipart/form-data">
                             <div>
                                 <label for="showname"><h4>头像：</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -85,7 +85,7 @@
                                 <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()"
                                    id="browse">选择图片</a>
                             </div>
-                            <%--                            真头像在这--%>
+                            <%-- 真头像在这--%>
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
                             <div class="form-group">
@@ -165,20 +165,32 @@
                                 <label for="usercard">地址：</label>
                             </div>
 
-                            <br/>
-                            <div class="docs-methods">
-                                <div id="distpicker">
-                                    <div class="form-group">
-                                        <div style="position: relative;">
-                                            <input id="city-picker3" autocomplete="off" required="required" name="sa" class="form-control" readonly type="text" value="北京市/北京市/东城区" data-toggle="city-picker">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-warning" id="reset" type="button">重置</button>
-                                        <button class="btn btn-danger" id="destroy" type="button">确定</button>
-                                    </div>
+<%--                            <br/>--%>
+                            <div class="info">
+                                <div>
+                                    <select id="s_province" name="sa"></select>  
+                                    <select id="s_city" name="sb" ></select>  
+                                    <select id="s_county" name="sc"></select>
+                                    <script class="resources library" src="<%=path%>page/client/js/city-data.js" type="text/javascript"></script>
+
+                                    <script type="text/javascript">_init_area();</script>
                                 </div>
+                                <div id="show"></div>
                             </div>
+
+<%--                            <div class="docs-methods">--%>
+<%--                                <div id="distpicker">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <div style="position: relative;">--%>
+<%--                                            <input id="city-picker3" autocomplete="off" required="required" name="sa" class="form-control" readonly type="text" value="北京市/北京市/东城区" data-toggle="city-picker">--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <button class="btn btn-warning" id="reset" type="button">重置</button>--%>
+<%--                                        <button class="btn btn-danger" id="destroy" type="button">确定</button>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <label for="scontext">详细地址：</label>
                                 <input type="text" class="form-control" autocomplete="off" required="required" id="scontext" name="scontext" placeholder="请输入详细地址">
@@ -246,10 +258,10 @@
 <script src="<%=path%>page/layui/layui.js"></script>
 
 <%--城市--%>
-<script src="<%=path%>page/client/js/city/city-picker.data.js"></script>
-<script src="<%=path%>page/client/js/city/city-picker.js"></script>
-<script src="<%=path%>page/client/js/city/main.js"></script>
-
+<%--<script src="<%=path%>page/client/js/city/city-picker.data.js"></script>--%>
+<%--<script src="<%=path%>page/client/js/city/city-picker.js"></script>--%>
+<%--<script src="<%=path%>page/client/js/city/main.js"></script>--%>
+<script class="resources library" src="<%=path%>page/client/js/city-data.js" type="text/javascript"></script>
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
 </body>
@@ -262,7 +274,9 @@
     //file表单选中文件时,让file表单的val展示到showname这个展示框
     $('#fileact').change(function () {
         $('#showname').val($(this).val())
+
     })
+
     //点击切换验证码
     $(function () {
         //点击图片更换验证码
@@ -270,6 +284,16 @@
             $("#Verify").attr("src", "<%=path%>serial/getimage.action?timestamp=" + new Date().getTime());
         });
     });
+
+    // var Gid  = document.getElementById ;
+    // var showArea = function(){
+    //         Gid('show').innerHTML = "<h3>省" +
+    //         Gid('s_province').value + " - 市" +
+    //         Gid('s_city').value + " - 县/区" +
+    //         Gid('s_county').value + "</h3>"
+    // }
+    // Gid('s_county').setAttribute('onchange','showArea()');
+
 </script>
 <%
     if (request.getAttribute("flog") == "success") {%>
