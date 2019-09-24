@@ -38,6 +38,7 @@
 
 
 <div class="layui-fluid">
+    <h3 style="color:black;">公司资料</h3>
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
@@ -49,7 +50,19 @@
         </div>
     </div>
 </div>
-
+<div class="layui-fluid">
+    <h3 style="color:black;">员工资料</h3>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" align="center" >
+                    <table class="layui-table" lay-filter="test" id="ptable" align="center">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 <script id="barDemo" type="text/html">
@@ -60,6 +73,7 @@
 <script>
     layui.use('table', function() {
         var table = layui.table;
+        // 公司资料表
         table.render({
             elem: '#utable'
             // , height: 500
@@ -82,7 +96,53 @@
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
-
+        // 员工资料表
+        table.render({
+            elem: '#ptable'
+            // , height: 500
+            , url:'<%=path%>page/Staffcredential.action'//数据接口
+            , page: true //开启分页
+            ,limit:10
+            // ,method:"get"
+            , id: 'testReload'
+            , parseData: function (res) {
+                return {
+                    "code": eval(res.code), //解析接口状态
+                    // "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data//解析数据列表
+                };
+            }
+            , cols: [[ //表头
+                {field: 'datatype', title: '材料名', minWidth: 100}
+                , {field: 'count', title: '份数', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+            ]]
+        });
+        <%--layui.use('table', function() {--%>
+        <%--    var table = layui.table;--%>
+        <%--    table.render({--%>
+        <%--        elem: '#utable'--%>
+        <%--        // , height: 500--%>
+        <%--        , url:'<%=path%>page/Comcredential.action'//数据接口--%>
+        <%--        , page: true //开启分页--%>
+        <%--        ,limit:10--%>
+        <%--        // ,method:"get"--%>
+        <%--        , id: 'testReload'--%>
+        <%--        , parseData: function (res) {--%>
+        <%--            return {--%>
+        <%--                "code": eval(res.code), //解析接口状态--%>
+        <%--                // "msg": res.msg, //解析提示文本--%>
+        <%--                "count": res.count, //解析数据长度--%>
+        <%--                "data": res.data//解析数据列表--%>
+        <%--            };--%>
+        <%--        }--%>
+        <%--        , cols: [[ //表头--%>
+        <%--            {field: 'crename', title: '材料名', minWidth: 100}--%>
+        <%--            , {field: 'count', title: '份数', minWidth: 80}--%>
+        <%--            , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}--%>
+        <%--        ]]--%>
+        <%--    });--%>
         //监听行工具事件
         table.on('tool(test)', function(obj) {
             var data = obj.data;

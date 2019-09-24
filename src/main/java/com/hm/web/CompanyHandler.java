@@ -74,15 +74,45 @@ public class CompanyHandler {
     //公司证书列表
     @RequestMapping("Comcredential")
     public @ResponseBody
-    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session)
+    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session,Credential credential)
     {
-        Company company1= (Company) session.getAttribute("company");
-        Integer page= company1.getPage();
-        Integer limit=company1.getLimit();
+        //---获取存的公司
+//        Company company = (Company) session.getAttribute("company");
+//        Integer fid=company.getFid();
+        //----把得到的公司id赋值给资料表
+        credential.setFid(1);
+        Integer page=credential.getPage()-1;
+        credential.setPage(page);
         //数据库查出条数
-        int count=0;
+        int count=companyBiz.comCount(credential);
+        Credential c = new Credential();
+        System.out.println(c.getLimit());
+        List<Credential> list=companyBiz.findCreList(credential);
 
-        List<Credential> list=companyBiz.findCreList(company1);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+
+        return map;
+    }
+
+    //公司证书列表
+    @RequestMapping("Staffcredential")
+    public @ResponseBody
+    Map<String,Object> Staffcredential(HttpServletRequest request, HttpSession session,Credential credential)
+    {
+        //---获取存的公司
+//        Company company = (Company) session.getAttribute("company");
+//        Integer fid=company.getFid();
+        //----把得到的公司id赋值给资料表
+        credential.setFid(1);
+        Integer page=credential.getPage()-1;
+        credential.setPage(page);
+        //数据库查出条数
+        int count=companyBiz.stfCount(credential);
+        System.out.println(count);
+        List<Credential> list=companyBiz.findStfCreList(credential);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("code",0);
         map.put("count",count);

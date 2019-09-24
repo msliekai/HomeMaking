@@ -15,8 +15,6 @@ public class Company {
     private String ftime;//注册时间
     private Integer ctid;//服务类别
     private Integer stid;//状态
-    private Integer page;
-    private Integer limit;
     public Company() {
 
     }

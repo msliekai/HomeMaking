@@ -18,7 +18,20 @@
         (#{facc},#{fpwd},#{fname},#{flaw},
         #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid});
     </insert>
-    <select id="findCreList" parameterType="com.hm.entity.Company" resultType="java.util.List">
-        SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=#{fid} and c.creid=f.creid GROUP BY c.crename;
+<!--    公司证书资料-->
+    <select id="findCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">
+        SELECT c.crename,count(f.creid) as count from tblcre c LEFT JOIN tblfcc f on f.fid=#{fid} and c.creid=f.creid GROUP BY c.crename limit #{page},#{limit};
+    </select>
+<!--    员工证书资料-->
+    <select id="findStfCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">
+       SELECT c.datatype,count(f.dataid) as count from tbldata c LEFT JOIN tblsfdata f on f.fid=#{fid} and c.dataid=f.dataid GROUP BY c.datatype limit #{page},#{limit};
+    </select>
+<!--    查找公司证书的总数-->
+    <select id="comCount" parameterType="com.hm.entity.Credential" resultType="java.lang.Integer">
+        select count(*) from tblfcc where fid=#{fid};
+    </select>
+    <!--    查找员工证书的总数-->
+    <select id="stfCount" parameterType="com.hm.entity.Credential" resultType="java.lang.Integer">
+        select count(*) from tblsfdata where fid=#{fid};
     </select>
 </mapper>
