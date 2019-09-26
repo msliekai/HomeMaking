@@ -39,7 +39,7 @@
 <div class="box">
     <ul>
         <li>
-            <img src="<%=path%>page/Xdamin/images/5.jpg" width="190" height="190" alt="">
+            <img src="<%=path%>page/Xadmin/images/5.jpg" width="190" height="190" alt="">
             <div class="cover">
                 <a href="page/CompanyLogin.jsp"><i class="fa fa-plus"></i></a>
                 <h4>LieKai</h4>
@@ -47,7 +47,7 @@
             </div>
         </li>
         <li>
-            <img src="<%=path%>page/Xdamin/images/6.jpg" width="190" height="190" alt="">
+            <img src="<%=path%>page/Xadmin/images/6.jpg" width="190" height="190" alt="">
             <div class="cover">
                 <a href="page/ManagerLogin.jsp"><i class="fa fa-plus"></i></a>
                 <h4>LieKai</h4>

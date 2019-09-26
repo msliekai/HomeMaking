@@ -1,5 +1,5 @@
-<%@ page import="com.hm.entity.User" %>
-<%@ page import="com.hm.entity.Menu" %>
+
+<%@ page import="com.hm.entity.Tblmenu" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -56,7 +56,7 @@
 							<li class="layui-nav-item layui-nav-itemed">
 								<a class="" href="javascript:;">${map.mname}</a>
 								<dl class="layui-nav-child">
-									<c:forEach items="${map.childMenus}" var="scm">
+									<c:forEach items="${map.childTblmenus}" var="scm">
 										<dd>
 											<c:if test="${scm.murl!=null}">
 												<a href="<%=path %>${scm.murl}" target="main">${scm.mname}</a>

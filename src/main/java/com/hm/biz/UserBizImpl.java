@@ -14,10 +14,6 @@ import java.util.List;
 public class UserBizImpl implements UserBiz {
     @Resource
     private UserMapper userMapper;
-    @Override
-    public User userLogin(String userid, String pwd) {
-        return null;
-    }
 
     @Override
     public Integer cUserReg(TblUser tblUser,TblSite tblSite) {

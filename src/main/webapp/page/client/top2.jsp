@@ -82,9 +82,9 @@
                         </nav>
                     </div>
 
-                    <!--mobile-menu-->
-                    <div class="d-hidden mobile-menu">
-                        <nav id="mobile-menu">
+                    <!--mobile-tblmenu-->
+                    <div class="d-hidden mobile-tblmenu">
+                        <nav id="mobile-tblmenu">
                             <ul class="list-none">
                                 <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
                                 <li><a href="#">其他界面</a>
@@ -158,7 +158,7 @@
                                      </a>
                                 </li>
                                 <li class="ml-25"><a href="<%=path%>page/client/UserCentor.jsp">${sessionScope.userbacc.username}</a></li>
-                                <li class="mmenu-icon"><a href="#mobile-menu"><i class="icon_menu"></i></a></li>
+                                <li class="mmenu-icon"><a href="#mobile-tblmenu"><i class="icon_menu"></i></a></li>
                                 <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i> </a>
 
                                 </li>

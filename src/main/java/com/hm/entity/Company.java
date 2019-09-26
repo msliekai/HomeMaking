@@ -1,7 +1,7 @@
 package com.hm.entity;
 
 import lombok.Data;
-
+//------公司表   tblfirm
 @Data
 public class Company {
     private Integer fid;

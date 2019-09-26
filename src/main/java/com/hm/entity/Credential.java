@@ -3,7 +3,7 @@ package com.hm.entity;
 
 import lombok.Data;
 
-//------证书表
+//------证书表    tblcre
 @Data
 public class Credential {
     private Integer fccid;//序号

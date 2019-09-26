@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface UserBiz {
 
-    public User userLogin(String userid, String pwd);
 
     /**
      * 新增普通用户账号
