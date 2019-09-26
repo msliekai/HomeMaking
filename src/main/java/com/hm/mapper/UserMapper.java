@@ -2,8 +2,11 @@ package com.hm.mapper;
 
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
+import com.hm.entity.UserMoney;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserMapper {
@@ -20,5 +23,8 @@ public interface UserMapper {
     public TblUser cUserLogin(TblUser tblUser);
 
     //查看用户状态
-    public Integer queryUserState(@Param("userphone")Long userphone);
+    public Integer queryUserState(@Param("userphone")String userphone);
+
+    //查询
+    public List<UserMoney> jUserMoney(UserMoney userMoney);
 }

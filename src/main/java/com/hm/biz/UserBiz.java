@@ -3,6 +3,9 @@ package com.hm.biz;
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
 import com.hm.entity.User;
+import com.hm.entity.UserMoney;
+
+import java.util.List;
 
 
 /**
@@ -33,5 +36,11 @@ public interface UserBiz {
      * @param userphone 电话号码
      * @return 状态id
      */
-    public Integer queryUserState(long userphone);
+    public Integer queryUserState(String userphone);
+
+    //账户
+    public List<UserMoney> jUserMoney(UserMoney userMoney);
+
+    public List jUserAppraise();
+
 }

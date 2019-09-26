@@ -3,10 +3,12 @@ package com.hm.biz;
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
 import com.hm.entity.User;
+import com.hm.entity.UserMoney;
 import com.hm.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("biz")
 public class UserBizImpl implements UserBiz {
@@ -35,9 +37,19 @@ public class UserBizImpl implements UserBiz {
     }
 
     @Override
-    public Integer queryUserState(long userphone) {
+    public Integer queryUserState(String userphone) {
 
         return userMapper.queryUserState(userphone);
+    }
+
+    @Override
+    public List<UserMoney> jUserMoney(UserMoney userMoney) {
+        return userMapper.jUserMoney(userMoney);
+    }
+
+    @Override
+    public List jUserAppraise() {
+        return null;
     }
 
 }

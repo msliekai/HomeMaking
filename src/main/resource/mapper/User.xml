@@ -15,7 +15,7 @@
          select * from tbluser where rid=2 and stid=1 and userphone=#{userphone} and userpwd=#{userpwd}
     </select>
 <!--    查看普通用户是否被禁用-->
-    <select id="queryUserState" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    <select id="queryUserState" parameterType="java.lang.String" resultType="java.lang.Integer">
         select stid from tbluser  where userphone=#{userphone}
     </select>
     <!--    增加地址-->
@@ -26,4 +26,25 @@
         (#{userid},#{scontext},#{sa},#{sb},#{sc})
     </insert>
 
+    <!--查询用户余额-->
+    <select id="jUserMoney" resultType="com.hm.entity.UserMoney">
+       SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,f.fname,z.hzbei*sf.sfcos as money from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
+WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid
+        <if test="userid!=null">
+            and u.userid = #{userid}
+        </if>
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--查询用户消费-->
+    <!--<select id="jUserBalance" resultType="com.hm.entity.UserMoney">
+        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,f.fname,z.hzbei*sf.sfcos as money from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid  and u.userid = #{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>-->
 </mapper>

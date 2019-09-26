@@ -17,7 +17,7 @@ public class TblUser {
     //用户性别
     private String usersex;
     // 用户手机
-    private Long userphone;
+    private String userphone;
     //注册时间
     private String usertime;
     // 用户余额
@@ -25,11 +25,11 @@ public class TblUser {
     // 用户积分
     private Integer usercon;
     //状态
-    private String stid;
+    private Integer stid;
     // 头像url
     private String userurl;
     // 银行卡号码
-    private Integer usercard;
+    private String usercard;
     // 角色id
     private Integer rid;
 
@@ -68,14 +68,6 @@ public class TblUser {
         this.usersex = usersex;
     }
 
-    public Long getUserphone() {
-        return userphone;
-    }
-
-    public void setUserphone(Long userphone) {
-        this.userphone = userphone;
-    }
-
     public String getUsertime() {
         return usertime;
     }
@@ -100,14 +92,6 @@ public class TblUser {
         this.usercon = usercon;
     }
 
-    public String getStid() {
-        return stid;
-    }
-
-    public void setStid(String stid) {
-        this.stid = stid;
-    }
-
     public String getUserurl() {
         return userurl;
     }
@@ -116,19 +100,35 @@ public class TblUser {
         this.userurl = userurl;
     }
 
-    public Integer getUsercard() {
-        return usercard;
-    }
-
-    public void setUsercard(Integer usercard) {
-        this.usercard = usercard;
-    }
-
     public Integer getRid() {
         return rid;
     }
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    public Integer getStid() {
+        return stid;
+    }
+
+    public void setStid(Integer stid) {
+        this.stid = stid;
+    }
+
+    public String getUsercard() {
+        return usercard;
+    }
+
+    public void setUsercard(String usercard) {
+        this.usercard = usercard;
     }
 }

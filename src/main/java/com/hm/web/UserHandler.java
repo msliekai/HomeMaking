@@ -4,6 +4,7 @@ package com.hm.web;
 import com.hm.biz.UserBiz;
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
+import com.hm.entity.UserMoney;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -27,6 +29,7 @@ public class UserHandler {
     @Resource
     private UserBiz biz;
     private ModelAndView mav = null;
+    private Map<String,Object> map = new HashMap<String, Object>();
 
 
     @RequestMapping(value = "/cUserReq.action")
@@ -96,5 +99,34 @@ public class UserHandler {
             flog.put("flog","coderr");
         }
         return flog;
+    }
+
+    /*@RequestMapping(value = "/jUserMoney.action")
+    public ModelAndView jUserMoney(HttpServletRequest request, TblUser tblUser) {
+        List<UserMoney> list = biz.jUserMoney((TblUser) request.getSession().getAttribute("userbacc"),-1,0);
+
+        System.out.println(list.size());
+        if (0 <=list.size()) {
+            mav = new ModelAndView();
+            mav.setViewName("client/UserBalance");
+            mav.addObject("Moneylist",list);
+        } else {
+            return null;
+        }
+        return mav;
+    }*/
+
+    @RequestMapping("/jUserMoney.action")
+    public @ResponseBody Map jUserMoney(HttpServletRequest request,UserMoney userMoney){
+        System.out.println("进入方法------------------------");
+        userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
+        List<UserMoney> list = biz.jUserMoney(userMoney);
+        System.out.println(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
+        map.put("code",0);
+        UserMoney userMoney1 = new UserMoney();
+        userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
+        map.put("count",biz.jUserMoney(userMoney1).size());
+        map.put("data",list);
+        return map;
     }
 }

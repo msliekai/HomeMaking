@@ -1,20 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: HANG
-  Date: 2019/8/26
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
+    我的足迹
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>用户管控</title>
+    <title>我的足迹</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -28,9 +24,9 @@
 <div class="x-nav">
           <span class="layui-breadcrumb">
             <a href="">首页</a>
-            <a href="">演示</a>
+            <a href="">个人中心</a>
             <a>
-              <cite>用户管控</cite></a>
+              <cite>我的足迹</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -44,8 +40,32 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
 <%--                    <form class="layui-form layui-col-space5">--%>
-                    <div class="demoTable">
-                        <div class="layui-inline layui-show-xs-block">
+
+    <%--账户信息<hr class="layui-bg-blue">
+                    <div class="demoTable" align="center">
+                        <table width="50%" border="0">
+                            <tbody>
+                            <tr>
+                                <td width="30%">账号类型：</td>
+                                <td>个人账号</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>账户余额：</td>
+                                <td>${sessionScope.userbacc.usermoney}元</td>
+                                <td><button class="layui-btn layui-btn-normal">充值</button></td>
+                            </tr>
+                            <tr>
+                                <td>绑定账户：</td>
+                                <td>${sessionScope.userbacc.usercard}</td>
+                                <td><button class="layui-btn layui-btn-primary">修改</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>--%>
+
+
+                        <%--<div class="layui-inline layui-show-xs-block">
                             <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
@@ -56,15 +76,17 @@
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
-                        </div>
-                    </div>
+                        </div>--%>
+
+    我的足迹<hr class="layui-bg-blue">
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
-                <div class="layui-card-header">
+
+                <%--<div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>page/Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
-                </div>
+                </div>--%>
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
@@ -78,10 +100,11 @@
 </body>
 
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
-    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">重置密码</a>
+    <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
+    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">查看详情</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+
+    <%--默认地址是灰色--%>
 </script>
 
 <script>
@@ -91,9 +114,9 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>queryAction/queryUser.action' //数据接口
+            , url: '<%=path%>admin/jUserMoney.action' //数据接口
             , page: true //开启分页
-            ,limit:10
+            ,limit:2
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -107,15 +130,11 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'uid', title: '用户id', minWidth: 100}
-                , {field: 'uname', title: '用户名', minWidth: 80}
-                , {field: 'usex', title: '性别', minWidth: 80}
-                , {field: 'regtime', title: '注册时间', minWidth:150}
-                , {field: 'tel', title: '电话', minWidth: 80}
-                , {field: 'email', title: '电子邮箱', minWidth: 80}
-                , {field: 'uintegral', title: '积分', minWidth: 80}
-                , {field: 'sname', title: '用户状态', minWidth: 90}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+                {field: 'oid', title: '服务', minWidth: 80}
+                , {field: 'onumber', title: '家政公司', minWidth: 150}
+                , {field: 'cosname', title: '价格', minWidth: 80}
+                , {field: 'ctname', title: '服务次数', minWidth:80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
             ]]
         });
         //触发查询按钮

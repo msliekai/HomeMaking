@@ -157,7 +157,7 @@
                                      </figure>
                                      </a>
                                 </li>
-                                <li class="ml-25"><a href="#" onclick="alert('这里是个人中心')">${sessionScope.userbacc.username}</a></li>
+                                <li class="ml-25"><a href="<%=path%>page/client/UserCentor.jsp">${sessionScope.userbacc.username}</a></li>
                                 <li class="mmenu-icon"><a href="#mobile-menu"><i class="icon_menu"></i></a></li>
                                 <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i> </a>
 
