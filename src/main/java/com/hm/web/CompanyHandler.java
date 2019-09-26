@@ -1,18 +1,16 @@
 package com.hm.web;
 
 import com.hm.biz.CompanyBiz;
-import com.hm.entity.Company;
-import com.hm.entity.Credential;
-import javafx.geometry.Pos;
+import com.hm.biz.MenuBiz;
+import com.hm.entity.*;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +25,11 @@ public class CompanyHandler {
 
     //公司登录
     private ModelAndView modelAndView=new ModelAndView();
+    private Map<String,Object> map = new HashMap<String,Object>();
     @Resource
     private CompanyBiz companyBiz;
+    @Resource
+    private MenuBiz menuBizImpl;
     @RequestMapping(value = "comlogin",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public ModelAndView comlogin(HttpServletRequest req, String facc, String fpwd){
 
@@ -36,7 +37,9 @@ public class CompanyHandler {
 
         if(company!=null){
             req.getSession().setAttribute("company",company);
-            modelAndView.setViewName("company/head");//成功后跳转的界面
+            List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
+            req.setAttribute("umenu", menu);
+            modelAndView.setViewName("baseindex");//成功后跳转的界面
         }else{
             modelAndView.setViewName("CompanyLogin");//失败返回登录页
         }
@@ -67,7 +70,7 @@ public class CompanyHandler {
             modelAndView.setViewName("CompanyLogin");
         }else{
             System.out.println("注册失败");
-            modelAndView.setViewName("company/comregister");
+            modelAndView.setViewName("company/reg");
         }
         return modelAndView;
     }
@@ -77,19 +80,15 @@ public class CompanyHandler {
     Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session,Credential credential)
     {
         //---获取存的公司
-//        Company company = (Company) session.getAttribute("company");
-//        Integer fid=company.getFid();
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
         //----把得到的公司id赋值给资料表
-        credential.setFid(1);
-        Integer page=credential.getPage()-1;
-        credential.setPage(page);
+        credential.setFid(fid);
         //数据库查出条数
-        int count=companyBiz.comCount(credential);
-        Credential c = new Credential();
-        System.out.println(c.getLimit());
+        int count=companyBiz.comCount();
         List<Credential> list=companyBiz.findCreList(credential);
-
-        Map<String,Object> map = new HashMap<String,Object>();
+        System.out.println(list);
+        session.setAttribute("comcre",list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -97,27 +96,67 @@ public class CompanyHandler {
         return map;
     }
 
-    //公司证书列表
+    //员工证书列表
     @RequestMapping("Staffcredential")
     public @ResponseBody
     Map<String,Object> Staffcredential(HttpServletRequest request, HttpSession session,Credential credential)
     {
         //---获取存的公司
-//        Company company = (Company) session.getAttribute("company");
-//        Integer fid=company.getFid();
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
         //----把得到的公司id赋值给资料表
-        credential.setFid(1);
-        Integer page=credential.getPage()-1;
-        credential.setPage(page);
+        credential.setFid(fid);
         //数据库查出条数
-        int count=companyBiz.stfCount(credential);
-        System.out.println(count);
-        List<Credential> list=companyBiz.findStfCreList(credential);
-        Map<String,Object> map = new HashMap<String,Object>();
+        Integer count1=companyBiz.stfCount();
+        List<Credential> list1=companyBiz.findStfCreList(credential);
+        map.put("code",0);
+        map.put("count",count1);
+        map.put("data",list1);
+
+        return map;
+    }
+
+    //公司订单查询
+    @RequestMapping("companyOrder")
+    public @ResponseBody
+    Map<String,Object> companyOrder(HttpServletRequest request, HttpSession session,Tblorder tblorder)
+    {
+        //---获得登录的公司对象
+        Company company = (Company) session.getAttribute("company");
+        Integer count=companyBiz.ordercount(company.getFid());
+        List<Tblorder> list=companyBiz.findCompanyOrder(company.getFid(),tblorder.getPage(),tblorder.getLimit());
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
+        return map;
+    }
 
+    //----员工信息表
+    //---员工配置表
+    //----人员评价表
+    @RequestMapping("staffList")
+    public @ResponseBody
+    Map<String,Object> staffList(HttpServletRequest request, HttpSession session,Tblorder tblorder)
+    {
+        //---获得登录的公司对象
+        Company company = (Company) session.getAttribute("company");
+        Integer count=companyBiz.staffCount(company.getFid());
+        List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+    //-------培训表
+    @RequestMapping("stafftrain")
+    public @ResponseBody
+    Map<String,Object> stafftrain(HttpServletRequest request, HttpSession session,Tbltrain tbltrain)
+    {
+        Integer count=companyBiz.traincount();
+        List<Tbltritem> list = companyBiz.train(tbltrain.getPage(),tbltrain.getLimit());
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
         return map;
     }
 }

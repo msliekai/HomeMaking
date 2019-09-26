@@ -1,7 +1,6 @@
 package com.hm.biz;
 
-import com.hm.entity.Company;
-import com.hm.entity.Credential;
+import com.hm.entity.*;
 import com.hm.mapper.CompanyMapper;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +35,43 @@ public class CompanyBizImpl implements CompanyBiz {
     }
     //    查找公司证书的总数
     @Override
-    public Integer comCount(Credential credential) {
-        return companyMapper.comCount(credential);
+    public Integer comCount() {
+        return companyMapper.comCount();
     }
     //    查找员工证书的总数
     @Override
-    public Integer stfCount(Credential credential) {
-        return companyMapper.stfCount(credential);
+    public Integer stfCount() {
+        return companyMapper.stfCount();
+    }
+    //-----查找公司订单表
+    @Override
+    public List<Tblorder> findCompanyOrder(Integer fid,Integer page,Integer limit) {
+        return companyMapper.findCompanyOrder(fid,page,limit);
+    }
+    //----查找订单的总数
+    @Override
+    public Integer ordercount(Integer fid) {
+        return companyMapper.ordercount(fid);
+    }
+    //--------查找员工信息表
+    @Override
+    public List<Staff> staffList(Integer fid, Integer page, Integer limit) {
+        return companyMapper.staffList(fid,page,limit);
+    }
+    //---------查找员工总数
+    @Override
+    public Integer staffCount(Integer fid) {
+        return companyMapper.staffCount(fid);
+    }
+    //    培训表
+    @Override
+    public List<Tbltritem> train(Integer page, Integer limit) {
+        return companyMapper.train(page,limit);
+    }
+    //    培训表总数
+    @Override
+    public Integer traincount() {
+        return companyMapper.traincount();
     }
 
     //------公司证书列表

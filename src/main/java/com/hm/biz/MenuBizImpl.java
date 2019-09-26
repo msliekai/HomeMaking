@@ -17,10 +17,10 @@ public class MenuBizImpl implements MenuBiz {
     public List<Tblmenu> getMenu(Integer rid) {
         //获取所有菜单（无序）
         List<Tblmenu> list = menuMapper.getMenu(rid);
-
-        for (Tblmenu tblmenu : list) {
-            System.out.println(tblmenu.getMname()+"+"+ tblmenu.getMfid());
-        }
+//
+//        for (Tblmenu tblmenu : list) {
+//            System.out.println(tblmenu.getMname()+"+"+ tblmenu.getMfid());
+//        }
 
         List<Tblmenu> tblmenuList = new ArrayList<Tblmenu>();
         for (int i = 0; i <list.size() ; i++) {
@@ -32,13 +32,13 @@ public class MenuBizImpl implements MenuBiz {
         for (Tblmenu tblmenu : tblmenuList) {
             tblmenu.setChildTblmenus(getChild(tblmenu.getMid(),list));
         }
-        for (Tblmenu tblmenu : tblmenuList) {
-            System.out.println("最终");
-            System.out.println(tblmenu.getMname());
-            if (tblmenu.getChildTblmenus() != null){
-                System.out.println("子级+"+ tblmenu.getChildTblmenus().size());
-            }
-        }
+//        for (Tblmenu tblmenu : tblmenuList) {
+//            System.out.println("最终");
+//            System.out.println(tblmenu.getMname());
+//            if (tblmenu.getChildTblmenus() != null){
+//                System.out.println("子级+"+ tblmenu.getChildTblmenus().size());
+//            }
+//        }
 
 
         return tblmenuList;
@@ -47,16 +47,16 @@ public class MenuBizImpl implements MenuBiz {
 
     //递归查询子菜单
     private List<Tblmenu> getChild(int mfid , List<Tblmenu> list){
-        System.out.println("获取子级");
-        System.out.println(mfid);
+//        System.out.println("获取子级");
+//        System.out.println(mfid);
         List<Tblmenu> childList = new ArrayList<Tblmenu>();
         //获取子菜单
         for (Tblmenu tblmenu : list) {
-            System.out.println("isNotBlank+:"+ tblmenu.getMfid());
+//            System.out.println("isNotBlank+:"+ tblmenu.getMfid());
             if (tblmenu.getMfid()!=null){
-                System.out.println(tblmenu.getMfid()+"+"+mfid+"+");
+//                System.out.println(tblmenu.getMfid()+"+"+mfid+"+");
                 if (tblmenu.getMfid().equals(mfid)){
-                    System.out.println("添加数据"+ tblmenu.getMname());
+//                    System.out.println("添加数据"+ tblmenu.getMname());
                     childList.add(tblmenu);
                 }
             }

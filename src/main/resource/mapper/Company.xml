@@ -14,24 +14,102 @@
     <!--公司注册-->
     <insert id="addCompany" parameterType="com.hm.entity.Company">
         INSERT into tblfirm
-        (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid) VALUES
+        (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid,rid) VALUES
         (#{facc},#{fpwd},#{fname},#{flaw},
-        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid});
+        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
     </insert>
 <!--    公司证书资料-->
     <select id="findCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">
-        SELECT c.crename,count(f.creid) as count from tblcre c LEFT JOIN tblfcc f on f.fid=#{fid} and c.creid=f.creid GROUP BY c.crename limit #{page},#{limit};
+        SELECT c.creid,c.crename,count(f.creid) as count from tblcre c LEFT JOIN tblfcc f on
+        f.fid=#{fid} and c.creid=f.creid GROUP BY c.crename
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit};
     </select>
 <!--    员工证书资料-->
     <select id="findStfCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">
-       SELECT c.datatype,count(f.dataid) as count from tbldata c LEFT JOIN tblsfdata f on f.fid=#{fid} and c.dataid=f.dataid GROUP BY c.datatype limit #{page},#{limit};
+       SELECT c.dataid,c.datatype,count(f.dataid) as count from tbldata c LEFT JOIN tblsfdata f on f.fid=#{fid} and c.dataid=f.dataid GROUP BY c.datatype
+        <bind name="page" value="(page-1)*limit"/>
+       limit #{page},#{limit};
     </select>
 <!--    查找公司证书的总数-->
-    <select id="comCount" parameterType="com.hm.entity.Credential" resultType="java.lang.Integer">
-        select count(*) from tblfcc where fid=#{fid};
+    <select id="comCount" resultType="java.lang.Integer">
+        select count(*) from tblcre ;
     </select>
     <!--    查找员工证书的总数-->
-    <select id="stfCount" parameterType="com.hm.entity.Credential" resultType="java.lang.Integer">
-        select count(*) from tblsfdata where fid=#{fid};
+    <select id="stfCount" resultType="java.lang.Integer">
+        select count(*) from tbldata;;
+    </select>
+
+    <!--公司的基本信息-->
+    <select id="queryBaseInfo" resultType="com.hm.entity.Company">
+        select * from tblfirm
+        where facc=#{facc};
+    </select>
+<!--    查找公司订单表-->
+    <select id="findCompanyOrder"  resultMap="commap">
+        SELECT g.sfurl,g.sfname,ff.fname,p.otime,p.svtime,g.sfcos,q.osname,p.userid from
+        tblfirm ff,tblorder p,tbloderstate q,(SELECT s.* from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g
+        where g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit};
+    </select>
+    <resultMap id="commap" type="com.hm.entity.Tblorder">
+        <id property="oid" column="oid"/>
+        <result property="otime" column="otime"/>
+        <result property="svtime" column="svtime"/>
+        <result property="userid" column="userid"/>
+        <association property="staff" column="staff" javaType="com.hm.entity.Staff">
+            <id property="sfid" column="sfid"/>
+            <result property="sfurl" column="sfurl"/>
+            <result property="sfname" column="sfname"/>
+            <result property="sfcos" column="sfcos"/>
+            <association property="company" column="company" javaType="com.hm.entity.Company">
+                <id property="fid" column="fid"/>
+                <result property="fname" column="fname"/>
+            </association>
+        </association>
+        <association property="tbloderstate" column="tbloderstate" javaType="com.hm.entity.Tbloderstate">
+            <id property="osid" column="osid"/>
+            <result property="osname" column="osname"/>
+        </association>
+    </resultMap>
+<!--查找订单表的总数-->
+    <select id="ordercount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(*) from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid}
+    </select>
+<!--    员工信息表-->
+    <select id="staffList"  resultMap="staff">
+    SELECT f.sfid,f.sfname,f.sfage,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
+    from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid}
+        <bind name="page" value="(page-1)*limit"/>
+    limit #{page},#{limit}
+    </select>
+    <resultMap id="staff" type="com.hm.entity.Staff">
+        <id property="sfid" column="sfid"/>
+        <result property="sfname" column="sfname"/>
+        <result property="sfage" column="sfage"/>
+        <result property="sfdob" column="sfdob"/>
+        <result property="sfedu" column="sfedu"/>
+        <result property="sfid" column="sfid"/>
+        <result property="sftag" column="sftag"/>
+        <result property="sfgood" column="sfgood"/>
+        <result property="sfwant" column="sfwant"/>
+        <association property="tblstate" column="tblstate" javaType="com.hm.entity.Tblstate">
+            <id property="stid" column="stid"/>
+            <result property="stname" column="stname"/>
+        </association>
+    </resultMap>
+    <!--    员工总数-->
+    <select id="staffCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT count(*) from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid}
+    </select>
+    <!--培训表-->
+    <select id="train" resultType="com.hm.entity.Tbltrain">
+        SELECT * from tbltrain <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+<!--    培训表总数-->
+    <select id="traincount" resultType="java.lang.Integer">
+        SELECT count(*) from tbltrain
     </select>
 </mapper>

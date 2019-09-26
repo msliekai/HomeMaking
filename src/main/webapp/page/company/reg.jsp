@@ -55,6 +55,9 @@
 
     <%--城市--%>
     <link rel="stylesheet" type="text/css" href="<%=path%>page/client/css/city-picker.css">
+    <style>
+        span{color: red}
+    </style>
 </head>
 
 <body>
@@ -65,13 +68,13 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>注册</h2>
+            <h2>公司注册</h2>
 
             <div class="signin-form">
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>admin/cUserReq.action" method="post" enctype="multipart/form-data">
+                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data">
                             <%--<div>
                                 <label for="showname"><h4>头像</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -84,43 +87,38 @@
 
                             <div class="form-group">
                                 <label for="facc">家政公司账号名</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required"
-                                       id="facc" name="facc" placeholder="请输入家政公司账号" />
-                            </div><!--/.form-group -->
-
-                            <%--<div class="form-group">
-                                <label for="telpwd">短信验证码</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="telpwd" name="telpwd" placeholder="请输入短信验证码">
-                            </div><!--/.form-group -->--%>
-
-                            <div class="form-group">
-                                <label for="username">用户名</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="username" name="username" placeholder="请输入用户名">
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入家政公司账号">
+                                <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="userpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码">
+                                <label for="fpwd">密码</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()">
+                                <span id="bbb"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="userpwd2">确认密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd2" name="userpwd2" placeholder="再次输入">
+                                <label for="nfpwd">确认密码</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()">
+                                <span id="ccc"></span><p/>
                             </div><!--/.form-group -->
-                           <%-- <div class="form-group">
-                                <label for="usercard">银行卡号</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="usercard" name="usercard" placeholder="请输入正确银行卡信息">
-                            </div><!--/.form-group -->--%>
 
-                            <%--<div class="form-group">
-                                <label>性别 </label>
-                                <label class="usersex">
-                                    <input type="radio" id="usersex1" name="usersex" value="男" checked> 男
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" id="usersex2" name="usersex" value="女"> 女
-                                </label>
-                            </div>--%>
+                            <div class="form-group">
+                                <label for="flaw">法人代表</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名">
+                                <span id="ddd"></span><p/>
+                            </div><!--/.form-group -->
+
+                            <div class="form-group">
+                                <label for="flawphone">法人电话</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入法人电话" onblur="checkflawphone()">
+                                <span id="eee" ></span><p/>
+                            </div><!--/.form-group -->
+                            <div class="form-group">
+                                <label for="ftime">注册时间</label>
+                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
+                                <span id="fff" ></span><p/>
+                            </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="securityCode">验证码</label>
@@ -252,6 +250,63 @@
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
 </body>
+
+<script>
+    function checkfpwd(){
+        var fpwd=$("#fpwd").val();
+        if(fpwd==""){
+            $("#bbb").html("密码不能为空");
+            return false;
+        }else if(fpwd.length<6){
+            $("#bbb").html("密码位数不能低于6位数");
+            return false;
+        }else{
+            $("#bbb").html("");
+        }
+    }
+    function checknfpwd(){
+        var fpwd=$("#fpwd").val();
+        var nfpwd=$("#nfpwd").val();
+        if(fpwd!=nfpwd){
+            $("#ccc").html("两次输入密码不一致");
+            return false;
+        }else{
+            $("#ccc").html("");
+        }
+    }
+    function checkflawphone(){
+        var flawphone=$("#flawphone").val();
+        if(flawphone.length!=11){
+            $("#eee").html("输入手机号有误");
+            return false;
+        }else {
+            $("#eee").html("");
+        }
+    }
+
+    $(document).ready(function () {
+        $("#facc").blur(function () {
+            var facc=$("#facc").val();
+            if(facc==""){
+                $("#aaa").html("公司账号不能为空");
+                return false;
+            }
+            $.post("<%=path%>page/checkfacc.action",
+                {"facc":facc},
+                function (data) {
+                    if(data=="1"){
+                        $("#aaa").html("该账号可用");
+                    }else{
+                        $("#aaa").html("该账号已被注册，请重新填写");
+                    }
+                }
+            )
+        });
+    });
+</script>
+
+
+
 <script type="text/javascript">
     //触发隐藏的file表单
     function makeThisfile() {

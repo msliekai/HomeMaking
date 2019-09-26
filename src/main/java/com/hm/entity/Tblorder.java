@@ -25,6 +25,7 @@ public class Tblorder {
     private Tbloderstate tbloderstate;
     private TblHZ tblHZ;
     private TblSite tblSite;
-
+    private Integer page;
+    private Integer limit;
 
 }

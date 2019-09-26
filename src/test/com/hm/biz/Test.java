@@ -3,6 +3,7 @@ package com.hm.biz;
  * 單元測試，自動加載xml文件可進行測試。
  */
 
+import com.hm.entity.Tblorder;
 import junit.framework.TestCase;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,7 @@ public class Test extends TestCase {
 
     @org.junit.Test
     public void menuTest(){
-        System.out.println();
-        menuBizImpl.getMenu(1);
+
     }
 
 
