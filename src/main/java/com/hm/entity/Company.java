@@ -1,6 +1,7 @@
 package com.hm.entity;
 
 import lombok.Data;
+//------公司表   tblfirm
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,6 +23,8 @@ public class Company {
     @Resource
     private List<CompanyService> list;//公司的服务类型
 
+    private Integer page;
+    private Integer limit;
     public Company() {
 
     }

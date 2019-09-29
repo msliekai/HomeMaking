@@ -99,19 +99,19 @@
 
                             <div class="form-group">
                                 <label for="fsite">公司地址:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="fsite" name="fsite">
+                                <input type="text" class="form-control" autocomplete="off" id="fsite" name="fsite" value="${company.fsite}">
 
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="flaw">法人代表:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="flaw" name="flaw"/>
+                                <input type="text" class="form-control" autocomplete="off" id="flaw" name="flaw" value="${company.flaw}" />
 
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="flawphone">法人电话:</label>
-                                <input type="number" class="form-control" autocomplete="off" id="flawphone" name="flawphone"/>
+                                <input type="number" class="form-control" autocomplete="off" id="flawphone" name="flawphone" value="${company.flawphone}"/>
 
                             </div><!--/.form-group -->
                                 <div class="form-group">
@@ -124,7 +124,7 @@
                                 </label>
 
 
-                                <input type="submit" value="保存"/>
+                                <input type="button" value="保存" onclick="upcom()"/>
                                 </div><!--/.form-group -->
 
 <script src="<%=path%>page/client/js/jquery.js"></script>
@@ -155,6 +155,28 @@
 </body>
 
 <script>
+
+    function upcom() {
+        var facc=$("#facc").val();
+        var fname=$("#fname").val();
+        var flaw=$("#flaw").val();
+        var flawphone=$("#flawphone").val();
+        var fsite=$("#fsite").val();
+        $.post("<%=path%>page/upcom.action",
+            {"facc":facc,"fname":fname,"flaw":flaw,"flawphone":flawphone,"fsite":fsite},
+            function (data) {
+                if(data=="1"){
+                    alert("修改成功");
+                }else {
+                    alert("修改失败");
+                }
+            });
+        
+    }
+    
+    
+    
+    
     function checkfpwd(){
         var fpwd=$("#fpwd").val();
         if(fpwd==""){

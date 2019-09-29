@@ -54,7 +54,11 @@
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
 
     <%--城市--%>
-    <link rel="stylesheet" type="text/css" href="<%=path%>page/client/css/city-picker.css">
+    <!--必要样式-->
+    <link href="<%=path%>page/client/css/city/main.css" rel="stylesheet" type="text/css" />
+<%--    <link href="<%=path%>page/css/city/bootstrap.css" rel="stylesheet" type="text/css" />--%>
+    <link href="<%=path%>page/client/css/city/city-picker.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -114,13 +118,13 @@
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label>性别 </label>
-                                <label class="usersex">
-                                    <input type="radio" id="usersex1" name="usersex" value="男" checked> 男
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" id="usersex2" name="usersex" value="女"> 女
-                                </label>
+                            <label>性别 </label>
+<%--                            <label class="usersex">--%>
+                                <input type="radio" id="usersex1" name="usersex" value="男" checked> <span>男</span>
+<%--                            </label>--%>
+<%--                            <label class="radio-inline">--%>
+                                <input type="radio" id="usersex2" name="usersex" value="女"><span> 女</span>
+<%--                            </label>--%>
                             </div>
 
                             <div class="form-group">
@@ -144,49 +148,23 @@
                                 </div><!--/.col -->
                             </div><!--/.row -->
 
-                            <br/>
-                            <h3>默认地址</h3>
-                            <br/>
-                            <div class="city-picker-selector" id="city-picker-selector">
-                                <div class="selector-item storey province">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sa" class="input-price val-error" value="110000"
-                                           data-required="userProvinceId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                            <li>天津市</li>
-                                            <li>河北省</li>
-                                            <li>山西省</li>
-                                        </ul>
+                            <div class="docs-methods">
+                                    <div id="distpicker">
+                                        <div class="form-group">
+                                            <div style="position: relative;">
+                                                <input id="city-picker3" autocomplete="off" required="required" name="scontext" class="form-control" readonly type="text" value="江苏省/常州市/溧阳市" data-toggle="city-picker">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-warning" id="reset" type="button">重置</button>
+                                            <button class="btn btn-danger" id="destroy" type="button">确定</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="selector-item storey city">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sb" class="input-price val-error" value="110100"
-                                           data-required="userCityId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="selector-item storey district">
-                                    <a href="javascript:;" class="selector-name reveal">海淀区</a>
-                                    <input type="hidden" name="sc" class="input-price val-error" value="110108"
-                                           data-required="userDistrictId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>东城区</li>
-                                            <li>西城区</li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="scontext">详细地址</label>
                                 <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="详细地址">
+                                       id="scontext" name="scontext" placeholder="请输入详细地址">
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
 
@@ -249,6 +227,11 @@
 
 <%--layui--%>
 <script src="<%=path%>page/layui/layui.js"></script>
+
+<%--城市--%>
+<script src="<%=path%>page/client/js/city/city-picker.data.js"></script>
+<script src="<%=path%>page/client/js/city/city-picker.js"></script>
+<script src="<%=path%>page/client/js/city/main.js"></script>
 
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>

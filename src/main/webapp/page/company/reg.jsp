@@ -87,7 +87,7 @@
 
                             <div class="form-group">
                                 <label for="facc">家政公司账号名</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入家政公司账号">
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号">
                                 <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
 
@@ -188,7 +188,7 @@
                             <!-- end .city-picker-selector -->
 
                             <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal"
-                                   data-target=".signin_modal" value="注册"/>
+                                   data-target=".signin_modal" value="注册" onsubmit="submit()" />
                         </form><!--/form -->
                     </div><!--/.col -->
                 </div><!--/.row -->
@@ -252,43 +252,54 @@
 </body>
 
 <script>
-    function checkfpwd(){
-        var fpwd=$("#fpwd").val();
-        if(fpwd==""){
-            $("#bbb").html("密码不能为空");
-            return false;
-        }else if(fpwd.length<6){
-            $("#bbb").html("密码位数不能低于6位数");
-            return false;
-        }else{
-            $("#bbb").html("");
+
+    function submit() {
+        function checkfpwd(){
+            var fpwd=$("#fpwd").val();
+            var reg=/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)\S{6,}$/
+            if(!(reg.test(fpwd))){
+                $("#bbb").html("密码输入格式不正确");
+                return false;
+            }
+            else if(fpwd==""){
+                $("#bbb").html("密码不能为空");
+                return false;
+            }else if(fpwd.length<6){
+                $("#bbb").html("密码位数不能低于6位数");
+                return false;
+            }else{
+                $("#bbb").html("");
+            }
         }
-    }
-    function checknfpwd(){
-        var fpwd=$("#fpwd").val();
-        var nfpwd=$("#nfpwd").val();
-        if(fpwd!=nfpwd){
-            $("#ccc").html("两次输入密码不一致");
-            return false;
-        }else{
-            $("#ccc").html("");
+        function checknfpwd(){
+            var fpwd=$("#fpwd").val();
+            var nfpwd=$("#nfpwd").val();
+            if(fpwd!=nfpwd){
+                $("#ccc").html("两次输入密码不一致");
+                return false;
+            }else{
+                $("#ccc").html("");
+            }
         }
-    }
-    function checkflawphone(){
-        var flawphone=$("#flawphone").val();
-        if(flawphone.length!=11){
-            $("#eee").html("输入手机号有误");
-            return false;
-        }else {
-            $("#eee").html("");
+        function checkflawphone(){
+            var flawphone=$("#flawphone").val();
+            var regular=new RegExp(/^1[3456789]\d{9}$/);
+
+            if(!(regular.test(flawphone))){
+                $("#eee").html("手机号码有误，请重填");
+                return false;
+            }else {
+                $("#eee").html("");
+            }
         }
     }
 
     $(document).ready(function () {
         $("#facc").blur(function () {
             var facc=$("#facc").val();
-            if(facc==""){
-                $("#aaa").html("公司账号不能为空");
+            var regular=new RegExp(/^1[3456789]\d{9}$/);
+            if(!(regular.test(facc))){
+                $("#aaa").html("手机号码有误，请重填");
                 return false;
             }
             $.post("<%=path%>page/checkfacc.action",

@@ -1,6 +1,6 @@
 package com.hm.biz;
 
-import com.hm.entity.Menu;
+import com.hm.entity.Tblmenu;
 import com.hm.mapper.MenuMapper;
 import org.apache.commons.lang.xwork.StringUtils;
 import org.springframework.stereotype.Service;
@@ -13,58 +13,60 @@ import java.util.List;
 public class MenuBizImpl implements MenuBiz {
     @Resource
     private MenuMapper menuMapper;
+
+
     @Override
-    public List<Menu> getMenu(int rid) {
+    public List<Tblmenu> getMenu(Integer rid) {
         //获取所有菜单（无序）
-        List<Menu> list = menuMapper.getMenu(rid);
+        List<Tblmenu> list = menuMapper.getMenu(rid);
 
-        for (Menu menu : list) {
-            System.out.println(menu.getMname()+"+"+menu.getMfid());
-        }
+        /*for (Tblmenu tblmenu : list) {
+            System.out.println(tblmenu.getMname()+"+"+ tblmenu.getMfid());
+        }*/
 
-        List<Menu> menuList = new ArrayList<Menu>();
+        List<Tblmenu> tblmenuList = new ArrayList<Tblmenu>();
         for (int i = 0; i <list.size() ; i++) {
             if (0==list.get(i).getMfid()){
-                menuList.add(list.get(i));
+                tblmenuList.add(list.get(i));
             };
         }
 
-        for (Menu menu : menuList) {
-            menu.setChildMenus(getChild(menu.getMid(),list));
+        for (Tblmenu tblmenu : tblmenuList) {
+            tblmenu.setChildTblmenus(getChild(tblmenu.getMid(),list));
         }
-        for (Menu menu : menuList) {
-            System.out.println("最终");
-            System.out.println(menu.getMname());
-            if (menu.getChildMenus() != null){
-                System.out.println("子级+"+ menu.getChildMenus().size());
+        for (Tblmenu tblmenu : tblmenuList) {
+//            System.out.println("最终");
+//            System.out.println(tblmenu.getMname());
+            if (tblmenu.getChildTblmenus() != null){
+//                System.out.println("子级+"+ tblmenu.getChildTblmenus().size());
             }
         }
 
 
-        return menuList;
+        return tblmenuList;
     }
 
 
     //递归查询子菜单
-    private List<Menu> getChild(int mfid , List<Menu> list){
-        System.out.println("获取子级");
-        System.out.println(mfid);
-        List<Menu> childList = new ArrayList<Menu>();
+    private List<Tblmenu> getChild(int mfid , List<Tblmenu> list){
+//        System.out.println("获取子级");
+//        System.out.println(mfid);
+        List<Tblmenu> childList = new ArrayList<Tblmenu>();
         //获取子菜单
-        for (Menu menu : list) {
-            System.out.println("isNotBlank+:"+menu.getMfid());
-            if (menu.getMfid()!=null){
-                System.out.println(menu.getMfid()+"+"+mfid+"+");
-                if (menu.getMfid().equals(mfid)){
-                    System.out.println("添加数据"+menu.getMname());
-                    childList.add(menu);
+        for (Tblmenu tblmenu : list) {
+//            System.out.println("isNotBlank+:"+ tblmenu.getMfid());
+            if (tblmenu.getMfid()!=null){
+//                System.out.println(tblmenu.getMfid()+"+"+mfid+"+");
+                if (tblmenu.getMfid().equals(mfid)){
+//                    System.out.println("添加数据"+ tblmenu.getMname());
+                    childList.add(tblmenu);
                 }
             }
         }
         //子菜单再循环
-        for (Menu menu : childList) {
-            if (StringUtils.isBlank(menu.getMurl())){
-                menu.setChildMenus(getChild(menu.getMid(),list));
+        for (Tblmenu tblmenu : childList) {
+            if (StringUtils.isBlank(tblmenu.getMurl())){
+                tblmenu.setChildTblmenus(getChild(tblmenu.getMid(),list));
             }
         }
         //退出递归
