@@ -26,7 +26,7 @@ function getPageOfMemo(page) {
             console.log(obj);
             var htm = "";
             if (obj != null) {
-                if(obj.length>0){
+                // if(obj.length>0){
                     // totalPages = data.returnData.totalPages;
                     $.each(obj.data, function (i, item) {
 
@@ -96,10 +96,10 @@ function getPageOfMemo(page) {
                     $('#ayitable').html(htm);
                 }
 
-            }else{
-                htm+="<div align='center'>暂无服务</div>";
-                $('#ayitable').html(htm);
-            }
+            // }else{
+            //     htm+="<div align='center'>暂无服务</div>";
+            //     $('#ayitable').html(htm);
+            // }
         }
     });
 };

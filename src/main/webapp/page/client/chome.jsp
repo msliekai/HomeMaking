@@ -80,8 +80,8 @@
                 <div class="section-title text-center">
                     <p>
                         搜索：<input type="text" id="aunt" name="aunt" />
-                        <button class="layui-btn layui-btn-normal" onclick="x()"><i class="lnr lnr-magnifier"></i>
-                        </button>
+                        <button class="layui-btn layui-btn-normal" onclick="chong()">
+                            <i class="lnr lnr-magnifier"></i></button>
                     </p>
                     <h2>我们的主要服务</h2>
                     <hr/>
@@ -411,7 +411,7 @@
 </body>
 
 <script>
-    function x() {
+    function chong() {
         var va = $('#aunt').val();
         location.href = '<%=path%>page/client/shopa.jsp?aunt=' + va;
     }
