@@ -51,8 +51,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 book-btn">
 
+                        <div class="col-xl-3 book-btn">
+                            <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
                         </div>
                     </div>
                 </div>

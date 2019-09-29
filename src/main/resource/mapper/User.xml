@@ -119,22 +119,22 @@
         </if>
     </select>
 
-<!--    公司下的所有服务-->
-    <select id="queryFirmService"  resultMap="costype">
+    <!--    公司下的所有服务-->
+    <select id="queryFirmService" resultMap="costype">
         select * from(SELECT
-            fc.fcid,fc.fid,fc.ctid,
-             m.facc,m.fpwd,m.fname,m.flaw,m.fphone,m.flawphone,m.fsite,m.ftime,
-             ct.ctname,ct.ctcontext,ct.cttime,
-            cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
-            m.rid
-            FROM
-            tblCOStype AS ct
-            INNER JOIN tblCOS AS cos ON cos.ctid = ct.ctid
-    INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid
-    INNER JOIN tblfirm AS m ON  fc.fid = m.fid
-    WHERE fc.stid=7 and m.stid=1) d
-<!--        <bind name="page" value="(page-1)*limit"/>-->
-<!--        limit #{page},#{limit}-->
+        fc.fcid,fc.fid,fc.ctid,
+        m.facc,m.fpwd,m.fname,m.flaw,m.fphone,m.flawphone,m.fsite,m.ftime,
+        ct.ctname,ct.ctcontext,ct.cttime,
+        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
+        m.rid
+        FROM
+        tblCOStype AS ct
+        INNER JOIN tblCOS AS cos ON cos.ctid = ct.ctid
+        INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid
+        INNER JOIN tblfirm AS m ON fc.fid = m.fid
+        WHERE fc.stid=7 and m.stid=1) d
+        <!--        <bind name="page" value="(page-1)*limit"/>-->
+        <!--        limit #{page},#{limit}-->
     </select>
 
     <resultMap id="costype" type="com.hm.entity.Tblfc">
@@ -158,34 +158,38 @@
         </collection>
     </resultMap>
 
-<!--    热门服务-->
+    <!--    热门服务-->
     <select id="thwWelcome" resultType="java.util.HashMap">
-SELECT oi.fid,oi.fname,cs.ctname ,oi.count from (SELECT
-m.fid,m.fname,en.cosname,SUM(en.count) as count,en.ctid
-FROM
-tblfirm m RIGHT JOIN(SELECT
-c.cosid,
-c.ctid,
-sf.fid,
-c.cosname,
-Count(o.oid) AS count
-FROM
-tblorder AS o
-INNER JOIN tblCOS AS c ON o.cosid = c.cosid
-INNER JOIN tblstaff AS sf ON  o.sfid = sf.sfid
-GROUP BY
-c.cosid,
-sf.fid,
-c.cosname) en on m.fid=en.fid WHERE m.stid=1
-GROUP BY m.fid,m.fname )oi INNER JOIN tblCOStype cs on cs.ctid=oi.ctid
-ORDER BY oi.count desc
+            SELECT oi.fid,oi.fname,cs.ctname ,oi.count from (SELECT
+            m.fid,m.fname,en.cosname,SUM(en.count) as count,en.ctid
+            FROM
+            tblfirm m RIGHT JOIN(SELECT
+            c.cosid,
+            c.ctid,
+            sf.fid,
+            c.cosname,
+            Count(o.oid) AS count
+            FROM
+            tblorder AS o
+            INNER JOIN tblCOS AS c ON o.cosid = c.cosid
+            INNER JOIN tblstaff AS sf ON  o.sfid = sf.sfid
+            GROUP BY
+            c.cosid,
+            sf.fid,
+            c.cosname) en on m.fid=en.fid WHERE m.stid=1
+            GROUP BY m.fid,m.fname )oi INNER JOIN tblCOStype cs on cs.ctid=oi.ctid
+            ORDER BY oi.count desc
     </select>
 
 
     <!--查询用户余额-->
     <select id="jUserMoney" resultMap="BalanceList">
-        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.odeta,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid}
+        SELECT
+        o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.odeta,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos
+        as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f
+        ,tblHZ z
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and
+        c.ctid = ct.ctid and o.osid = os.osid and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -200,19 +204,19 @@ ORDER BY oi.count desc
         <result property="ophone" column="ophone"/>
         <result property="money" column="money"/>
         <result property="osid" column="osid"/>
-         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
-             <id property="osid" column="osid" />
-             <result property="osname" column="osname"/>
-         </association>
+        <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
+            <id property="osid" column="osid"/>
+            <result property="osname" column="osname"/>
+        </association>
         <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
-            <id property="hzid" column="hzid" />
+            <id property="hzid" column="hzid"/>
             <result property="hzname" column="hzname"/>
         </association>
         <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
             <id property="sfid" column="sfid"/>
             <result property="sfname" column="sfname"/>
             <association property="company" column="company" javaType="com.hm.entity.Company">
-                <id property="fid" column="fid" />
+                <id property="fid" column="fid"/>
                 <result property="fname" column="fname"/>
             </association>
         </association>
@@ -220,16 +224,18 @@ ORDER BY oi.count desc
             <id property="cosid" column="cosid"/>
             <result property="cosname" column="cosname"/>
             <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
-                <id property="ctid" column="ctid" />
+                <id property="ctid" column="ctid"/>
                 <result property="ctname" column="ctname"/>
             </association>
         </association>
     </resultMap>
 
     <!--查询评价-->
-    <select id="jUserAppraise" resultMap="AppList" >
-        select sf.sfname,f.fname,o.svtime,z.hzbei*sf.sfcos as money ,os.osname,o.osid from tblorder o,tbloderstate os,tblHZ z,tblfirm f ,tblstaff sf
-            WHERE o.sfid = sf.sfid and sf.fid = f.fid AND o.osid = os.osid and o.hzid = z.hzid and (o.osid = 2 or o.osid = 5) and o.userid = #{userid}
+    <select id="jUserAppraise" resultMap="AppList">
+        select sf.sfname,f.fname,o.svtime,z.hzbei*sf.sfcos as money ,os.osname,o.osid from tblorder o,tbloderstate
+        os,tblHZ z,tblfirm f ,tblstaff sf
+        WHERE o.sfid = sf.sfid and sf.fid = f.fid AND o.osid = os.osid and o.hzid = z.hzid and (o.osid = 2 or o.osid =
+        5) and o.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -256,14 +262,14 @@ ORDER BY oi.count desc
             <result property="money" column="money"/>
             <result property="osid" column="osid"/>
             <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
-                <id property="osid" column="osid" />
+                <id property="osid" column="osid"/>
                 <result property="osname" column="osname"/>
             </association>
             <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
                 <id property="sfid" column="sfid"/>
                 <result property="sfname" column="sfname"/>
                 <association property="company" column="company" javaType="com.hm.entity.Company">
-                    <id property="fid" column="fid" />
+                    <id property="fid" column="fid"/>
                     <result property="fname" column="fname"/>
                 </association>
             </association>
@@ -272,7 +278,8 @@ ORDER BY oi.count desc
 
     <!--查看地址-->
     <select id="jUserSite" resultMap="SiteList">
-        select u.username,CONCAT(s.sa,s.sb,s.sc) as site,s.scontext,s.sphone,s.sid from tbluser u,tblsite s WHERE u.userid = s.userid and u.userid =#{userid}
+        select u.username,CONCAT(s.sa,s.sb,s.sc) as site,s.scontext,s.sphone,s.sid from tbluser u,tblsite s WHERE
+        u.userid = s.userid and u.userid =#{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -291,7 +298,8 @@ ORDER BY oi.count desc
     </resultMap>
     <!--收藏阿姨-->
     <select id="jUsersfcoll" resultMap="sfcoll">
-        select u.username,sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid = f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
+        select u.username,sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid =
+        f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -309,5 +317,20 @@ ORDER BY oi.count desc
             </association>
         </association>
     </resultMap>
+    <!--查服务-->
+    <select id="queryCOSType" resultType="com.hm.entity.TblCOStype">
+       SELECT * from tblCOStype
+    </select>
+    <!--根据服务查服务事项-->
+    <select id="queryCOS" parameterType="java.lang.Integer" resultType="com.hm.entity.TblCOS">
+        SELECT * from tblCOS where ctid=#{ctid}
+    </select>
+
+    <insert id="addOrder" parameterType="com.hm.entity.Tblorder">
+        insert into tblorder
+        (sfid,cosid,userid,osid,sendtime,hzid,otitle,ocontext,ophone,onumber,sid)
+        values
+        (#{sfid},#{cosid},#{userid},#{osid},#{sendtime},#{hzid},#{otitle},#{ocontext},#{ophone},#{onumber},#{sid})
+    </insert>
 
 </mapper>

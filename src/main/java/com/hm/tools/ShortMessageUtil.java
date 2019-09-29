@@ -8,10 +8,6 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.hm.tools.ShortMessage;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ShortMessageUtil {
 

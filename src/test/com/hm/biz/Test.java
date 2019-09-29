@@ -5,6 +5,7 @@ package com.hm.biz;
 
 import com.google.gson.Gson;
 import com.hm.entity.Staff;
+import com.hm.entity.Tblorder;
 import junit.framework.TestCase;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class Test extends TestCase {
     public void menuTest() {
 
         Gson g = new Gson();
-        System.out.println(g.toJson(userBiz.queryphone("13860811761")));
+        Tblorder t= new Tblorder();
+        System.out.println(g.toJson(userBiz.addOrder(t)));
     }
 
 

@@ -4,6 +4,7 @@ package com.hm.web;
 import com.hm.biz.UserBiz;
 import com.hm.entity.Staff;
 import com.hm.entity.*;
+import com.hm.tools.TimeTools;
 import com.sun.javafx.collections.MappingChange;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,10 @@ import java.util.Map;
 public class UserHandler {
     @Resource
     private UserBiz biz;
+
     private ModelAndView mav = null;
-    private Map<String,Object> map = new HashMap<String, Object>();
+
+    private Map<String, Object> map = new HashMap<String, Object>();
 
 //    @RequestMapping(value = "/cUserReq.action")
 //    public @ResponseBody
@@ -60,7 +63,7 @@ public class UserHandler {
                 //判断是否保存成功
                 if (file.exists()) {
 
-                    TblUser num = biz.cUserReg(tblUser, tblSite);//注册
+                    TblUser num = biz.cUserReg(tblUser);//注册
                     tblSite.setUserid(num.getUserid());//set用户id
                     TblSite sit = biz.addSite(tblSite);
                     int fl = biz.updateUserSid(sit.getSid(), sit.getUserid());
@@ -90,8 +93,8 @@ public class UserHandler {
     public @ResponseBody
     Map<String, String> userForgetPassword(HttpSession session, String userphone, String userpwd, String phcode) {
         Map<String, String> flog = new HashMap();
-        Integer count=biz.queryphone(userphone);
-        if(count>0){
+        Integer count = biz.queryphone(userphone);
+        if (count > 0) {
             String code = (String) session.getAttribute(userphone + "_code_req");
 
             if (phcode.equals(code)) {
@@ -105,7 +108,7 @@ public class UserHandler {
             } else {
                 flog.put("flog", "codeerr");
             }
-        }else{
+        } else {
             flog.put("flog", "notphone");
         }
 
@@ -162,7 +165,7 @@ public class UserHandler {
 
     @RequestMapping(value = "/thwWelcome.action")
     public @ResponseBody
-    Map<String, Object> thwWelcome(HttpServletRequest request, HttpSession session, Staff staff) {
+    Map<String, Object> thwWelcome(Staff staff) {
 
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -174,6 +177,44 @@ public class UserHandler {
         return map;
     }
 
+    @RequestMapping(value = "/queryCOSType.action")
+    public @ResponseBody
+    List<TblCOStype> queryCOSType(HttpServletRequest request) {
+
+        List list = biz.queryCOSType();
+
+        return list;
+    }
+
+    @RequestMapping(value = "/queryCOS.action")
+    public @ResponseBody
+    List<TblCOS> queryCOS(HttpServletRequest request, Integer ctid) {
+
+        List list = biz.queryCOS(ctid);
+
+        return list;
+    }
+
+    @RequestMapping("/addOrder.action")
+    public @ResponseBody
+    Map addOrder(HttpSession session, Tblorder tblorder) {
+        TblUser use=(TblUser)session.getAttribute("userbacc");
+
+        tblorder.setUserid(use.getUserid());
+        tblorder.setOsid(6);
+        tblorder.setSendtime(TimeTools.getStringDateMin());
+        tblorder.setOnumber(TimeTools.getOrderIdByTime());
+
+
+        Integer num=biz.addOrder(tblorder);
+        if(num>0){
+            map.put("flog","addok");
+        }else{
+            map.put("flog","addnot");
+        }
+
+        return map;
+    }
     /*@RequestMapping(value = "/jUserMoney.action")
     public ModelAndView jUserMoney(HttpServletRequest request, TblUser tblUser) {
         List<UserMoney> list = biz.jUserMoney((TblUser) request.getSession().getAttribute("userbacc"),-1,0);
@@ -190,68 +231,73 @@ public class UserHandler {
     }*/
 
     @RequestMapping("/jUserMoney.action")
-    public @ResponseBody Map jUserMoney(HttpServletRequest request,UserMoney userMoney){
+    public @ResponseBody
+    Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
         userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
         List<UserMoney> list = biz.jUserMoney(userMoney);
         System.out.println(list);//UserID
-        map.put("code",0);
+        map.put("code", 0);
         UserMoney userMoney1 = new UserMoney();
         userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        map.put("count",biz.jUserMoney(userMoney1).size());
-        map.put("data",list);
+        map.put("count", biz.jUserMoney(userMoney1).size());
+        map.put("data", list);
         return map;
     }
 
     @RequestMapping("/jUserAppraise.action")
-    public @ResponseBody Map jUserAppraise(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tbleva> list = biz.jUserAppraise(page,limit,userid);
+    public @ResponseBody
+    Map jUserAppraise(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tbleva> list = biz.jUserAppraise(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUserAppraise(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUserAppraise(-1, 0, userid).size());
+        map.put("data", list);
 
         return map;
     }
 
     @RequestMapping("/jUserSite.action")
-    public @ResponseBody Map jUserSite(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<TblSite> list = biz.jUserSite(page,limit,userid);
+    public @ResponseBody
+    Map jUserSite(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<TblSite> list = biz.jUserSite(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUserSite(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUserSite(-1, 0, userid).size());
+        map.put("data", list);
         return map;
     }
 
     @RequestMapping("/jUsersfcoll.action")
-    public @ResponseBody Map jUsersfcoll(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+    public @ResponseBody
+    Map jUsersfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblsfcoll> list = biz.jUsersfcoll(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUsersfcoll(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUsersfcoll(-1, 0, userid).size());
+        map.put("data", list);
         return map;
     }
 
     @RequestMapping("/jUserfcoll.action")
-    public @ResponseBody Map jUserfcoll(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblfcoll> list = biz.jUserfcoll(page,limit,userid);
+    public @ResponseBody
+    Map jUserfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblfcoll> list = biz.jUserfcoll(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUserfcoll(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUserfcoll(-1, 0, userid).size());
+        map.put("data", list);
         return map;
     }
 

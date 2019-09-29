@@ -28,10 +28,9 @@ public interface UserBiz {
      * 新增普通用户账号
      * 并新增地址
      * @param tblUser 用户实体类
-     * @param tblSite 地址实体
      * @return
      */
-    public TblUser cUserReg(TblUser tblUser,TblSite tblSite);
+    public TblUser cUserReg(TblUser tblUser);
 
     /**
      * 增加地址
@@ -60,6 +59,26 @@ public interface UserBiz {
      * @return 状态id
      */
     public Integer queryUserState(String userphone);
+
+    /**
+     * 查寻全部服务类
+     * @return
+     */
+    public List<TblCOStype> queryCOSType();
+
+    /**
+     * 查服务类中的事项
+     * @param ctid
+     * @return
+     */
+    public List<TblCOS> queryCOS(@Param("ctid")Integer ctid);
+
+    /**
+     * 增加订单
+     * @param tblorder
+     * @return
+     */
+    public Integer addOrder(Tblorder tblorder);
 
     //账户
     public List<UserMoney> jUserMoney(UserMoney userMoney);

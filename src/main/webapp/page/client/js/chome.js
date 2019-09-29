@@ -273,3 +273,79 @@ function forg() {
     }
     return true;
 }
+
+function getct() {
+    var ctid = $("#ctid");
+    var cosid = $("#cosid");
+    $.ajax({
+        async: true,
+        type: "post", //提交方式
+        url: "../../admin/queryCOSType.action",
+        // dataType:"text", //返回类型
+        success: function (jso) {//执行结果
+            var ht = "<option value='0'>选择服务类型</option>";
+            $.each(jso, function (k, v) {
+                ht += "<option value='" + v.ctid + "' >" + v.ctname + "</option>";
+            })
+            ctid.html(ht);
+            cosid.html("选择服务事项");
+        },
+    })
+}
+
+$(document).ready(function () {
+    var cosid=$("#cosid");
+    $("#ctid").change(function () {
+        cosid.html("服务事项载入中。。。");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/queryCOS.action",
+            data:{
+                "ctid":$("#ctid").val()
+            },
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                var ht="";
+                $.each(jso,function(k,v){
+                    ht+="<option value='"+ v.cosid +"' >"+ v.cosname +"</option>";
+                })
+                cosid.html(ht);
+            }
+        })
+
+    })
+})
+$(document).ready(function(){
+    getct();
+})
+
+
+function addOrder() {
+    layui.use('layer', function () {
+        var ctid = $("#ctid");
+        var cosid = $("#cosid");
+        var self = $("form");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/addOrder.action",
+            data: self.serialize(), //获得表单的信息
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                if (jso.flog == "addok") {
+                    layer.msg("发布成功")
+                } else {
+                    layer.msg("发布失败")
+                }
+            },
+        })
+    })
+}
+
+$(document).ready(function(){
+    $("#addor").click(function(){
+        addOrder()
+    })
+})
+

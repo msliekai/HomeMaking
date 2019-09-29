@@ -52,9 +52,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -94,13 +94,13 @@
             <div class="col-lg-5">
                 <div class="tab-content">
                     <div id="product-1" class="tab-pane fade in show active">
-                        <img src="assets/images/products/details/1.jpg" alt="" />
+                        <img src="../assets/images/products/details/1.jpg" alt="" />
                     </div>
                     <div id="product-2" class="tab-pane fade">
-                        <img src="assets/images/products/details/2.jpg" alt="" />
+                        <img src="../assets/images/products/details/2.jpg" alt="" />
                     </div>
                     <div id="product-3" class="tab-pane fade">
-                        <img src="assets/images/products/details/3.jpg" alt="" />
+                        <img src="../assets/images/products/details/3.jpg" alt="" />
                     </div>
                 </div>
             </div>
@@ -359,7 +359,7 @@
                                         <ul class="list-none">
                                             <li>
                                                 <div class="comment-avatar">
-                                                    <img src="assets/images/blog/comment/1.png" alt="" />
+                                                    <img src="../assets/images/blog/comment/1.png" alt="" />
                                                 </div>
                                                 <div class="comment-desc">
                                                     <div class="item-rating">
@@ -406,7 +406,7 @@
             <div class="col-lg-3">
                 <div class="product-single">
                     <div class="product-thumb">
-                        <a href="#"><img src="assets/images/products/1.jpg" alt="" /></a>
+                        <a href="#"><img src="../assets/images/products/1.jpg" alt="" /></a>
                         <a href="#" class="btn-common">Add To Cart</a>
                     </div>
                     <div class="product-caption">
@@ -418,7 +418,7 @@
             <div class="col-lg-3">
                 <div class="product-single">
                     <div class="product-thumb">
-                        <a href="#"><img src="assets/images/products/2.jpg" alt="" /></a>
+                        <a href="#"><img src="../assets/images/products/2.jpg" alt="" /></a>
                         <a href="#" class="btn-common">Add To Cart</a>
                     </div>
                     <div class="product-caption">
@@ -430,7 +430,7 @@
             <div class="col-lg-3">
                 <div class="product-single">
                     <div class="product-thumb">
-                        <a href="#"><img src="assets/images/products/3.jpg" alt="" /></a>
+                        <a href="#"><img src="../assets/images/products/3.jpg" alt="" /></a>
                         <a href="#" class="btn-common">Add To Cart</a>
                     </div>
                     <div class="product-caption">
@@ -442,7 +442,7 @@
             <div class="col-lg-3">
                 <div class="product-single">
                     <div class="product-thumb">
-                        <a href="#"><img src="assets/images/products/4.jpg" alt="" /></a>
+                        <a href="#"><img src="../assets/images/products/4.jpg" alt="" /></a>
                         <a href="#" class="btn-common">Add To Cart</a>
                     </div>
                     <div class="product-caption">
@@ -454,7 +454,7 @@
             <div class="col-lg-3">
                 <div class="product-single">
                     <div class="product-thumb">
-                        <a href="#"><img src="assets/images/products/5.jpg" alt="" /></a>
+                        <a href="#"><img src="../assets/images/products/5.jpg" alt="" /></a>
                         <a href="#" class="btn-common">Add To Cart</a>
                     </div>
                     <div class="product-caption">
@@ -537,7 +537,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -559,7 +559,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

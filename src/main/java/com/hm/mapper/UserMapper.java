@@ -46,6 +46,14 @@ public interface UserMapper {
     //热门公司服务
     public List<Map<String,Object>> thwWelcome();
 
+    //查寻全部服务类
+    public List<TblCOStype> queryCOSType();
+
+    //查服务类中的事项
+    public List<TblCOS> queryCOS(@Param("ctid")Integer ctid);
+
+    //增加订单
+    public Integer addOrder(Tblorder tblorder);
 
     //查询消费记录
     public List<UserMoney> jUserMoney(UserMoney userMoney);
@@ -58,6 +66,7 @@ public interface UserMapper {
 
     //收藏的阿姨
     public List<Tblsfcoll>  jUsersfcoll(@Param("page")int page, @Param("limit")int limit, @Param("userid")Integer userid);
+
     //收藏的公司
     public List<Tblfcoll>  jUserfcoll(@Param("page")int page,@Param("limit")int limit,@Param("userid")Integer userid);
 

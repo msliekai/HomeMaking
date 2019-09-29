@@ -52,9 +52,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -82,7 +82,7 @@
                         <ul class="list-none">
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/1.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/1.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">Which Cleaning Service Is Best For You?</a></h4>
@@ -91,7 +91,7 @@
                             </li>
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/2.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/2.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">Cleaning Tip: How to Clean Stainless Steel</a></h4>
@@ -100,7 +100,7 @@
                             </li>
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/3.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/3.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">The Top 3 Germiest Places in Your Office</a></h4>
@@ -161,7 +161,7 @@
                         </div>
                         <p>While we all might breathe a collective sigh of relief when flu season is over that does not mean the germs just fade away into the summer sunlight. Unfortunately, germs and illness can still be spread regardless of the season. Here are some of the surprising spots within your office that contain germs.</p>
                         <div class="img-radius mt-65 mb-50">
-                            <img src="assets/images/blog/details/1.jpg" alt="" />
+                            <img src="../assets/images/blog/details/1.jpg" alt="" />
                         </div>
                         <h3>1. Computer keyboards</h3>
                         <p>The workplace keyboard can have more than 200 times as many bacteria as a toilet seat.  To begin with, it is often touched throughout the day, so wherever those fingers have been,  it’s likely the computer keyboard has been there too. It is also the perfect surface for catching sneezes and all the times people cough while sitting at their desk, either into their hands or out in the open.</p>
@@ -206,7 +206,7 @@
                         </div>
                         <div class="author-bio mt-55">
                             <div class="author-thumb">
-                                <img src="assets/images/blog/authors/4.png" alt="" />
+                                <img src="../assets/images/blog/authors/4.png" alt="" />
                             </div>
                             <div class="author-desc">
                                 <h5>Caleigh Jerde <span>Author</span></h5>
@@ -223,14 +223,14 @@
                         <div class="col-lg-6">
                             <div class="blog-single">
                                 <div class="blog-thumb">
-                                    <a href="#"><img src="assets/images/blog/3.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/3.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-desc">
                                     <small>28 April 2018</small>
                                     <h4><a href="#">The Three Rules of Maid Service Etiquette</a></h4>
                                     <p>Every service industry has a list of do’s and don’ts to make sure both the customer and the provider can benefit from the relationship...</p>
                                     <div class="blog-author">
-                                        <img src="assets/images/blog/authors/3.png" alt="" />
+                                        <img src="../assets/images/blog/authors/3.png" alt="" />
                                         <small>By<a href="#"><strong>Katlynn Pouros</strong></a></small>
                                     </div>
                                 </div>
@@ -239,14 +239,14 @@
                         <div class="col-lg-6">
                             <div class="blog-single">
                                 <div class="blog-thumb">
-                                    <a href="#"><img src="assets/images/blog/4.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/4.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-desc">
                                     <small>28 April 2018</small>
                                     <h4><a href="#">Cleaning Tip: How to Clean Stainless Steel</a></h4>
                                     <p>Stainless steel remains a popular option when choosing kitchen appliances. From dishwashers to ovens, stainless steel outsells other colors...</p>
                                     <div class="blog-author">
-                                        <img src="assets/images/blog/authors/2.png" alt="" />
+                                        <img src="../assets/images/blog/authors/2.png" alt="" />
                                         <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
                                     </div>
                                 </div>
@@ -255,14 +255,14 @@
                         <div class="col-lg-6">
                             <div class="blog-single">
                                 <div class="blog-thumb">
-                                    <a href="#"><img src="assets/images/blog/5.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/5.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-desc">
                                     <small>28 April 2018</small>
                                     <h4><a href="#">The Top 3 Germiest Places in Your Office</a></h4>
                                     <p>You might be surprised that it’s not the restroom! Nope, the germiest place in your office is likely the last place you imagine it would be...</p>
                                     <div class="blog-author">
-                                        <img src="assets/images/blog/authors/1.png" alt="" />
+                                        <img src="../assets/images/blog/authors/1.png" alt="" />
                                         <small>By<a href="#"><strong>Will Marvin</strong></a></small>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@
                                 <ul class="list-none">
                                     <li class="has-reply">
                                         <div class="comment-avatar">
-                                            <img src="assets/images/blog/comment/1.png" alt="" />
+                                            <img src="../assets/images/blog/comment/1.png" alt="" />
                                         </div>
                                         <div class="comment-desc">
                                             <div class="comment-name-date">
@@ -291,7 +291,7 @@
                                         <ul class="list-none">
                                             <li>
                                                 <div class="comment-avatar">
-                                                    <img src="assets/images/blog/comment/2.png" alt="" />
+                                                    <img src="../assets/images/blog/comment/2.png" alt="" />
                                                 </div>
                                                 <div class="comment-desc">
                                                     <div class="comment-name-date">
@@ -308,7 +308,7 @@
                                     </li>
                                     <li>
                                         <div class="comment-avatar">
-                                            <img src="assets/images/blog/comment/3.png" alt="" />
+                                            <img src="../assets/images/blog/comment/3.png" alt="" />
                                         </div>
                                         <div class="comment-desc">
                                             <div class="comment-name-date">
@@ -435,7 +435,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -457,7 +457,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

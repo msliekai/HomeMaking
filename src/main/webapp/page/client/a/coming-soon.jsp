@@ -64,7 +64,7 @@
                     <div class="col-sm-6">
                         <div class="coming-soon-msg text-center">
                             <div class="logo mb-60">
-                                <img src="assets/images/logo.png" alt="" />
+                                <img src="../assets/images/logo.png" alt="" />
                             </div>
                             <h2>Coming soon</h2>
                             <div class="coming-countdown style-1 text-center mt-50">
@@ -95,7 +95,7 @@
 </div>
 <!--coming-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

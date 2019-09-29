@@ -32,7 +32,7 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public TblUser cUserReg(TblUser tblUser,TblSite tblSite) {
+    public TblUser cUserReg(TblUser tblUser) {
         Integer num=0;
         TblUser obj=tblUser;
         userMapper.cUserReg(obj);
@@ -61,6 +61,21 @@ public class UserBizImpl implements UserBiz
     public Integer queryUserState(String userphone) {
 
         return userMapper.queryUserState(userphone);
+    }
+
+    @Override
+    public List<TblCOStype> queryCOSType() {
+        return userMapper.queryCOSType();
+    }
+
+    @Override
+    public List<TblCOS> queryCOS(Integer ctid) {
+        return userMapper.queryCOS(ctid);
+    }
+
+    @Override
+    public Integer addOrder(Tblorder tblorder) {
+        return userMapper.addOrder(tblorder);
     }
 
     @Override

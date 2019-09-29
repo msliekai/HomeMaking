@@ -246,17 +246,18 @@
                     <div class="shop-bar-area">
                         <div class="shop-bar pb-60">
                             <div class="shop-found-selector">
-                                <%--                                <div class="shop-found">--%>
-                                <%--                                    <p><span>23</span> Product Found of <span>50</span></p>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="shop-selector">--%>
-                                <%--                                    <label>排序方式: </label>--%>
-                                <%--                                    <select name="select">--%>
-                                <%--                                        <option value="">默认</option>--%>
-                                <%--                                        <option value="">A to Z</option>--%>
-                                <%--                                        <option value=""> Z to A</option>--%>
-                                <%--                                    </select>--%>
-                                <%--                                </div>--%>
+                                <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
+<%--                                                                <div class="shop-found">--%>
+<%--                                                                    <p><span>23</span> Product Found of <span>50</span></p>--%>
+<%--                                                                </div>--%>
+<%--                                                                <div class="shop-selector">--%>
+<%--                                                                    <label>排序方式: </label>--%>
+<%--                                                                    <select name="select">--%>
+<%--                                                                        <option value="">默认</option>--%>
+<%--                                                                        <option value="">A to Z</option>--%>
+<%--                                                                        <option value=""> Z to A</option>--%>
+<%--                                                                    </select>--%>
+<%--                                                                </div>--%>
                             </div>
 
                         </div>

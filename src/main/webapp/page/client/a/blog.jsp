@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 19:24
+  Time: 19:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Project Details - HomeCleaner</title>
+    <title>Blog List - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -52,9 +52,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -63,13 +63,13 @@
         <div class="row height-400 align-items-center">
             <div class="col-lg-12">
                 <div class="page-banner text-center">
-                    <h2>Projects Grid</h2>
+                    <h2>Blog Listing</h2>
                     <div class="site-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog Listing</li>
                             </ol>
                         </nav>
                     </div>
@@ -80,75 +80,98 @@
 </div>
 <!--page-banner-end-->
 
-<!--project-details start-->
-<div class="project-details-area pt-120 pt-sm-80 pb-120 pb-sm-80">
+<!--blog-area start-->
+<div class="blog-area mt-120 mt-sm-80 mb-105 mb-sm-65">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="project-details-carousel">
-                    <div><img src="assets/images/projects/details/1.jpg" alt="" /></div>
-                    <div><img src="assets/images/projects/details/1.jpg" alt="" /></div>
+        <div class="row blog-single style-2">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="../assets/images/blog/lg/1.jpg" alt="" /></a>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <div class="project-details mt-40">
-                    <h4>Wood Floor Cleaning Machine  for Home</h4>
-                    <p>Most modern hardwood floors are finished, which means they’re coated in a heavy duty, hard wearing sealant which protects the wood beneath it. Urethane, polyurethane and polyacrylic are common sealants because they’re both stain resistant and waterproof. Being waterproof, this means that you can easily clean your wooden floors using water mixed with a sud-producing soap, such as dishwashing liquid or a mild laundry detergent. Think about all the abuse your wood floors get just because they take it lying down. Grit, dirt, mud, soot, dust, food debris, things stuck to the feet of pets. </p>
-
-                    <p>As Benjamin and other experts like to stress, properly cleaned floors are not hard to obtain. Hardwood floors can be easy to take care of with the use of a hardwood floor cleaner machine. You can use these machines to mop and sometimes even sweep without killing your back because they do all the work for you!</p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="project-info mt-40">
-                    <h4>Project Detail</h4>
-                    <table>
-                        <tr>
-                            <td>Client</td>
-                            <td>Envato Company</td>
-                        </tr>
-                        <tr>
-                            <td>Work Type</td>
-                            <td>Upholstery Cleaning</td>
-                        </tr>
-                        <tr>
-                            <td>Date</td>
-                            <td>14/Aug/2018</td>
-                        </tr>
-                        <tr>
-                            <td>Categories</td>
-                            <td>Upholstery, Office</td>
-                        </tr>
-                    </table>
-                    <div class="row align-items-center mt-30">
-                        <div class="col-lg-6 col-sm-6 col-6">
-                            <a href="#" class="btn-common">BOOK ONLINE</a>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-6">
-                            <div class="social-icons">
-                                <a href="#"><i class="social_facebook"></i></a>
-                                <a href="#"><i class="social_twitter"></i></a>
-                                <a href="#"><i class="social_linkedin"></i></a>
-                                <a href="#"><i class="social_pinterest"></i></a>
-                            </div>
-                        </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>28 April 2018</small>
+                    <h4><a href="#">Which Cleaning Service Is Best For You?</a></h4>
+                    <p>One of the most important parts of any healthy lifestyle, though, is a willingness to learn from those who’ve already been around for a bit. It seems like a good place to start. You might notice there’s a bit of a variety, almost as if one lifestyle doesn’t fit all...</p>
+                    <div class="blog-author">
+                        <img src="../assets/images/blog/authors/1.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-60">
-            <div class="col-lg-12">
-                <div class="testimonial-single style-3 text-center">
-                    <div class="testimonial-inner">
-                        <img src="assets/images/projects/details/quote.png" alt="" />
-                        <p>Wonderful! Not only were they kind and did a terrific job, but most importantly, one employee found nearly $200 in cash in my dad's pockets.  My dad has Alzheimer's and loses money constantly.  She handed me the money directly which meant a lot to me.  A great business with great employees.  Thank you so much!</p>
-                        <h5>Caleigh Jerde</h5>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="../assets/images/blog/lg/2.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>28 April 2018</small>
+                    <h4><a href="#">How To Clean Grout and Remove Stains</a></h4>
+                    <p>The workplace keyboard can have more than 200 times as many bacteria as a toilet seat.  To begin with, it is often touched throughout the day, so wherever those fingers have been,  it’s likely the computer keyboard has been there too. It is also the perfect surface for catching sneezes.</p>
+                    <div class="blog-author">
+                        <img src="../assets/images/blog/authors/3.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="../assets/images/blog/lg/3.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>26 April 2018</small>
+                    <h4><a href="#">The Three Rules of Maid Service Etiquette</a></h4>
+                    <p>To begin with, it is often touched throughout the day, so wherever those fingers have been. Every service industry has a list of do’s and don’ts to make sure both the customer and the provider can benefit from the relationship...</p>
+                    <div class="blog-author">
+                        <img src="../assets/images/blog/authors/2.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-single style-2 mt-60">
+            <div class="col-lg-6">
+                <div class="blog-thumb">
+                    <a href="#"><img src="../assets/images/blog/lg/4.jpg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="blog-desc">
+                    <small>26 April 2018</small>
+                    <h4><a href="#">Cleaning Tip: How to Clean Stainless Steel</a></h4>
+                    <p>To begin with, it is often touched throughout the day, so wherever those fingers have been. Every service industry has a list of do’s and don’ts to make sure both the customer and the provider can benefit from the relationship...</p>
+                    <div class="blog-author">
+                        <img src="../assets/images/blog/authors/3.png" alt="" />
+                        <small>By<a href="#"><strong>Caleigh Jerde</strong></a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-80 mt-sm-50">
+            <div class="col-lg-12">
+                <div class="site-pagination style-3 text-center">
+                    <ul>
+                        <li><a href="#"><i class="arrow_carrot-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#"><i class="arrow_carrot-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--project-details end-->
+<!--blog-area end-->
 
 <!--footer-area start-->
 <footer>
@@ -219,7 +242,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -241,7 +264,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

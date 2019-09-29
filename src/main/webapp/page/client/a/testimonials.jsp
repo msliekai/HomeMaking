@@ -21,34 +21,34 @@
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="../assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="../assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="../assets/css/jquery.mmenu.css">
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="../assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="../assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="../assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="../assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 
 <body>
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -88,7 +88,7 @@
         <div class="row mt-120">
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center mb-85">
-                    <img src="assets/images/testimonials/1.png" alt="" />
+                    <img src="../assets/images/testimonials/1.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Caleigh Jerde</h5>
                         <small>Physician</small>
@@ -105,7 +105,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center mb-85">
-                    <img src="assets/images/testimonials/2.png" alt="" />
+                    <img src="../assets/images/testimonials/2.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Mary Katherine</h5>
                         <small>Accountant</small>
@@ -122,7 +122,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center mb-85">
-                    <img src="assets/images/testimonials/3.png" alt="" />
+                    <img src="../assets/images/testimonials/3.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Lars Sambo</h5>
                         <small>Lawyer</small>
@@ -139,7 +139,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center mb-85">
-                    <img src="assets/images/testimonials/4.png" alt="" />
+                    <img src="../assets/images/testimonials/4.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Evelien Sambo</h5>
                         <small>Educator</small>
@@ -156,7 +156,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center mb-85">
-                    <img src="assets/images/testimonials/5.png" alt="" />
+                    <img src="../assets/images/testimonials/5.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Jayden Feenstra</h5>
                         <small>Chemist</small>
@@ -173,7 +173,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="testimonial-single style-2 text-center">
-                    <img src="assets/images/testimonials/6.png" alt="" />
+                    <img src="../assets/images/testimonials/6.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Amina Mohan</h5>
                         <small>Educator</small>
@@ -285,7 +285,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -307,7 +307,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

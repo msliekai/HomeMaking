@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 19:23
+  Time: 19:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,41 +14,47 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Projects Grid Fullwidth - HomeCleaner</title>
+    <title>Project Details - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/mmenu/dist/mmenu.css"/>
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<%=path%>page/client/style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
+
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
+    <%--    我的css--%>
+    <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
+
 </head>
 
 <body>
+
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -74,120 +80,75 @@
 </div>
 <!--page-banner-end-->
 
-<!--projects-area start-->
-<div class="projects-area pt-120 pt-sm-80 pb-120 pb-sm-80">
-    <div class="container-fluid">
+<!--project-details start-->
+<div class="project-details-area pt-120 pt-sm-80 pb-120 pb-sm-80">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="projects-nav style-2 text-center">
-                    <ul class="nav nav-tabs">
-                        <li data-filter="*" class="active">All Projects</li>
-                        <li data-filter=".house">House</li>
-                        <li data-filter=".office">Office</li>
-                        <li data-filter=".garden">Garden</li>
-                        <li data-filter=".apartment">Apartment</li>
-                    </ul>
+                <div class="project-details-carousel">
+                    <div><img src="../assets/images/projects/details/1.jpg" alt="" /></div>
+                    <div><img src="../assets/images/projects/details/1.jpg" alt="" /></div>
                 </div>
             </div>
-        </div>
-        <div class="row project-items mt-60 mt-sm-50">
-            <div class="col-lg-3 col-sm-6 house plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/1.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Office Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
+            <div class="col-lg-8">
+                <div class="project-details mt-40">
+                    <h4>Wood Floor Cleaning Machine  for Home</h4>
+                    <p>Most modern hardwood floors are finished, which means they’re coated in a heavy duty, hard wearing sealant which protects the wood beneath it. Urethane, polyurethane and polyacrylic are common sealants because they’re both stain resistant and waterproof. Being waterproof, this means that you can easily clean your wooden floors using water mixed with a sud-producing soap, such as dishwashing liquid or a mild laundry detergent. Think about all the abuse your wood floors get just because they take it lying down. Grit, dirt, mud, soot, dust, food debris, things stuck to the feet of pets. </p>
+
+                    <p>As Benjamin and other experts like to stress, properly cleaned floors are not hard to obtain. Hardwood floors can be easy to take care of with the use of a hardwood floor cleaner machine. You can use these machines to mop and sometimes even sweep without killing your back because they do all the work for you!</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 office plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/2.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Garden Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 garden plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/3.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Road Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 apartment plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/4.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Factory Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 house plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/5.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Office Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 office plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/6.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Office Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 garden plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/7.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Office Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 apartment plr-0">
-                <div class="project-single">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/8.jpg" alt="" />
-                    </div>
-                    <div class="project-caption">
-                        <small>Office Cleaning </small>
-                        <a href="project-details.html" class="btn-common">View Project</a>
+            <div class="col-lg-4">
+                <div class="project-info mt-40">
+                    <h4>Project Detail</h4>
+                    <table>
+                        <tr>
+                            <td>Client</td>
+                            <td>Envato Company</td>
+                        </tr>
+                        <tr>
+                            <td>Work Type</td>
+                            <td>Upholstery Cleaning</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>14/Aug/2018</td>
+                        </tr>
+                        <tr>
+                            <td>Categories</td>
+                            <td>Upholstery, Office</td>
+                        </tr>
+                    </table>
+                    <div class="row align-items-center mt-30">
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <a href="#" class="btn-common">BOOK ONLINE</a>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <div class="social-icons">
+                                <a href="#"><i class="social_facebook"></i></a>
+                                <a href="#"><i class="social_twitter"></i></a>
+                                <a href="#"><i class="social_linkedin"></i></a>
+                                <a href="#"><i class="social_pinterest"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-60 text-center">
+        <div class="row mt-60">
             <div class="col-lg-12">
-                <a href="#" class="btn-common">Load More</a>
+                <div class="testimonial-single style-3 text-center">
+                    <div class="testimonial-inner">
+                        <img src="../assets/images/projects/details/quote.png" alt="" />
+                        <p>Wonderful! Not only were they kind and did a terrific job, but most importantly, one employee found nearly $200 in cash in my dad's pockets.  My dad has Alzheimer's and loses money constantly.  She handed me the money directly which meant a lot to me.  A great business with great employees.  Thank you so much!</p>
+                        <h5>Caleigh Jerde</h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--projects-area end-->
+<!--project-details end-->
 
 <!--footer-area start-->
 <footer>
@@ -258,7 +219,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -280,7 +241,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
