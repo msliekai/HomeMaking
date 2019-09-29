@@ -243,12 +243,6 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.9.6</version>
     </dependency>
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
-      <version>1.9.9</version>
-    </dependency>
-
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>servlet-api</artifactId>
@@ -262,7 +256,6 @@
           <version>1.18.8</version>
           <scope>provided</scope>
       </dependency>
-
   </dependencies>
 
   <build>

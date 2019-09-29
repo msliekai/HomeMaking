@@ -33,4 +33,105 @@
 
 <!--    获取权限列表-->
 <!--    <select id="getPower"-->
+     <!--    用户列表-->
+    <select id="cFindUserAll" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
+        select u.*,t.stname from tbluser u,tblstate t WHERE u.stid=t.stid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--    家政公司列表-->
+    <select id="cFindCompanyAll" parameterType="com.hm.entity.Company" resultType="com.hm.entity.Company">
+        select u.*,t.rname,c.ctname from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid AND u.ctid=c.ctid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--    培训计划列表-->
+    <select id="cFindtrainAll" parameterType="com.hm.entity.Tbltrain" resultType="com.hm.entity.Tbltrain">
+        select * from tbltrain
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--    服务类型列表-->
+    <select id="cFindServiceTypeAll" parameterType="com.hm.entity.TblCOStype" resultType="com.hm.entity.TblCOStype">
+        select * from tblCOStype
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--    服务列表-->
+    <select id="cFindServiceAll" parameterType="com.hm.entity.TblCOS" resultType="com.hm.entity.TblCOS">
+        SELECT c.*,t.ctname FROM tblCOS c,tblCOStype t WHERE c.ctid=t.ctid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  热门服务列表-->
+    <select id="cFindHotServiceAll" parameterType="com.hm.entity.TblCOS" resultType="com.hm.entity.TblCOS">
+        SELECT c.*,t.ctname FROM tblCOS c,tblCOStype t WHERE c.ctid=t.ctid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  服务信息列表-->
+    <select id="MserviceIfmationlist" parameterType="com.hm.entity.Tblorder" resultType="com.hm.entity.Tblorder">
+        SELECT o.oid,o.svtime,c.cosname,ct.ctname,o.sendtime,f.fname,z.hzname,u.username,e.osname from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z,
+        tbloderstate e
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid=e.osid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  公告列表-->
+    <select id="cFindDynamiclistAll" parameterType="com.hm.entity.Tblnotice" resultType="com.hm.entity.Tblnotice">
+        SELECT * from tblnotice
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  技能培训-->
+    <select id="cFindtritemlistAll" parameterType="com.hm.entity.Tbltritem" resultType="com.hm.entity.Tbltritem">
+        SELECT * from tbltritem
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  育婴知识-->
+    <select id="cFindkaptAll" parameterType="com.hm.entity.Tblkap" resultType="com.hm.entity.Tblkap">
+        SELECT k.*, f.ftname from tblkap k,tblfiletype f WHERE k.ftid=f.ftid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  订单列表-->
+    <select id="cFindOrderAll" parameterType="com.hm.entity.Tblorder" resultType="com.hm.entity.Tblorder">
+        SELECT o.oid,o.svtime,c.cosname,ct.ctname,o.sendtime,f.fname,z.hzname,u.username,e.osname,sf.sfname,o.otime
+        from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z,tbloderstate e
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid
+        and c.ctid = ct.ctid and o.osid=e.osid
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--  顾问信息-->
+    <select id="cFindAdvisorAll" parameterType="com.hm.entity.TblAdvisor" resultType="com.hm.entity.TblAdvisor">
+        select * from tblAdvisor
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit "/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
 </mapper>

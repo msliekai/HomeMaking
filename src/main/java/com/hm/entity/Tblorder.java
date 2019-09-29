@@ -20,11 +20,20 @@ public class Tblorder {
     private String onumber;
     private Integer sid;
     private Staff staff;
+    private String username;
+    private String cosname;
+    private String ctname;
+    private String hzname;
+    private String fname;
+    private String osname;
+    private String sfname;
     private TblCOS tblCOS;
     private TblUser tblUser;
     private Tbloderstate tbloderstate;
     private TblHZ tblHZ;
     private TblSite tblSite;
+    private Integer page;
+    private Integer limit;
 
 
 }

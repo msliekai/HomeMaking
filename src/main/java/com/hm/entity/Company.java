@@ -17,6 +17,8 @@ public class Company {
     private Integer stid;//状态
     private Integer page;
     private Integer limit;
+    private String rname;
+    private String ctname;
     public Company() {
 
     }

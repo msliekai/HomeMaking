@@ -14,7 +14,7 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>用户信息</title>
+    <title>技能培训</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -30,7 +30,7 @@
             <a href="">首页</a>
             <a href="">演示</a>
             <a>
-              <cite>用户列表</cite></a>
+              <cite>技能培训</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -78,9 +78,9 @@
 </body>
 
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
-    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
-    <a class="layui-btn layui-btn-normal" lay-event="userContext">查看详情</a>
+    <a class="layui-btn layui-btn-xs " lay-event="tdel">删除</a>
+    <a class="layui-btn layui-btn-primary " lay-event="tupdate">修改</a>
+    <a class="layui-btn layui-btn-normal" lay-event="tritemContext">查看详情</a>
 </script>
 
 <script>
@@ -90,7 +90,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>manager/Muserlist.action' //数据接口
+            , url: '<%=path%>manager/Mtritemlist.action' //数据接口
             , page: true //开启分页
             ,limit:10
             // ,method:"get"
@@ -106,12 +106,9 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'userid', title: '用户id', minWidth: 100}
-                , {field: 'userphone', title: '用户名', minWidth: 80}
-                , {field: 'username', title: '用户姓名', minWidth: 80}
-                , {field: 'usersex', title: '性别', minWidth:50}
-                , {field: 'usertime', title: '注册时间', minWidth: 80}
-                , {field: 'stname', title: '状态', minWidth: 80}
+                {field: 'itname', title: '培训项目名', minWidth: 100}
+                , {field: 'ittime', title: '培训时长', minWidth: 80}
+                , {field: 'itbook', title: '认证证书', minWidth: 80}
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
@@ -135,61 +132,61 @@
                 }
         };
 
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
-        })
+        <%--$('.demoTable .layui-btn').on('click', function(){--%>
+        <%--    var type = $(this).data('type');--%>
+        <%--    alert(type);--%>
+        <%--    active[type] ? active[type].call(this) : '';--%>
+        <%--})--%>
 
-        //监听行工具事件
-        table.on('tool(test)', function(obj) {
-            var data = obj.data;
-            if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
-                });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useContext"){
-                layer.confirm('查看详情？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
-                });
-            }
-        });
+        <%--//监听行工具事件--%>
+        <%--table.on('tool(test)', function(obj) {--%>
+        <%--    var data = obj.data;--%>
+        <%--    if (obj.event === 'tdel') {--%>
+        <%--        layer.confirm('确定删除？', function (index) {--%>
+        <%--            fal("<%=path%>",data.uid);--%>
+        <%--            layer.close(index);--%>
+        <%--        });--%>
+        <%--    }else if(obj.event==="tupdate"){--%>
+        <%--        layer.confirm('确定修改？', function (index) {--%>
+        <%--            fal("<%=path%>",data.uid);--%>
+        <%--            layer.close(index);--%>
+        <%--        });--%>
+        <%--    } else if(obj.event==="tritemContext"){--%>
+        <%--        layer.confirm('查看详情？', function (index) {--%>
+        <%--            fal("<%=path%>",data.uid);--%>
+        <%--            layer.close(index);--%>
+        <%--        });--%>
+        <%--    }--%>
+        <%--});--%>
 
-        function fal(url,uid) {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: url,
-                dataType: "text",
-                data: {"uid":uid},
-                success: function (dat) {
-                    if(dat==1){
-                        layer.msg("操作成功");
-                    }else{
-                        layer.msg("操作失败");
-                    }
-                    //执行重载
-                    table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
-                    }, 'data');
-                },
-                error: function (dat) {
-                    layer.msg('裂开');
-                }
-            })
-
-        }
+        // function fal(url,uid) {
+        //     $.ajax({
+        //         async: true,
+        //         type: "post",
+        //         url: url,
+        //         dataType: "text",
+        //         data: {"uid":uid},
+        //         success: function (dat) {
+        //             if(dat==1){
+        //                 layer.msg("操作成功");
+        //             }else{
+        //                 layer.msg("操作失败");
+        //             }
+        //             //执行重载
+        //             table.reload('testReload', {
+        //                 where: {
+        //                     uname: uname.value,
+        //                     cong:cong.value,
+        //                     dao:dao.value,
+        //                 }
+        //             }, 'data');
+        //         },
+        //         error: function (dat) {
+        //             layer.msg('裂开');
+        //         }
+        //     })
+        //
+        // }
     });
 
 </script>

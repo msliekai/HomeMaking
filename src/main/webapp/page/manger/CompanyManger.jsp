@@ -14,7 +14,7 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>用户信息</title>
+    <title>家政公司列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -30,7 +30,7 @@
             <a href="">首页</a>
             <a href="">演示</a>
             <a>
-              <cite>用户列表</cite></a>
+              <cite>家政公司列表</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -78,8 +78,8 @@
 </body>
 
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
-    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
+<%--    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
+<%--    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
     <a class="layui-btn layui-btn-normal" lay-event="userContext">查看详情</a>
 </script>
 
@@ -90,7 +90,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>manager/Muserlist.action' //数据接口
+            , url: '<%=path%>manager/Mcompanylist.action' //数据接口
             , page: true //开启分页
             ,limit:10
             // ,method:"get"
@@ -106,13 +106,14 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'userid', title: '用户id', minWidth: 100}
-                , {field: 'userphone', title: '用户名', minWidth: 80}
-                , {field: 'username', title: '用户姓名', minWidth: 80}
-                , {field: 'usersex', title: '性别', minWidth:50}
-                , {field: 'usertime', title: '注册时间', minWidth: 80}
-                , {field: 'stname', title: '状态', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+                {field: 'fid', title: '公司id', minWidth: 100}
+                , {field: 'fname', title: '公司名', minWidth: 80}
+                , {field: 'flaw', title: '法人代表', minWidth: 80}
+                , {field: 'fsite', title: '公司地址', minWidth:50}
+                , {field: 'fphone', title: '公司电话', minWidth: 80}
+                , {field: 'ctname', title: '服务类别', minWidth: 80}
+                , {field: 'rname', title: '状态', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 120}
             ]]
         });
         //触发查询按钮
@@ -142,25 +143,26 @@
         })
 
         //监听行工具事件
-        table.on('tool(test)', function(obj) {
-            var data = obj.data;
-            if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
-                });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useContext"){
-                layer.confirm('查看详情？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
-                });
-            }
-        });
+        <%--table.on('tool(test)', function(obj) {--%>
+        <%--    var data = obj.data;--%>
+        <%--    if (obj.event === 'userContext') {--%>
+        <%--        layer.confirm('查看详情', function (index) {--%>
+        <%--            fal("<%=path%>userManagement/useEna.action",data.uid);--%>
+        <%--            layer.close(index);--%>
+        <%--        });--%>
+        <%--    }--%>
+            <%--else if(obj.event==="useDis"){--%>
+            <%--    layer.confirm('确定禁用？', function (index) {--%>
+            <%--        fal("<%=path%>userManagement/useDis.action",data.uid);--%>
+            <%--        layer.close(index);--%>
+            <%--    });--%>
+            <%--} else if(obj.event==="useContext"){--%>
+            <%--    layer.confirm('查看详情？', function (index) {--%>
+            <%--        fal("<%=path%>userManagement/useResetPwd.action",data.uid);--%>
+            <%--        layer.close(index);--%>
+            <%--    });--%>
+            <%--}--%>
+        // });
 
         function fal(url,uid) {
             $.ajax({
