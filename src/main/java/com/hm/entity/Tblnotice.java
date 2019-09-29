@@ -8,4 +8,6 @@ public class Tblnotice {
     private Integer nid;
     private String ntime;
     private String ntitle;
+    private Integer page;
+    private Integer limit;
 }

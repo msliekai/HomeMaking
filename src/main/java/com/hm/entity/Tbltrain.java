@@ -13,4 +13,8 @@ public class Tbltrain {
     private String trpsum;
     private Integer itid;
     private Tbltritem tbltritem;
+    //页码
+    private Integer page;
+    //条数
+    private Integer limit;
 }
