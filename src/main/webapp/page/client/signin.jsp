@@ -51,7 +51,7 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <%--layui--%>
-<%--    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">--%>
+    <%--    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">--%>
     <%--    我的css--%>
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
 
@@ -74,11 +74,15 @@
                         <form action="<%=path%>admin/cUserLogin.action" method="post">
                             <div class="form-group">
                                 <label for="userphone">电话</label>
-                                <input type="email" class="form-control" required="required" id="userphone" name="userphone" placeholder="请输入手机号" value="13860811761">
+                                <input type="email" class="form-control" required="required" id="userphone"
+                                       name="userphone" placeholder="请输入手机号" value="13860811761">
+                                <span id="userphoneerr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="userpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码" value="a12345">
+                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                       id="userpwd" name="userpwd" placeholder="请输入密码" value="a12345">
+                                <span id="passErr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="securityCode">验证码</label>
@@ -95,7 +99,8 @@
                     <div class="signin-password">
                         <div class="password-circle">
                             <div class="single-password-circle">
-                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
+                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;"
+                                     alt="看不清，换一张"/>
                                 <label>
 									<span class="round-boarder">
 										<span id="verclo" class="round-boarder1">看不清？换一张</span>
@@ -107,7 +112,7 @@
                         <div class="single-forgot-password-circle text-right">
                             <a href="<%=path%>page/client/forgot.jsp">忘记密码</a>
                         </div><!--/.single-password-circle-->
-                        
+
                     </div><!--/.signin-password -->
                 </div><!--/.col -->
             </div><!--/.row -->
@@ -115,9 +120,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="signin-footer">
-                        <button type="button" class="btn signin_btn signin_btn_two" data-toggle="modal" data-target=".signin_modal" id="fomsub" onclick="userLogin()">登陆</button>
+                        <button type="button" class="btn signin_btn signin_btn_two" data-toggle="modal"
+                                data-target=".signin_modal" id="fomsub" onclick="return userLogin()">登陆
+                        </button>
                         <p>
-                           没有账号？
+                            没有账号？
                             <a href="<%=path%>page/client/signup.jsp">注册</a>
                         </p>
                     </div><!--/.signin-footer -->
@@ -159,57 +166,57 @@
 <script src="<%=path%>page/client/js/chome.js"></script>
 
 </body>
-<script >
-    $(function () {
-        //点击图片更换验证码
-        $("#verclo").click(function(){
-            $("#Verify").attr("src","<%=path%>serial/getimage.action?timestamp="+new Date().getTime());
-        });
-    });
+<script>
+
+
     // $(document).ready(function(){
 
-function userLogin() {
-    layui.use('layer', function(){
-        var self=$("form");
-        $.ajax({
-            async:true, //true不异步，false异步
-            type:"post", //提交方式
-            url:self.attr("action"), //提交的地址（ self.attr("action")为form中的action地址）
-            data:self.serialize(), //获得表单的信息
-            // dataType:"text", //返回类型
-            success:function(logjson){//执行结果
-                if(logjson.flog==="0"){
-                    layer.msg("账号不存在");
+    function userLogin() {
 
-                }else if(logjson.flog==="2"){
-                    layer.msg("账号被禁用");
+        if (valForm()) {
+            layui.use('layer', function () {
 
-                }else if(logjson.flog==="3"){
-                    layer.msg("账号被删除");
+                var self = $("form");
+                $.ajax({
+                    async: true,
+                    type: "post", //提交方式
+                    url: self.attr("action"), //提交的地址（ self.attr("action")为form中的action地址）
+                    data: self.serialize(), //获得表单的信息
+                    // dataType:"text", //返回类型
+                    success: function (logjson) {//执行结果
+                        if (logjson.flog === "0") {
+                            layer.msg("账号不存在");
 
-                }else if(logjson.flog==="coderr"){
-                    layer.msg("验证码错误");
+                        } else if (logjson.flog === "2") {
+                            layer.msg("账号被禁用");
 
-                }else if(logjson.flog==="success"){
-                    layer.msg("登陆成功，准备跳转", {
-                        time:2000
-                        }, function () {
-                            location.href="<%=path%>page/client/chome.jsp";
-                        });
+                        } else if (logjson.flog === "3") {
+                            layer.msg("账号被删除");
+
+                        } else if (logjson.flog === "coderr") {
+                            layer.msg("验证码错误");
+
+                        } else if (logjson.flog === "success") {
+                            layer.msg("登陆成功，准备跳转", {
+                                time: 2000
+                            }, function () {
+                                location.href = "<%=path%>page/client/chome.jsp";
+                            });
 
 
-                }else if(logjson.flog==="pw"){
-                    layer.msg("账号密码错误");
+                        } else if (logjson.flog === "pw") {
+                            layer.msg("账号密码错误");
 
-                }else if(logjson.flog==="errc"){
-                    layer.msg("登陆失败");
+                        } else if (logjson.flog === "errc") {
+                            layer.msg("登陆失败");
 
-                }else{
-                    layer.msg("出现不可预估的问题，登陆失败");
-                }
-            },
-        });
-    })
+                        } else {
+                            layer.msg("出现不可预估的问题，登陆失败");
+                        }
+                    },
+                });
+            })
+        }
     }
 
 

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -42,10 +43,12 @@
     <link rel="stylesheet" href="<%=path%>page/client/style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
-
+<%--layui--%>
     <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
-    <%--    我的css--%>
+
+    <%--我的css--%>
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
+
 
 </head>
 
@@ -58,26 +61,26 @@
 <!--header-ends-->
 
 <!--page-banner-start-->
-<div class="page-banner-area bg-1">
-    <div class="container">
-        <div class="row height-400 align-items-center">
-            <div class="col-lg-12">
-                <div class="page-banner text-center">
-                    <h2>Projects Grid</h2>
-                    <div class="site-breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="page-banner-area bg-1">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row height-400 align-items-center">--%>
+<%--            <div class="col-lg-12">--%>
+<%--                <div class="page-banner text-center">--%>
+<%--                    <h2>Projects Grid</h2>--%>
+<%--                    <div class="site-breadcrumb">--%>
+<%--                        <nav aria-label="breadcrumb">--%>
+<%--                            <ol class="breadcrumb">--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Home</a></li>--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Pages</a></li>--%>
+<%--                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>--%>
+<%--                            </ol>--%>
+<%--                        </nav>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!--page-banner-end-->
 
 <!--projects-area start-->
@@ -87,23 +90,27 @@
             <div class="col-lg-12">
                 <div class="projects-nav style-2 text-center">
                     <ul>
-                        <li data-filter="*" class="active">All Projects</li>
-                        <li data-filter=".house">House</li>
-                        <li data-filter=".office">Office</li>
-                        <li data-filter=".garden">Garden</li>
-                        <li data-filter=".apartment">Apartment</li>
+                        <li data-filter="*" class="active">所有服务</li>
+                        <li>日常保洁</li>
+                        <li>品类保洁</li>
+                        <li>保姆</li>
+                        <li>月嫂</li>
+                        <li>育儿嫂</li>
+                        <li>照顾宠物</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="row project-items mt-60 mt-sm-50">
+
+        <div class="row project-items mt-60 mt-sm-50" id="ayitable">
+
             <div class="col-lg-4 col-sm-6 house">
                 <div class="project-single style-2 mb-15">
-                    <div class="project-thumb">
+                <div class="">
                         <img src="assets/images/projects/1.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/1.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
+<%--                        <div class="project-caption">--%>
+<%--                            <a href="assets/images/projects/1.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>--%>
+<%--                        </div>--%>
                     </div>
                     <div class="project-title">
                         <small>House, Office</small>
@@ -111,6 +118,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4 col-sm-6 office">
                 <div class="project-single style-2 mb-30">
                     <div class="project-thumb">
@@ -139,107 +147,27 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 apartment">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/4.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/4.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>House</small>
-                        <h4><a href="#">Warehouse Cleaning</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 house">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/5.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/5.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Office, Window</small>
-                        <h4><a href="#">A Thorough Window Cleaning Process</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 office">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/6.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/6.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Industrial, Floor</small>
-                        <h4><a href="#">Waxing and Buffing Floors</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 garden">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/7.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/7.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Build, Stains</small>
-                        <h4><a href="#">Removing Stains From Ceramic Tile Floor</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 apartment">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/8.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/8.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Restaurant, Floor</small>
-                        <h4><a href="#">Restaurant Cleaning</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 house">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/9.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/9.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Apartment</small>
-                        <h4><a href="#">Apartment Cleaning</a></h4>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div id="htmlDiv"></div>
+                    <div class="site-pagination style-3" align="center">
+                        <!-- 分页控件，标签必须是<ul> -->
+                        <ul id="pageButton">
+<%--                            <li>1</li>--%>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-15">
-            <div class="col-lg-12">
-                <div class="site-pagination style-3 text-center">
-                    <ul>
-                        <li><a href="#"><i class="arrow_carrot-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="arrow_carrot-right"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
+<%--分页--%>
+
 <!--projects-area end-->
 
 <!--footer-area start-->
@@ -333,7 +261,8 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+
+<script src="<%=path%>page/layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
@@ -363,9 +292,12 @@
 <script src="<%=path%>page/client/assets/js/plugins.js"></script>
 <!-- main js -->
 <script src="<%=path%>page/client/assets/js/main.js"></script>
-
+<%--bootstrap分页--%>
+<script src="<%=path%>page/client/js/bootstrap-paginator.js"></script>
+<script src="<%=path%>page/client/js/pageing.js"></script>
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
-
 </body>
+
+
 </html>

@@ -11,11 +11,11 @@
 <%
     String path = request.getContextPath() + "/";
 %>
-<html>
-<head>
-    <title>-</title>
-</head>
-<body>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>-</title>--%>
+<%--</head>--%>
+<%--<body>--%>
 
 <%--<nav class="navbar navbar-inverse navbar-fixed-top">--%>
 <header>
@@ -43,12 +43,13 @@
                                 <li><a href="#">服务
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="<%=path%>page/client/services.jsp">所有服务</a></li>
-                                        <li><a href="<%=path%>page/client/services.jsp">品类保洁</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">日常保洁</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp">所有服务</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp?aunt=品类保洁">品类保洁</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp?aunt=日常保洁">日常保洁</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp?aunt=保姆">保姆</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp?aunt=月嫂">月嫂</a></li>
+                                        <li><a href="<%=path%>page/client/shopa.jsp?aunt=育儿嫂">育儿嫂</a></li>
+<%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
                                     </ul>
                                 </li>
                                 <li><a href="#">项目
@@ -83,57 +84,6 @@
                     </div>
 
                     <!--mobile-tblmenu-->
-                    <div class="d-hidden mobile-tblmenu">
-                        <nav id="mobile-tblmenu">
-                            <ul class="list-none">
-                                <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
-                                <li><a href="#">其他界面</a>
-                                    <ul>
-                                        <li><a href="<%=path%>page/client/about.jsp">About Us</a></li>
-                                        <li><a href="<%=path%>page/client/testimonials.jsp">Testimonials</a></li>
-                                        <li><a href="<%=path%>page/client/pricing.jsp">Pricing & Plan</a></li>
-                                        <li><a href="<%=path%>page/client/order-form.jsp">Order Form</a></li>
-                                        <li><a href="<%=path%>page/client/faq.jsp">FAQS</a></li>
-                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>
-                                        <li><a href="<%=path%>page/client/coming-soon.jsp">Coming soon</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">服务</a>
-                                    <ul>
-                                        <li><a href="<%=path%>page/client/services.jsp">品类保洁</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">日常保洁</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">保姆</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">月嫂</a></li>
-                                        <li><a href="<%=path%>page/client/service-details.jsp">育儿嫂</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">项目</a>
-                                    <ul>
-                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>
-                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects
-                                            Fullwidth</a></li>
-                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">店</a>
-                                    <ul>
-                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>
-                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>
-                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>
-                                        <li><a href="<%=path%>page/client/checkout.jsp">Checout</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">微博</a>
-                                    <ul>
-                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>
-                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>
-                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>
-                            </ul>
-                        </nav>
-                    </div>
                     <!--mobile logo-->
                     <div class="d-hidden mobile-logo">
                         <div class="logo">
@@ -153,7 +103,7 @@
                                 <li class="ml-25">
                                     <a href="#" onclick="alert('这里是个人中心')">
                                     <figure style="width: 50px;height: 0px;">
-                                        <img class="img-circle" src="<%=path%>portrait/M.jpg" alt="头像"/>
+                                        <img class="img-circle" src="<%=path%>${sessionScope.userbacc.userurl}" alt="头像"/>
                                      </figure>
                                      </a>
                                 </li>
@@ -162,14 +112,15 @@
                                 <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i> </a>
 
                                 </li>
-                                <%--                            下面是搜索框--%>
-                                <li class="ml-25"><a href="#" class="search-icon"><i class="lnr lnr-magnifier"></i></a>
-                                    <div class="search-box">
-                                        <input type="text" placeholder="Enter Keyword..."/>
-                                        <button><i class="lnr lnr-magnifier"></i></button>
-                                    </div>
-                                </li>
                             </c:if>
+<%--                            &lt;%&ndash;                            下面是搜索框&ndash;%&gt;--%>
+<%--                            <li class="ml-25">--%>
+<%--                                <a href="#" class="search-icon"><i class="lnr lnr-magnifier"></i></a>--%>
+<%--                                <div class="search-box">--%>
+<%--                                    <input type="text" placeholder=" ..."/>--%>
+<%--                                    <button><i class="lnr lnr-magnifier"></i></button>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
 
                         </ul>
                     </div>
@@ -179,5 +130,5 @@
     </div>
 </header>
 <%--</nav>--%>
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>

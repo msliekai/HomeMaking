@@ -69,23 +69,26 @@
             <div class="signin-form">
                 <div class=" ">
                     <div class=" ">
-                        <form action="signin.html">
+                        <form action="<%=path%>admin/userForgot.action" >
                             <div class="form-group">
                                 <label for="userphone">手机号</label>
                                 <input type="text" class="form-control" id="userphone" name="userphone" placeholder="请输入手机号">
-                                <a style="color: #00a1d6">点我发送短信验证码</a>
+                                <input type="button" id="btn" value="点我发送短信验证码"></input>
+                                <span id="userphoneerr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="telpwd">短信验证码</label>
-                                <input type="text" class="form-control" id="telpwd" name="telpwd" placeholder="请输入短信验证码">
+                                <label for="phcode">短信验证码</label>
+                                <input type="text" class="form-control" id="phcode" name="phcode" placeholder="请输入短信验证码">
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="userpwd">密码</label>
                                 <input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="请输入密码">
+                                <span id="passErr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="userpwd2">确认密码</label>
                                 <input type="password" class="form-control" id="userpwd2" name="userpwd2" placeholder="再次输入">
+                                <span id="passErr2"></span>
                             </div><!--/.form-group -->
 
                         </form><!--/form -->
@@ -96,7 +99,7 @@
 
 
             <div class="signin-footer">
-                <button type="button" class="btn signin_btn signin_btn_two" data-toggle="modal" data-target=".signin_modal">
+                <button type="button" class="btn signin_btn signin_btn_two" data-toggle="modal" data-target=".signin_modal" onclick="forgot()">
                     提交
                 </button>
                 <p>
@@ -109,18 +112,6 @@
     </div><!--/.container -->
 
 </section><!--/.signin -->
-
-<!-- signin end -->
-
-<%--<!--footer copyright start -->--%>
-<%--<footer class="footer-copyright">--%>
-<%--    <div id="scroll-Top">--%>
-<%--        <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>--%>
-<%--    </div><!--/.scroll-Top-->--%>
-
-<%--</footer><!--/.hm-footer-copyright-->--%>
-<%--<!--footer copyright  end -->--%>
-
 
 <!-- Include all js compiled plugins (below), or include individual files as needed -->
 
@@ -149,5 +140,7 @@
 <script src="<%=path%>page/client/js/chome.js"></script>
 
 </body>
+<script>
 
+</script>
 </html>

@@ -84,13 +84,13 @@
 <div class="product-details-area mt-70">
     <div class="container">
         <div class="row">
-            <div class="col-lg-1">
-                <ul class="nav nav-tabs products-nav-tabs">
-                    <li><a class="active" data-toggle="tab" href="#product-1"><img src="assets/images/products/details/thumb-1.jpg" alt="" /></a></li>
-                    <li><a data-toggle="tab" href="#product-2"><img src="assets/images/products/details/thumb-2.jpg" alt="" /></a></li>
-                    <li><a data-toggle="tab" href="#product-3"><img src="assets/images/products/details/thumb-3.jpg" alt="" /></a></li>
-                </ul>
-            </div>
+<%--            <div class="col-lg-1">--%>
+<%--                <ul class="nav nav-tabs products-nav-tabs">--%>
+<%--                    <li><a class="active" data-toggle="tab" href="#product-1"><img src="assets/images/products/details/thumb-1.jpg" alt="" /></a></li>--%>
+<%--                    <li><a data-toggle="tab" href="#product-2"><img src="assets/images/products/details/thumb-2.jpg" alt="" /></a></li>--%>
+<%--                    <li><a data-toggle="tab" href="#product-3"><img src="assets/images/products/details/thumb-3.jpg" alt="" /></a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
             <div class="col-lg-5">
                 <div class="tab-content">
                     <div id="product-1" class="tab-pane fade in show active">

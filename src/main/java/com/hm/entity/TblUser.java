@@ -37,6 +37,7 @@ public class TblUser {
     private Integer sid;
 
 
+
     public TblUser() {
     }
 
@@ -72,6 +73,14 @@ public class TblUser {
         this.usersex = usersex;
     }
 
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
     public String getUsertime() {
         return usertime;
     }
@@ -104,6 +113,7 @@ public class TblUser {
         this.userurl = userurl;
     }
 
+
     public Integer getRid() {
         return rid;
     }
@@ -112,13 +122,6 @@ public class TblUser {
         this.rid = rid;
     }
 
-    public String getUserphone() {
-        return userphone;
-    }
-
-    public void setUserphone(String userphone) {
-        this.userphone = userphone;
-    }
 
     public Integer getStid() {
         return stid;
@@ -136,13 +139,6 @@ public class TblUser {
         this.usercard = usercard;
     }
 
-    public TblSite getTblSite() {
-        return tblSite;
-    }
-
-    public void setTblSite(TblSite tblSite) {
-        this.tblSite = tblSite;
-    }
 
     public Integer getSid() {
         return sid;
@@ -150,5 +146,13 @@ public class TblUser {
 
     public void setSid(Integer sid) {
         this.sid = sid;
+    }
+
+    public TblSite getTblSite() {
+        return tblSite;
+    }
+
+    public void setTblSite(TblSite tblSite) {
+        this.tblSite = tblSite;
     }
 }

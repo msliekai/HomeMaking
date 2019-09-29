@@ -13,7 +13,8 @@ public class TblCOS {
     private String costime;
     private Integer ctid;
     private String coshot;
-    private TblCOStype tblCOStype;
+
+    private TblCOStype tblCOStype;//服务类
 
 
 }

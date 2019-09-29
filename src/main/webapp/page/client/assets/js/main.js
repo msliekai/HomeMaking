@@ -3,7 +3,6 @@
 
 /*--------------------------
 tab
-最新最全最好的Bootstrap模板：http://www.bootstrapmb.com
 ---------------------------- */
 $(document).ready(function(){
   $(".nav-tabs a").click(function(){
