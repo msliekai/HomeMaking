@@ -26,6 +26,7 @@ public class CompanyHandler {
     //公司登录
     private ModelAndView modelAndView=new ModelAndView();
     private Map<String,Object> map = new HashMap<String,Object>();
+    private Integer flag=0;
     @Resource
     private CompanyBiz companyBiz;
     @Resource
@@ -119,12 +120,13 @@ public class CompanyHandler {
     //公司订单查询
     @RequestMapping("companyOrder")
     public @ResponseBody
-    Map<String,Object> companyOrder(HttpServletRequest request, HttpSession session,Tblorder tblorder)
+    Map<String,Object> companyOrder(HttpServletRequest request, HttpSession session,Order order)
     {
         //---获得登录的公司对象
         Company company = (Company) session.getAttribute("company");
-        Integer count=companyBiz.ordercount(company.getFid());
-        List<Tblorder> list=companyBiz.findCompanyOrder(company.getFid(),tblorder.getPage(),tblorder.getLimit());
+        Integer count=companyBiz.ordercount(company.getFid(),order.getOsname());
+        List<Tblorder> list=companyBiz.findCompanyOrder(company.getFid(),order.getPage(),order.getLimit(),order.getOsname());
+        request.getSession().setAttribute("aa",list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -142,6 +144,7 @@ public class CompanyHandler {
         Company company = (Company) session.getAttribute("company");
         Integer count=companyBiz.staffCount(company.getFid());
         List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
+        System.out.println(list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -159,4 +162,13 @@ public class CompanyHandler {
         map.put("data",list);
         return map;
     }
+
+//    员工删除
+@RequestMapping(value = "useDel", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+public @ResponseBody String useDel(String sfid){
+    flag=0;
+    Integer id=Integer.parseInt(sfid);
+    flag=companyBiz.delStaff(id);
+    return String.valueOf(flag);
+}
 }

@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="<%=path%>page/Xadmin/css/font.css">
     <link rel="stylesheet" href="<%=path%>page/Xadmin/css/xadmin.css">
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css"  media="all">
     <script src="<%=path%>page/Xadmin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="<%=path%>page/Xadmin/js/xadmin.js"></script>
 </head>
@@ -54,14 +55,80 @@
         </div>
     </div>
 </div>
-
+<div id="addstaff" style="display: none">
+    <form class="layui-form" action="<%=path%>rrr/addStaff.action" method="post" lay-filter="example" enctype="multipart/form-data">
+        <label class="layui-form-label">员工名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="sfname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">员工头像</label>
+            <div class="layui-input-inline">
+                <input type="file"     name = "pictureFile" />
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sfdob" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sfage" value="男" title="男" checked="">
+                <input type="radio" name="sfage" value="女" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">服务经验</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="sfexp" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <label class="layui-form-label">单次费用</label>
+        <div class="layui-input-inline">
+            <input type="text" name="sfcos" lay-verify="required" placeholder="元/次" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工作经历</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sfworkexp" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">擅长</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sfgood" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">学历</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sfedu" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">求职意向</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sfwant" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+<%--        员工所属公司id--%>
+        <input type="text" name="fid" value="" hidden="hidden">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+             <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">上传资料</a>
     <a class="layui-btn layui-btn-xs " lay-event="usedeal">详情</a>
     <a class="layui-btn layui-btn-xs " lay-event="usefix">修改</a>
-    <a class="layui-btn layui-btn-xs " lay-event="usedel">删除</a>
+    <a class="layui-btn layui-btn-xs " lay-event="useDel">删除</a>
 </script>
 
 <script>
@@ -97,30 +164,15 @@
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
-        //触发查询按钮
-        var $ = layui.$, active = {
-            reload: function(){
-                var uname = $('#uname');
-                var cong=$('#cong');
-                var dao=$('#dao');
-                //执行重载
-                table.reload('testReload', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    ,where: {
-                        uname: uname.val(),
-                        cong:cong.val(),
-                        dao:dao.val(),
-                    }
-                }, 'data');
-            }
-        };
 
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
+            layer.open({
+                type:1,
+                title: "上传资料",
+                area: ['600px', '500px'],
+                content: $("#addstaff")//引用的弹出层的页面层的方式加载修改界面表单
+            });
         })
 
         //监听行工具事件
@@ -133,19 +185,24 @@
                 });
             }else if(obj.event==="useDis"){
                 layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
+                    fal("<%=path%>userManagement/useDis.action",data.sfid);
+                    layer.close(index);
+                });
+            }else if(obj.event==="useDel"){
+                layer.confirm('确定禁用？员工ID:'+data.sfid, function (index) {
+                    fal("<%=path%>page/useDel.action",data.sfid);
                     layer.close(index);
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,sfid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"sfid":sfid},
                 success: function (dat) {
                     if(dat==1){
                         layer.msg("修改成功");
@@ -154,11 +211,6 @@
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
                     }, 'data');
                 },
                 error: function (dat) {
@@ -169,5 +221,23 @@
         }
     });
 
+
+</script>
+<script src="<%=path%>page/layui/laydate.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+    });
 </script>
 </html>

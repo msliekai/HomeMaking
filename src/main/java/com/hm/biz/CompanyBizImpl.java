@@ -45,13 +45,13 @@ public class CompanyBizImpl implements CompanyBiz {
     }
     //-----查找公司订单表
     @Override
-    public List<Tblorder> findCompanyOrder(Integer fid,Integer page,Integer limit) {
-        return companyMapper.findCompanyOrder(fid,page,limit);
+    public List<Tblorder> findCompanyOrder(Integer fid,Integer page,Integer limit,String osname) {
+        return companyMapper.findCompanyOrder(fid,page,limit,osname);
     }
     //----查找订单的总数
     @Override
-    public Integer ordercount(Integer fid) {
-        return companyMapper.ordercount(fid);
+    public Integer ordercount(Integer fid,String osname) {
+        return companyMapper.ordercount(fid,osname);
     }
     //--------查找员工信息表
     @Override
@@ -72,6 +72,11 @@ public class CompanyBizImpl implements CompanyBiz {
     @Override
     public Integer traincount() {
         return companyMapper.traincount();
+    }
+    //-----------删除员工
+    @Override
+    public Integer delStaff(Integer sfid) {
+        return companyMapper.delStaff(sfid);
     }
 
     //------公司证书列表

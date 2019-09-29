@@ -10,7 +10,7 @@
     <title>测试图片回显</title>
 </head>
 <body>
-<form action="<%=path%>rrr/addUser.action" method="post" enctype="multipart/form-data">
+<form action="<%=path%>rrr/addStaff.action" method="post" enctype="multipart/form-data">
     用户名：<input type = "text"  name = "username" /><br>
     图片： <input type="file"     name = "pictureFile" /><br>
     <input type = "submit" value = "提交">

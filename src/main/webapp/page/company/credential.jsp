@@ -65,13 +65,6 @@
         </div>
     </div>
 </div>
-<div id="scheduling" style="display: none" >
-    <form action="<%=path%>rrr/addUser.action" method="post" enctype="multipart/form-data">
-        图片： <input type="file"     name = "pictureFile" /><br>
-        <input type = "submit" value = "提交">
-        <span></span>
-    </form>
-</div>
 </body>
 
 <script id="barDemo" type="text/html">
@@ -140,17 +133,15 @@
         table.on('tool(test1)', function(obj) {
 
             var data =obj.data;
-            alert(JSON.stringify(data))
-            alert(data.creid);
-            alert(data.crename);
+            var creid=data.creid;
             if (obj.event === 'deal') {
 
             } else if(obj.event==="add"){
                 layer.open({
-                    type: 1,
+                    type:2,
                     title: "上传资料",
                     area: ['500px', '200px'],
-                    content: $("#scheduling")//引用的弹出层的页面层的方式加载修改界面表单
+                    content: "upfile.jsp"+"?uu="+encodeURIComponent(creid)//引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });

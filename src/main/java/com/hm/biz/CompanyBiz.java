@@ -17,9 +17,9 @@ public interface CompanyBiz {
     //    查找员工证书的总数
     public Integer stfCount();
     //-----查找公司订单表
-    public List<Tblorder> findCompanyOrder(Integer fid,Integer page,Integer limit);
+    public List<Tblorder> findCompanyOrder(Integer fid,Integer page,Integer limit,String osname);
     //----查找订单的总数
-    public Integer ordercount(Integer fid);
+    public Integer ordercount(Integer fid,String osname);
     //--------查找员工信息表
     public List<Staff> staffList(Integer fid,Integer page,Integer limit);
     //---------查找员工总数
@@ -28,4 +28,6 @@ public interface CompanyBiz {
     public List<Tbltritem> train(Integer page,Integer limit);
     //    培训表总数
     public Integer traincount();
+    //-----------删除员工
+    public Integer delStaff(Integer sfid);
 }

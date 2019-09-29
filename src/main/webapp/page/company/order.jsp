@@ -41,7 +41,7 @@
                 <div class="layui-card-body ">
                     <div class="demoTable">
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="根据状态查询，如待支付" autocomplete="off" class="layui-input" name="uname" id="uname">
+                            <input type="text"  placeholder="根据状态查询，如待支付" autocomplete="off" class="layui-input" name="osname" id="osname">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
@@ -60,8 +60,18 @@
 </body>
 
 <script id="barDemo" type="text/html">
+    {{#  if(d.tbloderstate.osname =="待处理"){}}
     <a class="layui-btn layui-btn-xs " lay-event="useEna">沟通</a>
     <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
+
+    {{# } if(d.tbloderstate.osname =="已处理"){}}
+    <a class="layui-btn layui-btn-xs " lay-event="useEna">回访</a>
+    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
+    {{# } if(d.tbloderstate.osname =="已评价"){}}
+    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
+    {{# } if(d.tbloderstate.osname =="已取消"){}}
+    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
+    {{#  } }}
 </script>
 
 <script>
@@ -93,24 +103,20 @@
                 , {field: 'sfcos', title: '费用', minWidth: 80,templet:function (d){return d.staff.sfcos}}
                 , {field: 'osname', title: '状态', minWidth: 80,templet:function (d){return d.tbloderstate.osname}}
                 , {field: 'userid', title: '服务对象', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 200}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 200,templet:function (d){return d.tbloderstate.osname}}
             ]]
         });
         //触发查询按钮
         var $ = layui.$, active = {
             reload: function(){
-                var uname = $('#uname');
-                var cong=$('#cong');
-                var dao=$('#dao');
+                var osname = $('#osname');
                 //执行重载
                 table.reload('testReload', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        uname: uname.val(),
-                        cong:cong.val(),
-                        dao:dao.val(),
+                        osname: osname.val(),
                     }
                 }, 'data');
             }
@@ -118,7 +124,7 @@
 
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
-            alert(type);
+            // alert(type);
             active[type] ? active[type].call(this) : '';
         })
 
@@ -155,8 +161,6 @@
                     table.reload('testReload', {
                         where: {
                             uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
                         }
                     }, 'data');
                 },

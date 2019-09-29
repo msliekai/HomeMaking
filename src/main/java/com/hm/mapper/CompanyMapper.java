@@ -25,9 +25,9 @@ public interface CompanyMapper {
     //查看公司基本信息
     public Company queryBaseInfo(@Param("facc") String facc);
     //-----查找公司订单表
-    public List<Tblorder> findCompanyOrder(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit")Integer limit);
+    public List<Tblorder> findCompanyOrder(@Param("fid") Integer fid,@Param("page")Integer page,@Param("limit")Integer limit,@Param("osname") String osname);
     //----查找订单的总数
-    public Integer ordercount(Integer fid);
+    public Integer ordercount(@Param("fid") Integer fid,@Param("osname")String osname);
     //--------查找员工信息表
     public List<Staff> staffList(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit")Integer limit);
     //---------查找员工总数
@@ -36,4 +36,6 @@ public interface CompanyMapper {
     public List<Tbltritem> train(@Param("page") Integer page,@Param("limit")Integer limit);
     //    培训表总数
     public Integer traincount();
+    //-----------删除员工
+    public Integer delStaff(Integer sfid);
 }

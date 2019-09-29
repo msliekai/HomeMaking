@@ -46,10 +46,14 @@
         where facc=#{facc};
     </select>
 <!--    查找公司订单表-->
-    <select id="findCompanyOrder"  resultMap="commap">
+    <select id="findCompanyOrder" parameterType="com.hm.entity.Company" resultMap="commap">
         SELECT g.sfurl,g.sfname,ff.fname,p.otime,p.svtime,g.sfcos,q.osname,p.userid from
         tblfirm ff,tblorder p,tbloderstate q,(SELECT s.* from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g
-        where g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid
+        where  g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid
+        <if test="osname!=null and osname!=''">
+            and q.osname like "%"#{osname}"%"
+        </if>
+        GROUP BY p.oid
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit};
     </select>
@@ -74,13 +78,16 @@
         </association>
     </resultMap>
 <!--查找订单表的总数-->
-    <select id="ordercount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT count(*) from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid}
+    <select id="ordercount"  resultType="java.lang.Integer">
+        SELECT count(*) from tblorder o,tblstaff s,tblfirm f,tbloderstate q where o.sfid=s.sfid and s.fid=f.fid and o.osid=q.osid and f.fid=#{fid}
+        <if test="osname!=null and osname!=''">
+            and q.osname like "%"#{osname}"%"
+        </if>
     </select>
 <!--    员工信息表-->
     <select id="staffList"  resultMap="staff">
     SELECT f.sfid,f.sfname,f.sfage,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
-    from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid}
+    from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid} and s.stid != 3
         <bind name="page" value="(page-1)*limit"/>
     limit #{page},#{limit}
     </select>
@@ -112,4 +119,8 @@
     <select id="traincount" resultType="java.lang.Integer">
         SELECT count(*) from tbltrain
     </select>
+<!--    员工删除-->
+    <update id="delStaff" parameterType="java.lang.Integer" >
+        update tblstaff set stid=3 where sfid=#{sfid}
+    </update>
 </mapper>
