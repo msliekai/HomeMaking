@@ -11,4 +11,5 @@ public class Tblfirmacc {
     private String facard;
     private String famoney;
     private Company company;
+    private String compwd;
 }

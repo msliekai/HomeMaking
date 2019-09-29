@@ -19,7 +19,9 @@ public class Staff {
     private String sfgood;
     private String sfedu;
     private String sfurl;
-
+    private String sftag;
+    private Company company;
+    private Tblstate tblstate;
     public Staff() {
 
     }

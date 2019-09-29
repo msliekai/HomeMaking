@@ -68,7 +68,7 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>公司注册</h2>
+            <h2>提现</h2>
 
             <div class="signin-form">
                 <div class=" ">
@@ -86,109 +86,42 @@
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
                             <div class="form-group">
-                                <label for="facc">家政公司账号名</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号">
+                                <label for="facc">收款方</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入收款人姓名">
                                 <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="fpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()">
+                                <label for="fpwd">收款账户</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入收款账户" onblur="checkfpwd()">
                                 <span id="bbb"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="nfpwd">确认密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()">
+                                <label for="nfpwd">付款方</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="请输入付款人姓名" onblur="checknfpwd()">
                                 <span id="ccc"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="flaw">法人代表</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名">
+                                <label for="flaw">付款账号</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入付款账户">
                                 <span id="ddd"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="flawphone">法人电话</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入法人电话" onblur="checkflawphone()">
+                                <label for="flawphone">转账金额</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入转账金额" onblur="checkflawphone()">
                                 <span id="eee" ></span><p/>
-                            </div><!--/.form-group -->
-                            <div class="form-group">
-                                <label for="ftime">注册时间</label>
-                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
-                                <span id="fff" ></span><p/>
-                            </div><!--/.form-group -->
-
-                            <div class="form-group">
-                                <label for="securityCode">验证码</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="securityCode" name="securityCode" placeholder="输入验证码">
-                            </div><!--/.form-group -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="signin-password">
-                                        <div class="password-circle">
-                                            <div class="single-password-circle">
-                                                <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
-                                                <label>
-										    		<span class="round-boarder">
-											    		<span id="verclo" class="round-boarder1">看不清？换一张</span>
-												    </span>
-                                                </label>
-                                            </div><!--/.single-password-circle-->
-                                        </div><!--/.password-circle-->
-                                    </div><!--/.signin-password -->
-                                </div><!--/.col -->
-                            </div><!--/.row -->
-
-                            <br/>
-                            <h3>默认地址</h3>
-                            <br/>
-                            <div class="city-picker-selector" id="city-picker-selector">
-                                <div class="selector-item storey province">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sa" class="input-price val-error" value="110000"
-                                           data-required="userProvinceId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                            <li>天津市</li>
-                                            <li>河北省</li>
-                                            <li>山西省</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="selector-item storey city">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sb" class="input-price val-error" value="110100"
-                                           data-required="userCityId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="selector-item storey district">
-                                    <a href="javascript:;" class="selector-name reveal">海淀区</a>
-                                    <input type="hidden" name="sc" class="input-price val-error" value="110108"
-                                           data-required="userDistrictId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>东城区</li>
-                                            <li>西城区</li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="scontext">详细地址</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="详细地址">
-                            </div><!--/.form-group -->
-                            <!-- end .city-picker-selector -->
+                                <div class="form-group">
+                                    <label for="flawphone">支付密码</label>
+                                    <input type="number" class="form-control" autocomplete="off" required="required" id="zfmm" name="flawphone" placeholder="请输入支付密码" onblur="checkflawphone()">
+                                    <span id="fff" ></span><p/>
+                                </div>
 
                             <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal"
-                                   data-target=".signin_modal" value="注册" onsubmit="submit()" />
+                                   data-target=".signin_modal" value="确定" onsubmit="submit()" />
                         </form><!--/form -->
                     </div><!--/.col -->
                 </div><!--/.row -->
@@ -196,33 +129,12 @@
             </div><!--/.signin-form -->
 
 
-            <div class="signin-footer">
-
-                <p>
-                    已有账号 ?
-                    <a href="<%=path%>page/client/signin.jsp">点我登陆</a>
-                </p>
-            </div><!--/.signin-footer -->
-
         </div><!--/.sign-content -->
 
     </div><!--/.container -->
 
 </section><!--/.signin -->
 
-<!-- signin end -->
-
-<%--<!--footer copyright start -->--%>
-<%--<footer class="footer-copyright">--%>
-<%--    <div id="scroll-Top">--%>
-<%--        <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>--%>
-<%--    </div><!--/.scroll-Top-->--%>
-
-<%--</footer><!--/.hm-footer-copyright-->--%>
-<%--<!--footer copyright  end -->--%>
-
-
-<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
 <script src="<%=path%>page/client/js/jquery.js"></script>
 
@@ -252,6 +164,11 @@
 </body>
 
 <script>
+
+
+
+
+
 
     function submit() {
         function checkfpwd(){
