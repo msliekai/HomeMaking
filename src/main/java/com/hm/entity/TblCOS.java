@@ -13,7 +13,7 @@ public class TblCOS {
     private String costime;
     private Integer ctid;
     private String coshot;
+    private TblCOStype tblCOStype;
     private List<TblCOStype> listcos;
-
 
 }

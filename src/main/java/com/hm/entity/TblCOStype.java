@@ -10,6 +10,4 @@ public class TblCOStype {
     private String ctcontext;
     private String cttime;
 
-
-
 }

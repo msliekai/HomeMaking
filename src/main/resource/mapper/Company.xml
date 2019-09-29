@@ -84,6 +84,149 @@
             and q.osname like "%"#{osname}"%"
         </if>
     </select>
+    <!--修改公司基本信息-->
+    <update id="upcom" parameterType="com.hm.entity.Company">
+        update tblfirm set facc=#{facc},fname=#{fname},flaw=#{flaw},fsite=#{fsite},flawphone=#{flawphone} where fid=#{fid}
+    </update>
+
+    <select id="findCreList" parameterType="com.hm.entity.Company" resultType="java.util.List">
+        SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=#{fid} and c.creid=f.creid GROUP BY c.crename;
+    </select>
+
+
+    <!--交易记录-->
+    <select id="querydeallog" resultMap="deallog" parameterType="java.lang.Integer">
+        select d.*,f.fname,u.username,e.dename
+        from tbldeallog d,tblfirm f,tbluser u,tbldeal e
+        where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid}
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+
+    <select id="countdeallog" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*)
+        from tbldeallog d,tblfirm f,tbluser u,tbldeal e
+        where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid};
+    </select>
+
+    <resultMap id="deallog" type="com.hm.entity.Tbldeallog">
+        <id property="dlid" column="dlid"/>
+        <result property="dltime" column="dltime"/>
+        <result property="dlcost" column="dlcost"/>
+        <association property="company" column="fid" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+            <result property="fname" column="fname"/>
+        </association>
+        <association property="tblUser" column="userid" javaType="com.hm.entity.TblUser">
+            <id property="userid" column="userid"/>
+            <result property="username" column="username"/>
+        </association>
+        <association property="tbldeal" column="deid" javaType="com.hm.entity.Tbldeal">
+            <id property="deid" column="deid"/>
+            <result property="dename" column="dename"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有服务-->
+    <select id="querycostype" resultType="com.hm.entity.TblCOStype" >
+        /*select * from tblCOStype;*/
+        select c.*from tblCOStype c
+    </select>
+
+    <resultMap id="costype" type="com.hm.entity.Tblfc">
+        <id property="fcid" column="fcid"/>
+        <id property="stid" column="stid"/>
+        <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+            <id property="ctid" column="ctid"/>
+            <result property="ctname" column="ctname"/>
+            <result property="ctcontext" column="ctcontext"/>
+            <result property="cttime" column="cttime"/>
+        </association>
+        <association property="tblstate" column="stid" javaType="com.hm.entity.Tblstate">
+            <id property="stid" column="stid"/>
+            <result property="stname" column="stname"/>
+        </association>
+        <association property="company" column="fid" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+        </association>
+    </resultMap>
+
+    <!--查询某个公司的有关服务-->
+
+    <select id="servicetype" resultMap="costype" parameterType="java.lang.Integer">
+        select * from tblCOStype c left join
+        (select s.stname,f.ctid from tblfc f,tblstate s where s.stid=f.stid and f.fid=#{fid})m
+        on c.ctid=m.ctid
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+
+    <select id="countservicetype" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from tblCOStype c left join
+        (select s.stname,f.ctid from tblfc f,tblstate s where s.stid=f.stid and f.fid=#{fid})m
+        on c.ctid=m.ctid
+    </select>
+
+    <!--查询具体服务-->
+   <!-- <select id="service" resultMap="cos" parameterType="java.lang.Integer">
+        select * from tblCOStype c left join
+        (select s.stname,f.ctid,s.stid ,c.cosname
+        from tblfc f,tblstate s,tblCOS c
+        where s.stid=f.stid and c.ctid=f.ctid and f.fid=#{fid})m
+        on c.ctid=m.ctid;
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+    <resultMap id="cos" type="com.hm.entity.Tblfc">
+        <id property="fcid" column="fcid"/>
+        <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+            <id property="ctid" column="ctid"/>
+            <result property="ctname" column="ctname"/>
+            <result property="ctcontext" column="ctcontext"/>
+            <result property="cttime" column="cttime"/>
+        </association>
+        <association property="tblstate" column="stid" javaType="com.hm.entity.Tblstate">
+            <id property="stid" column="stid"/>
+            <result property="stname" column="stname"/>
+        </association>
+        <association property="company" column="fid" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+        </association>
+        <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOS">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+            <result property="coscontext" column="coscontext"/>
+            <result property="costime" column="costime"/>
+            <result property="coshot" column="coshot"/>
+        </association>
+    </resultMap>-->
+
+
+    <!--公司入驻申请-->
+    <update id="">
+
+    </update>
+
+    <!--公司银行账号-->
+    <select id="queryfirmacc" resultType="com.hm.entity.Tblfirmacc" parameterType="java.lang.Integer">
+        select * from tblfirmacc where fid=#{fid}
+    </select>
+    <!--银行充值-->
+    <update id="addmoney" parameterType="com.hm.entity.Tblfirmacc">
+        UPDATE  tblfirmacc set famoney=#{famoney} where fid=#{fid}
+    </update>
+    <!--银行提现-->
+    <update id="drawmoney" parameterType="com.hm.entity.Tblfirmacc">
+        UPDATE  tblfirmacc set famoney=#{famoney} where fid=#{fid}
+    </update>
+    <!--修改银行账号-->
+    <update id="changefacard" parameterType="com.hm.entity.Tblfirmacc">
+        UPDATE  tblfirmacc set facard=#{facard} where fid=#{fid}
+    </update>
+    <!--检查银行密码-->
+    <select id="checkcompwd" resultType="com.hm.entity.Tblfirmacc">
+        select * from tblfirmacc where facard=#{facard} and compwd=#{compwd}
+    </select>
 <!--    员工信息表-->
     <select id="staffList"  resultMap="staff">
     SELECT f.sfid,f.sfname,f.sfage,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
@@ -123,4 +266,6 @@
     <update id="delStaff" parameterType="java.lang.Integer" >
         update tblstaff set stid=3 where sfid=#{sfid}
     </update>
+
+
 </mapper>

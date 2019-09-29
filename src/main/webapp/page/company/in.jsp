@@ -97,12 +97,15 @@
 
                                 </div><!--/.form-group -->
 
-                                <div class="form-group">
-                                <label >服务类别:<input type="checkbox"  autocomplete="off" id="品类保洁" name="ctid">品类保洁
+                                <div class="form-group" >
+                                <label > 服务类别:
+                                   <div id="costype"></div>
+
+                                    <%--<input type="checkbox"  autocomplete="off" id="品类保洁" name="ctid">品类保洁
                                     <input type="checkbox"  autocomplete="off" id="日常保洁" name="ctid">日常保洁
                                     <input type="checkbox"  autocomplete="off" id="保姆" name="ctid">保姆
                                     <input type="checkbox"  autocomplete="off" id="月嫂" name="ctid">月嫂
-                                    <input type="checkbox"  autocomplete="off" id="育儿嫂" name="ctid">育儿嫂
+                                    <input type="checkbox"  autocomplete="off" id="育儿嫂" name="ctid">育儿嫂--%>
                                     <p/>
                                 </label>
 
@@ -138,6 +141,23 @@
 </body>
 
 <script>
+
+    $(document).ready(function () {
+        $.post("<%=path%>page/querycostype.action",
+        function (data) {
+            var html = '';
+            for(var i in data){
+                html += '<input type="checkbox" name="ctname">' + data[i].ctname
+            }
+            $("#costype").append(html);
+            console.log(html);
+        });
+    });
+
+
+
+
+
     function checkfpwd(){
         var fpwd=$("#fpwd").val();
         if(fpwd==""){

@@ -14,7 +14,7 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>公司账户</title>
+    <title>服务类别</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -43,47 +43,42 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    公司账户
+                    服务类别
                     <hr class="layui-bg-red">
 
                     <div class="layui-form-item">
-                            <div class="layui-inline">
+                            <%--<div class="layui-inline">
                             <label class="layui-form-label">账户类型:</label>
                             <div class="layui-input-inline">
                                 <input type="tel" name="cardtype" lay-verify="required|phone" autocomplete="off" class="layui-input" id="cardtype">
                             </div>
-                    </div>
+                    </div>--%>
 
                     <div class="layui-form-item">
-                            <div class="layui-inline">
+                            <%--<div class="layui-inline">
                                 <label class="layui-form-label">账户余额:</label>
                                 <div class="layui-input-inline">
                                     <input type="tel" name="famoney" lay-verify="required|phone" autocomplete="off" class="layui-input" id="famoney">
                                 </div>
-                    </div>
+                    </div>--%>
 
                     <div class="layui-form-item">
-                                <div class="layui-inline">
+                                <%--<div class="layui-inline">
                                     <label class="layui-form-label">绑定账号:</label>
                                     <div class="layui-input-inline">
                                         <input type="tel" name="facard" lay-verify="required|phone" autocomplete="off" class="layui-input" id="facard">
                                     </div>
                                     <button class="layer-btn" onclick="changefacard()">修改</button>
                                 </div>
-                    </div>
+                    </div>--%>
 
-                        <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-                            <a href="<%=path%>page/company/addmoney.jsp" target="main"><button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="addmoney" onclick="addmoney()">充值</button></a>
-                            <a href="<%=path%>page/company/transfermoney.jsp" target="main"><button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="transfer" onclick="transfer()">转账</button></a>
-                                <a href="<%=path%>page/company/drawmoney.jsp" target="main"><button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="draw" onclick="draw()">提现</button></a>
-
+                       <%-- <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                            <button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="addmoney" onclick="addmoney()">充值</button>
+                            <button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="transfer" onclick="transfer()">转账</button>
+                            <button class="layui-btn layui-btn-normal" data-method="offset" data-type="auto" name="addmoney" id="draw" onclick="draw()">提现</button>
 
                             </div>
-
-                                <p/>
-
-                                交易明细
-                                <hr class="layui-bg-red">
+--%>
                 </div>
 
 
@@ -102,7 +97,7 @@
         </div>
     </div>
 </div>
-</body>
+
 <%--<script id="barDemo" type="text/html">--%>
 <%--    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
 <%--    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
@@ -117,13 +112,12 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>page/querydeallog.action' //数据接口
+            , url: '<%=path%>page/servicetype.action' //数据接口
             , page: true //开启分页
-            ,limit:3
+            ,limit:5
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
-
 
                 return {
                     "code": eval(res.code), //解析接口状态
@@ -133,16 +127,9 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'dlid', title: '序号', minWidth: 100}
-                , {field: 'dltime', title: '发生时间', minWidth: 80}
-                , {field: 'dename', title: '资金来源', minWidth: 80,templet:function (d) {return d.tbldeal.dename
-
-                    }}
-                , {field: 'dename', title: '资金去向', minWidth:150,templet:function (d) {return d.tbldeal.dename
-
-                    }}
-                , {field: 'dlcost', title: '金额', minWidth: 80}
-                , {field: 'email', title: '操作类型', minWidth: 80}
+                {field: 'ctname', title: '服务类别名', minWidth: 100,templet:function (d) {return d.tblCOStype.ctname}}
+                , {field: 'cttime', title: '服务申请时间', minWidth: 80,templet:function (d) {return d.tblCOStype.cttime}}
+                , {field: 'stname', title: '状态', minWidth: 80,templet:function (d) {return d.tblstate.stname}}
             ]]
         });
         //触发查询按钮
@@ -232,30 +219,30 @@
         );
     });
     //充值
-    <%--function addmoney() {--%>
-    <%--    layer.prompt(function(value, index, elem){--%>
-    <%--        /*alert(value); //得到value*/--%>
-    <%--        var addmoney=value;--%>
-    <%--        var zzm = /^\+?[1-9][0-9]{0,4}$/;--%>
-    <%--        if(zzm.test(addmoney)){--%>
-    <%--            if(addmoney!=null&&addmoney!=""){--%>
+    function addmoney() {
+        layer.prompt(function(value, index, elem){
+            /*alert(value); //得到value*/
+            var addmoney=value;
+            var zzm = /^\+?[1-9][0-9]{0,4}$/;
+            if(zzm.test(addmoney)){
+                if(addmoney!=null&&addmoney!=""){
 
-    <%--                $(function () {--%>
-    <%--                    $.post("<%=path%>page/addmoney.action",--%>
-    <%--                        {"addmoney":addmoney},--%>
-    <%--                        function (data) {--%>
-    <%--                            alert("充值成功");--%>
-    <%--                        })--%>
-    <%--                });--%>
-    <%--                layer.close(index);--%>
-    <%--            }--%>
+                    $(function () {
+                        $.post("<%=path%>page/addmoney.action",
+                            {"addmoney":addmoney},
+                            function (data) {
+                                alert("充值成功");
+                            })
+                    });
+                    layer.close(index);
+                }
 
-    <%--        }else{--%>
-    <%--            alert("请输入正确格式，正整数且不大于100000！")--%>
-    <%--        }--%>
+            }else{
+                alert("请输入正确格式，正整数且不大于100000！")
+            }
 
-    <%--    });--%>
-    <%--}--%>
+        });
+    }
     //转账
     function transfer() {
         layer.prompt(function(value, index, elem){
@@ -388,4 +375,5 @@
 <%--    }--%>
 
 <%--</script>--%>
+</body>
 </html>

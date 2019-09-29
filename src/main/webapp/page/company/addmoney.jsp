@@ -25,7 +25,7 @@
           rel="stylesheet">
 
     <!-- title of site -->
-    <title>基本信息</title>
+    <title>Sign up</title>
 
     <!-- For favicon png -->
     <link rel="shortcut icon" type="image/icon" href="<%=path%>page/client/css/logo/favicon.png"/>
@@ -68,13 +68,13 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>基本信息</h2>
+            <h2>充值</h2>
 
             <div class="signin-form">
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data">
+                        <form action="<%=path%>page/querydeallog.action" method="post" enctype="multipart/form-data">
                             <%--<div>
                                 <label for="showname"><h4>头像</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -85,47 +85,33 @@
                             <%--                            真头像在这--%>
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
-                            <div class="form-group">
-                                <label for="facc">账号名:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="facc" name="facc" value=${company.facc}>
-
-                            </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="fname">公司名:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="fname" name="fname" value="${company.fname}">
-
-                            </div><!--/.form-group -->
-
-                            <div class="form-group">
-                                <label for="fsite">公司地址:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="fsite" name="fsite" value="${company.fsite}">
-
-                            </div><!--/.form-group -->
-
-                            <div class="form-group">
-                                <label for="flaw">法人代表:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="flaw" name="flaw" value="${company.flaw}" />
-
-                            </div><!--/.form-group -->
-
-                            <div class="form-group">
-                                <label for="flawphone">法人电话:</label>
-                                <input type="number" class="form-control" autocomplete="off" id="flawphone" name="flawphone" value="${company.flawphone}"/>
-
-                            </div><!--/.form-group -->
+                                <label for="addmoney">充值金额</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="addmoney" name="addmoney" placeholder="请输入充值金额" >
+                                <span id="eee" ></span><p/>
+                            </div>
                                 <div class="form-group">
-                                <label >服务类别:<input type="checkbox"  autocomplete="off" id="品类保洁" name="ctid">品类保洁
-                                    <input type="checkbox"  autocomplete="off" id="日常保洁" name="ctid">日常保洁
-                                    <input type="checkbox"  autocomplete="off" id="保姆" name="ctid">保姆
-                                    <input type="checkbox"  autocomplete="off" id="月嫂" name="ctid">月嫂
-                                    <input type="checkbox"  autocomplete="off" id="育儿嫂" name="ctid">育儿嫂
-                                    <p/>
-                                </label>
+                                    <label for="compwd">支付密码</label>
+                                    <input type="password" class="form-control" autocomplete="off" required="required" id="compwd" name="compwd" placeholder="请输入支付密码">
+                                    <span id="fff" ></span><p/>
+                                </div>
+
+                            <input type="button" class="btn signin_btn signin_btn_two" data-toggle="modal"
+                                   data-target=".signin_modal" value="确定" onclick="add()" />
+                        </form><!--/form -->
+                    </div><!--/.col -->
+                </div><!--/.row -->
+
+            </div><!--/.signin-form -->
 
 
-                                <input type="button" value="保存" onclick="upcom()"/>
-                                </div><!--/.form-group -->
+        </div><!--/.sign-content -->
+
+    </div><!--/.container -->
+
+</section><!--/.signin -->
+
 
 <script src="<%=path%>page/client/js/jquery.js"></script>
 
@@ -156,64 +142,43 @@
 
 <script>
 
-    function upcom() {
-        var facc=$("#facc").val();
-        var fname=$("#fname").val();
-        var flaw=$("#flaw").val();
-        var flawphone=$("#flawphone").val();
-        var fsite=$("#fsite").val();
-        $.post("<%=path%>page/upcom.action",
-            {"facc":facc,"fname":fname,"flaw":flaw,"flawphone":flawphone,"fsite":fsite},
-            function (data) {
-                if(data=="1"){
-                    alert("修改成功");
-                }else {
-                    alert("修改失败");
-                }
-            });
-        
-    }
-    
-    
-    
-    
-    function checkfpwd(){
-        var fpwd=$("#fpwd").val();
-        if(fpwd==""){
-            $("#bbb").html("密码不能为空");
-            return false;
-        }else if(fpwd.length<6){
-            $("#bbb").html("密码位数不能低于6位数");
-            return false;
+    <%--function checkcompwd() {--%>
+    <%--    $.post("<%=path%>page/checkcompwd.action",{"compwd":compwd},function (data) {--%>
+    <%--        if(data=="1"){--%>
+    <%--            alert("支付正确");--%>
+    <%--        }else{--%>
+    <%--            alert("支付错误")--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--}--%>
+
+    function add() {
+        var compwd=$("#compwd").val();
+        var addmoney=$("#addmoney").val();
+        var zzm = /^\+?[1-9][0-9]{0,4}$/;
+        if(zzm.test(addmoney)){
+            if(addmoney!=null&&addmoney!=""){
+                $.post("<%=path%>page/addmoney.action",{"compwd":compwd,"addmoney":addmoney},function (data) {
+                    if(data=="1"){
+                        alert("充值成功")
+                    }else {
+                        alert("支付密码不正确，充值失败");
+                    }
+                });
+            }
         }else{
-            $("#bbb").html("");
+            alert("请输入正确格式，正整数且不大于100000！")
         }
+
     }
-    function checknfpwd(){
-        var fpwd=$("#fpwd").val();
-        var nfpwd=$("#nfpwd").val();
-        if(fpwd!=nfpwd){
-            $("#ccc").html("两次输入密码不一致");
-            return false;
-        }else{
-            $("#ccc").html("");
-        }
-    }
-    function checkflawphone(){
-        var flawphone=$("#flawphone").val();
-        if(flawphone.length!=11){
-            $("#eee").html("输入手机号有误");
-            return false;
-        }else {
-            $("#eee").html("");
-        }
-    }
+
 
     $(document).ready(function () {
         $("#facc").blur(function () {
             var facc=$("#facc").val();
-            if(facc==""){
-                $("#aaa").html("公司账号不能为空");
+            var regular=new RegExp(/^1[3456789]\d{9}$/);
+            if(!(regular.test(facc))){
+                $("#aaa").html("手机号码有误，请重填");
                 return false;
             }
             $.post("<%=path%>page/checkfacc.action",

@@ -13,4 +13,9 @@ public class Tbldeallog {
     private Company company;
     private TblUser tblUser;
     private Tbldeal tbldeal;
+    private Integer limit;
+    private Integer page;
+
+    public Tbldeallog() {
+    }
 }

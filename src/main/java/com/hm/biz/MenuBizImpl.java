@@ -13,6 +13,8 @@ import java.util.List;
 public class MenuBizImpl implements MenuBiz {
     @Resource
     private MenuMapper menuMapper;
+
+
     @Override
     public List<Tblmenu> getMenu(Integer rid) {
         //获取所有菜单（无序）
@@ -21,6 +23,10 @@ public class MenuBizImpl implements MenuBiz {
 //        for (Tblmenu tblmenu : list) {
 //            System.out.println(tblmenu.getMname()+"+"+ tblmenu.getMfid());
 //        }
+
+        /*for (Tblmenu tblmenu : list) {
+            System.out.println(tblmenu.getMname()+"+"+ tblmenu.getMfid());
+        }*/
 
         List<Tblmenu> tblmenuList = new ArrayList<Tblmenu>();
         for (int i = 0; i <list.size() ; i++) {
@@ -39,6 +45,13 @@ public class MenuBizImpl implements MenuBiz {
 //                System.out.println("子级+"+ tblmenu.getChildTblmenus().size());
 //            }
 //        }
+        for (Tblmenu tblmenu : tblmenuList) {
+//            System.out.println("最终");
+//            System.out.println(tblmenu.getMname());
+            if (tblmenu.getChildTblmenus() != null){
+//                System.out.println("子级+"+ tblmenu.getChildTblmenus().size());
+            }
+        }
 
 
         return tblmenuList;
