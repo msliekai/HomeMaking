@@ -1,8 +1,6 @@
 package com.hm.biz;
 
 import com.hm.entity.*;
-import com.hm.entity.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public interface CompanyBiz {
     public Integer traincount();
     //-----------删除员工
     public Integer delStaff(Integer sfid);
-    public List<Credential> findCreList(Company company);
+
     //查看交易
     public List<Tbldeallog> querydeallog(Integer fid,Integer page,Integer limit);
     //查看交易总条数

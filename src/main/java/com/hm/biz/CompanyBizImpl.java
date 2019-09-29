@@ -99,6 +99,7 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.delStaff(sfid);
     }
 
+
     //------公司证书列表
     @Override
     public Company checkfacc(String facc) {

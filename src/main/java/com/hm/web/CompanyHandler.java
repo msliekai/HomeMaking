@@ -43,7 +43,6 @@ public class CompanyHandler {
         if(company!=null){
             req.getSession().setAttribute("company",company);
             List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
-            List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
             for(Tblmenu menu1:menu){
                 System.out.println(menu1.getMname());
             }

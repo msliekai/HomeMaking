@@ -39,9 +39,7 @@ public interface CompanyMapper {
     //-----------删除员工
     public Integer delStaff(Integer sfid);
     public List<Credential> findCreList(Company company);
-    public int addCompany(Company company);//注册公司用户
-    public int Companyin(Company company);//公司入驻申请
-    public Company queryBaseInfo(@Param("facc") String facc);//查看公司基本信息
+
     //修改公司基本信息
     public int upcom(@Param("fid")Integer fid,@Param("facc")String facc,@Param("fname") String fname,@Param("flaw") String flaw,
                      @Param("flawphone") String flawphone,@Param("fsite") String fsite);

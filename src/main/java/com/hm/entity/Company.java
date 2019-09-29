@@ -23,7 +23,6 @@ public class Company {
     private String osname;
     private Integer page;
     private Integer limit;
-    private Integer rid;//角色权限
     @Resource
     private List<CompanyService> list;//公司的服务类型
 
