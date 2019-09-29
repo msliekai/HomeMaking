@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import sun.awt.SunHints;
 import sun.print.SunMinMaxPage;
 
@@ -30,6 +31,8 @@ public class CompanyHandler {
 
     //公司登录
     private ModelAndView modelAndView=new ModelAndView();
+    private Map<String,Object> map = new HashMap<String,Object>();
+    private Integer flag=0;
     @Resource
     private CompanyBiz companyBiz;
     @Resource
@@ -39,11 +42,9 @@ public class CompanyHandler {
 
         Company company = companyBiz.comlogin(facc, fpwd);
 
-        System.out.println(company+"*****");
         if(company!=null){
             req.getSession().setAttribute("company",company);
             List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
-            System.out.println(menu+"cai菜单");
             for(Tblmenu menu1:menu){
                 System.out.println(menu1.getMname());
             }
@@ -86,22 +87,99 @@ public class CompanyHandler {
     //公司证书列表
     @RequestMapping("Comcredential")
     public @ResponseBody
-    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session)
+    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session,Credential credential)
     {
-        Company company1= (Company) session.getAttribute("company");
-        Integer page= company1.getPage();
-        Integer limit=company1.getLimit();
+        //---获取存的公司
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        //----把得到的公司id赋值给资料表
+        credential.setFid(fid);
         //数据库查出条数
-        int count=0;
-
-        List<Credential> list=companyBiz.findCreList(company1);
-        Map<String,Object> map = new HashMap<String,Object>();
+        int count=companyBiz.comCount();
+        List<Credential> list=companyBiz.findCreList(credential);
+        System.out.println(list);
+        session.setAttribute("comcre",list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
 
         return map;
     }
+
+    //员工证书列表
+    @RequestMapping("Staffcredential")
+    public @ResponseBody
+    Map<String,Object> Staffcredential(HttpServletRequest request, HttpSession session,Credential credential)
+    {
+        //---获取存的公司
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        //----把得到的公司id赋值给资料表
+        credential.setFid(fid);
+        //数据库查出条数
+        Integer count1=companyBiz.stfCount();
+        List<Credential> list1=companyBiz.findStfCreList(credential);
+        map.put("code",0);
+        map.put("count",count1);
+        map.put("data",list1);
+
+        return map;
+    }
+
+    //公司订单查询
+    @RequestMapping("companyOrder")
+    public @ResponseBody
+    Map<String,Object> companyOrder(HttpServletRequest request, HttpSession session,Order order)
+    {
+        //---获得登录的公司对象
+        Company company = (Company) session.getAttribute("company");
+        Integer count=companyBiz.ordercount(company.getFid(),order.getOsname());
+        List<Tblorder> list=companyBiz.findCompanyOrder(company.getFid(),order.getPage(),order.getLimit(),order.getOsname());
+        request.getSession().setAttribute("aa",list);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+
+    //----员工信息表
+    //---员工配置表
+    //----人员评价表
+    @RequestMapping("staffList")
+    public @ResponseBody
+    Map<String,Object> staffList(HttpServletRequest request, HttpSession session,Tblorder tblorder)
+    {
+        //---获得登录的公司对象
+        Company company = (Company) session.getAttribute("company");
+        Integer count=companyBiz.staffCount(company.getFid());
+        List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+    //-------培训表
+    @RequestMapping("stafftrain")
+    public @ResponseBody
+    Map<String,Object> stafftrain(HttpServletRequest request, HttpSession session,Tbltrain tbltrain)
+    {
+        Integer count=companyBiz.traincount();
+        List<Tbltritem> list = companyBiz.train(tbltrain.getPage(),tbltrain.getLimit());
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+
+//    员工删除
+@RequestMapping(value = "useDel", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+public @ResponseBody String useDel(String sfid){
+    flag=0;
+    Integer id=Integer.parseInt(sfid);
+    flag=companyBiz.delStaff(id);
+    return String.valueOf(flag);
+}
     //公司交易
     @RequestMapping(value = "querydeallog",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
     public @ResponseBody Map<String,Object>  querydeallog(HttpServletRequest request,HttpSession httpSession ,Tbldeallog tbldeallog){

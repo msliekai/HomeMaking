@@ -9,5 +9,8 @@ public class TblCOStype {
     private String ctname;
     private String ctcontext;
     private String cttime;
+    private Integer page;
+    private Integer limit;
+
 
 }

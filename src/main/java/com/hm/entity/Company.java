@@ -20,11 +20,12 @@ public class Company {
     private Integer ctid;//服务类别
     private Integer stid;//状态
     private Integer rid;//角色权限
+    private String osname;
+    private Integer page;
+    private Integer limit;
     @Resource
     private List<CompanyService> list;//公司的服务类型
 
-    private Integer page;
-    private Integer limit;
     public Company() {
 
     }

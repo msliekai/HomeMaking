@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -35,35 +37,55 @@
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
 
+<%%>
+
 <div class="layui-fluid">
+    <h3 style="color:black;">公司资料</h3>
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body" align="center" >
-                    <table class="layui-table" lay-filter="test" id="utable" align="center">
+                    <table class="layui-table" lay-filter="test1" id="utable" align="center">
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<div class="layui-fluid">
+    <h3 style="color:black;">员工资料</h3>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body" align="center" >
+                    <table class="layui-table" lay-filter="test2" id="ptable" align="center">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 <script id="barDemo" type="text/html">
     <a class="layui-btn layui-btn-xs " lay-event="deal">查看详情</a>
-    <a class="layui-btn layui-btn-primary " lay-event="add">新增＋</a>
+    <a class="layui-btn layui-btn-xs  " lay-event="add">新增＋</a>
+</script>
+<script id="barDemo1" type="text/html">
+    <a class="layui-btn layui-btn-xs " lay-event="deal1">查看详情</a>
+    <a class="layui-btn layui-btn-xs  " lay-event="add1">新增＋</a>
 </script>
 
 <script>
     layui.use('table', function() {
         var table = layui.table;
+        // 公司资料表
         table.render({
             elem: '#utable'
             // , height: 500
-            , url:'<%=path%>page/Comcredential.action'//数据接口
+            , url: '<%=path%>page/Comcredential.action'//数据接口
             , page: true //开启分页
-            ,limit:10
+            , limit: 10
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -75,50 +97,71 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'crename', title: '材料名', minWidth: 100}
+                {field: 'creid', title: '材料序号', minWidth: 80}
+                ,{field: 'crename', title: '材料名', minWidth: 80}
                 , {field: 'count', title: '份数', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+                , {field: 'right', fixed: 'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+            ]]
+        });
+
+        // 员工资料表
+        table.render({
+            elem: '#ptable'
+            // , height: 500
+            , url:'<%=path%>page/Staffcredential.action'//数据接口
+            , page: true //开启分页
+            ,limit:10
+            // ,method:"get"
+            , id: 'testReload'
+            , parseData: function (res1) {
+                return {
+                    "code": eval(res1.code), //解析接口状态
+                    // "msg": res.msg, //解析提示文本
+                    "count": res1.count, //解析数据长度
+                    "data": res1.data//解析数据列表
+                };
+            }
+            , cols: [[ //表头
+                {field: 'dataid', title: '材料序号', minWidth: 80}
+                ,{field: 'datatype', title: '材料名', minWidth: 80}
+                , {field: 'count', title: '份数', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo1', minWidth: 270}
             ]]
         });
 
         //监听行工具事件
-        table.on('tool(test)', function(obj) {
-            var data = obj.data;
+        table.on('tool(test1)', function(obj) {
+
+            var data =obj.data;
+            var creid=data.creid;
             if (obj.event === 'deal') {
-                //查看详情
+
             } else if(obj.event==="add"){
-               //新增
+                layer.open({
+                    type:2,
+                    title: "上传资料",
+                    area: ['500px', '200px'],
+                    content: "upfile.jsp"+"?uu="+encodeURIComponent(creid)//引用的弹出层的页面层的方式加载修改界面表单
+                });
             }
         });
 
-        // function fal(url,uid) {
-        //     $.ajax({
-        //         async: true,
-        //         type: "post",
-        //         url: url,
-        //         dataType: "text",
-        //         data: {"uid":uid},
-        //         success: function (dat) {
-        //             if(dat==1){
-        //                 layer.msg("修改成功");
-        //             }else{
-        //                 layer.msg("修改失败");
-        //             }
-        //             //执行重载
-        //             table.reload('testReload', {
-        //                 where: {
-        //                     uname: uname.value,
-        //                     cong:cong.value,
-        //                     dao:dao.value,
-        //                 }
-        //             }, 'data');
-        //         },
-        //         error: function (dat) {
-        //             layer.msg('裂开');
-        //         }
-        //     })
+
+        // //监听行工具事件
+        // table.on('tool(test2)', function(obj) {
+        //     var data = obj.data;
+        //     if (obj.event === 'deal1') {
         //
-        // }
+        //     } else if(obj.event==="add1"){
+        //         layer.open({
+        //             type: 1,
+        //             title: "上传资料",
+        //             area: ['500px', '200px'],
+        //             content: $("#sche")//引用的弹出层的页面层的方式加载修改界面表单
+        //         });
+        //     }
+        // });
+
     });
 
 </script>

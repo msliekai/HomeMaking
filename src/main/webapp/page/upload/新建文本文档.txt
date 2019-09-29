@@ -1,0 +1,8 @@
+证书表查询
+SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=1 and c.creid=f.creid GROUP BY c.crename;
+员工资料表
+SELECT c.datatype,count(f.dataid) as count from tbldata c,tblsfdata f where sfid=1 and c.dataid=f.dataid GROUP BY c.datatype;
+订单列表
+SELECT g.sfname,ff.fname,p.otime,p.svtime,g.sfcos,q.osname,p.userid from 
+tblfirm ff,tblorder p,tbloderstate q,(SELECT s.* from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=1)g
+where g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid;

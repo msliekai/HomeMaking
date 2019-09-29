@@ -10,6 +10,7 @@ public class Tblmenu {
     private String mname;
     private String murl;
     private Integer mfid;
+    private Integer rid;
     private List<Tblmenu> childTblmenus;
 
 }

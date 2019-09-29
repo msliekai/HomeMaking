@@ -18,7 +18,12 @@ public class Credential {
     private String upname;
     private String uptime;
     private String upurl;
-
+    private Integer page;
+    private Integer limit;
     public Credential() {
+    }
+
+    public Credential(Integer fid) {
+        this.fid = fid;
     }
 }
