@@ -1,6 +1,9 @@
 package com.hm.entity;
 
 import lombok.Data;
+
+import java.util.List;
+
 //------服务类型表
 @Data
 public class TblCOStype {
@@ -10,6 +13,7 @@ public class TblCOStype {
     private String ctcontext;
     private String cttime;
 
+    private List<TblCOS> tblCOS;
 
 
 }

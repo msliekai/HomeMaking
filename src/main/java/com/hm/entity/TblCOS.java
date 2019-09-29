@@ -15,5 +15,7 @@ public class TblCOS {
     private String coshot;
     private List<TblCOStype> listcos;
 
+    private TblCOStype tblCOStype;//服务类
+
 
 }

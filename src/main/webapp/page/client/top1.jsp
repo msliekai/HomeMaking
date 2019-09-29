@@ -9,11 +9,12 @@
 <%
     String path = request.getContextPath() + "/";
 %>
-<html>
-<head>
-    <title>-</title>
-</head>
-<body>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>-</title>--%>
+
+<%--</head>--%>
+<%--<body>--%>
 
 <header>
     <%--    <nav class="navbar navbar-inverse navbar-fixed-top">--%>
@@ -43,8 +44,8 @@
                                     <div class="office-info call-us">
                                         <i class="lnr lnr-map-marker"></i>
                                         <ul class="list-none">
-                                            <li><span>当前位置</span></li>
-                                            <li><a href="" onclick="alert('冲')">点击改变位置</a></li>
+                                            <li><span id="ccypt">当前位置</span></li>
+                                            <li><a onclick="mapre()">点击改变位置</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -61,5 +62,6 @@
     <%--    </nav>--%>
 </header>
 
-</body>
-</html>
+<%--</body>--%>
+
+<%--</html>--%>

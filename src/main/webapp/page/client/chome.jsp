@@ -44,9 +44,9 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
 
-<%--layui--%>
+    <%--layui--%>
     <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
-<%--    我的css--%>
+    <%--    我的css--%>
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
 
 </head>
@@ -63,11 +63,11 @@
 <%--后续这里改掉img的地址--%>
 <div class="layui-carousel divimg" lay-filter="test1" id="sliderarea">
     <div carousel-item>
-        <div ><img src="<%=path%>page/client/img/weixin01.jpg" ></div>
-        <div ><img src="<%=path%>page/client/img/M.jpg" ></div>
-        <div><img src="<%=path%>page/client/img/qq01.png" ></div>
-        <div><img src="<%=path%>page/client/img/M.jpg" ></div>
-        <div><img src="<%=path%>page/client/img/M.jpg" ></div>
+        <div><img src="<%=path%>page/client/img/weixin01.jpg"></div>
+        <div><img src="<%=path%>page/client/img/M.jpg"></div>
+        <div><img src="<%=path%>page/client/img/qq01.png"></div>
+        <div><img src="<%=path%>page/client/img/M.jpg"></div>
+        <div><img src="<%=path%>page/client/img/M.jpg"></div>
     </div>
 </div>
 <!--轮播 end-->
@@ -78,11 +78,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
+                    <p>
+                        搜索：<input type="text" id="aunt" name="aunt" />
+                        <button class="layui-btn layui-btn-normal" onclick="x()"><i class="lnr lnr-magnifier"></i>
+                        </button>
+                    </p>
                     <h2>我们的主要服务</h2>
-                    <p>。。。</p>
+                    <hr/>
                 </div>
             </div>
         </div>
+
         <div class="row services-carousel mt-65 mt-sm-55">
 
             <div class="col-lg-4">
@@ -92,7 +98,7 @@
                     </div>
                     <div class="service-desc">
                         <h4>日常保洁</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
+                        <a href="<%=path%>page/client/shopa.jsp?aunt='日常保洁'" class="btn-common">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -104,7 +110,7 @@
                     </div>
                     <div class="service-desc">
                         <h4>品类保洁</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
+                        <a href="<%=path%>page/client/shopa.jsp?aunt='品类保洁'" class="btn-common">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -116,7 +122,7 @@
                     </div>
                     <div class="service-desc">
                         <h4>保姆</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
+                        <a href="<%=path%>page/client/shopa.jsp?aunt='保姆'" class="btn-common">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -128,7 +134,7 @@
                     </div>
                     <div class="service-desc">
                         <h4>月嫂</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
+                        <a href="<%=path%>page/client/shopa.jsp?aunt='月嫂'" class="btn-common">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -140,19 +146,7 @@
                     </div>
                     <div class="service-desc">
                         <h4>育儿嫂</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="<%=path%>page/client/assets/images/services/6.jpg" alt=""/>
-                    </div>
-                    <div class="service-desc">
-                        <h4>照顾宠物</h4>
-                        <a href="#" class="btn-common">READ MORE</a>
+                        <a href="<%=path%>page/client/shopa.jsp?aunt='育儿嫂'" class="btn-common">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -162,10 +156,24 @@
 </div>
 <!--主要服务1 end-->
 
+<!--热门服务-->
+<div class="blog-area pt-103 pt-sm-63 pb-60 pb-sm-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2>热门</h2>
+                </div>
+            </div>
+        </div>
 
-<!--about-area start-->
+        <div class="row blog-carousel mt-65 mt-sm-55" >
+            <div id="whot"></div>
 
-<!--about-area end-->
+        </div>
+    </div>
+</div>
+<!--热门服务 end-->
 
 <!--projects-area start-->
 <!--projects-area end-->
@@ -211,196 +219,6 @@
 </div>
 <!--counterup-area end-->
 
-<!--testimonial-area start-->
-<div class="testimonial-area pt-105 pt-sm-65 pb-100 pb-sm-60">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Testimonials & Partners</h2>
-                    <p>We rigorously vet all of our Cleaners, please see a selection of quotes from our <br/> Channel
-                        Partners below.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-65 align-items-center">
-            <div class="col-lg-6">
-                <div class="testimonial-items">
-                    <div class="testimonial-single style-1 text-center">
-                        <div class="testimonial-thumb">
-                            <img src="<%=path%>page/client/assets/images/testimonials/1.png" alt=""/>
-                            <div class="quote-icon">
-                                <img src="<%=path%>page/client/assets/images/testimonials/quote-icon.png" alt=""/>
-                            </div>
-                        </div>
-                        <p>Wonderful! Not only were they kind and did a terrific job, but most importantly, one employee
-                            found nearly $200 in cash in my dad's pockets. My dad has Alzheimer's and loses money
-                            constantly. She handed me the money directly which meant a lot to me. A great business with
-                            great employees. Thank you so much!</p>
-                        <h5>Caleigh Jerde</h5>
-                        <small>Physician</small>
-                    </div>
-                    <div class="testimonial-single style-1 text-center">
-                        <div class="testimonial-thumb">
-                            <img src="<%=path%>page/client/assets/images/testimonials/2.png" alt=""/>
-                        </div>
-                        <p>Wonderful! Not only were they kind and did a terrific job, but most importantly, one employee
-                            found nearly $200 in cash in my dad's pockets. My dad has Alzheimer's and loses money
-                            constantly. She handed me the money directly which meant a lot to me. A great business with
-                            great employees. Thank you so much!</p>
-                        <h5>Caleigh Jerde</h5>
-                        <small>Physician</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="brand-items">
-                    <ul class="list-none">
-                        <li><img src="<%=path%>page/client/assets/images/brands/1.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/2.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/3.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/4.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/5.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/6.jpg" alt=""/></li>
-                    </ul>
-                    <ul class="list-none">
-                        <li><img src="<%=path%>page/client/assets/images/brands/6.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/5.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/4.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/3.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/2.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/1.jpg" alt=""/></li>
-                    </ul>
-                    <ul class="list-none">
-                        <li><img src="<%=path%>page/client/assets/images/brands/1.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/2.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/3.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/4.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/5.jpg" alt=""/></li>
-                        <li><img src="<%=path%>page/client/assets/images/brands/6.jpg" alt=""/></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--testimonial-area end-->
-
-<!--package-area start-->
-<%--<div class="package-area bg-f3f4f7 pt-100 pt-sm-60 pb-120 pb-sm-80">--%>
-<%--    <div class="container">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-lg-12">--%>
-<%--                <div class="section-title text-center">--%>
-<%--                    <h2>Calculated Form</h2>--%>
-<%--                    <p>This unique tool allows you to easily create price estimation forms to give your <br/> client--%>
-<%--                        idea of the cost of your service.</p>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="row calculate-form mt-60 mt-sm-50">--%>
-<%--            <div class="col-lg-6 col-sm-6">--%>
-<%--                <div class="form-group">--%>
-<%--                    <label for="exampleFormControlSelect1">Choose your service</label>--%>
-<%--                    <select class="form-control" id="exampleFormControlSelect1">--%>
-<%--                        <option>Choose</option>--%>
-<%--                        <option>Home Cleaning</option>--%>
-<%--                        <option>Office Cleaning</option>--%>
-<%--                        <option>Window Cleaning</option>--%>
-<%--                    </select>--%>
-<%--                </div>--%>
-<%--                <div class="price_filter mt-40">--%>
-<%--                    <div class="price_slider_amount">--%>
-<%--                        <div class="row align-items-center">--%>
-<%--                            <div class="col-lg-10">--%>
-<%--                                <div id="service-range"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-lg-2 mt-sm-20">--%>
-<%--                                <input type="text" id="square-feets" name="price" placeholder="Add Your Price"--%>
-<%--                                       readonly/>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col-lg-6 col-sm-6">--%>
-<%--                <div class="form-group">--%>
-<%--                    <label for="exampleFormControlSelect2">Cleaning frequency</label>--%>
-<%--                    <select class="form-control" id="exampleFormControlSelect2">--%>
-<%--                        <option>Choose</option>--%>
-<%--                        <option>Upholstery Cleaning</option>--%>
-<%--                        <option>Carpet Cleaning</option>--%>
-<%--                        <option>Clutter Cleanup</option>--%>
-<%--                    </select>--%>
-<%--                </div>--%>
-<%--                <div class="price_filter mt-40">--%>
-<%--                    <div class="price_slider_amount">--%>
-<%--                        <div class="row align-items-center">--%>
-<%--                            <div class="col-lg-10">--%>
-<%--                                <div id="cleaning-frequency"></div>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-lg-2 mt-sm-20">--%>
-<%--                                <input type="text" id="total-workers" name="price" placeholder="Add Your Price"--%>
-<%--                                       readonly/>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="row package-carousel mt-45 mt-sm-35">--%>
-<%--            <div class="col-lg-4">--%>
-<%--                <div class="package-single">--%>
-<%--                    <h4>STANDARD</h4>--%>
-<%--                    <h2>$100.00</h2>--%>
-<%--                    <h5>/ per month</h5>--%>
-<%--                    <ul class="list-none">--%>
-<%--                        <li>3 Bedrooms cleaning</li>--%>
-<%--                        <li>Vacuuming</li>--%>
-<%--                        <li>2 Bathroom cleaning</li>--%>
-<%--                        <li>Mirror Cleaning</li>--%>
-<%--                        <li>1 Livingroom cleaning</li>--%>
-<%--                        <li>Window Sills</li>--%>
-<%--                    </ul>--%>
-<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col-lg-4">--%>
-<%--                <div class="package-single">--%>
-<%--                    <h4>PREMIUM</h4>--%>
-<%--                    <h2>$150.00</h2>--%>
-<%--                    <h5>/ per month</h5>--%>
-<%--                    <ul class="list-none">--%>
-<%--                        <li>5 Bedrooms cleaning</li>--%>
-<%--                        <li>Vacuuming</li>--%>
-<%--                        <li>2 Bathroom cleaning</li>--%>
-<%--                        <li>Mirror Cleaning</li>--%>
-<%--                        <li>1 Livingroom cleaning</li>--%>
-<%--                        <li>Window Sills</li>--%>
-<%--                    </ul>--%>
-<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="col-lg-4">--%>
-<%--                <div class="package-single">--%>
-<%--                    <h4>ENTERPRISE</h4>--%>
-<%--                    <h2>$200.00</h2>--%>
-<%--                    <h5>/ per month</h5>--%>
-<%--                    <ul class="list-none">--%>
-<%--                        <li>7 Bedrooms cleaning</li>--%>
-<%--                        <li>Vacuuming</li>--%>
-<%--                        <li>2 Bathroom cleaning</li>--%>
-<%--                        <li>Mirror Cleaning</li>--%>
-<%--                        <li>1 Livingroom cleaning</li>--%>
-<%--                        <li>Window Sills</li>--%>
-<%--                    </ul>--%>
-<%--                    <a href="#" class="btn-common width-150">BOOK ONLINE</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<!--package-area end-->
 
 <!--blog-area start-->
 <div class="blog-area pt-103 pt-sm-63 pb-60 pb-sm-20">
@@ -408,9 +226,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2>Latest News</h2>
-                    <p>Read some of our latest stories from across the LeanPro organization below, and then <br/> browse
-                        our archive to learn more about projects from years past.</p>
+                    <h2>育婴知识</h2>
+                    <p><a>更多文章</a></p>
                 </div>
             </div>
         </div>
@@ -478,57 +295,47 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-widget office-adress">
-                        <h4>ABOUT US</h4>
-                        <p>We offer a complete package for all our clients.</p>
+                        <h4>关于我们</h4>
+                        <p>我们为所有客户提供完整的套餐。</p>
                         <ul class="list-none">
                             <li>
                                 <i class="lnr lnr-map-marker"></i>
-                                Franse Stormboulevard 2 9677 JB Gasselternijveen
+                                福建省厦门市软件园二期传一科技
                             </li>
                             <li>
                                 <i class="lnr lnr-phone-handset"></i>
-                                (0131) 804 1808
+                                (+0592) 1234567
                             </li>
                             <li>
                                 <i class="lnr lnr-envelope"></i>
-                                CleanProtheme@gmail.com
+                                cykj@126.com
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-widget">
-                        <h4>OUR SERVICES</h4>
+                        <h4>我们的服务</h4>
                         <ul class="list-none">
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Home Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Office Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Window Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Carpet Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Clutter Cleanup</a></li>
+                            <li> </i>日常保洁</li>
+                            <li> </i>品类保洁</li>
+                            <li> </i>保姆</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-widget latest-posts">
-                        <h4>LATEST POSTS</h4>
+                        <h4>我们的服务</h4>
                         <ul class="list-none">
-                            <li>
-                                <a href="#">Which Cleaning Service Is Best For You?</a>
-                                <small>15 November 2019</small>
-                            </li>
-                            <li>
-                                <a href="#">How To Clean Grout and Remove Stains</a>
-                                <small>15 November 2019</small>
-                            </li>
+                            <li> </i>月嫂</li>
+                            <li> </i>育儿嫂</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-widget subscribe-form">
-                        <h4>NEWSLETTER</h4>
-                        <p>Subscribe & get 10% discount when you purchase clean equipments for the first time</p>
-                        <input type="text" placeholder="Your Email*"/>
-                        <button class="btn-common">SUBSCRIBE NOW</button>
+                        <h4>意见反馈</h4>
+                        <p>2211334466@126.com</p>
                     </div>
                 </div>
             </div>
@@ -545,7 +352,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="copyright-text text-center">
-                        <p>&copy; 2019 HomeCleaner. All rights reserved. Developed by LionsBite</p>
+                        <p>&copy; 2019 家庭清洁。保留所有权利。由lk开发</p>
                     </div>
                 </div>
                 <div class="col-lg-3 ds-sm-none">
@@ -562,12 +369,17 @@
 </footer>
 <!--footer-area end-->
 
+
+<%--layui--%>
+<script src="<%=path%>page/layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
 <script src="<%=path%>page/client/assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!-- jquery-migrate-3.1.0.min.js version -->
 <script src="<%=path%>page/client/assets/js/vendor/jquery-migrate-3.1.0.min.js"></script>
+<%--我的js--%>
+<script src="<%=path%>page/client/js/chome.js"></script>
 <!-- bootstra.min js -->
 <script src="http://cdn.bootstrapmb.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <!-- mmenu js -->
@@ -592,11 +404,50 @@
 <!-- main js -->
 <script src="<%=path%>page/client/assets/js/main.js"></script>
 
-<%--layui--%>
-<script src="../layui/layui.js"></script>
-<%--我的js--%>
-<script src="<%=path%>page/client/js/chome.js"></script>
 
+
+<script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
+<script src="<%=path%>page/client/js/baidumap.js"></script>
 </body>
 
+<script>
+    function x() {
+        var va = $('#aunt').val();
+        location.href = '<%=path%>page/client/shopa.jsp?aunt=' + va;
+    }
+
+
+    $(document).ready(function ({}) {
+        $.ajax({
+            url: "<%=path%>admin/thwWelcome.action",
+            type: "POST",
+            dataType: "json",
+            success: function (obj) {
+                console.log(obj);
+                var hothtml="";
+                $.each(obj,function(k,v){
+                    if("hot"==k){
+                        $.each(v,function (hk, hv) {
+                            console.log(hk);
+                            console.log(hv);
+                            hothtml+="<div class='col-lg-4'><div class='blog-single'><div class='blog-thumb'>";
+                            // hothtml+="<a href='#'><img src='<%=path%>page/client/assets/images/blog/1.jpg' alt=''/></a></div>";
+                            hothtml+="<div class='blog-desc'>";
+                            hothtml+="<h4><a href='#'>服务："+hk+"</a></h4>";
+                            hothtml+="<small></small> ";
+                            $.each(hv,function(bk,obj){
+                                hothtml+="<p>公司："+obj.fname+",完成单数："+obj.count+"</p>";
+                            })
+                            hothtml+="<div class='blog-author'>";
+                            hothtml+="</div> </div> </div> ";
+                            hothtml+="</div>";
+                        })
+
+                    }
+                })
+                $('#whot').html(hothtml);
+            }
+        })
+    })
+</script>
 </html>

@@ -1,20 +1,30 @@
 package com.hm.mapper;
 
+import com.hm.entity.Staff;
 import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
+import com.hm.entity.Tblfc;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface UserMapper {
 //
 //    public User userLogin(@Param("userid") String userid, @Param("pwd") String pwd);
 
+    //判断手机号是否存在
+    public Integer queryphone(@Param("userphone") String userphone);
     //新增普通用户账号
     public Integer cUserReg(TblUser tblUser);
 
     //新增地址
     public Integer addSite(TblSite tblSite);
+
+    //修改默认地址
+    public Integer updateUserSid(@Param("sid")Integer sid ,@Param("userid") Integer userid);
 
     //普通用户登陆
     public TblUser cUserLogin(TblUser tblUser);
@@ -22,6 +32,19 @@ public interface UserMapper {
     //查看用户状态
     public Integer queryUserState(@Param("userphone")String userphone);
 
-    //查看用户id
-    public Integer queryUserid(@Param("userphone")String userphone);
+    //查阿姨
+    public List<Staff> queryStaff(Staff staff);
+
+    //阿姨总数
+    public Integer getStaffCount(Staff staff);
+
+    //忘记密码
+    public Integer userForgetPassword(@Param("userpwd")String String ,@Param("userphone") String userphone);
+
+    //查询热门公司
+    public List<Tblfc> queryFirmService(@Param("page")Integer page, @Param("limit")Integer limit);
+
+    //热门公司服务
+    public List<Map<String,Object>> thwWelcome();
+
 }

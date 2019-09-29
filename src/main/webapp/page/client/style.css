@@ -1438,11 +1438,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
     float: right;
 }
-.faq-heading h5 a[aria-expanded=true] .arrow_carrot-down, 
-.faq-heading h5 a[aria-expanded=false] .arrow_carrot-up { 
+.faq-heading h5 a[aria-expanded=true] .arrow_carrot-down,
+.faq-heading h5 a[aria-expanded=false] .arrow_carrot-up {
   display:none;
 }
-.faq-heading h5 a[aria-expanded=false] .arrow_carrot-down { 
+.faq-heading h5 a[aria-expanded=false] .arrow_carrot-down {
   display:inline;
   color:#3e4140
 }
@@ -1458,7 +1458,7 @@ a.btn.btn-link {
 	border-radius:0;
 	border:0;
 }
-a.btn.btn-link[aria-expanded=true] { 
+a.btn.btn-link[aria-expanded=true] {
     background-color: #3065b8;
     color: #fff;
 }
@@ -1721,7 +1721,7 @@ a.btn.btn-link[aria-expanded=true] {
     padding-left: 30px;
     font-size: 18px;
     color: #767676;
-	
+
 }
 .sidebar-category ul li::before {
     font-family: 'ElegantIcons';
@@ -2047,10 +2047,7 @@ a.btn.btn-link[aria-expanded=true] {
 	background:#3065b8;
 	color:#ffffff;
 }
-.site-pagination.style-3 ul li:nth-child(4) a {
-	border:none;
-	background:none;
-}
+
 .site-pagination.style-3 ul li a {
 	margin:5px;
 }

@@ -3,32 +3,183 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hm.mapper.UserMapper">
 
+    <select id="queryphone" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select * from tbluser where  userphone=#{userphone}
+    </select>
     <!--    普通用户注册--><!--   并返回id -->
-    <insert id="cUserReg" parameterType="com.hm.entity.TblUser" useGeneratedKeys="true" keyProperty="userid">
+    <insert id="cUserReg" parameterType="com.hm.entity.TblUser">
         insert into tbluser
         (username,userpwd,usersex,userphone,usertime,usermoney,usercon,stid,userurl,usercard,rid)
         values
-        (#{username},#{userpwd},#{usersex},#{userphone},#{usertime},0,0,1,#{userurl},#{usercard},2)
-
+        (#{username},#{userpwd},#{usersex},#{userphone},sysdate(),0,0,1,#{userurl},#{usercard},2)
+        <selectKey resultType="java.lang.Integer" keyProperty="userid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS userId
+        </selectKey>
     </insert>
+    <!--    忘记密码-->
+    <update id="userForgetPassword">
+        update tbluser set userpwd=#{userpwd} where userphone=#{userphone}
+    </update>
     <!--    普通用户登录-->
     <select id="cUserLogin" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
          select * from tbluser where rid=2 and stid=1 and userphone=#{userphone} and userpwd=#{userpwd}
     </select>
-<!--    查看普通用户是否被禁用-->
+    <!--    查看普通用户是否被禁用-->
     <select id="queryUserState" parameterType="java.lang.String" resultType="java.lang.Integer">
         select stid from tbluser  where userphone=#{userphone}
     </select>
 
-    <select id="queryUserid" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select userid from tbluser  where userphone=#{userphone}
-    </select>
     <!--    增加地址-->
     <insert id="addSite" parameterType="com.hm.entity.TblSite">
         insert into tblsite
         (userid,scontext,sa,sb,sc)
         values
         (#{userid},#{scontext},#{sa},#{sb},#{sc})
+        <selectKey resultType="java.lang.Integer" keyProperty="sid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS userId
+        </selectKey>
     </insert>
+    <!--    修改默认地址-->
+    <update id="updateUserSid">
+        update tbluser set sid=#{sid} where userid=#{userid}
+    </update>
+    <!--&lt;!&ndash;通过用户id查地址id&ndash;&gt;-->
+    <!--    <select id="querySiteID" parameterType="java.lang.Integer" resultType="java.lang.Integer">-->
+    <!--        select sid from tblsite where userid=#{userid}-->
+    <!--    </select>-->
+    <insert id="addUserMsite" parameterType="java.lang.Integer">
+        insert into tbluser set
+    </insert>
+    <!--查询阿姨的信息-->
+    <select id="queryStaff" resultMap="cstaff">
+        SELECT *from (SELECT
+        c.ctid,c.ctname,c.ctcontext,c.cttime,
+        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
+        tblfc.fcid,tblfc.fid,
+        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
+        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        FROM
+        tblCOStype AS c
+        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
+        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
+        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
+        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        <if test="aunt.length>0">
+            WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR cosdeta
+            LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
+        </if>
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+
+    <resultMap id="cstaff" type="com.hm.entity.Staff">
+        <id property="sfid" column="sfid"/>
+        <result property="sfname" column="sfname"/>
+        <result property="sfexp" column="sfexp"/>
+        <result property="sfdob" column="sfdob"/>
+        <result property="cosid" column="cosid"/>
+        <result property="sfcos" column="sfcos"/>
+        <result property="sfage" column="sfage"/>
+        <result property="sfworkexp" column="sfworkexp"/>
+        <result property="sfgood" column="sfgood"/>
+        <result property="sfedu" column="sfedu"/>
+        <result property="sfurl" column="sfurl"/>
+        <result property="sftag" column="sftag"/>
+        <association property="company" column="company" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+            <result property="fname" column="fname"/>
+            <result property="fphone" column="fphone"/>
+        </association>
+        <association property="tblCOS" column="tblCOS" javaType="com.hm.entity.TblCOS">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+            <result property="coscontext" column="coscontext"/>
+            <result property="costime" column="costime"/>
+            <result property="ctid" column="ctid"/>
+            <result property="coshot" column="coshot"/>
+        </association>
+    </resultMap>
+    <!--阿姨数量-->
+    <select id="getStaffCount" resultType="java.lang.Integer">
+        SELECT count(*) from (SELECT
+        c.ctid,c.ctname,c.ctcontext,c.cttime,
+        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
+        tblfc.fcid,tblfc.fid,
+        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
+        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        FROM
+        tblCOStype AS c
+        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
+        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
+        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
+        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        <if test="aunt.length>0">
+            WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR cosdeta
+            LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
+        </if>
+    </select>
+
+<!--    公司下的所有服务-->
+    <select id="queryFirmService"  resultMap="costype">
+        select * from(SELECT
+            fc.fcid,fc.fid,fc.ctid,
+             m.facc,m.fpwd,m.fname,m.flaw,m.fphone,m.flawphone,m.fsite,m.ftime,
+             ct.ctname,ct.ctcontext,ct.cttime,
+            cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
+            m.rid
+            FROM
+            tblCOStype AS ct
+            INNER JOIN tblCOS AS cos ON cos.ctid = ct.ctid
+    INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid
+    INNER JOIN tblfirm AS m ON  fc.fid = m.fid
+    WHERE fc.stid=7 and m.stid=1) d
+<!--        <bind name="page" value="(page-1)*limit"/>-->
+<!--        limit #{page},#{limit}-->
+    </select>
+
+    <resultMap id="costype" type="com.hm.entity.Tblfc">
+        <id property="fcid" column="fcid"/>
+        <association property="company" column="fid" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+            <result property="fname" column="fname"/>
+        </association>
+        <collection property="tblCOStype" ofType="com.hm.entity.TblCOStype">
+            <id property="ctid" column="ctid"/>
+            <result property="ctname" column="ctname"/>
+            <result property="ctcontext" column="ctcontext"/>
+
+            <collection property="tblCOS" ofType="com.hm.entity.TblCOS">
+                <id property="cosid" column="cosid"/>
+                <result property="cosname" column="cosname"/>
+                <result property="name" column="t_name"/>
+                <result property="ctid" column="ctid"/>
+                <result property="name" column="t_name"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+<!--    热门服务-->
+    <select id="thwWelcome" resultType="java.util.HashMap">
+SELECT oi.fid,oi.fname,cs.ctname ,oi.count from (SELECT
+m.fid,m.fname,en.cosname,SUM(en.count) as count,en.ctid
+FROM
+tblfirm m RIGHT JOIN(SELECT
+c.cosid,
+c.ctid,
+sf.fid,
+c.cosname,
+Count(o.oid) AS count
+FROM
+tblorder AS o
+INNER JOIN tblCOS AS c ON o.cosid = c.cosid
+INNER JOIN tblstaff AS sf ON  o.sfid = sf.sfid
+GROUP BY
+c.cosid,
+sf.fid,
+c.cosname) en on m.fid=en.fid WHERE m.stid=1
+GROUP BY m.fid,m.fname )oi INNER JOIN tblCOStype cs on cs.ctid=oi.ctid
+ORDER BY oi.count desc
+    </select>
+
 
 </mapper>

@@ -1,11 +1,13 @@
 package com.hm.entity;
 
+import lombok.Data;
+
 /**
  * 用户实体
  * @author hha
  * @date 2019-09-22 11:39
  */
-
+@Data
 public class TblUser {
 
     //序号
@@ -29,9 +31,11 @@ public class TblUser {
     // 头像url
     private String userurl;
     // 银行卡号码
-    private Integer usercard;
+    private String usercard;
     // 角色id
     private Integer rid;
+
+    private TblSite tblSite;
 
     public TblUser() {
     }
@@ -68,12 +72,12 @@ public class TblUser {
         this.usersex = usersex;
     }
 
-    public void setUserphone(String userphone) {
-        this.userphone = userphone;
-    }
-
     public String getUserphone() {
         return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
     }
 
     public String getUsertime() {
@@ -116,11 +120,11 @@ public class TblUser {
         this.userurl = userurl;
     }
 
-    public Integer getUsercard() {
+    public String getUsercard() {
         return usercard;
     }
 
-    public void setUsercard(Integer usercard) {
+    public void setUsercard(String usercard) {
         this.usercard = usercard;
     }
 
@@ -130,5 +134,13 @@ public class TblUser {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public TblSite getTblSite() {
+        return tblSite;
+    }
+
+    public void setTblSite(TblSite tblSite) {
+        this.tblSite = tblSite;
     }
 }
