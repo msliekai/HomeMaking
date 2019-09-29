@@ -78,7 +78,7 @@
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="userpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码" value="123">
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码" value="a12345">
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="securityCode">验证码</label>

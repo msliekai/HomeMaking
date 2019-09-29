@@ -7,6 +7,7 @@ public class UserMoney {
     private String ctname;
     private String otime;
     private String fname;
+    private String osname;
     private Integer money;
     private Integer page;
     private Integer limit;
@@ -15,13 +16,14 @@ public class UserMoney {
     public UserMoney() {
     }
 
-    public UserMoney(Integer oid, String onumber, String cosname, String ctname, String otime, String fname, Integer money, Integer page, Integer limit, Integer userid) {
+    public UserMoney(Integer oid, String onumber, String cosname, String ctname, String otime, String fname, String osname, Integer money, Integer page, Integer limit, Integer userid) {
         this.oid = oid;
         this.onumber = onumber;
         this.cosname = cosname;
         this.ctname = ctname;
         this.otime = otime;
         this.fname = fname;
+        this.osname = osname;
         this.money = money;
         this.page = page;
         this.limit = limit;

@@ -78,7 +78,7 @@
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
                         </div>--%>
 
-    待评价<hr class="layui-bg-blue">
+    所有评论<hr class="layui-bg-blue">
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
@@ -113,7 +113,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
+            , url: '<%=path%>admin/jUserAppraise.action' //数据接口
             , page: true //开启分页
             ,limit:2
             // ,method:"get"
@@ -129,12 +129,23 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'oid', title: '保姆名字', minWidth: 80}
-                , {field: 'onumber', title: '所属公司', minWidth: 150}
-                , {field: 'cosname', title: '服务时间', minWidth: 80}
-                , {field: 'ctname', title: '总费用', minWidth:80}
-                , {field: 'otime', title: '状态', minWidth: 100}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
+                {field: 'sfname', title: '保姆名字', minWidth: 80,templet:function (d) {return d.tblorder.staff.sfname}}
+                , {field: 'fname', title: '所属公司', minWidth: 150,templet:function (d) {return d.tblorder.staff.company.fname}}
+                , {field: 'svtime', title: '服务时间', minWidth: 80,templet:function (d) {return d.tblorder.svtime}}
+                , {field: 'money', title: '总费用', minWidth:80,templet:function (d) {return d.tblorder.money}}
+                , {field: 'osname', title: '状态', minWidth: 100,templet:function (d) {return d.tblorder.tbloderstate.osname}}
+                , {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                        var tem = [];
+                        console.log(item)
+                        if (item.tblorder.osid == "5") {
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-primary">详情</a>');
+                        }
+                        if(item.tblorder.osid == "2"){
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">评论</a>');
+                        }
+                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        return tem.join(' <font></font> ')
+                    }}
             ]]
         });
         //触发查询按钮

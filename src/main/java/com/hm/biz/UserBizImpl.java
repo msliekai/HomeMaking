@@ -1,9 +1,6 @@
 package com.hm.biz;
 
-import com.hm.entity.TblSite;
-import com.hm.entity.TblUser;
-import com.hm.entity.User;
-import com.hm.entity.UserMoney;
+import com.hm.entity.*;
 import com.hm.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +8,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service("biz")
-public class UserBizImpl implements UserBiz {
+public class UserBizImpl implements UserBiz
+{
     @Resource
     private UserMapper userMapper;
 
@@ -44,8 +42,24 @@ public class UserBizImpl implements UserBiz {
     }
 
     @Override
-    public List jUserAppraise() {
-        return null;
+    public List<Tbleva> jUserAppraise(int page,int limit,Integer userid) {
+        return userMapper.jUserAppraise(page,limit,userid);
     }
+
+    @Override
+    public List<TblSite> jUserSite(int page, int limit, Integer userid) {
+        return userMapper.jUserSite(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblsfcoll> jUsersfcoll(int page, int limit, Integer userid) {
+        return userMapper.jUsersfcoll(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblfcoll> jUserfcoll(int page, int limit, Integer userid) {
+        return userMapper.jUserfcoll(page,limit,userid);
+    }
+
 
 }

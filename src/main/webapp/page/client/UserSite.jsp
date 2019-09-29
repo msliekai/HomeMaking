@@ -24,9 +24,9 @@
 <div class="x-nav">
           <span class="layui-breadcrumb">
             <a href="">首页</a>
+              <input type="hidden" value="${sessionScope.userbacc.sid}" id="usersid" name="usersid">
             <a href="">个人中心</a>
-            <a>
-              <cite>我的地址</cite></a>
+            <a><cite>我的地址</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -114,7 +114,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
+            , url: '<%=path%>admin/jUserSite.action' //数据接口
             , page: true //开启分页
             ,limit:2
             // ,method:"get"
@@ -130,11 +130,24 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'oid', title: '姓名', minWidth: 80}
-                , {field: 'onumber', title: '所在地区', minWidth: 150}
-                , {field: 'cosname', title: '详细地址', minWidth: 80}
-                , {field: 'ctname', title: '联系方式', minWidth:80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
+                {field: 'username', title: '姓名', minWidth: 80}
+                , {field: 'site', title: '所在地区', minWidth: 150,templet:function (d) {return d.tblSite.site}}
+                , {field: 'scontext', title: '详细地址', minWidth: 80,templet:function (d) {return d.tblSite.scontext}}
+                , {field: 'sphone', title: '联系方式', minWidth:80,templet:function (d) {return d.tblSite.sphone}}
+                , {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                        var tem = [];
+                        var usersid=$('#usersid').val();
+
+                        console.log(usersid);
+                        console.log(item)
+                        if (item.tblSite.sid == usersid) {
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-disabled">默认地址</a>');
+                        }else {
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">设为默认</a>');
+                        }
+                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        return tem.join(' <font></font> ')
+                    }}
             ]]
         });
         //触发查询按钮

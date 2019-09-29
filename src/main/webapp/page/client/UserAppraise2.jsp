@@ -113,7 +113,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
+            , url: '<%=path%>admin/jUserAAppraise.action' //数据接口
             , page: true //开启分页
             ,limit:2
             // ,method:"get"
@@ -129,12 +129,12 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'oid', title: '保姆名字', minWidth: 80}
-                , {field: 'onumber', title: '所属公司', minWidth: 150}
-                , {field: 'cosname', title: '服务时间', minWidth: 80}
-                , {field: 'ctname', title: '总费用', minWidth:80}
-                , {field: 'otime', title: '状态', minWidth: 100}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
+                {field: 'sfname', title: '保姆名字', minWidth: 80,templet:function (d) {return d.tblorder.staff.sfname}}
+                , {field: 'fname', title: '所属公司', minWidth: 150,templet:function (d) {return d.tblorder.staff.company.fname}}
+                , {field: 'svtime', title: '服务时间', minWidth: 80,templet:function (d) {return d.tblorder.svtime}}
+                , {field: 'money', title: '总费用', minWidth:80,templet:function (d) {return d.tblorder.money}}
+                , {field: 'osname', title: '状态', minWidth: 100,templet:function (d) {return d.tblorder.tbloderstate.osname}}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 140}
             ]]
         });
         //触发查询按钮

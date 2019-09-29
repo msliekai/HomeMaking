@@ -129,18 +129,18 @@
                     </div>
 
                     <a class="list-group-item" href="#">我的订单</a>
-                    <a class="list-group-item" href="#" id="myapp" onClick="zhedie(this.id)">我的评价</a>
-                    <div class="list-group" id="myapps" style="display: none">
+                    <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">我的评价</a>
+                    <%--<div class="list-group" id="myapps" style="display: none">
                         <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">待评价</a>
                         <a class="list-group-item" href="<%=path%>page/client/UserAppraise2.jsp" target="main">已评价</a>
-                    </div>
+                    </div>--%>
                     <a class="list-group-item" href="<%=path%>page/client/UserFoot.jsp" target="main">我的足迹</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserCollect.jsp" target="main">我的收藏</a>
-                    <a class="list-group-item" href="#" id="myser" onClick="zhedie(this.id)">历史服务</a>
-                    <div class="list-group" id="mysers" style="display: none">
+                    <a class="list-group-item" href="<%=path%>page/client/UserHistory.jsp" target="main">历史服务</a>
+                    <%--<div class="list-group" id="mysers" style="display: none">
                         <a class="list-group-item" href="<%=path%>page/client/UserHistory.jsp" target="main">服务记录</a>
                         <a class="list-group-item" href="<%=path%>page/client/UserHistory2.jsp" target="main">售后记录</a>
-                    </div>
+                    </div>--%>
                     <a class="list-group-item" href="<%=path%>page/client/UserSite.jsp" target="main">我的地址</a>
                 </div>
             </div>

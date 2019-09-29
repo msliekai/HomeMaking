@@ -27,24 +27,131 @@
     </insert>
 
     <!--查询用户余额-->
-    <select id="jUserMoney" resultType="com.hm.entity.UserMoney">
-       SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,f.fname,z.hzbei*sf.sfcos as money from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid
-        <if test="userid!=null">
-            and u.userid = #{userid}
-        </if>
+    <select id="jUserMoney" resultMap="BalanceList">
+        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.odeta,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
         </if>
     </select>
-    <!--查询用户消费-->
-    <!--<select id="jUserBalance" resultType="com.hm.entity.UserMoney">
-        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,f.fname,z.hzbei*sf.sfcos as money from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid  and u.userid = #{userid}
+    <resultMap id="BalanceList" type="com.hm.entity.Tblorder">
+        <id property="oid" column="oid"/>
+        <result property="onumber" column="onumber"/>
+        <result property="otime" column="otime"/>
+        <result property="otitle" column="otitle"/>
+        <result property="odeta" column="odeta"/>
+        <result property="ophone" column="ophone"/>
+        <result property="money" column="money"/>
+        <result property="osid" column="osid"/>
+         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
+             <id property="osid" column="osid" />
+             <result property="osname" column="osname"/>
+         </association>
+        <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
+            <id property="hzid" column="hzid" />
+            <result property="hzname" column="hzname"/>
+        </association>
+        <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+            <id property="sfid" column="sfid"/>
+            <result property="sfname" column="sfname"/>
+            <association property="company" column="company" javaType="com.hm.entity.Company">
+                <id property="fid" column="fid" />
+                <result property="fname" column="fname"/>
+            </association>
+        </association>
+        <association property="tblCOS" column="cosid" javaType="com.hm.entity.TblCOS">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+            <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+                <id property="ctid" column="ctid" />
+                <result property="ctname" column="ctname"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <!--查询评价-->
+    <select id="jUserAppraise" resultMap="AppList" >
+        select sf.sfname,f.fname,o.svtime,z.hzbei*sf.sfcos as money ,os.osname,o.osid from tblorder o,tbloderstate os,tblHZ z,tblfirm f ,tblstaff sf
+            WHERE o.sfid = sf.sfid and sf.fid = f.fid AND o.osid = os.osid and o.hzid = z.hzid and (o.osid = 2 or o.osid = 5) and o.userid = #{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <!--查询已评价-->
+    <!--<select id="jUserAAppraise" resultMap="AppList" >
+        select sf.sfname,f.fname,o.svtime,z.hzbei*sf.sfcos as money ,os.osname from tblorder o,tbloderstate os,tblHZ z,tblfirm f ,tblstaff sf
+        WHERE o.sfid = sf.sfid and sf.fid = f.fid AND o.osid = os.osid and o.hzid = z.hzid  and o.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
         </if>
     </select>-->
+    <!--AppList-->
+    <resultMap id="AppList" type="com.hm.entity.Tbleva">
+        <id property="eid" column="eid"/>
+        <result property="econtext" column="econtext"/>
+        <result property="econut" column="econut"/>
+        <result property="etime" column="etime"/>
+        <association property="tblorder" column="oid" javaType="com.hm.entity.Tblorder">
+            <id property="oid" column="oid"/>
+            <result property="svtime" column="svtime"/>
+            <result property="money" column="money"/>
+            <result property="osid" column="osid"/>
+            <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
+                <id property="osid" column="osid" />
+                <result property="osname" column="osname"/>
+            </association>
+            <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+                <id property="sfid" column="sfid"/>
+                <result property="sfname" column="sfname"/>
+                <association property="company" column="company" javaType="com.hm.entity.Company">
+                    <id property="fid" column="fid" />
+                    <result property="fname" column="fname"/>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+
+    <!--查看地址-->
+    <select id="jUserSite" resultMap="SiteList">
+        select u.username,CONCAT(s.sa,s.sb,s.sc) as site,s.scontext,s.sphone,s.sid from tbluser u,tblsite s WHERE u.userid = s.userid and u.userid =#{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <resultMap id="SiteList" type="com.hm.entity.TblUser">
+        <id property="userid" column="userid"/>
+        <result property="username" column="username"/>
+        <association property="tblSite" column="sid" javaType="com.hm.entity.TblSite">
+            <id property="sid" column="sid"/>
+            <result property="sid" column="sid"/>
+            <result property="site" column="site"/>
+            <result property="scontext" column="scontext"/>
+            <result property="sphone" column="sphone"/>
+        </association>
+    </resultMap>
+    <!--收藏阿姨-->
+    <select id="jUsersfcoll" resultMap="sfcoll">
+        select u.username,sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid = f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <resultMap id="sfcoll" type="com.hm.entity.Tblsfcoll">
+        <id property="scoid" column="scoid"/>
+        <result property="scotime" column="scotime"/>
+        <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+            <id property="sfid" column="sfid"/>
+            <result property="sfname" column="sfname"/>
+            <association property="company" column="fid" javaType="com.hm.entity.Company">
+                <id property="fid" column="fid"/>
+                <result property="fname" column="fname"/>
+            </association>
+        </association>
+    </resultMap>
+
 </mapper>

@@ -2,9 +2,7 @@ package com.hm.web;
 
 
 import com.hm.biz.UserBiz;
-import com.hm.entity.TblSite;
-import com.hm.entity.TblUser;
-import com.hm.entity.UserMoney;
+import com.hm.entity.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -118,10 +116,9 @@ public class UserHandler {
 
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody Map jUserMoney(HttpServletRequest request,UserMoney userMoney){
-        System.out.println("进入方法------------------------");
         userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
         List<UserMoney> list = biz.jUserMoney(userMoney);
-        System.out.println(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
+        System.out.println(list);//UserID
         map.put("code",0);
         UserMoney userMoney1 = new UserMoney();
         userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
@@ -129,4 +126,58 @@ public class UserHandler {
         map.put("data",list);
         return map;
     }
+
+    @RequestMapping("/jUserAppraise.action")
+    public @ResponseBody Map jUserAppraise(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tbleva> list = biz.jUserAppraise(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUserAppraise(-1,0,userid).size());
+        map.put("data",list);
+
+        return map;
+    }
+
+    @RequestMapping("/jUserSite.action")
+    public @ResponseBody Map jUserSite(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<TblSite> list = biz.jUserSite(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUserSite(-1,0,userid).size());
+        map.put("data",list);
+        return map;
+    }
+
+    @RequestMapping("/jUsersfcoll.action")
+    public @ResponseBody Map jUsersfcoll(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUsersfcoll(-1,0,userid).size());
+        map.put("data",list);
+        return map;
+    }
+
+    @RequestMapping("/jUserfcoll.action")
+    public @ResponseBody Map jUserfcoll(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblfcoll> list = biz.jUserfcoll(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUserfcoll(-1,0,userid).size());
+        map.put("data",list);
+        return map;
+    }
+
 }

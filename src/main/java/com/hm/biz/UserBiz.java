@@ -1,9 +1,6 @@
 package com.hm.biz;
 
-import com.hm.entity.TblSite;
-import com.hm.entity.TblUser;
-import com.hm.entity.User;
-import com.hm.entity.UserMoney;
+import com.hm.entity.*;
 
 import java.util.List;
 
@@ -39,7 +36,12 @@ public interface UserBiz {
 
     //账户
     public List<UserMoney> jUserMoney(UserMoney userMoney);
-
-    public List jUserAppraise();
-
+    //评论
+    public List<Tbleva> jUserAppraise(int page,int limit,Integer userid);
+    //查看地址
+    public List<TblSite> jUserSite(int page,int limit,Integer userid);
+    //收藏的阿姨
+    public List<Tblsfcoll> jUsersfcoll(int page, int limit, Integer userid);
+    //收藏的公司
+    public List<Tblfcoll> jUserfcoll(int page,int limit,Integer userid);
 }

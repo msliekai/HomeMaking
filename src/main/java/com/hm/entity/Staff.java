@@ -19,6 +19,7 @@ public class Staff {
     private String sfgood;
     private String sfedu;
     private String sfurl;
+    private Company company;//所属公司类
 
     public Staff() {
 

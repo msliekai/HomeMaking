@@ -1,8 +1,6 @@
 package com.hm.mapper;
 
-import com.hm.entity.TblSite;
-import com.hm.entity.TblUser;
-import com.hm.entity.UserMoney;
+import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +23,18 @@ public interface UserMapper {
     //查看用户状态
     public Integer queryUserState(@Param("userphone")String userphone);
 
-    //查询
+    //查询消费记录
     public List<UserMoney> jUserMoney(UserMoney userMoney);
+
+    //查询评论
+    public List<Tbleva> jUserAppraise(@Param("page")int page,@Param("limit")int limit,@Param("userid")Integer userid);
+
+    //查看地址
+    public List<TblSite>  jUserSite(@Param("page")int page,@Param("limit")int limit,@Param("userid")Integer userid);
+
+    //收藏的阿姨
+    public List<Tblsfcoll>  jUsersfcoll(@Param("page")int page, @Param("limit")int limit, @Param("userid")Integer userid);
+    //收藏的公司
+    public List<Tblfcoll>  jUserfcoll(@Param("page")int page,@Param("limit")int limit,@Param("userid")Integer userid);
+
 }

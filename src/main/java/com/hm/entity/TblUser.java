@@ -32,6 +32,10 @@ public class TblUser {
     private String usercard;
     // 角色id
     private Integer rid;
+    //地址类
+    private TblSite tblSite;
+    private Integer sid;
+
 
     public TblUser() {
     }
@@ -130,5 +134,21 @@ public class TblUser {
 
     public void setUsercard(String usercard) {
         this.usercard = usercard;
+    }
+
+    public TblSite getTblSite() {
+        return tblSite;
+    }
+
+    public void setTblSite(TblSite tblSite) {
+        this.tblSite = tblSite;
+    }
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 }

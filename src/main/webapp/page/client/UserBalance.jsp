@@ -103,7 +103,30 @@
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
     <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
     <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">重置密码</a>--%>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+
+    <%--<c:if test="d.tblCOS.tblCOStype.ctid == 1">
+        <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
+    </c:if>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>--%>
+
+    <%--{{# if (d.tblCOS.tblCOStype.ctid ==4){}}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="known"><i class="layui-icon">&#x1005;</i>已知</a>
+    {{#  } else if(d.tblCOS.tblCOStype.ctid ==2){ }}
+    {{#  if(d.tblCOS.tblCOStype.ctid ==0){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="known"><i class="layui-icon">&#x1005;</i>已知</a>
+    {{# }if(d.tblCOS.tblCOStype.ctid ==1) { }}
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="process"><i class="layui-icon">&#xe6b2;</i>处理</a>
+    {{#  } }}
+    {{#  } }}--%>
+
+<%--{{#  } else if(d.event_level ==2){ }}
+    {{#  if(d.event_type_state ==0){ }}
+
+    {{# }if(d.event_type_state ==1) { }}
+
+    {{#  } }}
+
+{{#  } }}--%>
 </script>
 
 <script>
@@ -131,12 +154,25 @@
             , cols: [[ //表头
                 {field: 'oid', title: '序号', minWidth: 80}
                 , {field: 'onumber', title: '订单号', minWidth: 150}
-                , {field: 'cosname', title: '服务事项', minWidth: 80}
-                , {field: 'ctname', title: '服务分类', minWidth:80}
+                , {field: 'osname', title: '订单状态', minWidth: 80,templet:function (d) {return d.tbloderstate.osname}}
+                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.tblCOS.cosname}}
+                , {field: 'ctname', title: '服务分类', minWidth:80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
                 , {field: 'otime', title: '消费时间', minWidth: 100}
-                , {field: 'fname', title: '商家名称', minWidth: 80}
+                , {field: 'fname', title: '商家名称', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
                 , {field: 'money', title: '消费金额', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
+                /*,{field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}*/
+                ,{fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                        var tem = [];
+                        console.log(item)
+                        if (item.osid == "1") {
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">查看</a>');
+                        }
+                        if(item.osid == "2"){
+                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">编辑</a>');
+                        }
+                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        return tem.join(' <font></font> ')
+                    }}
             ]]
         });
         //触发查询按钮
