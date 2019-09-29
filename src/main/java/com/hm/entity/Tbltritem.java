@@ -9,4 +9,6 @@ public class Tbltritem {
     private String itname;
     private String ittime;
     private String itbook;
+    private Integer page;
+    private Integer limit;
 }

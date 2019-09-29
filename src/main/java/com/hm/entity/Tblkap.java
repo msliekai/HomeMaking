@@ -15,4 +15,7 @@ public class Tblkap {
     private String filetime;
     private String fileurl;
     private Tblfiletype tblfiletype;
+    private String ftname;
+    private Integer page;
+    private Integer limit;
 }
