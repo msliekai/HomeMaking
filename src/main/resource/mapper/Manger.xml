@@ -6,4 +6,31 @@
     <select id="cUserLogin" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
          select * from tbluser where rid=1 and userphone=#{userphone} and userpwd=#{userpwd}
     </select>
+<!--    角色管理-->
+    <select id="getRole" parameterType="com.hm.entity.Tblrole" resultType="com.hm.entity.Tblrole">
+        select * from tblrole
+        <if test="rname!=null &amp; rname!=''">
+            where rname like "%"#{rname}"%"
+        </if>
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1) * limit"/>
+            limit  #{page} ,#{limit}
+        </if>
+    </select>
+<!--    添加角色-->
+    <insert id="addRole" parameterType="com.hm.entity.Tblrole">
+		INSERT into tblrole(rname,rdescribe)
+		VALUES (#{rname},#{rdescribe})
+	</insert>
+<!--    修改角色-->
+<update id="upRole" parameterType="com.hm.entity.Tblrole">
+    UPDATE tblrole SET rdescribe = #{rdescribe} where rid = #{rid}
+</update>
+<!--    刪除角色-->
+    <delete id="delRole" parameterType="com.hm.entity.Tblrole">
+        delete from tblrole where  rid = #{rid}
+    </delete>
+
+<!--    获取权限列表-->
+<!--    <select id="getPower"-->
 </mapper>
