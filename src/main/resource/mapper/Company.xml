@@ -28,6 +28,10 @@
     <update id="upcom" parameterType="com.hm.entity.Company">
         update tblfirm set facc=#{facc},fname=#{fname},flaw=#{flaw},fsite=#{fsite},flawphone=#{flawphone} where fid=#{fid}
     </update>
+    <!--传入id查看公司信息-->
+    <select id="upcominfo" resultType="com.hm.entity.Company">
+        select * from tblfirm where fid=#{fid}
+    </select>
 
     <select id="findCreList" parameterType="com.hm.entity.Company" resultType="java.util.List">
         SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=#{fid} and c.creid=f.creid GROUP BY c.crename;
@@ -48,6 +52,7 @@
         from tbldeallog d,tblfirm f,tbluser u,tbldeal e
         where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid};
     </select>
+
 
     <resultMap id="deallog" type="com.hm.entity.Tbldeallog">
         <id property="dlid" column="dlid"/>     
@@ -72,6 +77,9 @@
         /*select * from tblCOStype;*/
         select c.*from tblCOStype c
     </select>
+
+
+
 
     <resultMap id="costype" type="com.hm.entity.Tblfc">
         <id property="fcid" column="fcid"/>

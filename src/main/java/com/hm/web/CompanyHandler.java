@@ -5,6 +5,8 @@ import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
 import com.sun.deploy.ui.FancyButton;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -188,8 +190,6 @@ public class CompanyHandler {
     //银行卡修改
     @RequestMapping(value = "changefacard",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public @ResponseBody String changefacard(HttpSession httpSession,String car){
-
-        System.out.println("修改银行卡号");
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer row = companyBiz.changefacard(car, fid);
@@ -203,7 +203,7 @@ public class CompanyHandler {
         Integer limit = tblfc.getLimit();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        List<TblCOStype> servicetype = companyBiz.servicetype(fid,page,limit);
+        List<Tblfc> servicetype = companyBiz.servicetype(fid,page,limit);
         int count =companyBiz.countservicetype(fid,page,limit);
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",0);
@@ -232,10 +232,13 @@ public class CompanyHandler {
     }
     //修改公司信息
     @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
-    public @ResponseBody String upcom(HttpSession httpSession,String facc,
-                                      String fname,String flaw,String flawphone,String fsite){
+    public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
+                                      String fname, String flaw, String flawphone, String fsite){
         Company company = (Company) httpSession.getAttribute("company");
         int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,flawphone,fsite);
+        Company upcominfo = companyBiz.upcominfo(company.getFid());
+        httpSession.setAttribute("company",upcominfo);
+//        req.getSession().setAttribute("company",company);
         return "1";
     }
 

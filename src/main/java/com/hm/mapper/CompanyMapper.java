@@ -18,6 +18,7 @@ public interface CompanyMapper {
     //修改公司基本信息
     public int upcom(@Param("fid")Integer fid,@Param("facc")String facc,@Param("fname") String fname,@Param("flaw") String flaw,
                      @Param("flawphone") String flawphone,@Param("fsite") String fsite);
+    public Company upcominfo(@Param("fid")Integer fid);
     //查看交易
     public List<Tbldeallog> querydeallog(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     public Integer countdeallog(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
@@ -34,7 +35,7 @@ public interface CompanyMapper {
     //检查银行卡支付密码
     public Tblfirmacc checkcompwd(@Param("facard") String facard,@Param("compwd") String compwd);
     //查询某个公司的所有服务
-    public List<TblCOStype> servicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public List<Tblfc> servicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     public Integer countservicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     //具体服务
 //    public List<TblCOS> service(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);

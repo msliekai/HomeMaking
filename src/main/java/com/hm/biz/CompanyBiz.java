@@ -11,6 +11,7 @@ public interface CompanyBiz {
     public int addCompany(Company company);
     //修改公司基本信息
     public int upcom(Integer fid,String facc,String fname,String flaw,String flawphone,String fsite);
+    public Company upcominfo(Integer fid);
     //------公司证书列表
     public List<Credential> findCreList(Company company);
     //查看交易
@@ -30,7 +31,7 @@ public interface CompanyBiz {
     //检查银行卡支付密码
     public Tblfirmacc checkcompwd(String facard,String compwd);
     //查询某个公司的所有服务
-    public List<TblCOStype> servicetype(Integer fid,Integer page,Integer limit);
+    public List<Tblfc> servicetype(Integer fid,Integer page,Integer limit);
     public Integer countservicetype(Integer fid,Integer page,Integer limit);
 
     //查询具体服务

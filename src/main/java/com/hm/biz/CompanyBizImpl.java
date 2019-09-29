@@ -82,9 +82,14 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.countservicetype(fid,page,limit);
     }
 
+    @Override
+    public Company upcominfo(Integer fid) {
+        return companyMapper.upcominfo(fid);
+    }
+
     //某个公司提供的服务
     @Override
-    public List<TblCOStype> servicetype(Integer fid,Integer page,Integer limit) {
+    public List<Tblfc> servicetype(Integer fid,Integer page,Integer limit) {
         return companyMapper.servicetype(fid,page,limit);
     }
 
