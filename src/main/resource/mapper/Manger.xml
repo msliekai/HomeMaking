@@ -6,9 +6,43 @@
     <select id="cUserLogin" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
          select * from tbluser where rid=1 and userphone=#{userphone} and userpwd=#{userpwd}
     </select>
+<!--    角色管理-->
+    <select id="getRole" parameterType="com.hm.entity.Tblrole" resultType="com.hm.entity.Tblrole">
+        select * from tblrole
+        <if test="rname!=null &amp; rname!=''">
+            where rname like "%"#{rname}"%"
+        </if>
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1) * limit"/>
+            limit  #{page} ,#{limit}
+        </if>
+    </select>
+<!--    添加角色-->
+    <insert id="addRole" parameterType="com.hm.entity.Tblrole">
+		INSERT into tblrole(rname,rdescribe)
+		VALUES (#{rname},#{rdescribe})
+	</insert>
+<!--    修改角色-->
+<update id="upRole" parameterType="com.hm.entity.Tblrole">
+    UPDATE tblrole SET rdescribe = #{rdescribe} where rid = #{rid}
+</update>
+<!--    刪除角色-->
+    <delete id="delRole" parameterType="com.hm.entity.Tblrole">
+        delete from tblrole where  rid = #{rid}
+    </delete>
+
+<!--    获取权限列表-->
+<!--    <select id="getPower"-->
      <!--    用户列表-->
     <select id="cFindUserAll" parameterType="com.hm.entity.TblUser" resultType="com.hm.entity.TblUser">
         select u.*,t.stname from tbluser u,tblstate t WHERE u.stid=t.stid
+        <if test="username!=null and username!=''">
+            and u.username like "%"#{username}"%"
+        </if>
+        <if test="stname!=null and stname!=''">
+            and t.stname like "%"#{stname}"%"
+        </if>
+        ORDER BY u.userid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -16,7 +50,29 @@
     </select>
     <!--    家政公司列表-->
     <select id="cFindCompanyAll" parameterType="com.hm.entity.Company" resultType="com.hm.entity.Company">
-        select u.*,t.rname,c.ctname from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid AND u.ctid=c.ctid
+        select u.*,c.ctname,e.stname from tblfirm u,tblCOStype c,tblstate e WHERE  u.ctid=c.ctid and u.stid = e.stid AND u.rid=3
+        <if test="fname!=null and fname!=''">
+            and u.fname like "%"#{fname}"%"
+        </if>
+        <if test="stname!=null and stname!=''">
+            and e.stname like "%"#{stname}"%"
+        </if>
+        ORDER BY u.fid
+            <if test="0 &lt; page">
+                <bind name="page" value="(page-1)* limit "/>
+                limit #{page} ,#{limit}
+            </if>
+    </select>
+    <!--    家政公司入驻审核列表-->
+    <select id="cmFindCompanyAll" parameterType="com.hm.entity.Company" resultType="com.hm.entity.Company">
+        select u.*,t.rname,c.ctname from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid AND u.ctid=c.ctid and u.rid=4
+        <if test="fname!=null and fname!=''">
+            and u.fname like "%"#{fname}"%"
+        </if>
+        <if test="flaw!=null and flaw!=''">
+            and u.flaw like "%"#{flaw}"%"
+        </if>
+        ORDER BY u.fid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -107,4 +163,33 @@
             limit #{page} ,#{limit}
         </if>
     </select>
+<!--    用户禁用-->
+    <update id="updateUserState" parameterType="com.hm.entity.TblUser">
+		update tbluser set stid=2 where userid=#{userid}
+	</update>
+    <!--    用户启用-->
+    <update id="updateUserState2" parameterType="com.hm.entity.TblUser">
+		update tbluser set stid=1 where userid=#{userid}
+	</update>
+    <!--    家政公司禁用-->
+    <update id="updateCompanyState" parameterType="com.hm.entity.Company">
+		update tblfirm set stid=2 where fid=#{fid}
+	</update>
+    <!--   家政公司启用-->
+    <update id="updateCompanyState2" parameterType="com.hm.entity.Company">
+		update tblfirm set stid=1 where fid=#{fid}
+	</update>
+    <!--    入驻审核不通过-->
+    <update id="updateCompanyRole" parameterType="com.hm.entity.Company">
+		update tblfirm set rid=5 where fid=#{fid}
+	</update>
+    <!--   入驻审核通过-->
+    <update id="updateCompanyRole2" parameterType="com.hm.entity.Company">
+		update tblfirm set rid=3 where fid=#{fid}
+	</update>
+    <!--    添加培训安排-->
+    <insert id="addTrain" parameterType="com.hm.entity.Tbltrain">
+		insert into tbltrain(trtitle,trcontext,trsum,trtime)
+		values (#{trtitle},#{trcontext},#{trsum},#{trtime})
+	</insert>
 </mapper>

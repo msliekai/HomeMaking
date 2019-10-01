@@ -1,5 +1,7 @@
 package com.hm.biz;
 
+import com.hm.entity.TblUser;
+import com.hm.entity.Tblrole;
 import com.hm.entity.*;
 import com.hm.mapper.MangerMapper;
 import org.springframework.stereotype.Service;
@@ -12,11 +14,26 @@ public class MangerBizImpl implements MangerBiz {
     @Resource
     private MangerMapper mangerMapper;
 
+
     @Override
     public TblUser cUserLogin(TblUser tblUser) {
 
         return mangerMapper.cUserLogin(tblUser);
     }
+
+    @Override
+    public List<Tblrole> getRole(Tblrole tblrole) {
+        return mangerMapper.getRole(tblrole);
+    }
+
+    @Override
+    public Integer addRole(Tblrole tblrole) {
+        return mangerMapper.addRole(tblrole);
+    }
+
+    @Override
+    public int upRole(Tblrole tblrole) {
+        return  mangerMapper.upRole(tblrole);}
 
     @Override
     public List<TblUser> cFindUserAll(TblUser tblUser) {
@@ -26,6 +43,11 @@ public class MangerBizImpl implements MangerBiz {
     @Override
     public List<Company> cFindCompanyAll(Company company) {
         return mangerMapper.cFindCompanyAll(company);
+    }
+
+    @Override
+    public List<Company> cmFindCompanyAll(Company company) {
+        return mangerMapper.cmFindCompanyAll(company);
     }
 
     @Override
@@ -75,8 +97,48 @@ public class MangerBizImpl implements MangerBiz {
     }
 
     @Override
+    public int delRole(Tblrole tblrole) {
+        return mangerMapper.delRole(tblrole);
+    }
+
+    @Override
     public List<TblAdvisor> cFindAdvisorAll(TblAdvisor tblAdvisor) {
         return mangerMapper.cFindAdvisorAll(tblAdvisor);
+    }
+
+    @Override
+    public int updateUserState(int userid) {
+        return mangerMapper.updateUserState(userid);
+    }
+
+    @Override
+    public int updateUserState2(int userid) {
+        return mangerMapper.updateUserState2(userid);
+    }
+
+    @Override
+    public int updateCompanyState(int fid) {
+        return mangerMapper.updateCompanyState(fid);
+    }
+
+    @Override
+    public int updateCompanyState2(int fid) {
+        return mangerMapper.updateCompanyState2(fid);
+    }
+
+    @Override
+    public int updateCompanyRole(int fid) {
+        return mangerMapper.updateCompanyRole(fid);
+    }
+
+    @Override
+    public int updateCompanyRole2(int fid) {
+        return mangerMapper.updateCompanyRole2(fid);
+    }
+
+    @Override
+    public int addTrain(Tbltrain tbltrain) {
+        return mangerMapper.addTrain(tbltrain);
     }
 
 
