@@ -47,6 +47,13 @@ public interface UserBiz {
     public Integer updateUserSid(Integer sid,Integer userid);
 
     /**
+     * 查用户自己的地址
+     * @param userid
+     * @return
+     */
+    public List<TblSite> querySite(@Param("userid")Integer userid);
+
+    /**
      * 普通用户登陆
      * @param tblUser 用户实体
      * @return 用户实体
@@ -100,10 +107,31 @@ public interface UserBiz {
     public List<Staff> queryStaff(Staff staff);
 
     /**
+     * 根据id查一个阿姨
+     * @param sfid
+     * @return
+     */
+    public Staff queryOneStaff(Integer sfid);
+
+    /**
      * 阿姨总数
      * @return
      */
     public Integer getStaffCount(Staff staff);
+
+    /**
+     * 收藏阿姨
+     * @param tblsfcoll
+     * @return
+     */
+    public Integer addsfcoll(Tblsfcoll tblsfcoll);
+
+    /**
+     * 取消收藏阿姨
+     * @param scoid
+     * @return
+     */
+    public Integer delsfcoll(Integer scoid);
 
     /**
      * 忘记密码

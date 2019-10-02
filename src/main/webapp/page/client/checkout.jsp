@@ -112,44 +112,52 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="s_province">省</label>
-                                <select class="form-control" id="s_province" name="sa"></select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="s_city">市</label>
-                                <select class="form-control" id="s_city" name="sb">
-
+                                <label for="sid">地址</label>
+                                <select class="form-control" id="sid" name="sid">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="s_county">区</label>
-                                <select class="form-control" id="s_county" name="sc">
 
-                                </select>
-<%--加载城市下拉框--%>
-                                <script class="resources library" src="<%=path%>page/client/js/city-data.js"
-                                        type="text/javascript"></script>
+<%--                        <div class="col-lg-6">--%>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="s_province">省</label>--%>
+<%--                                <select class="form-control" id="s_province" name="sa"></select>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-lg-6">--%>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="s_city">市</label>--%>
+<%--                                <select class="form-control" id="s_city" name="sb">--%>
 
-                                <script type="text/javascript">_init_area();</script>
-                            </div>
-                        </div>
+<%--                                </select>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-lg-6">--%>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="s_county">区</label>--%>
+<%--                                <select class="form-control" id="s_county" name="sc">--%>
+
+<%--                                </select>--%>
+<%--&lt;%&ndash;加载城市下拉框&ndash;%&gt;--%>
+<%--                                <script class="resources library" src="<%=path%>page/client/js/city-data.js"--%>
+<%--                                        type="text/javascript"></script>--%>
+
+<%--                                <script type="text/javascript">_init_area();</script>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+
+<%--                        <div class="col-lg-12">--%>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="scontext">详细地址</label>--%>
+<%--                                <input type="text" id="scontext" name="scontext" class="form-control">--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="scontext">详细地址</label>
-                                <input type="text" id="scontext" name="scontext" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="scontext">其他要求</label>
+                                <label for="ocontext">其他要求</label>
                                 <textarea class="form-control" id="ocontext" name="ocontext"></textarea>
                             </div>
                         </div>
@@ -204,94 +212,7 @@
 <!--checkout-area end-->
 
 <!--footer-area start-->
-<footer>
-    <div class="footer-top-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-widget office-adress">
-                        <h4>ABOUT US</h4>
-                        <p>We offer a complete package for all our clients.</p>
-                        <ul class="list-none">
-                            <li>
-                                <i class="lnr lnr-map-marker"></i>
-                                Franse Stormboulevard 2 9677 JB Gasselternijveen
-                            </li>
-                            <li>
-                                <i class="lnr lnr-phone-handset"></i>
-                                (0131) 804 1808
-                            </li>
-                            <li>
-                                <i class="lnr lnr-envelope"></i>
-                                CleanProtheme@gmail.com
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-widget">
-                        <h4>OUR SERVICES</h4>
-                        <ul class="list-none">
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Home Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Office Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Window Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Carpet Cleaning</a></li>
-                            <li><a href="#"><i class="arrow_carrot-right"></i>Clutter Cleanup</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-widget latest-posts">
-                        <h4>LATEST POSTS</h4>
-                        <ul class="list-none">
-                            <li>
-                                <a href="#">Which Cleaning Service Is Best For You?</a>
-                                <small>15 November 2019</small>
-                            </li>
-                            <li>
-                                <a href="#">How To Clean Grout and Remove Stains</a>
-                                <small>15 November 2019</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-widget subscribe-form">
-                        <h4>NEWSLETTER</h4>
-                        <p>Subscribe & get 10% discount when you purchase clean equipments for the first time</p>
-                        <input type="text" placeholder="Your Email*" />
-                        <button class="btn-common">SUBSCRIBE NOW</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--footer-bottom-->
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 ds-sm-none">
-                    <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="copyright-text text-center">
-                        <p>&copy; 2019 HomeCleaner. All rights reserved. Developed by LionsBite</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 ds-sm-none">
-                    <div class="social-icons text-right">
-                        <a href="#"><i class="social_facebook"></i></a>
-                        <a href="#"><i class="social_twitter"></i></a>
-                        <a href="#"><i class="social_linkedin"></i></a>
-                        <a href="#"><i class="social_pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<jsp:include page="bottom.jsp" flush="true"/>
 <!--footer-area end-->
 
 <script src="../layui/layui.js"></script>
@@ -333,6 +254,10 @@
 </body>
 
 <script>
-
+    $(document).ready(function(){
+        $("#sid").ready(function(){
+            querySity(this);
+        })
+    })
 </script>
 </html>

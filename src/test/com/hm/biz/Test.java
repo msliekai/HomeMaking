@@ -24,8 +24,9 @@ public class Test extends TestCase {
     public void menuTest() {
 
         Gson g = new Gson();
-        Tblorder t= new Tblorder();
-        System.out.println(g.toJson(userBiz.addOrder(t)));
+        Staff t= new Staff();
+        t.setPage(1);
+        System.out.println(g.toJson(userBiz.queryStaff(t)));
     }
 
 

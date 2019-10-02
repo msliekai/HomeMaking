@@ -50,8 +50,8 @@
     <insert id="addUserMsite" parameterType="java.lang.Integer">
         insert into tbluser set
     </insert>
-    <!--查询阿姨的信息-->
-    <select id="queryStaff" resultMap="cstaff">
+
+    <select id="queryOneStaff" parameterType="java.lang.Integer" resultMap="cstaff">
         SELECT *from (SELECT
         c.ctid,c.ctname,c.ctcontext,c.cttime,
         cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
@@ -64,12 +64,35 @@
         INNER JOIN tblfirm AS f ON f.ctid = c.ctid
         INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
         INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
-        <if test="aunt.length>0">
+        where sfid=#{sfid}
+    </select>
+    <!--查询阿姨的信息-->
+    <select id="queryStaff" resultMap="cstaff">
+        SELECT xl.*,sl.scoid,sl.scotime from (SELECT *from (SELECT
+        c.ctid,c.ctname,c.ctcontext,c.cttime,
+        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
+        tblfc.fcid,tblfc.fid,
+        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
+        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        FROM
+        tblCOStype AS c
+        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
+        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
+        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
+        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        <if test="aunt!=null">
+        <if test="aunt.length>0" >
             WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR cosdeta
             LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
-        </if>
+        </if></if>
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
+        ) xl left join tblsfcoll sl on xl.sfid=sl.sfid
+        <if test="aunt!=null">
+        <if test="userid!=null">
+            and userid=#{userid}
+        </if></if>
+
     </select>
 
     <resultMap id="cstaff" type="com.hm.entity.Staff">
@@ -88,6 +111,7 @@
         <association property="company" column="company" javaType="com.hm.entity.Company">
             <id property="fid" column="fid"/>
             <result property="fname" column="fname"/>
+            <result property="fsite" column="fsite"/>
             <result property="fphone" column="fphone"/>
         </association>
         <association property="tblCOS" column="tblCOS" javaType="com.hm.entity.TblCOS">
@@ -97,6 +121,14 @@
             <result property="costime" column="costime"/>
             <result property="ctid" column="ctid"/>
             <result property="coshot" column="coshot"/>
+        </association>
+        <association property="tblCOStype" column="tblCOStype" javaType="com.hm.entity.TblCOStype">
+            <id property="ctid" column="ctid"/>
+            <result property="ctname" column="ctname"/>
+        </association>
+        <association property="tblsfcoll" column="tblsfcoll" javaType="com.hm.entity.Tblsfcoll">
+            <id property="scoid" column="scoid"/>
+            <result property="scotime" column="scotime"/>
         </association>
     </resultMap>
     <!--阿姨数量-->
@@ -325,12 +357,26 @@
     <select id="queryCOS" parameterType="java.lang.Integer" resultType="com.hm.entity.TblCOS">
         SELECT * from tblCOS where ctid=#{ctid}
     </select>
-
+<!--增加订单-->
     <insert id="addOrder" parameterType="com.hm.entity.Tblorder">
         insert into tblorder
         (sfid,cosid,userid,osid,sendtime,hzid,otitle,ocontext,ophone,onumber,sid)
         values
         (#{sfid},#{cosid},#{userid},#{osid},#{sendtime},#{hzid},#{otitle},#{ocontext},#{ophone},#{onumber},#{sid})
     </insert>
+<!--查找地址-->
+    <select id="querySite" parameterType="java.lang.Integer" resultType="com.hm.entity.TblSite">
+        SELECT * FROM tblsite where userid=#{userid}
+    </select>
+<!--收藏阿姨-->
+    <insert id="addsfcoll" parameterType="com.hm.entity.Tblsfcoll">
+        INSERT into tblsfcoll
+        (userid,scotime,sfid)
+        VALUES
+        (#{userid},#{scotime},#{sfid});
+    </insert>
 
+    <delete id="delsfcoll">
+        DELETE from tblsfcoll WHERE scoid=#{scoid};
+    </delete>
 </mapper>

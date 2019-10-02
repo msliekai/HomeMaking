@@ -9,15 +9,8 @@
 <%
     String path = request.getContextPath() + "/";
 %>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>-</title>--%>
-
-<%--</head>--%>
-<%--<body>--%>
 
 <header>
-    <%--    <nav class="navbar navbar-inverse navbar-fixed-top">--%>
 
     <div class="header-top-area">
         <div class="container">
@@ -60,9 +53,5 @@
             </div>
         </div>
     </div>
-    <%--    </nav>--%>
 </header>
 
-<%--</body>--%>
-
-<%--</html>--%>

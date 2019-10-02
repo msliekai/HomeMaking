@@ -53,6 +53,11 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
+    public List<TblSite> querySite(Integer userid) {
+        return userMapper.querySite(userid);
+    }
+
+    @Override
     public TblUser cUserLogin(TblUser tblUser) {
         return userMapper.cUserLogin(tblUser);
     }
@@ -110,8 +115,23 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
+    public Staff queryOneStaff(Integer sfid) {
+        return userMapper.queryOneStaff(sfid);
+    }
+
+    @Override
     public Integer getStaffCount(Staff staff) {
         return userMapper.getStaffCount(staff);
+    }
+
+    @Override
+    public Integer addsfcoll(Tblsfcoll tblsfcoll) {
+        return userMapper.addsfcoll(tblsfcoll);
+    }
+
+    @Override
+    public Integer delsfcoll(Integer scoid) {
+        return userMapper.delsfcoll(scoid);
     }
 
     @Override

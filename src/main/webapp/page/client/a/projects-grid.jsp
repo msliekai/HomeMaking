@@ -55,9 +55,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -107,7 +107,7 @@
             <div class="col-lg-4 col-sm-6 house">
                 <div class="project-single style-2 mb-15">
                 <div class="">
-                        <img src="assets/images/projects/1.jpg" alt="" />
+                        <img src="../assets/images/projects/1.jpg" alt="" />
 <%--                        <div class="project-caption">--%>
 <%--                            <a href="assets/images/projects/1.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>--%>
 <%--                        </div>--%>
@@ -122,28 +122,14 @@
             <div class="col-lg-4 col-sm-6 office">
                 <div class="project-single style-2 mb-30">
                     <div class="project-thumb">
-                        <img src="assets/images/projects/2.jpg" alt="" />
+                        <img src="../assets/images/projects/2.jpg" alt="" />
                         <div class="project-caption">
-                            <a href="assets/images/projects/2.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
+                            <a href="../assets/images/projects/2.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
                         </div>
                     </div>
                     <div class="project-title">
                         <small>Maintenance</small>
                         <h4><a href="#">Garden Cleaning Archives</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 garden">
-                <div class="project-single style-2 mb-30">
-                    <div class="project-thumb">
-                        <img src="assets/images/projects/3.jpg" alt="" />
-                        <div class="project-caption">
-                            <a href="assets/images/projects/3.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="project-title">
-                        <small>Industrial</small>
-                        <h4><a href="#">Hot Water Industrial Pressure Cleaning</a></h4>
                     </div>
                 </div>
             </div>
@@ -239,7 +225,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">

@@ -124,7 +124,6 @@ function valpass2() {
     var userpwd = $("#userpwd");
     var userpwd2 = $("#userpwd2");
     var passErr2 = $("#passErr2");
-    // console.log(userpwd2.val()===userpwd.val())
     if (userpwd2.val() === userpwd.val()) {
         passErr2.html("");
         return true;
@@ -157,7 +156,6 @@ function uname() {
     var useerr = $("#useerr");
     var na = /^[\u4e00-\u9fa5]{0,}$/;
     if (!na.test(username.val())) {
-        console.log(na.test(username.val()));
         useerr.html("用户名只能输入中文");
         return false;
     } else {
@@ -348,4 +346,26 @@ $(document).ready(function(){
         addOrder()
     })
 })
+
+function querySity(){
+    layui.use('layer', function () {
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/querySite.action",
+            success: function (jso) {//执行结果
+                var ht="";
+                if(jso.defaulAddress!=null){
+                    var defaul=jso.defaulAddress;
+                    ht+="<option value='"+ defaul.sid +"' >"+ defaul.sa+"-"+defaul.sb+"-"+defaul.sc+"-"+defaul.scontext+"（默认地址）</option>";
+                }
+
+                $.each(jso.list,function(k,v){
+                    ht+="<option value='"+ v.sid +"' >"+ v.sa+"-"+v.sb+"-"+v.sc+"-"+v.scontext+"</option>";
+                })
+                $("#sid").html(ht);
+            },
+        })
+    })
+}
 

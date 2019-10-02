@@ -34,8 +34,17 @@ public interface UserMapper {
     //查阿姨
     public List<Staff> queryStaff(Staff staff);
 
+    //根据id查一个阿姨
+    public Staff queryOneStaff(@Param("sfid") Integer sfid);
+
     //阿姨总数
     public Integer getStaffCount(Staff staff);
+
+    //收藏阿姨
+    public Integer addsfcoll(Tblsfcoll tblsfcoll);
+
+    //取消收藏阿姨
+    public Integer delsfcoll(@Param("scoid") Integer scoid);
 
     //忘记密码
     public Integer userForgetPassword(@Param("userpwd")String String ,@Param("userphone") String userphone);
@@ -51,6 +60,9 @@ public interface UserMapper {
 
     //查服务类中的事项
     public List<TblCOS> queryCOS(@Param("ctid")Integer ctid);
+
+    //查用户自己的地址
+    public List<TblSite> querySite(@Param("userid")Integer userid);
 
     //增加订单
     public Integer addOrder(Tblorder tblorder);

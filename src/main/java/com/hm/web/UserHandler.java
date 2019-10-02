@@ -1,6 +1,7 @@
 package com.hm.web;
 
 
+import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
 import com.hm.biz.UserBiz;
 import com.hm.entity.Staff;
 import com.hm.entity.*;
@@ -19,9 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Controller
@@ -151,6 +150,10 @@ public class UserHandler {
     public @ResponseBody
     Map<String, Object> classifyA(HttpServletRequest request, HttpSession session, Staff staff) {
 
+        TblUser use=(TblUser) session.getAttribute("userbacc");
+        if(null!=use){
+            staff.setUserid(use.getUserid());
+        }
         Integer count = biz.getStaffCount(staff);
 
         List<Staff> list = biz.queryStaff(staff);
@@ -207,7 +210,7 @@ public class UserHandler {
 
 
         Integer num=biz.addOrder(tblorder);
-        if(num>0){
+        if(num!=null&&num!=0){
             map.put("flog","addok");
         }else{
             map.put("flog","addnot");
@@ -215,20 +218,78 @@ public class UserHandler {
 
         return map;
     }
-    /*@RequestMapping(value = "/jUserMoney.action")
-    public ModelAndView jUserMoney(HttpServletRequest request, TblUser tblUser) {
-        List<UserMoney> list = biz.jUserMoney((TblUser) request.getSession().getAttribute("userbacc"),-1,0);
 
-        System.out.println(list.size());
-        if (0 <=list.size()) {
-            mav = new ModelAndView();
-            mav.setViewName("client/UserBalance");
-            mav.addObject("Moneylist",list);
-        } else {
-            return null;
+    @RequestMapping("/querySite.action")
+    public @ResponseBody
+    Map querySite(HttpSession session) {
+
+        TblUser use=(TblUser) session.getAttribute("userbacc");
+
+        Map<String,Object> mpas=new HashMap<>();
+
+        List<TblSite> list=biz.querySite(use.getUserid());
+        TblSite tblSite=null;
+        Iterator<TblSite> iterator= list.iterator();
+        while (iterator.hasNext()) {
+            TblSite str = iterator.next();
+            if (str.getSid()==use.getSid()) {
+                tblSite=str;
+                iterator.remove();
+                break;
+            }
         }
-        return mav;
-    }*/
+
+        mpas.put("defaulAddress",tblSite);
+        mpas.put("list",list);
+
+        return mpas;
+    }
+    @RequestMapping(value = "/product-details.action")
+    public String productdetails(HttpServletRequest request, Integer sfid) {
+
+        Staff staff=biz.queryOneStaff(sfid);
+
+        request.setAttribute("staff",staff);
+
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("client/product-details");
+//        modelAndView.addObject("staff", staff);
+
+        return "client/product-details";
+    }
+
+    @RequestMapping("/addsfcoll.action")
+    public @ResponseBody
+    Map addsfcoll(HttpSession session,Tblsfcoll tblsfcoll) {
+
+        TblUser use=(TblUser)session.getAttribute("userbacc");
+
+        tblsfcoll.setUserid(use.getUserid());
+        tblsfcoll.setScotime(TimeTools.getStringDateMin());
+
+        Integer num=biz.addsfcoll(tblsfcoll);
+
+        if(num>0){
+            map.put("flog","OK");
+        }else {
+            map.put("flog","NO");
+        }
+        return map;
+    }
+
+    @RequestMapping("/delsfcoll.action")
+    public @ResponseBody
+    Map delsfcoll(HttpSession session,Integer scoid) {
+
+        Integer num=biz.delsfcoll(scoid);
+
+        if(num>0){
+            map.put("flog","OK");
+        }else {
+            map.put("flog","NO");
+        }
+        return map;
+    }
 
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody
