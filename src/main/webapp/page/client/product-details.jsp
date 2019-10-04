@@ -170,7 +170,13 @@
                         <div class="layui-btn-group">
                             <button type="button" class="layui-btn layui-btn-normal">确认预约</button>
                             <button type="button" class="layui-btn">咨询</button>
-                            <button type="button" class="layui-btn layui-btn-warm">收藏</button>
+                            <c:if test="${requestScope.staff.tblsfcoll==null}">
+                                <button type="button" class="layui-btn layui-btn-warm" onclick="proCollections(${requestScope.staff.sfid})">收藏</button>
+                            </c:if>
+                            <c:if test="${requestScope.staff.tblsfcoll!=null}">
+                                <button type="button" class="layui-btn layui-btn-warm" onclick="proDelcollections(${requestScope.staff.tblsfcoll.scoid})">取消收藏</button>
+                            </c:if>
+
                         </div>
                     </div>
 

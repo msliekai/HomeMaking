@@ -115,8 +115,8 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public Staff queryOneStaff(Integer sfid) {
-        return userMapper.queryOneStaff(sfid);
+    public Staff queryOneStaff(Integer sfid ,Integer userid) {
+        return userMapper.queryOneStaff(sfid,userid);
     }
 
     @Override

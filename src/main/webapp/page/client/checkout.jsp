@@ -259,5 +259,8 @@
             querySity(this);
         })
     })
+    $(document).ready(function(){
+        getct();
+    })
 </script>
 </html>

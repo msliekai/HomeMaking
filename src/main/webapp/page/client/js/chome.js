@@ -314,9 +314,7 @@ $(document).ready(function () {
 
     })
 })
-$(document).ready(function(){
-    getct();
-})
+
 
 
 function addOrder() {

@@ -111,7 +111,7 @@ public interface UserBiz {
      * @param sfid
      * @return
      */
-    public Staff queryOneStaff(Integer sfid);
+    public Staff queryOneStaff(Integer sfid,Integer userid);
 
     /**
      * 阿姨总数

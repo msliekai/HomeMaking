@@ -372,6 +372,12 @@
 <script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
 <script src="<%=path%>page/client/js/baidumap.js"></script>
 </body>
+<script>
+    // 初始化页面
+
+    // getPageOfMemo(1);
+    window.οnlοad=getPageOfMemo(1);
+</script>
 </html>
 
 

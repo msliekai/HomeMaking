@@ -1,12 +1,8 @@
-// 初始化页面
 
-// getPageOfMemo(1);
-window.οnlοad=getPageOfMemo(1);
 
 // 分页函数
 
 function getPageOfMemo(page) {
-    // 获取请求参数(input里面的时间人员参数可忽略注释)
     var anpage=page;
     var aunt = $("#aunt").val();
 
@@ -127,7 +123,7 @@ function collections(sfid) {
         success: function (obj) {
             if (obj.flog == "OK") {
                 layer.msg("收藏成功");
-                getPageOfMemo();
+                history.go(0);
             } else {
                 layer.msg("收藏失败");
             }
@@ -148,9 +144,52 @@ function delcollections(scoid){
             success: function (obj) {
                 if (obj.flog == "OK") {
                     layer.msg("取消收藏");
-                    getPageOfMemo()
+                    history.go(0);
                 } else {
                     layer.msg("操作失败");
+                }
+            }
+        })
+    })
+}
+
+
+//详细界面专用
+function proDelcollections(scoid){
+    layui.use('layer', function () {
+        $.ajax({
+            url: "../admin/delsfcoll.action",
+            type: "POST",
+            data: {
+                "scoid": scoid,
+            },
+            dataType: "json",
+            success: function (obj) {
+                if (obj.flog == "OK") {
+                    layer.msg("取消收藏");
+                    history.go(0);
+                } else {
+                    layer.msg("操作失败");
+                }
+            }
+        })
+    })
+}
+function proCollections(sfid) {
+    layui.use('layer', function () {
+        $.ajax({
+            url: "../admin/addsfcoll.action",
+            type: "POST",
+            data: {
+                "sfid": sfid,
+            },
+            dataType: "json",
+            success: function (obj) {
+                if (obj.flog == "OK") {
+                    layer.msg("收藏成功");
+                    history.go(0);
+                } else {
+                    layer.msg("收藏失败");
                 }
             }
         })

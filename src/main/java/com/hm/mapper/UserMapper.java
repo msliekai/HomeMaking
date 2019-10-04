@@ -35,7 +35,7 @@ public interface UserMapper {
     public List<Staff> queryStaff(Staff staff);
 
     //根据id查一个阿姨
-    public Staff queryOneStaff(@Param("sfid") Integer sfid);
+    public Staff queryOneStaff(@Param("sfid") Integer sfid,@Param("userid") Integer userid);
 
     //阿姨总数
     public Integer getStaffCount(Staff staff);

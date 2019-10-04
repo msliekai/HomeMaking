@@ -245,9 +245,11 @@ public class UserHandler {
         return mpas;
     }
     @RequestMapping(value = "/product-details.action")
-    public String productdetails(HttpServletRequest request, Integer sfid) {
+    public String productdetails(HttpServletRequest request,HttpSession session, Integer sfid) {
 
-        Staff staff=biz.queryOneStaff(sfid);
+        TblUser use=(TblUser) session.getAttribute("userbacc");
+
+        Staff staff=biz.queryOneStaff(sfid,use.getUserid());
 
         request.setAttribute("staff",staff);
 
