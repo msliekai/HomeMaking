@@ -15,7 +15,7 @@ public class Tblorder {
     private String svtime;
     private Integer hzid;
     private String otitle;
-    private String odeta;
+    private String ocontext;
     private String ophone;
     private String onumber;
     private Integer sid;

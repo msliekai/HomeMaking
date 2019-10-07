@@ -71,6 +71,17 @@ public interface UserBiz {
     public List<Tblsfcoll> jUsersfcoll(int page, int limit, Integer userid);
     //收藏的公司
     public List<Tblfcoll> jUserfcoll(int page,int limit,Integer userid);
+    //历史服务
+    public List<Tblorder> jUserHistory(int page,int limit,Integer userid);
+    //足迹
+    public List<Tblfoot> jUserfoot(int page,int limit,Integer userid);
+    //订单
+    public List<Tblorder> jUserOrder(int page,int limit,Integer userid);
+    //积分
+    public List<Tblorder> jUserpoints(int page,int limit,Integer userid);
+    //卡券
+    public List<Tblorder> jUserticket(int page,int limit,Integer userid);
+
     //public Integer queryUserState(String userphone);
 
     /**

@@ -114,7 +114,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
+            , url: '<%=path%>admin/jUserfoot.action' //数据接口
             , page: true //开启分页
             ,limit:2
             // ,method:"get"
@@ -130,11 +130,13 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'oid', title: '服务', minWidth: 80}
-                , {field: 'onumber', title: '家政公司', minWidth: 150}
-                , {field: 'cosname', title: '价格', minWidth: 80}
-                , {field: 'ctname', title: '服务次数', minWidth:80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
+                {field: 'footid', title: '序号', minWidth: 80}
+                , {field: 'sfname', title: '浏览阿姨', minWidth: 150,templet:function (d) {return d.staff.sfname}}
+                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
+                , {field: 'ctname', title: '服务类别', minWidth:80,templet:function (d) {return d.staff.tblCOS.tblCOStype.ctname}}
+                , {field: 'fname', title: '所属公司', minWidth:80,templet:function (d) {return d.staff.company.fname}}
+                , {field: 'foottime', title: '浏览时间', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 150}
             ]]
         });
         //触发查询按钮

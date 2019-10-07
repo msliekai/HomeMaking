@@ -17,6 +17,7 @@ public class Company {
     private Integer stid;//状态
     private Integer page;
     private Integer limit;
+    private TblCOStype tblCOStype;
     public Company() {
 
     }

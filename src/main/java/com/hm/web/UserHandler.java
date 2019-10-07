@@ -232,27 +232,65 @@ public class UserHandler {
     @RequestMapping("/jUsersfcoll.action")
     public @ResponseBody Map jUsersfcoll(HttpServletRequest request,int page,int limit,Integer userid){
         userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+        System.out.println("传过来的值是："+request.getParameter("status"));
+        String status = request.getParameter("status");
+        switch (status){
+            case "":
+                List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+
+                System.out.println(userid);
+                System.out.println("列表长度："+list.size());
+                System.out.println(list);
+                map.put("code",0);
+                map.put("count",biz.jUsersfcoll(-1,0,userid).size());
+                map.put("data",list);
+                break;
+            case "1":
+                List<Tblfcoll> list2 = biz.jUserfcoll(page,limit,userid);
+                System.out.println(userid);
+                System.out.println("列表长度："+list2.size());
+                System.out.println(list2);
+                map.put("code",0);
+                map.put("count",biz.jUserfcoll(-1,0,userid).size());
+                map.put("data",list2);
+                break;
+        }
+        /*List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+
         System.out.println(userid);
         System.out.println("列表长度："+list.size());
         System.out.println(list);
         map.put("code",0);
         map.put("count",biz.jUsersfcoll(-1,0,userid).size());
-        map.put("data",list);
+        map.put("data",list);*/
         return map;
     }
 
-    @RequestMapping("/jUserfcoll.action")
-    public @ResponseBody Map jUserfcoll(HttpServletRequest request,int page,int limit,Integer userid){
+    @RequestMapping("/jUserHistory.action")
+    public @ResponseBody Map jUserHistory(HttpServletRequest request,int page,int limit,Integer userid){
         userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblfcoll> list = biz.jUserfcoll(page,limit,userid);
+        List<Tblorder> list = biz.jUserHistory(page,limit,userid);
         System.out.println(userid);
         System.out.println("列表长度："+list.size());
         System.out.println(list);
         map.put("code",0);
-        map.put("count",biz.jUserfcoll(-1,0,userid).size());
+        map.put("count",biz.jUserHistory(-1,0,userid).size());
         map.put("data",list);
         return map;
     }
+    @RequestMapping("/jUserfoot.action")
+    public @ResponseBody Map jUserfoot(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblfoot> list = biz.jUserfoot(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUserfoot(-1,0,userid).size());
+        map.put("data",list);
+        return map;
+    }
+
+
 
 }
