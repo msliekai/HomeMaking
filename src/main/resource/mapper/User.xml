@@ -406,5 +406,8 @@ ORDER BY oi.count desc
         </association>
 
     </resultMap>
-
+    <!--充值-->
+    <update id="jUserPay">
+     UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid}
+    </update>
 </mapper>

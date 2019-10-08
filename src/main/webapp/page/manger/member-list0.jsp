@@ -9,12 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
-    String path = request.getContextPath() + "/page/";
+    String path = request.getContextPath() + "/";
 %>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>用户管控</title>
+    <title>用户信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -30,7 +30,7 @@
             <a href="">首页</a>
             <a href="">演示</a>
             <a>
-              <cite>用户管控</cite></a>
+              <cite>用户列表</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -80,8 +80,7 @@
 <script id="barDemo" type="text/html">
     <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
     <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">重置密码</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+    <a class="layui-btn layui-btn-normal" lay-event="userContext">查看详情</a>
 </script>
 
 <script>
@@ -91,7 +90,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>queryAction/queryUser.action' //数据接口
+            , url: '<%=path%>manager/Muserlist.action' //数据接口
             , page: true //开启分页
             ,limit:10
             // ,method:"get"
@@ -107,14 +106,12 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'uid', title: '用户id', minWidth: 100}
-                , {field: 'uname', title: '用户名', minWidth: 80}
-                , {field: 'usex', title: '性别', minWidth: 80}
-                , {field: 'regtime', title: '注册时间', minWidth:150}
-                , {field: 'tel', title: '电话', minWidth: 80}
-                , {field: 'email', title: '电子邮箱', minWidth: 80}
-                , {field: 'uintegral', title: '积分', minWidth: 80}
-                , {field: 'sname', title: '用户状态', minWidth: 90}
+                {field: 'userid', title: '用户id', minWidth: 100}
+                , {field: 'userphone', title: '用户名', minWidth: 80}
+                , {field: 'username', title: '用户姓名', minWidth: 80}
+                , {field: 'usersex', title: '性别', minWidth:50}
+                , {field: 'usertime', title: '注册时间', minWidth: 80}
+                , {field: 'stname', title: '状态', minWidth: 80}
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
@@ -147,12 +144,7 @@
         //监听行工具事件
         table.on('tool(test)', function(obj) {
             var data = obj.data;
-            if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
-                    layer.close(index);
-                });
-            } else if (obj.event === 'useEna') {
+            if (obj.event === 'useEna') {
                 layer.confirm('确定启用？', function (index) {
                     fal("<%=path%>userManagement/useEna.action",data.uid);
                     layer.close(index);
@@ -162,8 +154,8 @@
                     fal("<%=path%>userManagement/useDis.action",data.uid);
                     layer.close(index);
                 });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
+            } else if(obj.event==="useContext"){
+                layer.confirm('查看详情？', function (index) {
                     fal("<%=path%>userManagement/useResetPwd.action",data.uid);
                     layer.close(index);
                 });
@@ -179,9 +171,9 @@
                 data: {"uid":uid},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {

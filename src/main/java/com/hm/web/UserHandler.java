@@ -291,6 +291,24 @@ public class UserHandler {
         return map;
     }
 
+    @RequestMapping("/jUserPay.action")
+    public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        System.out.println("充值的金额是："+usermoney);
+        int a = biz.jUserPay(userid,usermoney);
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        user.setUsermoney(user.getUsermoney()+usermoney);
+        System.out.println("充值后的金额是："+user.getUsermoney());
+        request.getSession().setAttribute("userbacc",user);
+        String b =null;
+        if (0 < a){
+            b ="1";
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
 
 
 }

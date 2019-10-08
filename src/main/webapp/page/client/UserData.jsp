@@ -41,7 +41,7 @@
                 <div class="layui-card-body ">
 <%--                    <form class="layui-form layui-col-space5">--%>
 
-    账户信息<hr class="layui-bg-blue">
+    基本信息<hr class="layui-bg-blue">
                     <div class="demoTable" align="center">
                         <table width="50%" border="0">
                             <tbody>
@@ -93,7 +93,6 @@
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
                         </div>--%>
                     </div>
-    消费记录<hr class="layui-bg-blue">
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
@@ -102,11 +101,11 @@
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>page/Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
                 </div>--%>
-
-                <div class="layui-card-body" align="center" >
+<%--表格--%>
+                <%--<div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
                     </table>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
@@ -121,7 +120,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
 </script>
 
-<script>
+<%--<script>
     layui.use('table', function() {
         var table = layui.table;
 
@@ -236,7 +235,7 @@
         }
     });
 
-</script>
+</script>--%>
 
 <%--<script>--%>
 <%--    layui.use(['laydate','form'], function(){--%>

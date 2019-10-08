@@ -78,5 +78,7 @@ public interface UserMapper {
     //卡券
     public List<Tblorder> jUserticket(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
 
+    //充值
+    public int jUserPay(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney);
 
 }

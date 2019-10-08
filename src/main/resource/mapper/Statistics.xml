@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.mapper.StatisticsMapper">
+<!--    用户统计-->
+<select id="getUser" resultType="java.util.LinkedHashMap">
+    select sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 MONTH),'%Y-%m')
+then 1 else 0 end) AS first,
+sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 MONTH),'%Y-%m')
+then 1 else 0 end) AS second,
+sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 MONTH),'%Y-%m')
+then 1 else 0 end) AS third,
+sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 MONTH),'%Y-%m')
+then 1 else 0 end) AS fourth,
+sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 MONTH),'%Y-%m')
+then 1 else 0 end) AS fifth,
+sum(case  when DATE_FORMAT(usertime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 MONTH),'%Y-%m')
+then 1 else 0 end) AS six from tbluser
+</select>
+<!--    每月注册公司统计-->
+    <select id="getFirm" resultType="java.util.LinkedHashMap">
+select sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 MONTH),'%Y-%m')
+then 1 else 0 end) AS first,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 MONTH),'%Y-%m')
+then 1 else 0 end) AS second,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 MONTH),'%Y-%m')
+then 1 else 0 end) AS third,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 MONTH),'%Y-%m')
+then 1 else 0 end) AS fourth,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 MONTH),'%Y-%m')
+then 1 else 0 end) AS fifth,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 MONTH),'%Y-%m')
+then 1 else 0 end) AS six from tblfirm
+</select>
+<!--    截止至当前公司总数-->
+    <select id="getAllFirm" resultType="java.util.LinkedHashMap">
+select sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 MONTH),'%Y-%m')
+then 1 else 0 end) AS first,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 MONTH),'%Y-%m')
+then 1 else 0 end) AS second,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 MONTH),'%Y-%m')
+then 1 else 0 end) AS third,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 MONTH),'%Y-%m')
+then 1 else 0 end) AS fourth,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 MONTH),'%Y-%m')
+then 1 else 0 end) AS fifth,
+sum(case  when DATE_FORMAT(ftime,'%Y-%m')<![CDATA[ <= ]]>DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 MONTH),'%Y-%m')
+then 1 else 0 end) AS six from tblfirm
+</select>
+<!--    订单统计-->
+    <select id="getOrder" resultType="java.util.LinkedHashMap">
+select sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 6 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS first,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS second,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS third,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS fourth,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS fifth,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS six ,
+sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 DAY),'%Y-%m-%d')
+then 1 else 0 end) AS seven
+from (SELECT svtime from (select * from tblorder where osid = 2 or osid =5) o,tblstaff s WHERE o.sfid = s.sfid
+<if test="fid!=0">
+    AND s.fid = #{fid}
+</if>
+ ) o
+</select>
+<!--    查询发布时间-->
+    <select id="getSendOrder" resultType="java.util.LinkedHashMap">
+        select sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 6 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS first,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS second,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS third,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS fourth,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS fifth,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS six ,
+        sum(case  when DATE_FORMAT(sendtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 DAY),'%Y-%m-%d')
+        then 1 else 0 end) AS seven
+        from  tblorder
+    </select>
+</mapper>

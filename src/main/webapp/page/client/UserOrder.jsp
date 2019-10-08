@@ -10,7 +10,6 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>订单</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -142,7 +141,7 @@
                         var tem = [];
                         console.log(item)
                         if (item.osid == "1") {
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">查看</a>');
+                            tem.push('<a lay-event="userCK" class="layui-btn layui-btn-normal">查看</a>');
                         }
                         if(item.osid == "2"){
                             tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">编辑</a>');
@@ -178,13 +177,27 @@
             active[type] ? active[type].call(this) : '';
         })
 
+        //查看详情
+
+
+
         //监听行工具事件
         table.on('tool(test)', function(obj) {
             var data = obj.data;
-            if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
-                    layer.close(index);
+            if (obj.event === 'userCK') {
+                layer.open({
+                    type:2,
+                    title: "用户详情",
+                    area: ['300px', '400px'],
+                    content: "<%=path%>page/client/branch/Order.jsp"+
+                        "?ordernum="+encodeURIComponent(data.onumber)+
+                        "&ordertype="+encodeURIComponent(data.tbloderstate.osname)+
+                        "&cos="+encodeURIComponent(data.tblCOS.cosname)+
+                        "&costype="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)+
+                        "&allmoney="+encodeURIComponent(data.money)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             } else if (obj.event === 'useEna') {
                 layer.confirm('确定启用？', function (index) {
@@ -232,7 +245,26 @@
             })
 
         }
+
+        /*function chakan(){
+            layer.open({
+                type:2,
+                title: "用户详情",
+                area: ['450px', '430px'],
+                content: "<%=path%>page/client/branch/Order.jsp"+
+                    "?ordernum="+encodeURIComponent(data.onumber)+
+                    "&ordertype="+encodeURIComponent(data.osname)+
+                    "&cos="+encodeURIComponent(data.cosname)+
+                    "&costype="+encodeURIComponent(data.ctname)+
+                    "&otime="+encodeURIComponent(data.otime)+
+                    "&fname="+encodeURIComponent(data.fname)+
+                    "&allmoney="+encodeURIComponent(data.money)
+                //引用的弹出层的页面层的方式加载修改界面表单
+            });
+        }*/
     });
+
+
 
 </script>
 

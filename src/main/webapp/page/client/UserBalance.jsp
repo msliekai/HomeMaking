@@ -53,7 +53,7 @@
                             <tr>
                                 <td>账户余额：</td>
                                 <td>${sessionScope.userbacc.usermoney}元</td>
-                                <td><button class="layui-btn layui-btn-normal">充值</button></td>
+                                <td><button class="layui-btn layui-btn-normal" onclick="Into()">充值</button></td>
                             </tr>
                             <tr>
                                 <td>绑定账户：</td>
@@ -78,7 +78,6 @@
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
                         </div>--%>
                     </div>
-    消费记录<hr class="layui-bg-blue">
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
@@ -88,10 +87,11 @@
                     <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>page/Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
                 </div>--%>
 
-                <div class="layui-card-body" align="center" >
+                <%--消费记录--%>
+                <%--<div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
                     </table>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
@@ -128,214 +128,16 @@
 
 {{#  } }}--%>
 </script>
-
 <script>
-    layui.use('table', function() {
-        var table = layui.table;
-
-        table.render({
-            elem: '#utable'
-            // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
-            , page: true //开启分页
-            ,limit:2
-            // ,method:"get"
-            , id: 'testReload'
-            , parseData: function (res) {
-
-
-                    return {
-                    "code": eval(res.code), //解析接口状态
-                    // "msg": res.msg, //解析提示文本
-                    "count": res.count, //解析数据长度
-                    "data": res.data//解析数据列表
-                };
-            }
-            , cols: [[ //表头
-                {field: 'oid', title: '序号', minWidth: 80}
-                , {field: 'onumber', title: '订单号', minWidth: 150}
-                , {field: 'osname', title: '订单状态', minWidth: 80,templet:function (d) {return d.tbloderstate.osname}}
-                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.tblCOS.cosname}}
-                , {field: 'ctname', title: '服务分类', minWidth:80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
-                , {field: 'otime', title: '消费时间', minWidth: 100}
-                , {field: 'fname', title: '商家名称', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
-                , {field: 'money', title: '消费金额', minWidth: 80}
-                /*,{field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}*/
-                ,{fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
-                        var tem = [];
-                        console.log(item)
-                        if (item.osid == "1") {
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">查看</a>');
-                        }
-                        if(item.osid == "2"){
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">编辑</a>');
-                        }
-                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
-                        return tem.join(' <font></font> ')
-                    }}
-            ]]
+    function Into() {
+        layer.open({
+            type:2,
+            title: "用户详情",
+            area: ['300px', '260px'],
+            content: "<%=path%>page/client/branch/Intomoney.jsp"
+            //引用的弹出层的页面层的方式加载修改界面表单
         });
-        //触发查询按钮
-            var $ = layui.$, active = {
-                reload: function(){
-                    var uname = $('#uname');
-                    var cong=$('#cong');
-                    var dao=$('#dao');
-                    //执行重载
-                    table.reload('testReload', {
-                        page: {
-                            curr: 1 //重新从第 1 页开始
-                        }
-                        ,where: {
-                            uname: uname.val(),
-                            cong:cong.val(),
-                            dao:dao.val(),
-                        }
-                    }, 'data');
-                }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
-        })
-
-        //监听行工具事件
-        table.on('tool(test)', function(obj) {
-            var data = obj.data;
-            if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
-                    layer.close(index);
-                });
-            } else if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
-                });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
-                });
-            }
-        });
-
-        function fal(url,uid) {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: url,
-                dataType: "text",
-                data: {"uid":uid},
-                success: function (dat) {
-                    if(dat==1){
-                        layer.msg("修改成功");
-                    }else{
-                        layer.msg("修改失败");
-                    }
-                    //执行重载
-                    table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
-                    }, 'data');
-                },
-                error: function (dat) {
-                    layer.msg('裂开');
-                }
-            })
-
-        }
-    });
+    }
 
 </script>
-
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
-
-
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

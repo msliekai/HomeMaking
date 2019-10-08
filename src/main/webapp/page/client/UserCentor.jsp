@@ -116,8 +116,8 @@
                 <h4>个人中心</h4>
                 <div class="list-group list-group-root">
                     <a class="list-group-item" href="<%=path%>page/client/UserData.jsp" target="main">基本信息</a>
-                    <a class="list-group-item" href="#" id="myacc" onClick="zhedie(this.id)">我的账户</a>
-                    <div class="list-group" id="myaccs" style="display: none">
+                    <a class="list-group-item" href="<%=path%>page/client/UserBalance.jsp" target="main">我的账户</a>
+                    <%--<div class="list-group" id="myaccs" style="display: none">
                         <a class="list-group-item" href="<%=path%>page/client/UserBalance.jsp" target="main">账户信息</a>
                         <a class="list-group-item" href="#">我的积分</a>
                         <a class="list-group-item" href="#" id="mycard" onClick="zhedie(this.id)">我的卡券</a>
@@ -126,7 +126,7 @@
                             <a class="list-group-item" href="#">保洁卡</a>
                         </div>
                         <!--class="list-group-item active"-->
-                    </div>
+                    </div>--%>
 
                     <a class="list-group-item" href="<%=path%>page/client/UserOrder.jsp" target="main">我的订单</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">我的评价</a>

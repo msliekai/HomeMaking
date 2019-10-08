@@ -113,6 +113,11 @@ public class UserBizImpl implements UserBiz
         return userMapper.jUserticket(page,limit,userid);
     }
 
+    @Override
+    public int jUserPay(Integer userid, Integer money) {
+        return userMapper.jUserPay(userid,money);
+    }
+
 
     @Override
     public List<Staff> queryStaff(Staff staff) {

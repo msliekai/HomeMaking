@@ -102,7 +102,7 @@
 <script id="barDemo" type="text/html">
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
     <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">申请售后</a>
+    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd" onclick="xadmin.open('申请售后','<%=path%>page/client/branch/AfterSale.jsp',600,400)">申请售后</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
 </script>
 
