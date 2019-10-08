@@ -87,7 +87,6 @@
                 </div>
 
 
-
                 <%--                <s:property value="list"></s:property>--%>
                 <%--<div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
@@ -231,63 +230,7 @@
             }
         );
     });
-    //充值
-    <%--function addmoney() {--%>
-    <%--    layer.prompt(function(value, index, elem){--%>
-    <%--        /*alert(value); //得到value*/--%>
-    <%--        var addmoney=value;--%>
-    <%--        var zzm = /^\+?[1-9][0-9]{0,4}$/;--%>
-    <%--        if(zzm.test(addmoney)){--%>
-    <%--            if(addmoney!=null&&addmoney!=""){--%>
 
-    <%--                $(function () {--%>
-    <%--                    $.post("<%=path%>page/addmoney.action",--%>
-    <%--                        {"addmoney":addmoney},--%>
-    <%--                        function (data) {--%>
-    <%--                            alert("充值成功");--%>
-    <%--                        })--%>
-    <%--                });--%>
-    <%--                layer.close(index);--%>
-    <%--            }--%>
-
-    <%--        }else{--%>
-    <%--            alert("请输入正确格式，正整数且不大于100000！")--%>
-    <%--        }--%>
-
-    <%--    });--%>
-    <%--}--%>
-    //转账
-    function transfer() {
-        layer.prompt(function(value, index, elem){
-            alert(value); //得到value
-
-            layer.close(index);
-        });
-    }
-    //提现
-    function draw() {
-        layer.prompt(function(value, index, elem){
-            var drawmoney=value;
-            var zzm = /^\+?[1-9][0-9]{0,4}$/;
-            if(zzm.test(drawmoney)){
-                $(function () {
-
-                    $.post("<%=path%>page/drawmoney.action",{"drawmoney":drawmoney},
-                        function (data) {
-                            if(data=="1"){
-                                alert("提现成功");
-                            }else {
-                                alert("余额不足");
-                            }
-                        });
-                });
-                layer.close(index);
-            }else{
-                alert("请输入正确格式，正整数且不大于100000！");
-            }
-
-        });
-    }
     //修改银行卡号
     function changefacard() {
         // alert("222");
@@ -307,85 +250,7 @@
         }
 
     }
-
 </script>
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
 
 
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

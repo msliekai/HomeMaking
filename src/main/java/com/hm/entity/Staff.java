@@ -20,6 +20,7 @@ public class Staff {
     private String sfedu;
     private String sfurl;
     private String sftag;
+    private String scard;
     private Company company;
     private Tblstate tblstate;
     public Staff() {

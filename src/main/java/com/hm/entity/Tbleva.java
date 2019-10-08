@@ -11,4 +11,6 @@ public class Tbleva {
     private String econut;
     private String etime;
     private Tblorder tblorder;
+    private Integer page;
+    private Integer limit;
 }

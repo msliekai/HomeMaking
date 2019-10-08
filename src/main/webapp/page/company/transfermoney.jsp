@@ -86,42 +86,42 @@
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
                             <div class="form-group">
-                                <label for="facc">收款方</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入收款人姓名">
+                                <label for="collect">收款方</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="collect" name="collect" placeholder="请输入收款人姓名">
                                 <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="fpwd">收款账户</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入收款账户" onblur="checkfpwd()">
+                                <label for="collectcount">收款账户</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="collectcount" name="collectcount" placeholder="请输入收款账户">
                                 <span id="bbb"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="nfpwd">付款方</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="请输入付款人姓名" onblur="checknfpwd()">
+                                <label for="payee">付款方</label>
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="payee" name="payee" placeholder="请输入付款人姓名">
                                 <span id="ccc"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="flaw">付款账号</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入付款账户">
+                                <label for="payeecount">付款账号</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="payeecount" name="payeecount" placeholder="请输入付款账户">
                                 <span id="ddd"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="flawphone">转账金额</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入转账金额" onblur="checkflawphone()">
+                                <label for="transfermoney">转账金额</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="transfermoney" name="transfermoney" placeholder="请输入转账金额">
                                 <span id="eee" ></span><p/>
                             </div>
                                 <div class="form-group">
-                                    <label for="flawphone">支付密码</label>
-                                    <input type="number" class="form-control" autocomplete="off" required="required" id="zfmm" name="flawphone" placeholder="请输入支付密码" onblur="checkflawphone()">
+                                    <label for="paymentpwd">支付密码</label>
+                                    <input type="password" class="form-control" autocomplete="off" required="required" id="paymentpwd" name="paymentpwd" placeholder="请输入支付密码">
                                     <span id="fff" ></span><p/>
                                 </div>
 
-                            <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal"
-                                   data-target=".signin_modal" value="确定" onsubmit="submit()" />
+                            <input type="button" class="btn signin_btn signin_btn_two" data-toggle="modal"
+                                   data-target=".signin_modal" value="确定" onclick="transfer()" />
                         </form><!--/form -->
                     </div><!--/.col -->
                 </div><!--/.row -->
@@ -165,6 +165,41 @@
 
 <script>
 
+    function transfer() {
+        var payee=$("#payee").val();
+        var collect=$("#collect").val();
+        var collectcount=$("#collectcount").val();
+        var payeecount=$("#payeecount").val();
+        var transfermoney=$("#transfermoney").val();
+        var paymentpwd=$("#paymentpwd").val();
+        var transfermoney=$("#transfermoney").val();
+        var zzm = /^\+?[1-9][0-9]{0,4}$/;//转账金额格式
+        var pattern = /^([1-9]{1})(\d{14}|\d{
+        if(pattern.test(payeecount)&&pattern.test(collectcount)){
+            if(zzm.test(transfermoney)){
+                $.post("<%=path%>page/transfer.action",{"collectcount":collectcount,
+                        "payeecount":payeecount,"transfermoney":transfermoney,
+                        "payee":payee,"collect":collect,"paymentpwd":paymentpwd,"transfermoney":transfermoney},
+                    function (data) {
+                        if(data=="1"){
+                            alert("转账成功");
+                            window.location.href="<%=path%>page/company/account.jsp";//银行卡号格式
+                    }else if(data=="2"){
+                        alert("卡号余额不足，转账失败");
+                    }else if(data=="3"){
+                        alert("支付密码错误，转账失败");
+                    }else{
+                        alert("转账失败");
+                    }
+                });
+            }else{
+                alert("请输入正确格式，正整数且不大于100000！")
+            }
+        }else {
+            alert("卡号输入错误")
+        }
+
+    }
 
 
 

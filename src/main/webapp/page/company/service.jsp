@@ -112,9 +112,9 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>page/querydeallog.action' //数据接口
+            , url: '<%=path%>page/queryserve.action' //数据接口
             , page: true //开启分页
-            ,limit:3
+            ,limit:5
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -128,10 +128,10 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'dlid', title: '服务名', minWidth: 100}
-                , {field: 'dltime', title: '服务类别名', minWidth: 80}
-                , {field: 'dename', title: '服务类申请时间', minWidth: 80,templet:function (d) {return d.tbldeal.dename}}
-                , {field: 'dename', title: '状态', minWidth: 80,templet:function (d) {return d.tbldeal.dename}}
+                {field: 'cosname', title: '服务名', minWidth: 100,templet:function (d) {return d.tblCOS.cosname}}
+                , {field: 'ctname', title: '服务类别名', minWidth: 80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
+                , {field: 'cttime', title: '服务类申请时间', minWidth: 80,templet:function (d) {return d.tblCOS.costime}}
+                , {field: 'stname', title: '状态', minWidth: 80,templet:function (d) {return d.tblstate.stname}}
             ]]
         });
         //触发查询按钮

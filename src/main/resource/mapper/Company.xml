@@ -88,6 +88,10 @@
     <update id="upcom" parameterType="com.hm.entity.Company">
         update tblfirm set facc=#{facc},fname=#{fname},flaw=#{flaw},fsite=#{fsite},flawphone=#{flawphone} where fid=#{fid}
     </update>
+    <!--传入id查看公司信息-->
+    <select id="upcominfo" resultType="com.hm.entity.Company">
+        select * from tblfirm where fid=#{fid}
+    </select>
 
 <!--    <select id="findCreList" parameterType="com.hm.entity.Company" resultType="java.util.List">-->
 <!--        SELECT c.crename,count(f.creid) as count from tblcre c,tblfcc f where fid=#{fid} and c.creid=f.creid GROUP BY c.crename;-->
@@ -108,6 +112,7 @@
         from tbldeallog d,tblfirm f,tbluser u,tbldeal e
         where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid};
     </select>
+
 
     <resultMap id="deallog" type="com.hm.entity.Tbldeallog">
         <id property="dlid" column="dlid"/>
@@ -133,9 +138,9 @@
         select c.*from tblCOStype c
     </select>
 
+
     <resultMap id="costype" type="com.hm.entity.Tblfc">
         <id property="fcid" column="fcid"/>
-        <id property="stid" column="stid"/>
         <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
             <id property="ctid" column="ctid"/>
             <result property="ctname" column="ctname"/>
@@ -166,41 +171,6 @@
         (select s.stname,f.ctid from tblfc f,tblstate s where s.stid=f.stid and f.fid=#{fid})m
         on c.ctid=m.ctid
     </select>
-
-    <!--查询具体服务-->
-   <!-- <select id="service" resultMap="cos" parameterType="java.lang.Integer">
-        select * from tblCOStype c left join
-        (select s.stname,f.ctid,s.stid ,c.cosname
-        from tblfc f,tblstate s,tblCOS c
-        where s.stid=f.stid and c.ctid=f.ctid and f.fid=#{fid})m
-        on c.ctid=m.ctid;
-        <bind name="page" value="(page-1)*limit"/>
-        limit #{page},#{limit}
-    </select>
-    <resultMap id="cos" type="com.hm.entity.Tblfc">
-        <id property="fcid" column="fcid"/>
-        <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
-            <id property="ctid" column="ctid"/>
-            <result property="ctname" column="ctname"/>
-            <result property="ctcontext" column="ctcontext"/>
-            <result property="cttime" column="cttime"/>
-        </association>
-        <association property="tblstate" column="stid" javaType="com.hm.entity.Tblstate">
-            <id property="stid" column="stid"/>
-            <result property="stname" column="stname"/>
-        </association>
-        <association property="company" column="fid" javaType="com.hm.entity.Company">
-            <id property="fid" column="fid"/>
-        </association>
-        <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOS">
-            <id property="cosid" column="cosid"/>
-            <result property="cosname" column="cosname"/>
-            <result property="coscontext" column="coscontext"/>
-            <result property="costime" column="costime"/>
-            <result property="coshot" column="coshot"/>
-        </association>
-    </resultMap>-->
-
 
     <!--公司入驻申请-->
     <update id="">
@@ -330,4 +300,101 @@
         sfgood=#{sfgood},sftag=#{sftag},sfedu=#{sfedu},sfwant=#{sfwant}
         where sfid=#{sfid}
     </update>
+
+
+    <!--服务评价-->
+    <select id="querycomment" resultMap="comment" parameterType="java.lang.Integer">
+        select * from tbleva t,
+        (select o.oid,u.userid,u.userurl from tblorder o,tblstaff s,tbluser u
+        where u.userid=o.userid and s.sfid=o.sfid and s.fid=#{fid})m
+        where t.oid=m.oid
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+    <resultMap id="comment" type="com.hm.entity.Tbleva">
+        <id property="eid" column="eid"/>
+        <result property="econtext" column="econtext"/>
+        <result property="econut" column="econut"/>
+        <result property="etime" column="etime"/>
+        <association property="tblorder" column="oid" javaType="com.hm.entity.Tblorder">
+            <id property="oid" column="oid"/>
+            <association property="tblUser" column="userid" javaType="com.hm.entity.TblUser">
+                <id property="userid" column="userid"/>
+                <result property="userurl" column="userurl"/>
+            </association>
+            <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+                <id property="sfid" column="sfid"/>
+                <association property="company" column="fid" javaType="com.hm.entity.Company">
+                    <id property="fid" column="fid"/>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+    <select id="countcomment" resultType="java.lang.Integer">
+        select count(*) from tbleva t,
+        (select o.oid,u.userid,u.userurl from tblorder o,tblstaff s,tbluser u
+        where u.userid=o.userid and s.sfid=o.sfid and s.fid=#{fid})m
+        where t.oid=m.oid
+    </select>
+
+    <!--查询员工银行卡号-->
+    <select id="queryscard" resultType="com.hm.entity.Staff" parameterType="java.lang.String">
+        select * from tblstaff where scard=#{scard};
+    </select>
+    <!--查询公司银行卡表-->
+    <select id="queryfacard" resultMap="facard" parameterType="java.lang.Integer">
+        select c.*,f.flaw from tblfirmacc c,tblfirm f where f.fid=c.fid and c.fid=#{fid};
+    </select>
+    <resultMap id="facard" type="com.hm.entity.Tblfirmacc">
+        <id property="faid" column="faid"/>
+        <result property="facard" column="facard"/>
+        <result property="cardtype" column="cardtype"/>
+        <result property="famoney" column="famoney"/>
+        <result property="compwd" column="compwd"/>
+        <association property="company" column="fid">
+            <id property="fid" column="fid"/>
+            <result property="flaw" column="flaw"/>
+        </association>
+    </resultMap>
+
+    <!--公司服务具体-->
+    <select id="queryserve" resultMap="serve" parameterType="java.lang.Integer">
+select m.ctname , ts.*,m.stname from tblCOS ts,
+(select t.ctname,t.cttime,s.stname,f.ctid from tblfc f,tblCOStype t,tblstate s,tblfirm m
+where f.ctid=t.ctid and f.fid=m.fid and f.stid=s.stid  and f.fid=#{fid})m
+where ts.ctid=m.ctid
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+    <resultMap id="serve" type="com.hm.entity.Tblfc">
+        <id property="fcid" column="fcid"/>
+        <association property="company" column="fid">
+            <id property="fid" column="fid"/>
+        </association>
+        <association property="tblstate" column="stid">
+            <id column="stid" property="stid"/>
+            <result property="stname" column="stname"/>
+        </association>
+        <association property="tblCOS" column="cosid">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+            <result property="cosdeta" column="cosdeta"/>
+            <result property="costime" column="costime"/>
+            <result property="coshot" column="coshot"/>
+            <result property="ctname" column="ctname"/>
+            <association property="tblCOStype" column="ctid">
+                <id property="ctid" column="ctid"/>
+                <result property="ctname" column="ctname"/>
+                <result property="cttime" column="cttime"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="countserve" resultType="java.lang.Integer">
+select count(*) from tblCOS ts,
+(select t.ctname,t.cttime,s.stname,f.ctid from tblfc f,tblCOStype t,tblstate s,tblfirm m
+where f.ctid=t.ctid and f.fid=m.fid and f.stid=s.stid  and f.fid=#{fid})m
+where ts.ctid=m.ctid
+    </select>
+
 </mapper>

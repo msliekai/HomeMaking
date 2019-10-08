@@ -2,6 +2,7 @@ package com.hm.mapper;
 
 import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
+import org.apiguardian.api.API;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public interface CompanyMapper {
     //修改公司基本信息
     public int upcom(@Param("fid")Integer fid,@Param("facc")String facc,@Param("fname") String fname,@Param("flaw") String flaw,
                      @Param("flawphone") String flawphone,@Param("fsite") String fsite);
+    public Company upcominfo(@Param("fid")Integer fid);
     //查看交易
     public List<Tbldeallog> querydeallog(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     public Integer countdeallog(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
@@ -53,14 +55,24 @@ public interface CompanyMapper {
     public Integer addmoney(@Param("famoney") String famoney,@Param("fid") Integer fid);
     //公司银行卡提现
     public Integer drawmoney(@Param("famoney") String famoney,@Param("fid") Integer fid);
+    //员工银行卡号
+    public Staff queryscard(@Param("scard") String scard);
+    //公司银行账号
+    public Tblfirmacc queryfacard(@Param("fid") Integer fid);
     //修改银行卡号
     public Integer changefacard(@Param("facard") String facard,@Param("fid") Integer fid);
     //检查银行卡支付密码
     public Tblfirmacc checkcompwd(@Param("facard") String facard,@Param("compwd") String compwd);
     //查询某个公司的所有服务
-    public List<TblCOStype> servicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public List<Tblfc> servicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     public Integer countservicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     //具体服务
+    public List<Tblfc> queryserve(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public Integer countserve(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+
+    //评价
+    public List<Tbleva> querycomment(@Param("fid")Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public Integer countcomment(@Param("fid")Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
 //    public List<TblCOS> service(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     //员工新增
     public Integer addStaff(Staff staff);
@@ -75,3 +87,4 @@ public interface CompanyMapper {
     //---员工修改
     public Integer staffFix(Staff staff);
 }
+
