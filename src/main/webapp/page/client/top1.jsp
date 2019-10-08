@@ -17,7 +17,7 @@
             <div class="row height-100 align-items-center">
                 <div class="col-lg-5 col-sm-4">
                     <div class="logo">
-                        <a href="<%=path%>page/client/chome.jsp"><img src="assets/images/logo.png" alt=""/></a>
+                        <a href="<%=path%>page/client/chome.jsp"><img src="<%=path%>page/client/assets/images/logo.png" alt=""/></a>
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-8">
@@ -38,7 +38,7 @@
                                         <i class="lnr lnr-map-marker"></i>
                                         <ul class="list-none">
                                             <li><span id="ccypt">当前位置</span></li>
-                                            <li><a onclick="mapre()">点击改变位置</a></li>
+                                            <li><a data-toggle="modal" data-target="#myModal">点击改变位置</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -47,6 +47,38 @@
 
                         <div class="col-xl-3 book-btn">
                             <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
+                        </div>
+
+                        <div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3>选择你的地址</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+                                            <select id="s_province" ></select>  
+                                            <select id="s_city"></select>  
+                                            <select id="s_county"></select>
+                                            <%--加载城市下拉框--%>
+                                            <script class="resources library" src="<%=path%>page/client/js/city-data.js"
+                                                    type="text/javascript"></script>
+
+                                            <script type="text/javascript">_init_area();</script>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary" onclick="upcity()">
+                                            提交更改
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
                         </div>
                     </div>
                 </div>

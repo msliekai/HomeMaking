@@ -401,4 +401,27 @@ public class UserHandler {
         return map;
     }
 
+    @RequestMapping("/myMap.action")
+    public @ResponseBody
+    Map myMap(HttpSession session,String csc) {
+
+        String city=(String)session.getAttribute("csc");
+        if(null==city){
+                session.setAttribute("csc",csc);
+                map.put("csc",csc);
+        }else{
+            map.put("csc",city);
+        }
+        return map;
+    }
+    @RequestMapping("/upmyMap.action")
+    public @ResponseBody
+    Map upmyMap(HttpSession session,String csc) {
+
+        if(null!=csc){
+            session.setAttribute("csc",csc);
+            map.put("flog","OK");
+        }
+        return map;
+    }
 }

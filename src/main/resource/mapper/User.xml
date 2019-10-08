@@ -50,7 +50,7 @@
     <insert id="addUserMsite" parameterType="java.lang.Integer">
         insert into tbluser set
     </insert>
-<!--根据id查阿姨-->
+<!--根据id查阿姨20191008-->
     <select id="queryOneStaff"  resultMap="cstaff">
         SELECT xl.*,sl.scoid,sl.scotime from (SELECT *from (SELECT
         fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
@@ -140,7 +140,9 @@
     </resultMap>
     <!--阿姨数量-->
     <select id="getStaffCount" resultType="java.lang.Integer">
-        SELECT count(*) from (SELECT
+
+        SELECT count(*) from (
+        SELECT
         fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
         ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
         c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,

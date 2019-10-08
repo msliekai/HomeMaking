@@ -294,16 +294,14 @@
 <!--footer-area end-->
 
 
-<%--layui--%>
-<script src="<%=path%>page/layui/layui.js"></script>
+
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
 <script src="<%=path%>page/client/assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!-- jquery-migrate-3.1.0.min.js version -->
 <script src="<%=path%>page/client/assets/js/vendor/jquery-migrate-3.1.0.min.js"></script>
-<%--我的js--%>
-<script src="<%=path%>page/client/js/chome.js"></script>
+
 <!-- bootstra.min js -->
 <script src="http://cdn.bootstrapmb.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <!-- mmenu js -->
@@ -327,8 +325,10 @@
 <script src="<%=path%>page/client/assets/js/plugins.js"></script>
 <!-- main js -->
 <script src="<%=path%>page/client/assets/js/main.js"></script>
-
-
+<%--layui--%>
+<script src="<%=path%>page/layui/layui.js"></script>
+<%--我的js--%>
+<script src="<%=path%>page/client/js/chome.js"></script>
 
 <script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
 <script src="<%=path%>page/client/js/baidumap.js"></script>
@@ -348,7 +348,6 @@
             type: "POST",
             dataType: "json",
             success: function (obj) {
-                console.log(obj);
                 var hothtml="";
                 $.each(obj,function(k,v){
                     if("hot"==k){

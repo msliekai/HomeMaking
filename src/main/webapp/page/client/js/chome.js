@@ -187,6 +187,7 @@ function scity() {
         cityerr.html("请选择地址");
         return false;
     }
+
     cityerr.html("");
     var scontext = $("#scontext")
     var scontexterr = $("#scontexterr");
@@ -357,7 +358,6 @@ function querySity(){
                     var defaul=jso.defaulAddress;
                     ht+="<option value='"+ defaul.sid +"' >"+ defaul.sa+"-"+defaul.sb+"-"+defaul.sc+"-"+defaul.scontext+"（默认地址）</option>";
                 }
-
                 $.each(jso.list,function(k,v){
                     ht+="<option value='"+ v.sid +"' >"+ v.sa+"-"+v.sb+"-"+v.sc+"-"+v.scontext+"</option>";
                 })

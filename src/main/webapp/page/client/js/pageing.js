@@ -24,7 +24,6 @@ function getPageOfMemo(page) {
         },
         dataType: "json",
         success: function (obj) {
-            console.log(obj);
             var htm = "";
             if (obj != null) {
                 // if(obj.length>0){
@@ -69,7 +68,7 @@ function getPageOfMemo(page) {
                     $('#ayitable').html(htm);
 
                     var totalPages = obj.count;
-                    var limit=totalPages%5==0 ? totalPages/5:totalPages/5+1;
+                    var limit=totalPages%6==0 ? totalPages/6:totalPages/6+1;
 
                     var element = $('#pageButton');
                     var options = {

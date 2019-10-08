@@ -555,7 +555,7 @@
     <script src="<%=path%>page/client/js/chome.js"></script>
 
     <script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
-    <script src="<%=path%>page/client/js/baidumap.js"></script>
+<%--    <script src="<%=path%>page/client/js/baidumap.js"></script>--%>
 </body>
 <script>
     $(document).ready(function(){
@@ -584,6 +584,60 @@
             })
         })
     }
+    function mapre(){
+
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "<%=path%>admin/myMap.action",
+            success: function (jso) {//执行结果
+                $("#ccypt").text("正在获取位置......");
+                if(jso.csc!=null){
+                    $("#ccypt").text(jso.csc);
+                }else{
+                    //创建百度地图控件
+                    var geolocation = new BMap.Geolocation();
+                    geolocation.getCurrentPosition(function (r) {
+                        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                            //以指定的经度与纬度创建一个坐标点
+                            var pt = new BMap.Point(r.point.lng, r.point.lat);
+                            //创建一个地理位置解析器
+                            var geoc = new BMap.Geocoder();
+                            geoc.getLocation(pt, function (rs) {//解析格式：城市，区县，街道
+                                var addComp = rs.addressComponents;
+                                $("#ccypt").text(addComp.city);
+                                //保存
+                                addd(addComp.city);
+                            });
+                        } else {
+                            $("#ccypt").text('定位失败');
+                        }
+                    }, {enableHighAccuracy: true})//指示浏览器获取高精度的位置，默认false
+                }
+            },
+            error:function (jso) {
+                $("#ccypt").text("定位失败,出现异常");
+            }
+        });
+
+    }
+
+
+    //保存
+    function addd(csc) {
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "<%=path%>admin/myMap.action",
+            data:{
+                "csc":csc,
+            },
+            success: function (jso) {//执行结果
+
+            }
+        })
+    }
+    mapre();
 </script>
 </html>
 
