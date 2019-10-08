@@ -455,7 +455,7 @@ public @ResponseBody String useDel(String sfid){
             return "no";
         }
     }
-
+    //------员工修改
     @RequestMapping(value = "staffFix",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
     public @ResponseBody String staffFix(Staff staff)
     {
