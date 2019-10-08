@@ -71,7 +71,6 @@
             , url: '<%=path%>page/staffList.action' //数据接口
             , page: true //开启分页
             ,limit:10
-            // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
                 return {
