@@ -82,4 +82,9 @@ public interface UserMapper {
     //收藏的公司
     public List<Tblfcoll>  jUserfcoll(@Param("page")int page,@Param("limit")int limit,@Param("userid")Integer userid);
 
+    //查钱
+    public Integer queryMoney(@Param("userid")Integer userid);
+
+    //改钱
+    public Integer updateMoney(@Param("usermoney")Integer usermoney,@Param("userid")Integer userid);
 }

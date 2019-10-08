@@ -111,9 +111,7 @@
                         </div>
 
                     </div>
-                    <div class="details-price">
-                        <span>$120.00</span>
-                    </div>
+
 <%--                    <p>擅长</p>--%>
 <%--                    <p>唱跳</p>--%>
                     <div class="product-details-cati-tag mt-35">
@@ -159,16 +157,13 @@
                         </ul>
                     </div>
 
-                    <div class="product-details-cati-tag mtb-10">
-                        <ul>
-                            <li class="categories-title">价格 :</li>
-                            <li><a>${requestScope.staff.sfcos}元/次</a></li>
-                        </ul>
+                    <div class="details-price">
+                        <span>${requestScope.staff.sfcos}元/次</span>
                     </div>
 
                     <div class="product-details-cati-tag mtb-10">
                         <div class="layui-btn-group">
-                            <button type="button" class="layui-btn layui-btn-normal">确认预约</button>
+
                             <button type="button" class="layui-btn">咨询</button>
                             <c:if test="${requestScope.staff.tblsfcoll==null}">
                                 <button type="button" class="layui-btn layui-btn-warm" onclick="proCollections(${requestScope.staff.sfid})">收藏</button>
@@ -181,7 +176,41 @@
                     </div>
 
                 </div>
+
+
+
             </div>
+
+                <div>
+                    <hr/>
+                    <h3>我要预约</h3>
+                    <form>
+                        <input type="hidden" id="sfid" name="sfid" value="${requestScope.staff.sfid}"/>
+                        <input type="hidden" id="cosid" name="cosid" value="${requestScope.staff.tblCOS.cosid}"/>
+                        <input type="hidden" id="money" name="money" value="${requestScope.staff.sfcos}"/>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="sid">地址：</label>
+                            <select class="form-control" id="sid" name="sid">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="ophone">联系电话：</label>
+                            <input type="text" id="ophone" name="ophone" class="form-control" value="${sessionScope.userbacc.userphone}">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="ocontext">其他要求：</label>
+                            <textarea class="form-control" id="ocontext" name="ocontext"></textarea>
+                        </div>
+                    </div>
+                        <input type="button" class="layui-btn layui-btn-normal" onclick="Appointord()" value="确认预约"/>
+                    </form>
+
+                </div>
         </div>
     </div>
 </div>
@@ -528,5 +557,33 @@
     <script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
     <script src="<%=path%>page/client/js/baidumap.js"></script>
 </body>
+<script>
+    $(document).ready(function(){
+        $("#sid").ready(function(){
+            theSity();
+        })
+    })
+    function theSity(){
+        layui.use('layer', function () {
+            $.ajax({
+                async: true,
+                type: "post", //提交方式
+                url: "../admin/querySite.action",
+                success: function (jso) {//执行结果
+                    var ht="";
+                    if(jso.defaulAddress!=null){
+                        var defaul=jso.defaulAddress;
+                        ht+="<option value='"+ defaul.sid +"' >"+ defaul.sa+"-"+defaul.sb+"-"+defaul.sc+"-"+defaul.scontext+"（默认地址）</option>";
+                    }
+
+                    $.each(jso.list,function(k,v){
+                        ht+="<option value='"+ v.sid +"' >"+ v.sa+"-"+v.sb+"-"+v.sc+"-"+v.scontext+"</option>";
+                    })
+                    $("#sid").html(ht);
+                },
+            })
+        })
+    }
+</script>
 </html>
 

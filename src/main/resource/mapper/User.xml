@@ -235,6 +235,7 @@
             limit #{page} ,#{limit}
         </if>
     </select>
+
     <resultMap id="BalanceList" type="com.hm.entity.Tblorder">
         <id property="oid" column="oid"/>
         <result property="onumber" column="onumber"/>
@@ -387,4 +388,12 @@
     <delete id="delsfcoll">
         DELETE from tblsfcoll WHERE scoid=#{scoid};
     </delete>
+<!--查用户金额-->
+    <select id="queryMoney" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select usermoney from tbluser where userid=#{userid}
+    </select>
+<!--修改钱-->
+    <update id="updateMoney" >
+       UPDATE tbluser SET usermoney=usermoney-#{usermoney} WHERE userid=#{userid}
+    </update>
 </mapper>

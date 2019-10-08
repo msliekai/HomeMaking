@@ -20,6 +20,7 @@
 <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 <span id="mapname"></span>
 <span id="xy"></span>
+<span id="dm"></span>
 </body>
 </html>
 <script type="text/javascript">
@@ -38,9 +39,16 @@
         map.centerAndZoom(point,15);                 //起始比例
         map.enableScrollWheelZoom();                 //启用滚轮放大缩小
         map.addControl(new BMap.ScaleControl());     //添加比例尺
+        var geoc = new BMap.Geocoder();
 
         function showInfo(e){
             $("#xy").text("坐标："+e.point.lng + ", " + e.point.lat);
+            var pt = e.point;
+            geoc.getLocation(pt, function(rs){
+                var addComp = rs.addressComponents;
+                $("#dm").text(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                // alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+            });
             var point= new BMap.Point(e.point.lng, e.point.lat);
             var marker = new BMap.Marker(point); // 创建标注
             map.clearOverlays();//清除

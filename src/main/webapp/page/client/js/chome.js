@@ -367,3 +367,33 @@ function querySity(){
     })
 }
 
+//选择阿姨并下单
+function Appointord() {
+
+    layui.use('layer', function () {
+        var self = $("form");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../admin/addOrder2.action",
+            data: self.serialize(), //获得表单的信息
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                if (jso.flog == "addok") {
+                    layer.msg('发布成功', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        location.href="../page/client/chome.jsp";
+                    });
+
+                } else if(jso.flog=="moneyerr"){
+                    layer.msg("余额不足请充值")
+                }else{
+                    layer.msg("发布失败")
+                }
+            },
+        })
+    })
+    
+}
+

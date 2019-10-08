@@ -132,6 +132,7 @@ function collections(sfid) {
     })
 }
 
+
 function delcollections(scoid){
     layui.use('layer', function () {
         $.ajax({

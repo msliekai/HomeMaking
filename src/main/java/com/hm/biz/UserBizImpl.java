@@ -166,5 +166,15 @@ public class UserBizImpl implements UserBiz
         return map;
     }
 
+    @Override
+    public Integer queryMoney(Integer userid) {
+        return userMapper.queryMoney(userid);
+    }
+
+    @Override
+    public Integer updateMoney(Integer usermoney, Integer userid) {
+        return userMapper.updateMoney(usermoney,userid);
+    }
+
 
 }

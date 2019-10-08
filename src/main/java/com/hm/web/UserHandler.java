@@ -150,8 +150,8 @@ public class UserHandler {
     public @ResponseBody
     Map<String, Object> classifyA(HttpServletRequest request, HttpSession session, Staff staff) {
 
-        TblUser use=(TblUser) session.getAttribute("userbacc");
-        if(null!=use){
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+        if (null != use) {
             staff.setUserid(use.getUserid());
         }
         Integer count = biz.getStaffCount(staff);
@@ -201,21 +201,57 @@ public class UserHandler {
     @RequestMapping("/addOrder.action")
     public @ResponseBody
     Map addOrder(HttpSession session, Tblorder tblorder) {
-        TblUser use=(TblUser)session.getAttribute("userbacc");
+        TblUser use = (TblUser) session.getAttribute("userbacc");
 
         tblorder.setUserid(use.getUserid());
         tblorder.setOsid(6);
         tblorder.setSendtime(TimeTools.getStringDateMin());
         tblorder.setOnumber(TimeTools.getOrderIdByTime());
 
-
-        Integer num=biz.addOrder(tblorder);
-        if(num!=null&&num!=0){
-            map.put("flog","addok");
-        }else{
-            map.put("flog","addnot");
+        Integer num = biz.addOrder(tblorder);
+        if (num != null && num != 0) {
+            map.put("flog", "addok");
+        } else {
+            map.put("flog", "addnot");
         }
 
+        return map;
+    }
+
+    /**
+     * 先判断金额够不够，够再确认订单
+     *
+     * @param session
+     * @param tblorder
+     * @return
+     */
+    @RequestMapping("/addOrder2.action")
+    public @ResponseBody
+    Map addOrder2(HttpSession session, Tblorder tblorder) {
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        Integer money = biz.queryMoney(use.getUserid());
+        Integer ji = Integer.parseInt(tblorder.getMoney());
+        if ((money - ji) >= 0) {
+            tblorder.setUserid(use.getUserid());
+            tblorder.setOsid(1);
+            tblorder.setSendtime(TimeTools.getStringDateMin());
+            System.out.print("");
+            tblorder.setOnumber(TimeTools.getOrderIdByTime());
+            int num1 = biz.updateMoney(ji, use.getUserid());
+            if (num1 > 0) {
+                Integer num = biz.addOrder(tblorder);
+                if (num != null && num != 0) {
+                    map.put("flog", "addok");
+                } else {
+                    map.put("flog", "addnot");
+                }
+            }else{
+                map.put("flog", "addnot");
+            }
+        } else {
+            map.put("flog", "moneyerr");
+        }
         return map;
     }
 
@@ -223,35 +259,36 @@ public class UserHandler {
     public @ResponseBody
     Map querySite(HttpSession session) {
 
-        TblUser use=(TblUser) session.getAttribute("userbacc");
+        TblUser use = (TblUser) session.getAttribute("userbacc");
 
-        Map<String,Object> mpas=new HashMap<>();
+        Map<String, Object> mpas = new HashMap<>();
 
-        List<TblSite> list=biz.querySite(use.getUserid());
-        TblSite tblSite=null;
-        Iterator<TblSite> iterator= list.iterator();
+        List<TblSite> list = biz.querySite(use.getUserid());
+        TblSite tblSite = null;
+        Iterator<TblSite> iterator = list.iterator();
         while (iterator.hasNext()) {
             TblSite str = iterator.next();
-            if (str.getSid()==use.getSid()) {
-                tblSite=str;
+            if (str.getSid() == use.getSid()) {
+                tblSite = str;
                 iterator.remove();
                 break;
             }
         }
 
-        mpas.put("defaulAddress",tblSite);
-        mpas.put("list",list);
+        mpas.put("defaulAddress", tblSite);
+        mpas.put("list", list);
 
         return mpas;
     }
+
     @RequestMapping(value = "/product-details.action")
-    public String productdetails(HttpServletRequest request,HttpSession session, Integer sfid) {
+    public String productdetails(HttpServletRequest request, HttpSession session, Integer sfid) {
 
-        TblUser use=(TblUser) session.getAttribute("userbacc");
+        TblUser use = (TblUser) session.getAttribute("userbacc");
 
-        Staff staff=biz.queryOneStaff(sfid,use.getUserid());
+        Staff staff = biz.queryOneStaff(sfid, use.getUserid());
 
-        request.setAttribute("staff",staff);
+        request.setAttribute("staff", staff);
 
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("client/product-details");
@@ -262,33 +299,33 @@ public class UserHandler {
 
     @RequestMapping("/addsfcoll.action")
     public @ResponseBody
-    Map addsfcoll(HttpSession session,Tblsfcoll tblsfcoll) {
+    Map addsfcoll(HttpSession session, Tblsfcoll tblsfcoll) {
 
-        TblUser use=(TblUser)session.getAttribute("userbacc");
+        TblUser use = (TblUser) session.getAttribute("userbacc");
 
         tblsfcoll.setUserid(use.getUserid());
         tblsfcoll.setScotime(TimeTools.getStringDateMin());
 
-        Integer num=biz.addsfcoll(tblsfcoll);
+        Integer num = biz.addsfcoll(tblsfcoll);
 
-        if(num>0){
-            map.put("flog","OK");
-        }else {
-            map.put("flog","NO");
+        if (num > 0) {
+            map.put("flog", "OK");
+        } else {
+            map.put("flog", "NO");
         }
         return map;
     }
 
     @RequestMapping("/delsfcoll.action")
     public @ResponseBody
-    Map delsfcoll(HttpSession session,Integer scoid) {
+    Map delsfcoll(HttpSession session, Integer scoid) {
 
-        Integer num=biz.delsfcoll(scoid);
+        Integer num = biz.delsfcoll(scoid);
 
-        if(num>0){
-            map.put("flog","OK");
-        }else {
-            map.put("flog","NO");
+        if (num > 0) {
+            map.put("flog", "OK");
+        } else {
+            map.put("flog", "NO");
         }
         return map;
     }

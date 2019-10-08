@@ -155,4 +155,19 @@ public interface UserBiz {
      */
     public Map<String,Object> thwWelcome();
 
+    /**
+     * 查钱
+     * @param userid
+     * @return
+     */
+    public Integer queryMoney(Integer userid);
+
+    /**
+     * 改钱
+     * @param usermoney
+     * @param userid
+     * @return
+     */
+    public Integer updateMoney(Integer usermoney,Integer userid);
+
 }
