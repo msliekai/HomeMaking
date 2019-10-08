@@ -2,6 +2,7 @@ package com.hm.mapper;
 
 import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
+import org.apiguardian.api.API;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -55,6 +56,10 @@ public interface CompanyMapper {
     public Integer addmoney(@Param("famoney") String famoney,@Param("fid") Integer fid);
     //公司银行卡提现
     public Integer drawmoney(@Param("famoney") String famoney,@Param("fid") Integer fid);
+    //员工银行卡号
+    public Staff queryscard(@Param("scard") String scard);
+    //公司银行账号
+    public Tblfirmacc queryfacard(@Param("fid") Integer fid);
     //修改银行卡号
     public Integer changefacard(@Param("facard") String facard,@Param("fid") Integer fid);
     //检查银行卡支付密码
@@ -63,5 +68,11 @@ public interface CompanyMapper {
     public List<Tblfc> servicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     public Integer countservicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     //具体服务
-//    public List<TblCOS> service(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public List<Tblfc> queryserve(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public Integer countserve(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+
+    //评价
+    public List<Tbleva> querycomment(@Param("fid")Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    public Integer countcomment(@Param("fid")Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
 }
+

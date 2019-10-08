@@ -160,7 +160,8 @@
             if(addmoney!=null&&addmoney!=""){
                 $.post("<%=path%>page/addmoney.action",{"compwd":compwd,"addmoney":addmoney},function (data) {
                     if(data=="1"){
-                        alert("充值成功")
+                        alert("充值成功");
+                        window.location.href="<%=path%>page/company/account.jsp";
                     }else {
                         alert("支付密码不正确，充值失败");
                     }

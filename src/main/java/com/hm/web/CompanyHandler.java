@@ -1,10 +1,12 @@
 package com.hm.web;
 
+import com.hm.aop.TransLog;
 import com.hm.biz.CompanyBiz;
 import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
 import com.sun.deploy.ui.FancyButton;
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import sun.awt.SunHints;
 import sun.print.SunMinMaxPage;
 
 import javax.annotation.Resource;
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -207,21 +210,17 @@ public @ResponseBody String useDel(String sfid){
     //显示银行账户 余额 类型
     @RequestMapping(value = "queryfirmacc",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody Tblfirmacc queryfirmacc(HttpServletRequest request,HttpSession httpSession){
-        System.out.println("公司银行账户");
         Company company = (Company) httpSession.getAttribute("company");
-        System.out.println(company+"+++++++++++++");
         Integer fid = company.getFid();
         System.out.println(fid);
         Tblfirmacc queryfirmacc = companyBiz.queryfirmacc(fid);
         request.getSession().setAttribute("firmacc",queryfirmacc);
-        System.out.println(queryfirmacc+"****"+queryfirmacc.getCardtype());
         return queryfirmacc;
     }
     //充值
+    @TransLog(operationName = "充值",operationType = "银行卡")
     @RequestMapping(value = "addmoney",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String addmoney(HttpSession httpSession,String addmoney,String compwd){
-        System.out.println("充值");
-        System.out.println("检测银行卡密码是否正确");
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
         if(checkcompwd!=null){
@@ -254,7 +253,6 @@ public @ResponseBody String useDel(String sfid){
                 String money=sum+"";
                 System.out.println(money);
                 Integer row = companyBiz.drawmoney(money, fid);
-                System.out.println(row);
                 return "1";
 
             }else{
@@ -290,13 +288,27 @@ public @ResponseBody String useDel(String sfid){
         return map;
     }
 
-    /*//具体服务
-    @RequestMapping(value = "service",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public @ResponseBody Map<String,Object> service(HttpSession httpSession,Tblfc tblfc){
+    //具体服务
+    @RequestMapping(value = "queryserve",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> queryserve(HttpSession httpSession,Tblfc tblfc){
         System.out.println("具体服务");
+        Integer page = tblfc.getPage();
+        Integer limit = tblfc.getLimit();
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        System.out.println(fid);
+        System.out.println(page);
+        System.out.println(limit);
+        List<Tblfc> queryserve = companyBiz.queryserve(fid, page, limit);
+        System.out.println(queryserve+"********");
+        int count = companyBiz.countserve(fid,page,limit);
+        System.out.println(count+"+++++++++++");
         Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",queryserve);
         return map;
-    }*/
+    }
 
     //检测银行密码是否正确
     @RequestMapping(value = "checkcompwd",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
@@ -319,5 +331,61 @@ public @ResponseBody String useDel(String sfid){
 //        req.getSession().setAttribute("company",company);
         return "1";
     }
+
+    //评价
+    @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva){
+        System.out.println("评价");
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();
+        Integer page = tbleva.getPage();
+        Integer limit = tbleva.getLimit();
+        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit);
+        Map<String,Object> map=new HashMap<String,Object>();
+//        int count=0;
+        int count = companyBiz.countcomment(fid,page,limit);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",querycomment);
+        return map;
+    }
+    //银行转账
+    @RequestMapping(value = "transfer",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
+    public @ResponseBody String transfer(HttpSession httpSession,String collectcount,
+                                         String collect,String payee,String paymentpwd,String transfermoney){
+        Staff staff = companyBiz.queryscard(collectcount);
+        String sfname = staff.getSfname();
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();
+        System.out.println(fid+"//////");
+        Tblfirmacc queryfacard = companyBiz.queryfacard(fid);
+        String facard = queryfacard.getFacard();
+        System.out.println(queryfacard+"**********");
+        String famoney = queryfacard.getFamoney();//余额
+        System.out.println(famoney+"+++++");
+        System.out.println(transfermoney+"****");
+        int i = Integer.parseInt(famoney);
+        int j = Integer.parseInt(transfermoney);
+        String flaw = queryfacard.getCompany().getFlaw();//法人
+        Tblfirmacc checkcompwd = companyBiz.checkcompwd(facard, paymentpwd);//验证支付密码是否正确
+        if(checkcompwd!=null){
+            if(sfname.equals(collect)&&queryfacard!=null&&flaw.equals(payee))
+        {
+            if(j<i){
+                int sum=i-j;
+                String money=sum+"";
+                Integer drawmoney = companyBiz.drawmoney(money, fid);
+                return "1";
+            }else{
+                return "2";
+            }
+        }else {
+            return "0";
+        }
+        }else{
+            return "3";
+        }
+    }
+
 
 }

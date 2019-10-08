@@ -2,6 +2,8 @@ package com.hm.biz;
 
 import com.hm.entity.*;
 import com.hm.mapper.CompanyMapper;
+import org.apache.ibatis.annotations.Param;
+import org.bouncycastle.util.Integers;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -88,6 +90,28 @@ public class CompanyBizImpl implements CompanyBiz {
     public List<Tbltritem> train(Integer page, Integer limit) {
         return companyMapper.train(page,limit);
     }
+
+    @Override
+    public Tblfirmacc queryfacard(Integer fid) {
+        return companyMapper.queryfacard(fid);
+    }
+
+    @Override
+    public Staff queryscard(String scard) {
+        return companyMapper.queryscard(scard);
+    }
+
+    @Override
+    public Integer countcomment(Integer fid, Integer page, Integer limit) {
+        return companyMapper.countcomment(fid,page,limit);
+    }
+
+    //评价
+    @Override
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit) {
+        return companyMapper.querycomment(fid,page,limit);
+    }
+
     //    培训表总数
     @Override
     public Integer traincount() {
@@ -123,10 +147,15 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.checkcompwd(facard,compwd);
     }
 
+    @Override
+    public Integer countserve(Integer fid, Integer page, Integer limit) {
+        return companyMapper.countserve(fid,page,limit);
+    }
+
     //具体服务
     @Override
-    public List<TblCOS> service(Integer fid, Integer page, Integer limit) {
-        return null;
+    public List<Tblfc> queryserve(Integer fid, Integer page, Integer limit) {
+        return companyMapper.queryserve(fid,page,limit);
     }
 
     //某个公司提供的服务数量
