@@ -25,4 +25,16 @@ public class Staff {
     public Staff() {
 
     }
+
+    public Staff(Integer sfid, String sfname, String sfdob, String sfcos, String sfworkexp, String sfwant, String sfgood, String sfedu, String sftag) {
+        this.sfid = sfid;
+        this.sfname = sfname;
+        this.sfdob = sfdob;
+        this.sfcos = sfcos;
+        this.sfworkexp = sfworkexp;
+        this.sfwant = sfwant;
+        this.sfgood = sfgood;
+        this.sfedu = sfedu;
+        this.sftag = sftag;
+    }
 }

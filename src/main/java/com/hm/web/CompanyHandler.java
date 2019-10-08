@@ -4,7 +4,10 @@ import com.hm.biz.CompanyBiz;
 import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
+import com.hm.tools.TimeTools;
 import com.sun.deploy.ui.FancyButton;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,8 @@ import sun.print.SunMinMaxPage;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -117,6 +122,7 @@ public class CompanyHandler {
         //数据库查出条数
         Integer count1=companyBiz.stfCount();
         List<Credential> list1=companyBiz.findStfCreList(credential);
+        System.out.println(list1+"22");
         map.put("code",0);
         map.put("count",count1);
         map.put("data",list1);
@@ -151,7 +157,6 @@ public class CompanyHandler {
         Company company = (Company) session.getAttribute("company");
         Integer count=companyBiz.staffCount(company.getFid());
         List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
-        System.out.println(list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -317,4 +322,83 @@ public @ResponseBody String useDel(String sfid){
         return "1";
     }
 
+//    抢单
+    @RequestMapping(value = "takeOrders",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody Map<String,Object> takeOrders(HttpSession httpSession,Tblorder tblorder)
+    {
+        Integer page = tblorder.getPage();
+        Integer limit = tblorder.getLimit();
+        Integer osid=6;
+        List<Tblorder> list = companyBiz.takeOrders(osid,page,limit);
+        Integer count=list.size();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+    //-----查找用户信息
+    @RequestMapping(value = "finduser",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody TblUser finduser(HttpSession httpSession,TblUser tblUser)
+    {
+        Integer userid = tblUser.getUserid();
+        TblUser user = companyBiz.findUser(userid);
+        System.out.println(user);
+        return user;
+    }
+    //--------查找员工信息
+    @RequestMapping(value = "findStaff",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody List<Staff> findStaff(HttpSession session)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        List<Staff> list=companyBiz.findStaff(fid);
+        System.out.println(list);
+        return list;
+    }
+    //--------------接单
+    @RequestMapping(value = "take",method = RequestMethod.GET,produces ="application/text;charset=utf-8" )
+    public @ResponseBody String take(Tblorder tblorder)
+    {
+
+        //---获取订单号
+        Integer oid= tblorder.getOid();
+        //--员工id
+        Integer sfid=tblorder.getSfid();
+        //--服务时间
+        String svtime=tblorder.getSvtime();
+        //--订单时间
+        String otime= TimeTools.getStringDateMin();
+        //--更改状态
+        Integer osid=7;
+        tblorder.setOid(oid);
+        tblorder.setOsid(osid);
+        tblorder.setSfid(sfid);
+        tblorder.setSvtime(svtime);
+        tblorder.setOtime(otime);
+
+        Integer a = companyBiz.addOrder(tblorder);
+        if(a>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+
+    @RequestMapping(value = "staffFix",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String staffFix(Staff staff)
+    {
+        Staff staff1 = new Staff(staff.getSfid(),staff.getSfname(),staff.getSfdob(),
+                staff.getSfcos(),staff.getSfworkexp(),staff.getSfwant(),
+                staff.getSfgood(),staff.getSfedu(),staff.getSftag());
+
+        Integer b = companyBiz.staffFix(staff1);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
 }

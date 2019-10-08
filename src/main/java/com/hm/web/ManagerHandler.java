@@ -1,14 +1,12 @@
 package com.hm.web;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hm.biz.MangerBiz;
 import com.hm.biz.MenuBiz;
-import com.hm.biz.UserBiz;
 import com.hm.entity.*;
 import com.hm.biz.StatisticsBizImpl;
-import com.hm.entity.*;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,9 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/manager")

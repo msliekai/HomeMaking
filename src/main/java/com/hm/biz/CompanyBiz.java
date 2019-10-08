@@ -56,4 +56,16 @@ public interface CompanyBiz {
     //查询具体服务
     public List<TblCOS> service(Integer fid,Integer page,Integer limit);
 
+    //员工新增
+    public Staff addStaff(Staff staff);
+//    抢单
+    public List<Tblorder> takeOrders(Integer osid,Integer page,Integer limit);
+    //--------查找用户
+    public TblUser findUser(Integer userid);
+    //--------查找用户
+    public List<Staff> findStaff(Integer fid);
+    //----------抢单更新
+    public Integer addOrder(Tblorder tblorder);
+    //---员工修改
+    public Integer staffFix(Staff staff);
 }

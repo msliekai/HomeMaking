@@ -129,6 +129,41 @@ public class CompanyBizImpl implements CompanyBiz {
         return null;
     }
 
+    //员工新增
+    @Override
+    public Staff addStaff(Staff staff) {
+        Staff obj=staff;
+        companyMapper.addStaff(obj);
+        return obj;
+    }
+    //    抢单
+    @Override
+    public List<Tblorder> takeOrders(Integer osid,Integer page,Integer limit) {
+        return companyMapper.takeorders(osid,page,limit);
+    }
+    //--------查找用户
+    @Override
+    public TblUser findUser(Integer userid) {
+        return companyMapper.findUser(userid);
+    }
+    //--------查找用户
+    @Override
+    public List<Staff> findStaff(Integer fid) {
+        return companyMapper.findStaff(fid);
+    }
+    //----------抢单更新
+    @Override
+    public Integer addOrder(Tblorder tblorder) {
+
+
+        return companyMapper.addOrder(tblorder);
+    }
+    //---员工修改
+    @Override
+    public Integer staffFix(Staff staff) {
+        return companyMapper.staffFix(staff);
+    }
+
     //某个公司提供的服务数量
     @Override
     public Integer countservicetype(Integer fid, Integer page, Integer limit) {

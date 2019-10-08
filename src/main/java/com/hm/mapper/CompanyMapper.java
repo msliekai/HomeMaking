@@ -38,7 +38,6 @@ public interface CompanyMapper {
     public Integer traincount();
     //-----------删除员工
     public Integer delStaff(Integer sfid);
-    public List<Credential> findCreList(Company company);
 
     //修改公司基本信息
     public int upcom(@Param("fid")Integer fid,@Param("facc")String facc,@Param("fname") String fname,@Param("flaw") String flaw,
@@ -63,4 +62,16 @@ public interface CompanyMapper {
     public Integer countservicetype(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
     //具体服务
 //    public List<TblCOS> service(@Param("fid") Integer fid,@Param("page") Integer page,@Param("limit") Integer limit);
+    //员工新增
+    public Integer addStaff(Staff staff);
+    //    抢单
+    public List<Tblorder> takeorders(@Param("osid") Integer osid,@Param("page") Integer page,@Param("limit") Integer limit);
+    //--------查找用户
+    public TblUser findUser(Integer userid);
+    //--------查找用户
+    public List<Staff> findStaff(Integer fid);
+    //----------抢单更新
+    public Integer addOrder(Tblorder tblorder);
+    //---员工修改
+    public Integer staffFix(Staff staff);
 }

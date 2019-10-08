@@ -49,7 +49,7 @@
     <select id="findCompanyOrder" parameterType="com.hm.entity.Company" resultMap="commap">
         SELECT g.sfurl,g.sfname,ff.fname,p.otime,p.svtime,g.sfcos,q.osname,p.userid from
         tblfirm ff,tblorder p,tbloderstate q,(SELECT s.* from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g
-        where  g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid
+        where  g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid and p.osid !=6
         <if test="osname!=null and osname!=''">
             and q.osname like "%"#{osname}"%"
         </if>
@@ -229,7 +229,7 @@
     </select>
 <!--    员工信息表-->
     <select id="staffList"  resultMap="staff">
-    SELECT f.sfid,f.sfname,f.sfage,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
+    SELECT f.sfid,f.sfname,f.sfcos,f.sfage,f.sfworkexp,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
     from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid} and s.stid != 3
         <bind name="page" value="(page-1)*limit"/>
     limit #{page},#{limit}
@@ -240,6 +240,8 @@
         <result property="sfage" column="sfage"/>
         <result property="sfdob" column="sfdob"/>
         <result property="sfedu" column="sfedu"/>
+        <result property="sfcos" column="sfcos"/>
+        <result property="sfworkexp" column="sfworkexp"/>
         <result property="sfid" column="sfid"/>
         <result property="sftag" column="sftag"/>
         <result property="sfgood" column="sfgood"/>
@@ -251,7 +253,7 @@
     </resultMap>
     <!--    员工总数-->
     <select id="staffCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-    SELECT count(*) from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid}
+    SELECT count(*) from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid} and s.stid != 3
     </select>
     <!--培训表-->
     <select id="train" resultType="com.hm.entity.Tbltrain">
@@ -266,6 +268,66 @@
     <update id="delStaff" parameterType="java.lang.Integer" >
         update tblstaff set stid=3 where sfid=#{sfid}
     </update>
-
-
+<!--    新增员工-->
+    <insert id="addStaff" parameterType="com.hm.entity.Staff">
+        insert into tblstaff
+        (sfname,sfdob,sfage,sfexp,sfcos,sfworkexp,sfgood,sftag,sfedu,sfwant,sfurl,fid,stid)
+        values
+        (#{sfname},#{sfdob},#{sfage},#{sfexp},#{sfcos},#{sfworkexp},#{sfgood},#{sftag},#{sfedu},#{sfwant},#{sfurl},#{fid},4)
+        <selectKey resultType="java.lang.Integer" keyProperty="sfid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS sfid
+        </selectKey>
+    </insert>
+<!--    抢单-->
+    <select id="takeorders" resultMap="qiang">
+        SELECT o.oid,c.cosname,u.userid,u.username,o.sendtime,o.otitle,o.ocontext,o.ophone,o.onumber from tblorder o,tblCOS c,tbluser u where o.cosid=c.cosid and u.userid=o.userid and o.osid=#{osid} GROUP BY o.oid
+        <bind name="page" value="(page-1)*limit"/>
+        limit #{page},#{limit}
+    </select>
+    <resultMap id="qiang" type="com.hm.entity.Tblorder">
+        <id property="oid" column="oid"/>
+        <result property="sendtime" column="sendtime" />
+        <result property="otitle" column="otitle" />
+        <result property="ocontext" column="ocontext" />
+        <result property="ophone" column="ophone" />
+        <result property="onumber" column="onumber" />
+        <association property="tblCOS" column="tblCOS" javaType="com.hm.entity.TblCOS">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+        </association>
+        <association property="tblUser" column="tblUser" javaType="com.hm.entity.TblUser">
+            <id property="userid" column="userid"/>
+            <result property="username" column="username"/>
+        </association>
+    </resultMap>
+<!--    查找用户-->
+<select id="findUser" parameterType="java.lang.Integer" resultMap="usermap">
+    SELECT * from tbluser u,tblsite s where u.sid=s.sid and u.userid=#{userid}
+</select>
+    <resultMap id="usermap" type="com.hm.entity.TblUser">
+        <id property="userid" column="userid"/>
+        <result property="username" column="username"/>
+        <result property="userphone" column="userphone"/>
+        <association property="tblSite" column="tblSite" javaType="com.hm.entity.TblSite">
+            <id property="sid" column="sid"/>
+            <result property="sa" column="sa"/>
+            <result property="sb" column="sb"/>
+            <result property="sc" column="sc"/>
+            <result property="scontext" column="scontext"/>
+        </association>
+    </resultMap>
+<!--    查找员工-->
+    <select id="findStaff" parameterType="java.lang.Integer" resultType="com.hm.entity.Staff">
+        SELECT *  from tblstaff where  fid=#{fid} and stid != 3
+    </select>
+<!--    抢单更新-->
+    <update id="addOrder" parameterType="com.hm.entity.Tblorder">
+        UPDATE tblorder set sfid=#{sfid},otime=#{otime},svtime=#{svtime},osid=#{osid} where oid=#{oid}
+    </update>
+<!--    员工修改-->
+    <update id="staffFix" parameterType="com.hm.entity.Staff">
+        update tblstaff set sfname=#{sfname},sfdob=#{sfdob},sfcos=#{sfcos},sfworkexp=#{sfworkexp},
+        sfgood=#{sfgood},sftag=#{sftag},sfedu=#{sfedu},sfwant=#{sfwant}
+        where sfid=#{sfid}
+    </update>
 </mapper>

@@ -15,6 +15,7 @@ public class Tblorder {
     private String svtime;
     private Integer hzid;
     private String otitle;
+    private String ocontext;
     private String odeta;
     private String ophone;
     private String onumber;
@@ -34,6 +35,7 @@ public class Tblorder {
     private TblSite tblSite;
     private Integer page;
     private Integer limit;
+
 
 
 }

@@ -38,6 +38,8 @@ public class TblUser {
     private Integer page;
     //条数
     private Integer limit;
+    //地址
+    private TblSite tblSite;
 
     public TblUser() {
     }
@@ -160,5 +162,13 @@ public class TblUser {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public TblSite getTblSite() {
+        return tblSite;
+    }
+
+    public void setTblSite(TblSite tblSite) {
+        this.tblSite = tblSite;
     }
 }
