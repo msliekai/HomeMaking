@@ -1,10 +1,17 @@
 package com.hm.web;
 
+import com.hm.aop.TransLog;
 import com.hm.biz.CompanyBiz;
 import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
+import com.hm.tools.TimeTools;
 import com.sun.deploy.ui.FancyButton;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import org.aspectj.weaver.ast.Or;
+import com.sun.org.apache.regexp.internal.RE;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +23,10 @@ import sun.awt.SunHints;
 import sun.print.SunMinMaxPage;
 
 import javax.annotation.Resource;
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -151,7 +161,6 @@ public class CompanyHandler {
         Company company = (Company) session.getAttribute("company");
         Integer count=companyBiz.staffCount(company.getFid());
         List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
-        System.out.println(list);
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -205,21 +214,17 @@ public @ResponseBody String useDel(String sfid){
     //显示银行账户 余额 类型
     @RequestMapping(value = "queryfirmacc",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody Tblfirmacc queryfirmacc(HttpServletRequest request,HttpSession httpSession){
-        System.out.println("公司银行账户");
         Company company = (Company) httpSession.getAttribute("company");
-        System.out.println(company+"+++++++++++++");
         Integer fid = company.getFid();
         System.out.println(fid);
         Tblfirmacc queryfirmacc = companyBiz.queryfirmacc(fid);
         request.getSession().setAttribute("firmacc",queryfirmacc);
-        System.out.println(queryfirmacc+"****"+queryfirmacc.getCardtype());
         return queryfirmacc;
     }
     //充值
+    @TransLog(operationName = "充值",operationType = "银行卡")
     @RequestMapping(value = "addmoney",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String addmoney(HttpSession httpSession,String addmoney,String compwd){
-        System.out.println("充值");
-        System.out.println("检测银行卡密码是否正确");
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
         if(checkcompwd!=null){
@@ -252,7 +257,6 @@ public @ResponseBody String useDel(String sfid){
                 String money=sum+"";
                 System.out.println(money);
                 Integer row = companyBiz.drawmoney(money, fid);
-                System.out.println(row);
                 return "1";
 
             }else{
@@ -266,8 +270,6 @@ public @ResponseBody String useDel(String sfid){
     //银行卡修改
     @RequestMapping(value = "changefacard",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public @ResponseBody String changefacard(HttpSession httpSession,String car){
-
-        System.out.println("修改银行卡号");
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer row = companyBiz.changefacard(car, fid);
@@ -281,7 +283,7 @@ public @ResponseBody String useDel(String sfid){
         Integer limit = tblfc.getLimit();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        List<TblCOStype> servicetype = companyBiz.servicetype(fid,page,limit);
+        List<Tblfc> servicetype = companyBiz.servicetype(fid,page,limit);
         int count =companyBiz.countservicetype(fid,page,limit);
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",0);
@@ -290,13 +292,27 @@ public @ResponseBody String useDel(String sfid){
         return map;
     }
 
-    /*//具体服务
-    @RequestMapping(value = "service",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public @ResponseBody Map<String,Object> service(HttpSession httpSession,Tblfc tblfc){
+    //具体服务
+    @RequestMapping(value = "queryserve",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> queryserve(HttpSession httpSession,Tblfc tblfc){
         System.out.println("具体服务");
+        Integer page = tblfc.getPage();
+        Integer limit = tblfc.getLimit();
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        System.out.println(fid);
+        System.out.println(page);
+        System.out.println(limit);
+        List<Tblfc> queryserve = companyBiz.queryserve(fid, page, limit);
+        System.out.println(queryserve+"********");
+        int count = companyBiz.countserve(fid,page,limit);
+        System.out.println(count+"+++++++++++");
         Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",queryserve);
         return map;
-    }*/
+    }
 
     //检测银行密码是否正确
     @RequestMapping(value = "checkcompwd",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
@@ -310,11 +326,149 @@ public @ResponseBody String useDel(String sfid){
     }
     //修改公司信息
     @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
-    public @ResponseBody String upcom(HttpSession httpSession,String facc,
-                                      String fname,String flaw,String flawphone,String fsite){
+    public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
+                                      String fname, String flaw, String flawphone, String fsite){
         Company company = (Company) httpSession.getAttribute("company");
         int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,flawphone,fsite);
+        Company upcominfo = companyBiz.upcominfo(company.getFid());
+        httpSession.setAttribute("company",upcominfo);
+//        req.getSession().setAttribute("company",company);
         return "1";
     }
 
+    //评价
+    @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva){
+        System.out.println("评价");
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();
+        Integer page = tbleva.getPage();
+        Integer limit = tbleva.getLimit();
+        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit);
+        Map<String,Object> map=new HashMap<String,Object>();
+//        int count=0;
+        int count = companyBiz.countcomment(fid,page,limit);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",querycomment);
+        return map;
+    }
+    //银行转账
+    @RequestMapping(value = "transfer",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
+    public @ResponseBody String transfer(HttpSession httpSession,String collectcount,
+                                         String collect,String payee,String paymentpwd,String transfermoney){
+        Staff staff = companyBiz.queryscard(collectcount);
+        String sfname = staff.getSfname();
+        Company company = (Company) httpSession.getAttribute("company");
+        Integer fid = company.getFid();
+        System.out.println(fid+"//////");
+        Tblfirmacc queryfacard = companyBiz.queryfacard(fid);
+        String facard = queryfacard.getFacard();
+        System.out.println(queryfacard+"**********");
+        String famoney = queryfacard.getFamoney();//余额
+        System.out.println(famoney+"+++++");
+        System.out.println(transfermoney+"****");
+        int i = Integer.parseInt(famoney);
+        int j = Integer.parseInt(transfermoney);
+        String flaw = queryfacard.getCompany().getFlaw();//法人
+        Tblfirmacc checkcompwd = companyBiz.checkcompwd(facard, paymentpwd);//验证支付密码是否正确
+        if(checkcompwd!=null){
+            if(sfname.equals(collect)&&queryfacard!=null&&flaw.equals(payee))
+        {
+            if(j<i){
+                int sum=i-j;
+                String money=sum+"";
+                Integer drawmoney = companyBiz.drawmoney(money, fid);
+                return "1";
+            }else{
+                return "2";
+            }
+        }else {
+            return "0";
+        }
+        }else{
+            return "3";
+        }
+    }
+
+
+//    抢单
+    @RequestMapping(value = "takeOrders",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody Map<String,Object> takeOrders(HttpSession httpSession,Tblorder tblorder)
+    {
+        Integer page = tblorder.getPage();
+        Integer limit = tblorder.getLimit();
+        Integer osid=6;
+        List<Tblorder> list = companyBiz.takeOrders(osid,page,limit);
+        Integer count=list.size();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
+    //-----查找用户信息
+    @RequestMapping(value = "finduser",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody TblUser finduser(HttpSession httpSession,TblUser tblUser)
+    {
+        Integer userid = tblUser.getUserid();
+        TblUser user = companyBiz.findUser(userid);
+        System.out.println(user);
+        return user;
+    }
+    //--------查找员工信息
+    @RequestMapping(value = "findStaff",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody List<Staff> findStaff(HttpSession session)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        List<Staff> list=companyBiz.findStaff(fid);
+        System.out.println(list);
+        return list;
+    }
+    //--------------接单
+    @RequestMapping(value = "take",method = RequestMethod.GET,produces ="application/text;charset=utf-8" )
+    public @ResponseBody String take(Tblorder tblorder)
+    {
+
+        //---获取订单号
+        Integer oid= tblorder.getOid();
+        //--员工id
+        Integer sfid=tblorder.getSfid();
+        //--服务时间
+        String svtime=tblorder.getSvtime();
+        //--订单时间
+        String otime= TimeTools.getStringDateMin();
+        //--更改状态
+        Integer osid=7;
+        tblorder.setOid(oid);
+        tblorder.setOsid(osid);
+        tblorder.setSfid(sfid);
+        tblorder.setSvtime(svtime);
+        tblorder.setOtime(otime);
+
+        Integer a = companyBiz.addOrder(tblorder);
+        if(a>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //------员工修改
+    @RequestMapping(value = "staffFix",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String staffFix(Staff staff)
+    {
+        Staff staff1 = new Staff(staff.getSfid(),staff.getSfname(),staff.getSfdob(),
+                staff.getSfcos(),staff.getSfworkexp(),staff.getSfwant(),
+                staff.getSfgood(),staff.getSfedu(),staff.getSftag());
+
+        Integer b = companyBiz.staffFix(staff1);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
 }

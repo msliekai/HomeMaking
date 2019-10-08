@@ -1,6 +1,7 @@
 package com.hm.biz;
 
 import com.hm.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface CompanyBiz {
     public int addCompany(Company company);
     //修改公司基本信息
     public int upcom(Integer fid,String facc,String fname,String flaw,String flawphone,String fsite);
+    public Company upcominfo(Integer fid);
     //------公司证书列表
     public List<Credential> findCreList(Credential credential);
     //------员工证书列表
@@ -45,15 +47,36 @@ public interface CompanyBiz {
     public Integer addmoney( String famoney,Integer fid);
     //银行提现
     public Integer drawmoney( String famoney,Integer fid);
+    //员工银行卡号
+    public Staff queryscard(String scard);
+    //银行卡号
+    public Tblfirmacc queryfacard(Integer fid);
     //修改银行卡号
     public Integer changefacard(String facard,Integer fid);
     //检查银行卡支付密码
     public Tblfirmacc checkcompwd(String facard,String compwd);
     //查询某个公司的所有服务
-    public List<TblCOStype> servicetype(Integer fid,Integer page,Integer limit);
+    public List<Tblfc> servicetype(Integer fid,Integer page,Integer limit);
     public Integer countservicetype(Integer fid,Integer page,Integer limit);
 
     //查询具体服务
-    public List<TblCOS> service(Integer fid,Integer page,Integer limit);
+    public List<Tblfc> queryserve(Integer fid,Integer page,Integer limit);
+    public Integer countserve(Integer fid,Integer page,Integer limit);
+    //评价
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit);
+    public Integer countcomment(Integer fid,Integer page,Integer limit);
 
+
+    //员工新增
+    public Staff addStaff(Staff staff);
+//    抢单
+    public List<Tblorder> takeOrders(Integer osid,Integer page,Integer limit);
+    //--------查找用户
+    public TblUser findUser(Integer userid);
+    //--------查找用户
+    public List<Staff> findStaff(Integer fid);
+    //----------抢单更新
+    public Integer addOrder(Tblorder tblorder);
+    //---员工修改
+    public Integer staffFix(Staff staff);
 }

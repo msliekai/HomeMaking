@@ -12,6 +12,7 @@ public class Tblfc {
     private TblCOStype tblCOStype;//服务
     private Integer stid;
     private Tblstate tblstate;//中间表里的状态表
+    private TblCOS tblCOS;
     private Integer limit;
     private Integer page;
 

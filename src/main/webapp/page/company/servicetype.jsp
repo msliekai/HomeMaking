@@ -111,7 +111,7 @@
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
-
+                console.log(res);
                 return {
                     "code": eval(res.code), //解析接口状态
                     // "msg": res.msg, //解析提示文本

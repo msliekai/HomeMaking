@@ -150,7 +150,8 @@
                 if(draw!=null&&draw!=""){
                     $.post("<%=path%>page/drawmoney.action",{"compwd":compwd,"draw":draw},function (data) {
                         if(data=="1"){
-                            alert("提现成功")
+                            alert("提现成功");
+                            window.location.href="<%=path%>page/company/account.jsp";
                         }else {
                             alert("支付密码不正确，充值失败");
                         }

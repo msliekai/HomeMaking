@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hm.biz.MangerBiz;
 import com.hm.biz.MenuBiz;
-import com.hm.biz.UserBiz;
 import com.hm.entity.*;
 import com.hm.biz.StatisticsBizImpl;
 import org.springframework.stereotype.Controller;
@@ -20,9 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/manager")
