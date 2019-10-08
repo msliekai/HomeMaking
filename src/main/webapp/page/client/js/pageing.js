@@ -111,6 +111,10 @@ function getPageOfMemo(page) {
     });
 };
 
+/**
+ * 异步用收藏
+ * @param sfid
+ */
 function collections(sfid) {
     layui.use('layer', function () {
     $.ajax({
@@ -132,7 +136,10 @@ function collections(sfid) {
     })
 }
 
-
+/**
+ * 异步用取消收藏
+ * @param scoid
+ */
 function delcollections(scoid){
     layui.use('layer', function () {
         $.ajax({
@@ -155,7 +162,10 @@ function delcollections(scoid){
 }
 
 
-//详细界面专用
+/**
+ * 同步用取消收藏
+ * @param scoid
+ */
 function proDelcollections(scoid){
     layui.use('layer', function () {
         $.ajax({
@@ -176,6 +186,11 @@ function proDelcollections(scoid){
         })
     })
 }
+
+/**
+ * 同步用收藏
+ * @param sfid
+ */
 function proCollections(sfid) {
     layui.use('layer', function () {
         $.ajax({

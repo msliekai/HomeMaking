@@ -53,17 +53,16 @@
 <!--根据id查阿姨-->
     <select id="queryOneStaff"  resultMap="cstaff">
         SELECT xl.*,sl.scoid,sl.scotime from (SELECT *from (SELECT
-        c.ctid,c.ctname,c.ctcontext,c.cttime,
-        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
-        tblfc.fcid,tblfc.fid,
-        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
-        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
+        ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
+        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,
+        sf.sfwant,sf.sfgood, sf.sfedu,sf.sfurl,sf.scard,ct.ctid,fm.fid
         FROM
-        tblCOStype AS c
-        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
-        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
-        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
-        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        tblstaff AS sf
+        INNER JOIN tblfirm AS fm ON sf.fid = fm.fid
+        INNER JOIN tblCOS AS c ON sf.cosid = c.cosid
+        INNER JOIN tblCOStype AS ct ON c.ctid = ct.ctid
+        INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid AND fc.fid = fm.fid)m
         where sfid=#{sfid}
         ) xl left join tblsfcoll sl on xl.sfid=sl.sfid and userid=#{userid}
     </select>
@@ -74,22 +73,22 @@
                 SELECT xl.*,sl.scoid,sl.scotime from (
             </if>
         </if>
-        SELECT *from (SELECT
-        c.ctid,c.ctname,c.ctcontext,c.cttime,
-        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
-        tblfc.fcid,tblfc.fid,
-        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
-        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        SELECT *from (
+        SELECT
+        fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
+        ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
+        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,
+        sf.sfwant,sf.sfgood, sf.sfedu,sf.sfurl,sf.scard,ct.ctid,fm.fid
         FROM
-        tblCOStype AS c
-        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
-        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
-        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
-        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        tblstaff AS sf
+        INNER JOIN tblfirm AS fm ON sf.fid = fm.fid
+        INNER JOIN tblCOS AS c ON sf.cosid = c.cosid
+        INNER JOIN tblCOStype AS ct ON c.ctid = ct.ctid
+        INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid AND fc.fid = fm.fid)m
         <if test="aunt!=null">
             <if test="aunt.length>0">
-                WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR cosdeta
-                LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
+                WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR
+                cosdeta LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
             </if>
         </if>
         <bind name="page" value="(page-1)*limit"/>
@@ -142,17 +141,16 @@
     <!--阿姨数量-->
     <select id="getStaffCount" resultType="java.lang.Integer">
         SELECT count(*) from (SELECT
-        c.ctid,c.ctname,c.ctcontext,c.cttime,
-        cos.cosid,cos.cosname,cos.cosdeta,cos.costime,cos.coshot,
-        tblfc.fcid,tblfc.fid,
-        f.facc,f.fpwd,f.fname,f.flaw,f.fphone,f.flawphone,f.fsite,f.ftime,f.rid,
-        sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,sf.sftrain,sf.sfwant,sf.sfgood,sf.sfedu,sf.sfurl
+        fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
+        ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
+        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,
+        sf.sfwant,sf.sfgood, sf.sfedu,sf.sfurl,sf.scard,ct.ctid,fm.fid
         FROM
-        tblCOStype AS c
-        INNER JOIN tblCOS AS cos ON cos.ctid = c.ctid
-        INNER JOIN tblfirm AS f ON f.ctid = c.ctid
-        INNER JOIN tblstaff AS sf ON sf.cosid = cos.cosid AND sf.fid = f.fid
-        INNER JOIN tblfc ON tblfc.ctid = c.ctid AND tblfc.fid = f.fid)m
+        tblstaff AS sf
+        INNER JOIN tblfirm AS fm ON sf.fid = fm.fid
+        INNER JOIN tblCOS AS c ON sf.cosid = c.cosid
+        INNER JOIN tblCOStype AS ct ON c.ctid = ct.ctid
+        INNER JOIN tblfc AS fc ON fc.ctid = ct.ctid AND fc.fid = fm.fid)m
         <if test="aunt.length>0">
             WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR cosdeta
             LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"

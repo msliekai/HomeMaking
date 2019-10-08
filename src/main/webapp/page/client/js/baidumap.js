@@ -1,14 +1,14 @@
 function mapre(){
-    $.ajax({
-        async: true,
-        type: "post", //提交方式
-        url: "../admin/addOrder2.action",
-        data: self.serialize(), //获得表单的信息
-        // dataType:"text", //返回类型
-        success: function (jso) {//执行结果
-
-        },
-    });
+    // $.ajax({
+    //     async: true,
+    //     type: "post", //提交方式
+    //     url: "../admin/addOrder2.action",
+    //     data: self.serialize(), //获得表单的信息
+    //     // dataType:"text", //返回类型
+    //     success: function (jso) {//执行结果
+    //
+    //     },
+    // });
     $("#ccypt").text("正在获取位置......");
     //创建百度地图控件
     var geolocation = new BMap.Geolocation();
