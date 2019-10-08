@@ -134,7 +134,7 @@
                 , {field: 'site', title: '所在地区', minWidth: 150,templet:function (d) {return d.tblSite.site}}
                 , {field: 'scontext', title: '详细地址', minWidth: 80,templet:function (d) {return d.tblSite.scontext}}
                 , {field: 'sphone', title: '联系方式', minWidth:80,templet:function (d) {return d.tblSite.sphone}}
-                , {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                , {fixed: 'right',title: '操作', align:'center',minWidth:180,templet:function (item) {
                         var tem = [];
                         var usersid=$('#usersid').val();
 

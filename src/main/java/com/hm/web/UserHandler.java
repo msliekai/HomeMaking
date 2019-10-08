@@ -292,17 +292,17 @@ public class UserHandler {
     }
 
     @RequestMapping("/jUserPay.action")
-    public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        System.out.println("充值的金额是："+usermoney);
-        int a = biz.jUserPay(userid,usermoney);
+    public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
-        user.setUsermoney(user.getUsermoney()+usermoney);
-        System.out.println("充值后的金额是："+user.getUsermoney());
-        request.getSession().setAttribute("userbacc",user);
+        userid =user.getUserid();
+        System.out.println("充值的金额是："+usermoney);
+        int a = biz.jUserPay(userid,usermoney,userpwd);
         String b =null;
         if (0 < a){
             b ="1";
+            user.setUsermoney(user.getUsermoney()+usermoney);
+            System.out.println("充值后的金额是："+user.getUsermoney());
+            request.getSession().setAttribute("userbacc",user);
         }else {
             b ="0";
         }
@@ -310,5 +310,21 @@ public class UserHandler {
         return b;
     }
 
-
+    @RequestMapping("/jUserCard.action")
+    public @ResponseBody String jUserCard(HttpServletRequest request,Integer userid,String usercard,String userpwd){
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        userid = user.getUserid();
+        System.out.println("新的卡号是："+usercard);
+        int a = biz.jUserCard(userid,usercard,userpwd);
+        String b =null;
+        if (0 < a){
+            b ="1";
+            user.setUsercard(usercard);
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
 }

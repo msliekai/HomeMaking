@@ -83,7 +83,9 @@ public interface UserBiz {
     public List<Tblorder> jUserticket(int page,int limit,Integer userid);
 
     //充值
-    public int jUserPay(Integer userid,Integer money);
+    public int jUserPay(Integer userid,Integer money,String userpwd);
+    //修改卡号
+    public int jUserCard(Integer userid,String usercard,String userpwd);
     //public Integer queryUserState(String userphone);
 
     /**

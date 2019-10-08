@@ -78,6 +78,15 @@
                         </div>--%>
 
     订单记录<hr class="layui-bg-blue">
+    <form class="layui-form" enctype="multipart/form-data">
+        <select name="osid" id="osid" lay-verify="" lay-search>
+            <option value="" selected>全部</option>
+            <option value="7">待确认</option>
+            <option value="1">待处理</option>
+            <option value="2">已处理</option>
+            <option value="5">已评价</option>
+        </select>
+    </form>
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
@@ -106,6 +115,8 @@
 </script>
 
 <script>
+
+
     layui.use('table', function() {
         var table = layui.table;
 
@@ -114,7 +125,7 @@
             // , height: 500
             , url: '<%=path%>admin/jUserMoney.action' //数据接口
             , page: true //开启分页
-            ,limit:2
+            ,limit:3
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -154,18 +165,14 @@
         //触发查询按钮
             var $ = layui.$, active = {
                 reload: function(){
-                    var uname = $('#uname');
-                    var cong=$('#cong');
-                    var dao=$('#dao');
+                    var osid = $('#osid');
                     //执行重载
                     table.reload('testReload', {
                         page: {
                             curr: 1 //重新从第 1 页开始
                         }
                         ,where: {
-                            uname: uname.val(),
-                            cong:cong.val(),
-                            dao:dao.val(),
+                            osid: osid.val(),
                         }
                     }, 'data');
                 }
@@ -177,9 +184,35 @@
             active[type] ? active[type].call(this) : '';
         })
 
+        //下拉框筛选
+        /*form.on('submit(add)',
+            function (data) {
+
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "<%=path%>admin/jUserPay.action",
+                    data: data.field,
+                    success: function (bac) {
+                        if (bac == "1") {
+                            /!*layer.msg("添加成功")*!/
+                            layer.alert("充值成功", {
+                                icon: 6
+                            }, function () {
+                                //关闭当前frame
+                                xadmin.close();
+                                // 可以对父窗口进行刷新
+                                xadmin.father_reload();
+                            });
+                        } else {
+                            layer.msg("充值失败");
+                        }
+                    }
+                })
+                return false;
+            });*/
+
         //查看详情
-
-
 
         //监听行工具事件
         table.on('tool(test)', function(obj) {

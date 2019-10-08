@@ -114,8 +114,13 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public int jUserPay(Integer userid, Integer money) {
-        return userMapper.jUserPay(userid,money);
+    public int jUserPay(Integer userid, Integer money,String userpwd) {
+        return userMapper.jUserPay(userid,money,userpwd);
+    }
+
+    @Override
+    public int jUserCard(Integer userid, String usercard, String userpwd) {
+        return userMapper.jUserCard(userid,usercard,userpwd);
     }
 
 
