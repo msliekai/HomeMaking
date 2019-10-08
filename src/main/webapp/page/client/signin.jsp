@@ -172,8 +172,8 @@
     // $(document).ready(function(){
 
     function userLogin() {
-
-        if (valForm()) {
+        //
+        // if (valForm()) {
             layui.use('layer', function () {
 
                 var self = $("form");
@@ -217,7 +217,7 @@
                 });
             })
         }
-    }
+    // }
 
 
     // })

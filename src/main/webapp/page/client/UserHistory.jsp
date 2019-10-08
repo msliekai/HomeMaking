@@ -26,7 +26,7 @@
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
-              <cite>历史需求</cite></a>
+              <cite>历史服务</cite></a>
           </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -102,7 +102,7 @@
 <script id="barDemo" type="text/html">
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
     <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">去评价</a>
+    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd" onclick="xadmin.open('申请售后','<%=path%>page/client/branch/AfterSale.jsp',600,400)">申请售后</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
 </script>
 
@@ -113,7 +113,7 @@
         table.render({
             elem: '#utable'
             // , height: 500
-            , url: '<%=path%>admin/jUserMoney.action' //数据接口
+            , url: '<%=path%>admin/jUserHistory.action' //数据接口
             , page: true //开启分页
             ,limit:2
             // ,method:"get"
@@ -129,13 +129,16 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'oid', title: '服务类别', minWidth: 80}
-                , {field: 'onumber', title: '服务事项', minWidth: 150}
-                , {field: 'cosname', title: '服务频次', minWidth: 80}
-                , {field: 'ctname', title: '标题', minWidth:80}
-                , {field: 'otime', title: '描述', minWidth: 100}
-                , {field: 'otime', title: '联系方式', minWidth: 100}
-                , {field: 'otime', title: '详细地址', minWidth: 100}
+                {field: 'onumber', title: '订单号', minWidth: 100}
+                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.tblCOS.cosname}}
+                , {field: 'ctname', title: '服务类别', minWidth: 80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
+                , {field: 'hzname', title: '服务频次', minWidth: 80,templet:function (d) {return d.tblHZ.hzname}}
+                , {field: 'otitle', title: '标题', minWidth:80}
+                , {field: 'ocontext', title: '描述', minWidth: 150}
+                , {field: 'ophone', title: '联系方式', minWidth: 110}
+                , {field: 'site', title: '联系地址', minWidth: 180,templet:function (d) {return d.tblSite.site}}
+                , {field: 'money', title: '消费金额', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 150}
             ]]
         });
         //触发查询按钮

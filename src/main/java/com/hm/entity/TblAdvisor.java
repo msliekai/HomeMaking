@@ -9,5 +9,7 @@ public class TblAdvisor {
     private Integer adid;
     private String adpost;
     private String adduty;
+    private Integer page;
+    private Integer limit;
 
 }

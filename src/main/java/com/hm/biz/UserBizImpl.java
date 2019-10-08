@@ -108,6 +108,36 @@ public class UserBizImpl implements UserBiz
         return userMapper.jUserfcoll(page,limit,userid);
     }
 
+    @Override
+    public List<Tblorder> jUserHistory(int page, int limit, Integer userid) {
+        return userMapper.jUserHistory(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblfoot> jUserfoot(int page, int limit, Integer userid) {
+        return userMapper.jUserfoot(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblorder> jUserOrder(int page, int limit, Integer userid) {
+        return userMapper.jUserOrder(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblorder> jUserpoints(int page, int limit, Integer userid) {
+        return userMapper.jUserpoints(page,limit,userid);
+    }
+
+    @Override
+    public List<Tblorder> jUserticket(int page, int limit, Integer userid) {
+        return userMapper.jUserticket(page,limit,userid);
+    }
+
+    @Override
+    public int jUserPay(Integer userid, Integer money) {
+        return userMapper.jUserPay(userid,money);
+    }
+
 
     @Override
     public List<Staff> queryStaff(Staff staff) {

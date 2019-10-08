@@ -14,6 +14,8 @@ public class TblCOStype {
     private String cttime;
     private List<TblCOS> tblCOS;
 
+    private Integer page;
+    private Integer limit;
 
 
 }

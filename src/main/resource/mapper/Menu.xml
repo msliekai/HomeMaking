@@ -5,4 +5,25 @@
     <select id="getMenu" resultType="com.hm.entity.Tblmenu">
       select m.* from tblmenu m,tblrole r,tblpower p where m.mid = p.mid and p.rid = r.rid and p.rid = #{rid}
     </select>
+
+<!--    权限管理-->
+    <select id="getPower" resultType="com.hm.entity.Tblmenu">
+     select * FROM tblmenu m LEFT JOIN (SELECT * from tblpower where rid =  #{rid}) p ON m.mid = p.mid order by m.mid
+    </select>
+
+    <!--    刪除权限-->
+    <delete id="delPower">
+        delete from tblpower where  rid = #{rid}
+    </delete>
+
+    <!--    增加权限-->
+    <insert id="addPower" parameterType="java.util.List">
+        insert into tblpower (rid,mid) values 
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.rid},
+            #{item.mid}
+            )
+        </foreach>
+    </insert>
 </mapper>

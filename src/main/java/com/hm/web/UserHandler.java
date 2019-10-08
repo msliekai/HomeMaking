@@ -374,32 +374,86 @@ public class UserHandler {
     }
 
     @RequestMapping("/jUsersfcoll.action")
-    public @ResponseBody
-    Map jUsersfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
-        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblsfcoll> list = biz.jUsersfcoll(page, limit, userid);
+    public @ResponseBody Map jUsersfcoll(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        System.out.println("传过来的值是："+request.getParameter("status"));
+        String status = request.getParameter("status");
+        switch (status){
+            case "":
+                List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+
+                System.out.println(userid);
+                System.out.println("列表长度："+list.size());
+                System.out.println(list);
+                map.put("code",0);
+                map.put("count",biz.jUsersfcoll(-1,0,userid).size());
+                map.put("data",list);
+                break;
+            case "1":
+                List<Tblfcoll> list2 = biz.jUserfcoll(page,limit,userid);
+                System.out.println(userid);
+                System.out.println("列表长度："+list2.size());
+                System.out.println(list2);
+                map.put("code",0);
+                map.put("count",biz.jUserfcoll(-1,0,userid).size());
+                map.put("data",list2);
+                break;
+        }
+        /*List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
+
         System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
+        System.out.println("列表长度："+list.size());
         System.out.println(list);
-        map.put("code", 0);
-        map.put("count", biz.jUsersfcoll(-1, 0, userid).size());
-        map.put("data", list);
+        map.put("code",0);
+        map.put("count",biz.jUsersfcoll(-1,0,userid).size());
+        map.put("data",list);*/
         return map;
     }
 
-    @RequestMapping("/jUserfcoll.action")
-    public @ResponseBody
-    Map jUserfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
-        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tblfcoll> list = biz.jUserfcoll(page, limit, userid);
+    @RequestMapping("/jUserHistory.action")
+    public @ResponseBody Map jUserHistory(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblorder> list = biz.jUserHistory(page,limit,userid);
         System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
+        System.out.println("列表长度："+list.size());
         System.out.println(list);
-        map.put("code", 0);
-        map.put("count", biz.jUserfcoll(-1, 0, userid).size());
-        map.put("data", list);
+        map.put("code",0);
+        map.put("count",biz.jUserHistory(-1,0,userid).size());
+        map.put("data",list);
         return map;
     }
+    @RequestMapping("/jUserfoot.action")
+    public @ResponseBody Map jUserfoot(HttpServletRequest request,int page,int limit,Integer userid){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tblfoot> list = biz.jUserfoot(page,limit,userid);
+        System.out.println(userid);
+        System.out.println("列表长度："+list.size());
+        System.out.println(list);
+        map.put("code",0);
+        map.put("count",biz.jUserfoot(-1,0,userid).size());
+        map.put("data",list);
+        return map;
+    }
+
+    @RequestMapping("/jUserPay.action")
+    public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney){
+        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        System.out.println("充值的金额是："+usermoney);
+        int a = biz.jUserPay(userid,usermoney);
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        user.setUsermoney(user.getUsermoney()+usermoney);
+        System.out.println("充值后的金额是："+user.getUsermoney());
+        request.getSession().setAttribute("userbacc",user);
+        String b =null;
+        if (0 < a){
+            b ="1";
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
+
 
     @RequestMapping("/myMap.action")
     public @ResponseBody

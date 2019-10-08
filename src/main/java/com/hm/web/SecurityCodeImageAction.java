@@ -6,9 +6,7 @@ package com.hm.web;
  */
 
 import com.hm.biz.UserBiz;
-import com.hm.entity.Staff;
 import com.hm.tools.CreateSecurityCodeANDImage;
-import com.hm.tools.ShortMessageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +19,6 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 提供图片验证码
@@ -78,9 +74,7 @@ public class SecurityCodeImageAction {
         String flog="";
         Integer count=biz.queryphone(userphone);
         if(count<=0){
-            String code=ShortMessageUtil.vcode();
-            session.setAttribute(userphone+"_code_req",code);
-            flog=ShortMessageUtil.getVerificationCode(userphone,code);
+
         }else{
             flog="phoneerr";
         }

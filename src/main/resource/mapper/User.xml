@@ -222,14 +222,10 @@
     </select>
 
 
-    <!--查询用户余额-->
+    <!--查询订单-->
     <select id="jUserMoney" resultMap="BalanceList">
-        SELECT
-        o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.odeta,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos
-        as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f
-        ,tblHZ z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and
-        c.ctid = ct.ctid and o.osid = os.osid and u.userid = #{userid}
+        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -241,7 +237,7 @@
         <result property="onumber" column="onumber"/>
         <result property="otime" column="otime"/>
         <result property="otitle" column="otitle"/>
-        <result property="odeta" column="odeta"/>
+        <result property="ocontext" column="ocontext"/>
         <result property="ophone" column="ophone"/>
         <result property="money" column="money"/>
         <result property="osid" column="osid"/>
@@ -339,8 +335,7 @@
     </resultMap>
     <!--收藏阿姨-->
     <select id="jUsersfcoll" resultMap="sfcoll">
-        select u.username,sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid =
-        f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
+        select sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid = f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -395,5 +390,106 @@
 <!--修改钱-->
     <update id="updateMoney" >
        UPDATE tbluser SET usermoney=usermoney-#{usermoney} WHERE userid=#{userid}
+    </update>
+
+    <!--收藏公司-->
+    <select id="jUserfcoll" resultMap="fcoll">
+        select f.fname,ct.ctname,ct.ctcontext,fc.fcotime  from tblfcoll fc ,tbluser u,tblfirm f,tblCOStype ct WHERE fc.userid = u. userid and fc.fid = f.fid and f.ctid = ct.ctid and fc.userid = #{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <resultMap id="fcoll" type="com.hm.entity.Tblfcoll">
+        <id property="fcoid" column="fcoid"/>
+        <result property="fcotime" column="fcotime"/>
+        <association property="company" column="fid" javaType="com.hm.entity.Company">
+            <id property="fid" column="fid"/>
+            <result property="fname" column="fname"/>
+            <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+                <id property="ctid" column="ctid"/>
+                <result property="ctname" column="ctname"/>
+                <result property="ctcontext" column="ctcontext"/>
+            </association>
+        </association>
+    </resultMap>
+    <!--历史记录-->
+    <select id="jUserHistory" resultMap="history" >
+        SELECT o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,z.hzname,z.hzbei*sf.sfcos as money,CONCAT(s.sa,s.sb,s.sc,s.scontext) as site from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblHZ  z,tblsite s
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid and o.sid = s.sid  and (o.osid = 2 or o.osid = 5)
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <resultMap id="history" type="com.hm.entity.Tblorder">
+        <id property="oid" column="oid"/>
+        <result property="onumber" column="onumber"/>
+        <result property="otime" column="otime"/>
+        <result property="otitle" column="otitle"/>
+        <result property="ocontext" column="ocontext"/>
+        <result property="ophone" column="ophone"/>
+        <result property="money" column="money"/>
+        <result property="osid" column="osid"/>
+        <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
+            <id property="osid" column="osid" />
+        </association>
+        <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
+            <id property="hzid" column="hzid" />
+            <result property="hzname" column="hzname"/>
+        </association>
+        <association property="tblSite" column="sid" javaType="com.hm.entity.TblSite">
+            <id property="sid" column="sid" />
+            <result property="site" column="site"/>
+        </association>
+        <!--<association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+            <id property="sfid" column="sfid"/>
+            <association property="company" column="company" javaType="com.hm.entity.Company">
+                <id property="fid" column="fid" />
+                <result property="fname" column="fname"/>
+            </association>
+        </association>-->
+        <association property="tblCOS" column="cosid" javaType="com.hm.entity.TblCOS">
+            <id property="cosid" column="cosid"/>
+            <result property="cosname" column="cosname"/>
+            <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+                <id property="ctid" column="ctid" />
+                <result property="ctname" column="ctname"/>
+            </association>
+        </association>
+    </resultMap>
+    <!--足迹-->
+    <select id="jUserfoot" resultMap="foot" >
+        SELECT ft.*,sf.sfname,cs.cosname,ct.ctname,f.fname  from tblfoot ft,tblstaff sf,tblfirm f,tbluser u ,tblCOS cs, tblCOStype ct where ft.sfid = sf.sfid and ft.userid = u.userid and sf.cosid = cs.cosid and cs.ctid = ct.ctid and sf.fid = f.fid and ft.userid = #{userid}
+        <if test="0 &lt; page">
+            <bind name="page" value="(page-1)* limit"/>
+            limit #{page} ,#{limit}
+        </if>
+    </select>
+    <resultMap id="foot" type="com.hm.entity.Tblfoot">
+        <id property="footid" column="footid"/>
+        <result property="footid" column="footid" />
+        <result property="foottime" column="foottime"/>
+        <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
+            <id property="sfid" column="sfid"/>
+            <result property="sfname" column="sfname"/>
+            <association property="company" column="company" javaType="com.hm.entity.Company">
+                <id property="fid" column="fid" />
+                <result property="fname" column="fname"/>
+            </association>
+            <association property="tblCOS" column="cosid" javaType="com.hm.entity.TblCOS">
+                <id property="cosid" column="cosid"/>
+                <result property="cosname" column="cosname"/>
+                <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
+                    <id property="ctid" column="ctid" />
+                    <result property="ctname" column="ctname"/>
+                </association>
+            </association>
+        </association>
+
+    </resultMap>
+    <!--充值-->
+    <update id="jUserPay">
+     UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid}
     </update>
 </mapper>

@@ -37,6 +37,12 @@ public class TblUser {
     private Integer sid;
 
 
+    //状态名
+    private String stname;
+    //页码
+    private Integer page;
+    //条数
+    private Integer limit;
 
     public TblUser() {
     }
@@ -154,5 +160,29 @@ public class TblUser {
 
     public void setTblSite(TblSite tblSite) {
         this.tblSite = tblSite;
+    }
+
+    public String getStname() {
+        return stname;
+    }
+
+    public void setStname(String stname) {
+        this.stname = stname;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 }
