@@ -91,6 +91,7 @@
                 cosdeta LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
             </if>
         </if>
+        ORDER BY coshot DESC
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
         <if test="aunt!=null">
@@ -492,4 +493,15 @@
     <update id="jUserPay">
      UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid}
     </update>
+
+    <update id="upUser" parameterType="com.hm.entity.TblUser">
+        UPDATE tbluser SET username=#{username},userphone=#{userphone} ,sid=#{sid},usersex=#{usersex}
+        <if test="userurl!=null and userurl.length>0">
+            ,userurl=#{userurl}
+        </if>
+        WHERE userid=#{userid}
+    </update>
+
+
 </mapper>
+

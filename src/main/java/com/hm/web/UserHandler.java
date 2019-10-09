@@ -54,8 +54,14 @@ public class UserHandler {
                 //保存头像
                 String filename = fileact.getOriginalFilename();//获取到的文件名
                 String upf = request.getServletContext().getResource("/").getPath();
+
+                File fileParent  = new File(upf+"portrait");
+                if (!fileParent .exists()) {
+                    fileParent.createNewFile();
+                }
+
                 String url = "portrait/" + filename;
-                tblUser.setUserurl(url);//抽象路径保存在数据库
+                tblUser.setUserurl(url);//抽象路径保存在实体类
 
                 File file = new File(upf + url);
                 fileact.transferTo(file);//文件保存的路径
@@ -290,6 +296,7 @@ public class UserHandler {
 
         request.setAttribute("staff", staff);
 
+
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("client/product-details");
 //        modelAndView.addObject("staff", staff);
@@ -478,4 +485,32 @@ public class UserHandler {
         }
         return map;
     }
+
+    @RequestMapping("/upUser.action")
+    public String upUser(HttpServletRequest request, HttpSession session,TblUser tblUser,MultipartFile fileact) throws IOException {
+
+        TblUser use=(TblUser) session.getAttribute("userbacc");
+        if(null!=fileact){
+            //保存头像
+            String filename = fileact.getOriginalFilename();//获取到的文件名
+            String upf = request.getServletContext().getResource("/").getPath();
+
+            String url = "portrait/" + filename;
+            tblUser.setUserurl(url);//抽象路径保存在实体类
+
+            File file = new File(upf + url);
+            fileact.transferTo(file);//文件保存的路径
+        }
+        tblUser.setUserid(use.getUserid());
+        Integer num=biz.upUser(tblUser);
+        if(num==null||num==0){
+            request.setAttribute("flog","NO");
+        }else{
+            request.setAttribute("flog","OK");
+            session.setAttribute("userbacc",use);
+        }
+
+        return "client/UserData";
+    }
 }
+

@@ -274,7 +274,7 @@
     if (request.getAttribute("flog") == "success") {%>
 <script>
     alert("注册成功");
-    <%--location.href="<%=path%>ON/hha.jsp";--%>
+    location.href="<%=path%>page/client/signin.jsp";
 </script>
 <%} else if (request.getAttribute("flog") == "reqerr") {%>
 <script>

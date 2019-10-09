@@ -107,4 +107,6 @@ public interface UserMapper {
     //充值
     public int jUserPay(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney);
 
+    //修改用户信息
+    public Integer upUser(TblUser tblUser);
 }

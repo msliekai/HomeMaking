@@ -198,7 +198,7 @@
 
                         } else if (logjson.flog === "success") {
                             layer.msg("登陆成功，准备跳转", {
-                                time: 2000
+                                time: 1000
                             }, function () {
                                 location.href = "<%=path%>page/client/chome.jsp";
                             });

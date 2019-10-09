@@ -78,7 +78,7 @@
 <%--                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>--%>
 <%--                                    </ul>--%>
 <%--                                </li>--%>
-                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>
+<%--                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>--%>
                             </ul>
                         </nav>
                     </div>
@@ -101,7 +101,7 @@
                             </c:if>
                             <c:if test="${null!=userbacc}">
                                 <li class="ml-25">
-                                    <a href="#" onclick="alert('这里是个人中心')">
+                                    <a href="<%=path%>page/client/UserCentor.jsp" >
                                     <figure style="width: 50px;height: 0px;">
                                         <img class="img-circle" src="<%=path%>${sessionScope.userbacc.userurl}" alt="头像"/>
                                      </figure>

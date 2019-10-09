@@ -560,15 +560,18 @@
 <script>
     $(document).ready(function(){
         $("#sid").ready(function(){
-            theSity();
+            querySity();
         })
     })
-    function theSity(){
+    /**
+     * 获得地址
+     */
+    function querySity(){
         layui.use('layer', function () {
             $.ajax({
                 async: true,
                 type: "post", //提交方式
-                url: "../admin/querySite.action",
+                url: "<%=path%>admin/querySite.action",
                 success: function (jso) {//执行结果
                     var ht="";
                     if(jso.defaulAddress!=null){
@@ -584,6 +587,7 @@
             })
         })
     }
+
     function mapre(){
 
         $.ajax({

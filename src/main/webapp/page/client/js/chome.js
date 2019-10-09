@@ -74,8 +74,10 @@ $("#btn").click(function () {
                         layer.msg("验证码发送成功");
                     } else if ("phoneerr" == jso) {
                         layer.msg("手机号未注册");
+                        stopTime();
                     } else {
                         layer.msg("验证码发送失败");
+                        stopTime();
                     }
                 },
                 error: function (jso) {
@@ -96,10 +98,10 @@ function valname() {
     var uerr = $("#userphoneerr");
     var az = /^1(3|4|5|7|8)\d{9}$/;
     if (!az.test(userphone.val())) {
-        uerr.html("电话号码输入不正确");
+            uerr.html("电话号码输入不正确");
         return false;
     } else {
-        uerr.html("");
+            uerr.html("");
         return true;
     }
 }
@@ -317,8 +319,11 @@ $(document).ready(function () {
 })
 
 
-
+/**
+ * 发布需求
+ */
 function addOrder() {
+
     layui.use('layer', function () {
         var ctid = $("#ctid");
         var cosid = $("#cosid");
@@ -342,10 +347,66 @@ function addOrder() {
 
 $(document).ready(function(){
     $("#addor").click(function(){
-        addOrder()
+        if(biaoti()==true&&dianh()==true&&tcos()==true&&yaoqiu()==true){
+            addOrder();
+        }
     })
 })
 
+//标题的正则
+function biaoti() {
+    var otitle = $("#otitle");
+    var na = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/;
+        if (!na.test(otitle.val())) {
+            layui.use('layer', function () {
+            layer.msg("请检查标题，标题只能中文、英文、数字包括下划线");
+            })
+            return false;
+        } else {
+            return true;
+        }
+}
+//发布需求电话表单
+function dianh() {
+    var ophone = $("#ophone");
+    var az = /^1(3|4|5|7|8)\d{9}$/;
+    if (!az.test(ophone.val())) {
+        layui.use('layer', function () {
+            layer.msg("电话号码输入不正确");
+        })
+        return false;
+    } else {
+        return true;
+    }
+}
+//需求
+function yaoqiu() {
+    var ocontext = $("#ocontext");
+    var na = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/;
+    if (!na.test(ocontext.text())) {
+        layui.use('layer', function () {
+            layer.msg("请检查需求，只能中文、英文、数字包括下划线");
+        })
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function tcos() {
+    var ctid=$("#ctid");
+    if(ctid.val()!=0){
+        return true;
+    }
+    layui.use('layer', function () {
+        layer.msg("请选择服务");
+    })
+    return false;
+}
+
+/**
+ * 查询地址
+ */
 function querySity(){
     layui.use('layer', function () {
         $.ajax({
@@ -394,6 +455,38 @@ function Appointord() {
             },
         })
     })
-    
+
+}
+
+function upuse() {
+    if(!upph()){
+        return false;
+    }
+    if(!upname()){
+        return false;
+    }
+    return true;
+}
+
+function upph() {
+    var userphone = $("#userphone");
+    var az = /^1(3|4|5|7|8)\d{9}$/;
+    if (!az.test(userphone.val())) {
+        alert("电话号码输入不正确");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function upname() {
+    var username = $("#username");
+    var na = /^[\u4e00-\u9fa5]{0,}$/;
+    if (!na.test(username.val())) {
+        alert("用户名只能输入中文");
+        return false;
+    } else {
+        return true;
+    }
 }
 

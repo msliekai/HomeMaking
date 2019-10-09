@@ -206,5 +206,10 @@ public class UserBizImpl implements UserBiz
         return userMapper.updateMoney(usermoney,userid);
     }
 
+    @Override
+    public Integer upUser(TblUser tblUser) {
+        return userMapper.upUser(tblUser);
+    }
+
 
 }

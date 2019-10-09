@@ -7,6 +7,7 @@ package com.hm.web;
 
 import com.hm.biz.UserBiz;
 import com.hm.tools.CreateSecurityCodeANDImage;
+import com.hm.tools.ShortMessageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,8 +74,10 @@ public class SecurityCodeImageAction {
 
         String flog="";
         Integer count=biz.queryphone(userphone);
-        if(count<=0){
-
+        if(count==null||count<=0){
+            String code= ShortMessageUtil.vcode();
+            session.setAttribute(userphone+"_code_req",code);
+            flog=ShortMessageUtil.getVerificationCode(userphone,code);
         }else{
             flog="phoneerr";
         }

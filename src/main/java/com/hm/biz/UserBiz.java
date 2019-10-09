@@ -183,4 +183,10 @@ public interface UserBiz {
      */
     public Integer updateMoney(Integer usermoney,Integer userid);
 
+    /**
+     * 修改用户信息
+     * @param tblUser
+     * @return
+     */
+    public Integer upUser(TblUser tblUser);
 }
