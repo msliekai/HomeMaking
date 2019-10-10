@@ -332,6 +332,7 @@ public class UserHandler {
         }
         return map;
     }
+
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody
     Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
@@ -442,20 +443,37 @@ public class UserHandler {
     }
 
     @RequestMapping("/jUserPay.action")
-    public @ResponseBody
-    String jUserPay(HttpServletRequest request, Integer userid, Integer usermoney) {
-        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        System.out.println("充值的金额是：" + usermoney);
-        int a = biz.jUserPay(userid, usermoney);
+    public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
-        user.setUsermoney(user.getUsermoney() + usermoney);
-        System.out.println("充值后的金额是：" + user.getUsermoney());
-        request.getSession().setAttribute("userbacc", user);
-        String b = null;
-        if (0 < a) {
-            b = "1";
-        } else {
-            b = "0";
+        userid =user.getUserid();
+        System.out.println("充值的金额是："+usermoney);
+        int a = biz.jUserPay(userid,usermoney,userpwd);
+        String b =null;
+        if (0 < a){
+            b ="1";
+            user.setUsermoney(user.getUsermoney()+usermoney);
+            System.out.println("充值后的金额是："+user.getUsermoney());
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
+
+    @RequestMapping("/jUserCard.action")
+    public @ResponseBody String jUserCard(HttpServletRequest request,Integer userid,String usercard,String userpwd){
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        userid = user.getUserid();
+        System.out.println("新的卡号是："+usercard);
+        int a = biz.jUserCard(userid,usercard,userpwd);
+        String b =null;
+        if (0 < a){
+            b ="1";
+            user.setUsercard(usercard);
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b ="0";
         }
         System.out.println(b);
         return b;
@@ -486,6 +504,100 @@ public class UserHandler {
         }
         return map;
     }
+
+    @RequestMapping(value = "/jdelorder.action")
+    public @ResponseBody int jdelorder( Tblorder tblorder){
+        return biz.jdelorder(tblorder);
+    }
+
+    @RequestMapping(value = "/jdelsfcoll.action")
+    public @ResponseBody int jdelsfcoll( Tblsfcoll tblsfcoll){
+        System.out.println("删除的列是："+tblsfcoll.getScoid());
+        return biz.jdelsfcoll(tblsfcoll);
+    }
+
+    @RequestMapping(value = "/jdelfcoll.action")
+    public @ResponseBody int jdelfcoll( Tblfcoll tblfcoll){
+        System.out.println("删除的列是："+tblfcoll.getFcoid());
+        return biz.jdelfcoll(tblfcoll);
+    }
+
+    @RequestMapping(value = "/jdelhistory.action")
+    public @ResponseBody int jdelhistory( Tblorder tblorder){
+        return biz.jdelhistory(tblorder);
+    }
+
+    @RequestMapping(value = "/jdelsite.action")
+    public @ResponseBody int jdelsite( TblSite tblSite){
+        System.out.println("删除的列是："+tblSite.getSid());
+        return biz.jdelsite(tblSite);
+    }
+
+    @RequestMapping(value = "/jdeleva.action")
+    public @ResponseBody int jdeleva( Tbleva tbleva){
+        return biz.jdeleva(tbleva);
+    }
+
+    @RequestMapping(value = "/jdelfoot.action")
+    public @ResponseBody int jdelfoot( Tblfoot tblfoot){
+        return biz.jdelfoot(tblfoot);
+    }
+
+    @RequestMapping(value = "/jsetsite.action")
+    public @ResponseBody String jsetsite(HttpServletRequest request, TblSite tblSite){
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        Integer userid = user.getUserid();
+        int succ = biz.updateUserSid(tblSite.getSid(),userid);
+        String b =null;
+        if (0<succ){
+            b="1";
+            user.setSid(tblSite.getSid());
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+    @RequestMapping(value = "/jUserAddApp.action")
+    public @ResponseBody String jUserAddApp(HttpServletRequest request, Tbleva tbleva){
+        System.out.println(tbleva);
+        tbleva.setEconut("5");
+        int succ = biz.jUserAddApp(tbleva);
+        String b =null;
+        if (0<succ){
+            int c = biz.jcorder(tbleva.getOid(),5);
+            if (0<c){
+                b="1";
+            }else{
+                b="0";
+            }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+    @RequestMapping(value = "/jUserAddAfter.action")
+    public @ResponseBody String jUserAddAfter(HttpServletRequest request, Tblorder tblorder){
+        System.out.println(tblorder);
+        int succ = biz.jUserAddAfter(tblorder);
+        String b =null;
+        if (0<succ){
+            int c = biz.jcorder(tblorder.getOid(),9);
+            if (0<c){
+                b="1";
+            }else{
+                b="0";
+            }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+
+
 @Log(operationType = "修改用户信息",operationName = "用户端")
     @RequestMapping("/upUser.action")
     public String upUser(HttpServletRequest request, HttpSession session, TblUser tblUser, MultipartFile fileact) throws IOException {

@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -23,13 +24,20 @@
         <form class="layui-form" enctype="multipart/form-data">
 
             <input id="anotherAimg" name="aimg" type="hidden" value=""/>
-
             <div class="layui-form-item">
-                <label for="usermoney" class="layui-form-label">
-                    <span class="x-red">*</span>充值金额</label>
+                <label for="useroldcard" class="layui-form-label">
+                    <span class="x-red">*</span>旧银行卡</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="usermoney" name="usermoney" required="" lay-verify="pay" placeholder="1-10000"
-                           autocomplete="off" class="layui-input" style="width: 100px">
+                    <input type="text" id="useroldcard" name="useroldcard" required=""
+                           autocomplete="off" class="layui-input" style="width: 200px" readonly="readonly" value="${sessionScope.userbacc.usercard}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="usercard" class="layui-form-label">
+                    <span class="x-red">*</span>新银行卡</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="usercard" name="usercard" required="" lay-verify="card" placeholder="15-19位银行卡号"
+                           autocomplete="off" class="layui-input" style="width: 200px">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -37,12 +45,12 @@
                     <span class="x-red">*</span>账户密码</label>
                 <div class="layui-input-inline">
                     <input type="password" id="userpwd" name="userpwd" required="" lay-verify="pass" placeholder="请输入密码"
-                           autocomplete="off" class="layui-input" style="width: 100px">
+                           autocomplete="off" class="layui-input" style="width: 200px">
                 </div>
             </div>
             <div align="center" class="layui-form-item">
                 <%--                <label for="L_repass" class="layui-form-label"></label>--%>
-                <button class="layui-btn" lay-filter="add" lay-submit="">充值</button>
+                <button class="layui-btn" lay-filter="add" lay-submit="">修改</button>
             </div>
         </form>
     </div>
@@ -55,7 +63,7 @@
 
         //自定义验证规则
         form.verify({
-            pay:[/^([1-9]\d{0,3}|10000)$/,'请输入1-10000的整数金额']
+            card:[/^([1-9]{1})(\d{14}|\d{18})$/,'请输入正确的银行卡号']
             ,pass: [
                 /^[a-zA-Z]\w{5,17}$/
                 ,'密码长度在6~18之间，只能包含字母、数字和下划线，必须以字母开头'
@@ -70,12 +78,12 @@
                 $.ajax({
                     async: false,
                     type: "post",
-                    url: "<%=path%>admin/jUserPay.action",
+                    url: "<%=path%>admin/jUserCard.action",
                     data: data.field,
                     success: function (bac) {
                         if (bac == "1") {
                             /*layer.msg("添加成功")*/
-                            layer.alert("充值成功", {
+                            layer.alert("修改成功", {
                                 icon: 6
                             }, function () {
                                 //关闭当前frame
@@ -84,7 +92,7 @@
                                 xadmin.father_reload();
                             });
                         } else {
-                            layer.msg("充值失败");
+                            layer.msg("修改失败");
                         }
                     }
                 })

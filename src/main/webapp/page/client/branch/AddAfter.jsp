@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -7,7 +8,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>评价详情</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -18,15 +18,13 @@
 
 </head>
 <body>
+
 <%
     String sfname = request.getParameter("sfname")==null?"":request.getParameter("sfname");
     String cosname = request.getParameter("cosname")==null?"":request.getParameter("cosname");
     String ctname = request.getParameter("ctname")==null?"":request.getParameter("ctname");
     String onumber =request.getParameter("onumber")==null?"":request.getParameter("onumber");
     String oid =request.getParameter("oid")==null?"":request.getParameter("oid");
-    String aftercontext =request.getParameter("aftercontext")==null?"":request.getParameter("aftercontext");
-    String afterstaff =request.getParameter("afterstaff")==null?"":request.getParameter("afterstaff");
-    String afterresult =request.getParameter("afterresult")==null?"":request.getParameter("afterresult");
 %>
 
 <div class="layui-fluid">
@@ -34,7 +32,6 @@
         <form class="layui-form" enctype="multipart/form-data">
 
             <input id="anotherAimg" name="aimg" type="hidden" value=""/>
-
             <div class="layui-form-item">
                 <label for="onumber" class="layui-form-label">
                     <span class="x-red">*</span>订单编号</label>
@@ -71,80 +68,64 @@
                 <label for="aftercontext" class="layui-form-label">
                     <span class="x-red">*</span>售后原因</label>
                 <div class="layui-input-inline">
-                    <textarea id="aftercontext" name="aftercontext" required="" lay-verify="card"
-                              autocomplete="off" class="layui-input" readonly="readonly" style="width: 200px;height: 100px;resize:none;" ></textarea>
+                    <textarea id="aftercontext" name="aftercontext" required="" lay-verify="card" placeholder="请描述售后申请的理由(100字以内)"
+                           autocomplete="off" class="layui-input"  style="width: 200px;height: 100px;resize:none;" ></textarea>
                     <%--<input type="hidden" id="oid" name="oid" required=""
                            autocomplete="off" class="layui-input" value="<%=oid%>"/>--%>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="afterstaff" class="layui-form-label">
-                    <span class="x-red">*</span>客服人员</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="afterstaff" name="afterstaff" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterstaff%>" style="width: 200px">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="afterresult" class="layui-form-label">
-                    <span class="x-red">*</span>售后回执</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="afterresult" name="afterresult" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterresult%>" style="width: 200px">
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label for="oid" class="layui-form-label">
-                </label>
+                    </label>
                 <div class="layui-input-inline">
                     <input type="hidden" id="oid" name="oid" required=""
                            autocomplete="off" class="layui-input" value="<%=oid%>"/>
                 </div>
             </div>
+            <%--<div class="layui-form-item">
+                <label for="econut" class="layui-form-label">
+                    <span class="x-red">*</span>星级评价</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="econut" name="econut" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=econut%>">
+                </div>
+            </div>--%>
+            <div align="center" class="layui-form-item">
+                <%--                <label for="L_repass" class="layui-form-label"></label>--%>
+                <button class="layui-btn" lay-filter="add" lay-submit="">提交申请</button>
+            </div>
         </form>
     </div>
 </div>
-<script>layui.use(['form', 'layer', 'jquery'],
+<script>
+    layui.use(['form', 'layer', 'jquery'],
     function () {
-        $ = layui.jquery;
         var form = layui.form,
             layer = layui.layer;
 
         //自定义验证规则
         form.verify({
-            trtitle: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            trcontext: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trsum: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trtime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            card:[/^.{3,100}$/,'请输入3-100字符的评价']
+            ,pass: [
+                /^[a-zA-Z]\w{5,17}$/
+                ,'密码长度在6~18之间，只能包含字母、数字和下划线，必须以字母开头'
+            ]
         });
+
 
         //监听提交
         form.on('submit(add)',
             function (data) {
-
+                console.log(data)
                 $.ajax({
                     async: false,
                     type: "post",
-                    url: "<%=path%>manager/addtrain.action",
-                    dataType: "json",
+                    url: "<%=path%>admin/jUserAddAfter.action",
                     data: data.field,
-                    success: function (map) {
-                        if (map == "1") {
-                            layer.alert("添加成功", {
+                    success: function (bac) {
+                        if (bac == "1") {
+                            /*layer.msg("添加成功")*/
+                            layer.alert("申请成功", {
                                 icon: 6
                             }, function () {
                                 //关闭当前frame
@@ -153,13 +134,14 @@
                                 xadmin.father_reload();
                             });
                         } else {
-                            layer.msg("添加失败,稍后重试");
+                            layer.msg("申请失败");
                         }
                     }
                 })
                 return false;
             });
     });
+
 </script>
 
 </body>

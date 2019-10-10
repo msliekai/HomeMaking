@@ -6,6 +6,7 @@ import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
 import com.hm.entity.Tblfc;
 import com.hm.mapper.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.stereotype.Service;
 
@@ -134,8 +135,63 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public int jUserPay(Integer userid, Integer money) {
-        return userMapper.jUserPay(userid,money);
+    public int jUserPay(Integer userid, Integer money,String userpwd) {
+        return userMapper.jUserPay(userid,money,userpwd);
+    }
+
+    @Override
+    public int jUserCard(Integer userid, String usercard, String userpwd) {
+        return userMapper.jUserCard(userid,usercard,userpwd);
+    }
+
+    @Override
+    public int jdelorder(Tblorder tblorder) {
+        return userMapper.jdelorder(tblorder);
+    }
+
+    @Override
+    public int jdelsfcoll(Tblsfcoll tblsfcoll) {
+        return userMapper.jdelsfcoll(tblsfcoll);
+    }
+
+    @Override
+    public int jdelfcoll(Tblfcoll tblfcoll) {
+        return userMapper.jdelfcoll(tblfcoll);
+    }
+
+    @Override
+    public int jdelhistory(Tblorder tblorder) {
+        return userMapper.jdelhistory(tblorder);
+    }
+
+    @Override
+    public int jdelsite(TblSite tblSite) {
+        return userMapper.jdelsite(tblSite);
+    }
+
+    @Override
+    public int jdeleva(Tbleva tbleva) {
+        return userMapper.jdeleva(tbleva);
+    }
+
+    @Override
+    public int jdelfoot(Tblfoot tblfoot) {
+        return userMapper.jdelfoot(tblfoot);
+    }
+
+    @Override
+    public int jUserAddApp(Tbleva tbleva) {
+        return userMapper.jUserAddApp(tbleva);
+    }
+
+    @Override
+    public int jUserAddAfter(Tblorder tblorder) {
+        return userMapper.jUserAddAfter(tblorder);
+    }
+
+    @Override
+    public int jcorder(Integer oid,Integer state) {
+        return userMapper.jcorder(oid,state);
     }
 
 

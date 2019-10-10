@@ -132,18 +132,18 @@
                 {field: 'sfname', title: '保姆名字', minWidth: 80,templet:function (d) {return d.tblorder.staff.sfname}}
                 , {field: 'fname', title: '所属公司', minWidth: 150,templet:function (d) {return d.tblorder.staff.company.fname}}
                 , {field: 'svtime', title: '服务时间', minWidth: 80,templet:function (d) {return d.tblorder.svtime}}
-                , {field: 'money', title: '总费用', minWidth:80,templet:function (d) {return d.tblorder.money}}
+                , {field: 'money', title: '总费用', minWidth:80,templet:function (d) {return d.tblorder.staff.sfcos}}
                 , {field: 'osname', title: '状态', minWidth: 100,templet:function (d) {return d.tblorder.tbloderstate.osname}}
                 , {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
                         var tem = [];
                         console.log(item)
                         if (item.tblorder.osid == "5") {
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-primary">详情</a>');
+                            tem.push('<a lay-event="useCK" class="layui-btn layui-btn-primary">详情</a>');
                         }
                         if(item.tblorder.osid == "2"){
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">评论</a>');
+                            tem.push('<a lay-event="useApp" class="layui-btn layui-btn-normal">评论</a>');
                         }
-                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         return tem.join(' <font></font> ')
                     }}
             ]]
@@ -178,52 +178,65 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
+                layer.confirm('确定删除该订单记录？', function (index) {
+                    fal("<%=path%>admin/jdelorder.action",data.tblorder.oid);
                     layer.close(index);
                 });
-            } else if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
+            } else if (obj.event === 'useCK') {
+                layer.open({
+                    type:2,
+                    title: "评价详情",
+                    area: ['300px', '400px'],
+                    content: "<%=path%>page/client/branch/Appraise.jsp"+
+                        "?sfname="+encodeURIComponent(data.tblorder.staff.sfname)+
+                        "&fname="+encodeURIComponent(data.tblorder.staff.company.fname)+
+                        "&svtime="+encodeURIComponent(data.tblorder.svtime)+
+                        "&money="+encodeURIComponent(data.tblorder.staff.sfcos)+
+                        "&etime="+encodeURIComponent(data.etime)+
+                        "&econtext="+encodeURIComponent(data.econtext)+
+                        "&econut="+encodeURIComponent(data.econut)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
+            }else if(obj.event==="useApp"){
+                layer.open({
+                    type:2,
+                    title: "评价",
+                    area: ['400px', '400px'],
+                    content: "<%=path%>page/client/branch/AddAppraise.jsp"+
+                        "?sfname="+encodeURIComponent(data.tblorder.staff.sfname)+
+                        "&fname="+encodeURIComponent(data.tblorder.staff.company.fname)+
+                        "&svtime="+encodeURIComponent(data.tblorder.svtime)+
+                        "&money="+encodeURIComponent(data.tblorder.staff.sfcos)+
+                        "&oid="+encodeURIComponent(data.tblorder.oid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,oid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"oid":oid},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
+                        /*where: {
                             uname: uname.value,
                             cong:cong.value,
                             dao:dao.value,
-                        }
+                        }*/
                     }, 'data');
                 },
                 error: function (dat) {
-                    layer.msg('裂开');
+                    layer.msg('未知错误');
                 }
             })
 

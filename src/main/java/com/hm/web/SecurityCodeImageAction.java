@@ -8,6 +8,7 @@ package com.hm.web;
 import com.hm.aoplog.Log;
 import com.hm.biz.UserBiz;
 import com.hm.tools.CreateSecurityCodeANDImage;
+import com.hm.tools.ShortMessage;
 import com.hm.tools.ShortMessageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,7 +84,6 @@ public class SecurityCodeImageAction {
         }else{
             flog="phoneerr";
         }
-
         return flog;
     }
 

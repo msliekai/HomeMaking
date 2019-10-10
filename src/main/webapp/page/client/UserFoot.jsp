@@ -101,8 +101,8 @@
 
 <script id="barDemo" type="text/html">
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">查看详情</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+    <a class="layui-btn layui-btn-normal" lay-event="userCK">查看详情</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel"><i class="layui-icon layui-icon-delete"></i>删除</a>
 
     <%--默认地址是灰色--%>
 </script>
@@ -132,11 +132,11 @@
             , cols: [[ //表头
                 {field: 'footid', title: '序号', minWidth: 80}
                 , {field: 'sfname', title: '浏览阿姨', minWidth: 150,templet:function (d) {return d.staff.sfname}}
-                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
+                , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.staff.tblCOS.cosname}}
                 , {field: 'ctname', title: '服务类别', minWidth:80,templet:function (d) {return d.staff.tblCOS.tblCOStype.ctname}}
                 , {field: 'fname', title: '所属公司', minWidth:80,templet:function (d) {return d.staff.company.fname}}
                 , {field: 'foottime', title: '浏览时间', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 150}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}
             ]]
         });
         //触发查询按钮
@@ -169,52 +169,51 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
+                layer.confirm('确定删除？ID:'+data.footid, function (index) {
+                    fal("<%=path%>admin/jdelfoot.action",data.footid);
                     layer.close(index);
                 });
-            } else if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
-                });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
+            } else if (obj.event === 'userCK') {
+                layer.open({
+                    type:2,
+                    title: "详情",
+                    area: ['300px', '400px'],
+                    content: "<%=path%>page/client/branch/Foot.jsp"+
+                        "?footid="+encodeURIComponent(data.footid)+
+                        "&sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&cosname="+encodeURIComponent(data.staff.tblCOS.cosname)+
+                        "&ctname="+encodeURIComponent(data.staff.tblCOS.tblCOStype.ctname)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)+
+                        "&foottime="+encodeURIComponent(data.foottime)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,footid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"footid":footid},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
+                        /*where: {
                             uname: uname.value,
                             cong:cong.value,
                             dao:dao.value,
-                        }
+                        }*/
                     }, 'data');
                 },
                 error: function (dat) {
-                    layer.msg('裂开');
+                    layer.msg('未知错误');
                 }
             })
 
