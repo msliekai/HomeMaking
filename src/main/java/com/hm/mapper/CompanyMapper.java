@@ -144,7 +144,7 @@ public interface CompanyMapper {
     public Integer after(Tblorder tblorder);
     //-----拒绝售后
     public Integer afterResult(Tblorder tblorder);
-}
+
 
     //入驻
     public Integer infirm(@Param("fname") String fname, @Param("facc") String facc);
