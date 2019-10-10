@@ -13,4 +13,6 @@ public class Tbleva {
     private Tblorder tblorder;
     private Integer page;
     private Integer limit;
+
+    private String cosname;
 }

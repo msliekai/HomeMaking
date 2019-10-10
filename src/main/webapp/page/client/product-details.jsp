@@ -98,19 +98,19 @@
             <div class="col-md-12 col-lg-5 col-12">
                 <div class="product-details-content">
                     <h3>${requestScope.staff.sfname}</h3>
-                    <div class="rating-number">
-                        <div class="quick-view-number">
-                            <span>星级：</span>
-                        </div>
-                        <div class="quick-view-rating">
-                            <i class="pe-7s-star red-star"></i>
-                            <i class="pe-7s-star red-star"></i>
-                            <i class="pe-7s-star"></i>
-                            <i class="pe-7s-star"></i>
-                            <i class="pe-7s-star"></i>
-                        </div>
+<%--                    <div class="rating-number">--%>
+<%--                        <div class="quick-view-number">--%>
+<%--                            <span>星级：</span>--%>
+<%--                        </div>--%>
+<%--                        <div class="quick-view-rating">--%>
+<%--                            <i class="pe-7s-star red-star"></i>--%>
+<%--                            <i class="pe-7s-star red-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                        </div>--%>
 
-                    </div>
+<%--                    </div>--%>
 
 <%--                    <p>擅长</p>--%>
 <%--                    <p>唱跳</p>--%>
@@ -221,9 +221,9 @@
                 <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                     Description
                 </a>
-                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                    Reviews (0)
-                </a>
+<%--                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">--%>
+<%--                    Reviews (0)--%>
+<%--                </a>--%>
             </div>
             <div class="description-review-text tab-content">
                 <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
@@ -231,281 +231,15 @@
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
                 </div>
-                <div class="tab-pane fade" id="pro-review" role="tabpanel">
-                    <a href="#">Be the first to write your review!</a>
-                </div>
+<%--                <div class="tab-pane fade" id="pro-review" role="tabpanel">--%>
+<%--&lt;%&ndash;                    <a href="#">Be the first to write your review!</a>&ndash;%&gt;--%>
+<%--                </div>--%>
             </div>
         </div>
     </div>
 </div>
-<!-- product area start -->
-<%--<div class="product-area pb-95">--%>
-<%--    <div class="container">--%>
-<%--        <div class="section-title-3 text-center mb-50">--%>
-<%--            <h2>Related products</h2>--%>
-<%--        </div>--%>
-<%--        <div class="product-style">--%>
-<%--            <div class="related-product-active owl-carousel">--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/1.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <span>hot</span>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/2.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/3.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <span>hot</span>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/4.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/5.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <span>hot</span>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/1.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-wrapper">--%>
-<%--                    <div class="product-img">--%>
-<%--                        <a href="#">--%>
-<%--                            <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/2.jpg" alt="">--%>
-<%--                        </a>--%>
-<%--                        <span>hot</span>--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="animate-left" title="Wishlist" href="#">--%>
-<%--                                <i class="pe-7s-like"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-top" title="Add To Cart" href="#">--%>
-<%--                                <i class="pe-7s-cart"></i>--%>
-<%--                            </a>--%>
-<%--                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal"--%>
-<%--                               href="#">--%>
-<%--                                <i class="pe-7s-look"></i>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="product-content">--%>
-<%--                        <h4><a href="#">Arifo Stylas Dress</a></h4>--%>
-<%--                        <span>$115.00</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<!-- product area end -->
+
     <jsp:include page="bottom.jsp" flush="true"/>
-<!-- modal -->
-<!-- modal -->
-<%--<div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">--%>
-<%--    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--        <span class="pe-7s-close" aria-hidden="true"></span>--%>
-<%--    </button>--%>
-<%--    <div class="modal-dialog modal-compare-width" role="document">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-body">--%>
-<%--                <form action="#">--%>
-<%--                    <div class="table-content compare-style table-responsive">--%>
-<%--                        <table>--%>
-<%--                            <thead>--%>
-<%--                            <tr>--%>
-<%--                                <th></th>--%>
-<%--                                <th>--%>
-<%--                                    <a href="#">Remove <span>x</span></a>--%>
-<%--                                    <img src="<%=path%>page/client/shopgrid/img/cart/4.jpg" alt="">--%>
-<%--                                    <p>Blush Sequin Top </p>--%>
-<%--                                    <span>$75.99</span>--%>
-<%--                                    <a class="compare-btn" href="#">Add to cart</a>--%>
-<%--                                </th>--%>
-<%--                            </tr>--%>
-<%--                            </thead>--%>
-<%--                            <tbody>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>Description </h4></td>--%>
-<%--                                <td class="compare-dec compare-common">--%>
-<%--                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem--%>
-<%--                                        Ipsum has beenin the stand ard dummy text ever since the 1500s, when an unknown--%>
-<%--                                        printer took a galley</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>Sku </h4></td>--%>
-<%--                                <td class="product-none compare-common">--%>
-<%--                                    <p>-</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>Availability </h4></td>--%>
-<%--                                <td class="compare-stock compare-common">--%>
-<%--                                    <p>In stock</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>Weight </h4></td>--%>
-<%--                                <td class="compare-none compare-common">--%>
-<%--                                    <p>-</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>Dimensions </h4></td>--%>
-<%--                                <td class="compare-stock compare-common">--%>
-<%--                                    <p>N/A</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>brand </h4></td>--%>
-<%--                                <td class="compare-brand compare-common">--%>
-<%--                                    <p>HasTech</p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>color </h4></td>--%>
-<%--                                <td class="compare-color compare-common">--%>
-<%--                                    <p>Grey, Light Yellow, Green, Blue, Purple, Black </p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"><h4>size </h4></td>--%>
-<%--                                <td class="compare-size compare-common">--%>
-<%--                                    <p>XS, S, M, L, XL, XXL </p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            <tr>--%>
-<%--                                <td class="compare-title"></td>--%>
-<%--                                <td class="compare-price compare-common">--%>
-<%--                                    <p>$75.99 </p>--%>
-<%--                                </td>--%>
-<%--                            </tr>--%>
-<%--                            </tbody>--%>
-<%--                        </table>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 
 
     <!-- modernizr js -->
@@ -641,7 +375,37 @@
             }
         })
     }
+    //启动
     mapre();
+
+    //保存
+    function queryEva() {
+        var sfid=$("#sfid");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "<%=path%>admin/queryEva.action",
+            data:{
+                "sfid":sfid.val(),
+            },
+            success: function (jso) {//执行结果
+                var htm="";
+                if(jso.length>0){
+                    $.each(jso,function(k,v){
+                        htm+="<h4>匿名用户"+(k+1) +"</h4>";
+                        htm+="<p>评价："+v.econtext+"</p>";
+                        htm+="<span>所选服务："+v.cosname+"评价时间："+v.etime+"</span>";
+                    });
+                }else{
+                    htm+="<p>暂无评价</p>";
+                }
+                $("#pro-dec").html(htm);
+            }
+        })
+    }
+// $("#queryEva").ready(function () {
+    window.onload=queryEva();
+// })
 </script>
 </html>
 

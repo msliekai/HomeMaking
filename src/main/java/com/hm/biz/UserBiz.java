@@ -189,4 +189,18 @@ public interface UserBiz {
      * @return
      */
     public Integer upUser(TblUser tblUser);
+
+    /**
+     * 查询一个阿姨的评价
+     * @param sfid
+     * @return
+     */
+    public List<Tbleva> queryEva(@Param("sfid") Integer sfid);
+
+    /**
+     * 添加足迹
+     * @param tblfoot
+     * @return
+     */
+    public Integer addFoot(Tblfoot tblfoot);
 }

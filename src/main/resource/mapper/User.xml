@@ -50,8 +50,8 @@
     <insert id="addUserMsite" parameterType="java.lang.Integer">
         insert into tbluser set
     </insert>
-<!--根据id查阿姨20191008-->
-    <select id="queryOneStaff"  resultMap="cstaff">
+    <!--根据id查阿姨20191008-->
+    <select id="queryOneStaff" resultMap="cstaff">
         SELECT xl.*,sl.scoid,sl.scotime from (SELECT *from (SELECT
         fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
         ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
@@ -77,7 +77,8 @@
         SELECT
         fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
         ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
-        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,
+        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,
+        sf.sftrain,
         sf.sfwant,sf.sfgood, sf.sfedu,sf.sfurl,sf.scard,ct.ctid,fm.fid
         FROM
         tblstaff AS sf
@@ -88,7 +89,8 @@
         <if test="aunt!=null">
             <if test="aunt.length>0">
                 WHERE ctname LIKE "%"#{aunt}"%" OR ctcontext LIKE "%"#{aunt}"%" OR cosname LIKE "%"#{aunt}"%" OR
-                cosdeta LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE "%"#{aunt}"%"
+                cosdeta LIKE "%"#{aunt}"%" OR fname LIKE "%"#{aunt}"%" OR sfname LIKE "%"#{aunt}"%" OR sftag LIKE
+                "%"#{aunt}"%"
             </if>
         </if>
         ORDER BY coshot DESC
@@ -146,7 +148,8 @@
         SELECT
         fc.fcid,fm.facc,fm.fpwd,fm.fname,fm.flaw,fm.fphone,fm.flawphone, fm.fsite,fm.ftime,fm.rid,
         ct.ctname,ct.ctcontext,ct.cttime, c.cosid,c.cosname,
-        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp, sf.sftrain,
+        c.cosdeta,c.costime,c.coshot, sf.sfid,sf.sfname,sf.sfexp,sf.sfdob,sf.sfcos,sf.sfage,sf.sftag,sf.sfworkexp,
+        sf.sftrain,
         sf.sfwant,sf.sfgood, sf.sfedu,sf.sfurl,sf.scard,ct.ctid,fm.fid
         FROM
         tblstaff AS sf
@@ -160,7 +163,7 @@
         </if>
     </select>
 
-    <!--    公司下的所有服务-->
+    <!--公司下的所有服务-->
     <select id="queryFirmService" resultMap="costype">
         select * from(SELECT
         fc.fcid,fc.fid,fc.ctid,
@@ -222,11 +225,14 @@
             ORDER BY oi.count desc
     </select>
 
-
     <!--查询订单-->
     <select id="jUserMoney" resultMap="BalanceList">
-        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid}
+        SELECT
+        o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos
+        as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f
+        ,tblHZ z
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and
+        c.ctid = ct.ctid and o.osid = os.osid and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -336,7 +342,8 @@
     </resultMap>
     <!--收藏阿姨-->
     <select id="jUsersfcoll" resultMap="sfcoll">
-        select sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid = f.fid and u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
+        select sf.sfname,sc.scotime,f.fname from tbluser u,tblsfcoll sc,tblstaff sf,tblfirm f WHERE sf.fid = f.fid and
+        u.userid = sc.userid and sc.sfid = sf.sfid and u.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -371,7 +378,7 @@
     </insert>
     <!--查找地址-->
     <select id="querySite" parameterType="java.lang.Integer" resultType="com.hm.entity.TblSite">
-        SELECT * FROM tblsite where userid=#{userid}
+        SELECT * FROM tblsite where userid=#{userid} and  isopen=1
     </select>
     <!--收藏阿姨-->
     <insert id="addsfcoll" parameterType="com.hm.entity.Tblsfcoll">
@@ -384,18 +391,19 @@
     <delete id="delsfcoll">
         DELETE from tblsfcoll WHERE scoid=#{scoid};
     </delete>
-<!--查用户金额-->
+    <!--查用户金额-->
     <select id="queryMoney" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select usermoney from tbluser where userid=#{userid}
     </select>
-<!--修改钱-->
-    <update id="updateMoney" >
+    <!--修改钱-->
+    <update id="updateMoney">
        UPDATE tbluser SET usermoney=usermoney-#{usermoney} WHERE userid=#{userid}
     </update>
 
     <!--收藏公司-->
     <select id="jUserfcoll" resultMap="fcoll">
-        select f.fname,ct.ctname,ct.ctcontext,fc.fcotime  from tblfcoll fc ,tbluser u,tblfirm f,tblCOStype ct WHERE fc.userid = u. userid and fc.fid = f.fid and f.ctid = ct.ctid and fc.userid = #{userid}
+        select f.fname,ct.ctname,ct.ctcontext,fc.fcotime from tblfcoll fc ,tbluser u,tblfirm f,tblCOStype ct WHERE
+        fc.userid = u. userid and fc.fid = f.fid and f.ctid = ct.ctid and fc.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -415,9 +423,12 @@
         </association>
     </resultMap>
     <!--历史记录-->
-    <select id="jUserHistory" resultMap="history" >
-        SELECT o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,z.hzname,z.hzbei*sf.sfcos as money,CONCAT(s.sa,s.sb,s.sc,s.scontext) as site from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblHZ  z,tblsite s
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid and o.sid = s.sid  and (o.osid = 2 or o.osid = 5)
+    <select id="jUserHistory" resultMap="history">
+        SELECT o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,z.hzname,z.hzbei*sf.sfcos as
+        money,CONCAT(s.sa,s.sb,s.sc,s.scontext) as site from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c
+        ,tblCOStype ct ,tblstaff sf,tblHZ z,tblsite s
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid
+        and o.osid = os.osid and o.sid = s.sid and (o.osid = 2 or o.osid = 5)
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -433,14 +444,14 @@
         <result property="money" column="money"/>
         <result property="osid" column="osid"/>
         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
-            <id property="osid" column="osid" />
+            <id property="osid" column="osid"/>
         </association>
         <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
-            <id property="hzid" column="hzid" />
+            <id property="hzid" column="hzid"/>
             <result property="hzname" column="hzname"/>
         </association>
         <association property="tblSite" column="sid" javaType="com.hm.entity.TblSite">
-            <id property="sid" column="sid" />
+            <id property="sid" column="sid"/>
             <result property="site" column="site"/>
         </association>
         <!--<association property="staff" column="sfid" javaType="com.hm.entity.Staff">
@@ -454,35 +465,38 @@
             <id property="cosid" column="cosid"/>
             <result property="cosname" column="cosname"/>
             <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
-                <id property="ctid" column="ctid" />
+                <id property="ctid" column="ctid"/>
                 <result property="ctname" column="ctname"/>
             </association>
         </association>
     </resultMap>
     <!--足迹-->
-    <select id="jUserfoot" resultMap="foot" >
-        SELECT ft.*,sf.sfname,cs.cosname,ct.ctname,f.fname  from tblfoot ft,tblstaff sf,tblfirm f,tbluser u ,tblCOS cs, tblCOStype ct where ft.sfid = sf.sfid and ft.userid = u.userid and sf.cosid = cs.cosid and cs.ctid = ct.ctid and sf.fid = f.fid and ft.userid = #{userid}
+    <select id="jUserfoot" resultMap="foot">
+        SELECT ft.*,sf.sfname,cs.cosname,ct.ctname,f.fname from tblfoot ft,tblstaff sf,tblfirm f,tbluser u ,tblCOS cs,
+        tblCOStype ct where ft.sfid = sf.sfid and ft.userid = u.userid and sf.cosid = cs.cosid and cs.ctid = ct.ctid and
+        sf.fid = f.fid and ft.userid = #{userid}
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
         </if>
     </select>
+
     <resultMap id="foot" type="com.hm.entity.Tblfoot">
         <id property="footid" column="footid"/>
-        <result property="footid" column="footid" />
+        <result property="footid" column="footid"/>
         <result property="foottime" column="foottime"/>
         <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
             <id property="sfid" column="sfid"/>
             <result property="sfname" column="sfname"/>
             <association property="company" column="company" javaType="com.hm.entity.Company">
-                <id property="fid" column="fid" />
+                <id property="fid" column="fid"/>
                 <result property="fname" column="fname"/>
             </association>
             <association property="tblCOS" column="cosid" javaType="com.hm.entity.TblCOS">
                 <id property="cosid" column="cosid"/>
                 <result property="cosname" column="cosname"/>
                 <association property="tblCOStype" column="ctid" javaType="com.hm.entity.TblCOStype">
-                    <id property="ctid" column="ctid" />
+                    <id property="ctid" column="ctid"/>
                     <result property="ctname" column="ctname"/>
                 </association>
             </association>
@@ -493,7 +507,7 @@
     <update id="jUserPay">
      UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid}
     </update>
-
+    <!--修改用户信息-->
     <update id="upUser" parameterType="com.hm.entity.TblUser">
         UPDATE tbluser SET username=#{username},userphone=#{userphone} ,sid=#{sid},usersex=#{usersex}
         <if test="userurl!=null and userurl.length>0">
@@ -501,7 +515,23 @@
         </if>
         WHERE userid=#{userid}
     </update>
-
-
+<!--查询阿姨的评价-->
+    <select id="queryEva" resultType="com.hm.entity.Tbleva">
+        SELECT
+        e.eid,e.econtext,e.econut,e.etime,c.cosname
+        FROM
+        tblstaff AS f
+        INNER JOIN tblorder AS o ON o.sfid = f.sfid
+        INNER JOIN tbleva AS e ON e.oid = o.oid
+        INNER JOIN tblCOS AS c ON  o.cosid = c.cosid
+        WHERE f.sfid = #{sfid}
+    </select>
+<!--增加足迹-->
+    <insert id="addFoot" parameterType="com.hm.entity.Tblfoot" >
+        INSERT INTO tblfoot
+        (userid,sfid,foottime)
+        VALUES
+        (#{userid},#{sfid},#{foottime});
+    </insert>
 </mapper>
 

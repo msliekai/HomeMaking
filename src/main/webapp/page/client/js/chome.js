@@ -490,3 +490,20 @@ function upname() {
     }
 }
 
+function exc() {
+    $.ajax({
+        url: "../../admin/userEsc.action",
+        type: "POST",
+        success: function (obj) {
+            layui.use('layer', function () {
+                if (obj.flog == "by") {
+                    layer.msg("已注销", {
+                        time: 1000
+                    }, function () {
+                        history.go(0);
+                    });
+                }
+            })
+        }
+    })
+}

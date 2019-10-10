@@ -211,5 +211,15 @@ public class UserBizImpl implements UserBiz
         return userMapper.upUser(tblUser);
     }
 
+    @Override
+    public List<Tbleva> queryEva(Integer sfid) {
+        return userMapper.queryEva(sfid);
+    }
+
+    @Override
+    public Integer addFoot(Tblfoot tblfoot) {
+        return userMapper.addFoot(tblfoot);
+    }
+
 
 }

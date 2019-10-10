@@ -109,4 +109,10 @@ public interface UserMapper {
 
     //修改用户信息
     public Integer upUser(TblUser tblUser);
+
+    //查询一个阿姨的评价
+    public List<Tbleva> queryEva(@Param("sfid") Integer sfid);
+
+    //添加足迹
+    public Integer addFoot(Tblfoot tblfoot);
 }

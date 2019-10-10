@@ -28,18 +28,18 @@
                         <nav>
                             <ul class="list-none">
                                 <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
-<%--                                <li><a href="#">其他界面--%>
-<%--                                    <i class="arrow_carrot-down"></i></a>--%>
-<%--                                    <ul class="submenu">--%>
-<%--                                        <li><a href="<%=path%>page/client/about.jsp">关于我们</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/testimonials.jsp">推荐</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/pricing.jsp">定价和计划</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/order-form.jsp">订单表格</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/faq.jsp">常见问题/解答</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/coming-soon.jsp">即将推出</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </li>--%>
+                                <%--                                <li><a href="#">其他界面--%>
+                                <%--                                    <i class="arrow_carrot-down"></i></a>--%>
+                                <%--                                    <ul class="submenu">--%>
+                                <%--                                        <li><a href="<%=path%>page/client/about.jsp">关于我们</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/testimonials.jsp">推荐</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/pricing.jsp">定价和计划</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/order-form.jsp">订单表格</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/faq.jsp">常见问题/解答</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>--%>
+                                <%--                                        <li><a href="<%=path%>page/client/coming-soon.jsp">即将推出</a></li>--%>
+                                <%--                                    </ul>--%>
+                                <%--                                </li>--%>
                                 <li><a href="#">服务
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
@@ -49,37 +49,12 @@
                                         <li><a href="<%=path%>page/client/shopa.jsp?aunt=保姆">保姆</a></li>
                                         <li><a href="<%=path%>page/client/shopa.jsp?aunt=月嫂">月嫂</a></li>
                                         <li><a href="<%=path%>page/client/shopa.jsp?aunt=育儿嫂">育儿嫂</a></li>
-<%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
+                                        <%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
                                     </ul>
                                 </li>
-<%--                                <li><a href="#">项目--%>
-<%--                                    <i class="arrow_carrot-down"></i></a>--%>
-<%--                                    <ul class="submenu">--%>
-<%--                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects--%>
-<%--                                            Fullwidth</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </li>--%>
-<%--                                <li><a href="#">店--%>
-<%--                                    <i class="arrow_carrot-down"></i></a>--%>
-<%--                                    <ul class="submenu">--%>
-<%--                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/checkout.jsp">Checkout</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </li>--%>
-<%--                                <li><a href="#">微博--%>
-<%--                                    <i class="arrow_carrot-down"></i></a>--%>
-<%--                                    <ul class="submenu">--%>
-<%--                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>--%>
-<%--                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </li>--%>
-<%--                                <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>--%>
+
                             </ul>
+
                         </nav>
                     </div>
 
@@ -101,26 +76,20 @@
                             </c:if>
                             <c:if test="${null!=userbacc}">
                                 <li class="ml-25">
-                                    <a href="<%=path%>page/client/UserCentor.jsp" >
-                                    <figure style="width: 50px;height: 0px;">
-                                        <img class="img-circle" src="<%=path%>${sessionScope.userbacc.userurl}" alt="头像"/>
-                                     </figure>
-                                     </a>
+                                    <a href="<%=path%>page/client/UserCentor.jsp">
+                                        <figure style="width: 50px;height: 0px;">
+                                            <img class="img-circle" src="<%=path%>${sessionScope.userbacc.userurl}"
+                                                 alt="头像"/>
+                                        </figure>
+                                    </a>
                                 </li>
-                                <li class="ml-25"><a href="<%=path%>page/client/UserCentor.jsp">${sessionScope.userbacc.username}</a></li>
-                                <li class="mmenu-icon"><a href="#mobile-tblmenu"><i class="icon_menu"></i></a></li>
-                                <li class="minicart-icon"><a href="#"><i class="lnr lnr-cart"></i></i> </a>
+                                <li class="ml-25"><a href="<%=path%>page/client/UserCentor.jsp">${sessionScope.userbacc.username}</a>
+                                </li>
+                                <li class="ml-25"><button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal" onclick="exc()">退出</button></li>
 
                                 </li>
                             </c:if>
-<%--                            &lt;%&ndash;                            下面是搜索框&ndash;%&gt;--%>
-<%--                            <li class="ml-25">--%>
-<%--                                <a href="#" class="search-icon"><i class="lnr lnr-magnifier"></i></a>--%>
-<%--                                <div class="search-box">--%>
-<%--                                    <input type="text" placeholder=" ..."/>--%>
-<%--                                    <button><i class="lnr lnr-magnifier"></i></button>--%>
-<%--                                </div>--%>
-<%--                            </li>--%>
+
 
                         </ul>
                     </div>

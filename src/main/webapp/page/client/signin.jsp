@@ -100,7 +100,7 @@
                         <div class="password-circle">
                             <div class="single-password-circle">
                                 <img src="<%=path%>serial/getimage.action" id="Verify" style="cursor:hand;"
-                                     alt="看不清，换一张"/>
+                                alt="看不清，换一张"/>
                                 <label>
 									<span class="round-boarder">
 										<span id="verclo" class="round-boarder1">看不清？换一张</span>
