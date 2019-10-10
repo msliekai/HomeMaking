@@ -79,4 +79,18 @@ public interface CompanyBiz {
     public Integer addOrder(Tblorder tblorder);
     //---员工修改
     public Integer staffFix(Staff staff);
+    //---培训内容
+    public Tbltrain trainMsg(Integer trid);
+    //---员工评价
+    public List<Tbleva> findStaffEva(Integer sfid);
+    //----分配服务类型
+    public List<Tblfc> findCosStyle(Integer fid);
+    //----分配服务
+    public List<TblCOS> findCos(Integer ctid);
+    //---员工修改服务
+    public Integer fenPeiCos(Integer cosid,Integer sfid);
+    //-----售后接受
+    public Integer after(Tblorder tblorder);
+    //-----拒绝售后
+    public Integer afterResult(Tblorder tblorder);
 }

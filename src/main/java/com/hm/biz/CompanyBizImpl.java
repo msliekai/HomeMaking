@@ -192,6 +192,42 @@ public class CompanyBizImpl implements CompanyBiz {
     public Integer staffFix(Staff staff) {
         return companyMapper.staffFix(staff);
     }
+    //---培训内容
+    @Override
+    public Tbltrain trainMsg(Integer trid) {
+        return companyMapper.trainMsg(trid);
+    }
+    //---员工评价
+    @Override
+    public List<Tbleva> findStaffEva(Integer sfid) {
+
+        return companyMapper.findStaffEva(sfid);
+    }
+    //----分配服务类型
+    @Override
+    public List<Tblfc> findCosStyle(Integer fid) {
+        return companyMapper.findCosStyle(fid);
+    }
+    //----分配服务
+    @Override
+    public List<TblCOS> findCos(Integer ctid) {
+        return companyMapper.findCos(ctid);
+    }
+    //---员工修改服务
+    @Override
+    public Integer fenPeiCos(Integer cosid,Integer sfid) {
+        return companyMapper.fenPeiCos(cosid,sfid);
+    }
+    //-----售后接受
+    @Override
+    public Integer after(Tblorder tblorder) {
+        return companyMapper.after(tblorder);
+    }
+    //-----拒绝售后
+    @Override
+    public Integer afterResult(Tblorder tblorder) {
+        return companyMapper.afterResult(tblorder);
+    }
 
     //某个公司提供的服务数量
     @Override

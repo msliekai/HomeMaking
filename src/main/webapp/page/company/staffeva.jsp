@@ -6,31 +6,46 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath() + "/";
+%>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
+    <script type="text/javascript" src="<%=path%>page/Xadmin/js/jquery.min.js"></script>
     <title>无标题文档</title>
-    <style type="text/css">
-        #apDiv1 {
-            position:absolute;
-            width:100%;
-            height:100%;
-            z-index:1;
-        }
-    </style>
 </head>
 <body>
-<div id="apDiv1">
-    <table width="100%" border="0">
-        <tr>
-            <td colspan="2" rowspan="2">头像</td>
-            <td width="297">用户id</td>
-            <td width="423">&nbsp;</td>
-            <td width="269">时间</td>
-        </tr>
-        <tr>
-            <td height="60" colspan="3">内容</td>
-        </tr>
-    </table>
+<%
+    String sfid = request.getParameter("sfid")==null?"":request.getParameter("sfid");
+%>
+<input type="text" value="<%=sfid%>" id="sfid" name="sfid" hidden="hidden"/>
+<div id="di">
+用户：<span id="userid"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+时间：<span id="time"></span><p/>
+评价内容：<span id="text"></span><br/>
+<span id="tt"></span>
 </div>
 </body>
+<script>
+
+    $(document).ready(function(){
+        var sfid =$("#sfid").val();
+        $.ajax({
+            url:"<%=path%>page/findStaffEva.action",
+            type:"GET",
+            data:"sfid="+sfid,
+            success:function(redata){
+                var htm="";
+                $.each(redata,function(idx,obj){
+                    htm+="用户：<span id=\"userid\">"+obj.tblorder.userid+"</span>"
+                    htm+="时间：<span id=\"time\">"+obj.etime+"</span><p/>"
+                    htm+="评价内容：<span id=\"text\">"+obj.econtext+"</span><br/>"
+                    htm+="<span id=\"tt\">----------------------------------</span><p/>"
+                })
+                $("#di").html(htm);
+            }
+        });
+    });
+</script>
 </html>

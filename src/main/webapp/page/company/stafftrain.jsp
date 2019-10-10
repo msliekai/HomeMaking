@@ -115,9 +115,13 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "培训信息",
+                    area: ['500px', '400px'],
+                    content: "trainmsg.jsp"+
+                        "?trid="+encodeURIComponent(data.trid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useDis"){
                 layer.confirm('确定禁用？', function (index) {

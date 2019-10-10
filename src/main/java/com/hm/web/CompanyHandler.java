@@ -423,7 +423,6 @@ public @ResponseBody String useDel(String sfid){
         Company company = (Company) session.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
         List<Staff> list=companyBiz.findStaff(fid);
-        System.out.println(list);
         return list;
     }
     //--------------接单
@@ -464,6 +463,96 @@ public @ResponseBody String useDel(String sfid){
                 staff.getSfgood(),staff.getSfedu(),staff.getSftag());
 
         Integer b = companyBiz.staffFix(staff1);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //----查看培训详情
+    @RequestMapping(value = "trainMsg")
+    public @ResponseBody Tbltrain trainMsg(String trid)
+    {
+
+      Tbltrain tbltrain=companyBiz.trainMsg(Integer.parseInt(trid));
+
+       return tbltrain;
+    }
+    //--查看员工评价信息
+    @RequestMapping(value = "findStaffEva")
+    public @ResponseBody List<Tbleva> findStaffEva(String sfid)
+    {
+
+       List<Tbleva> list=companyBiz.findStaffEva(Integer.parseInt(sfid));
+        System.out.println(list);
+
+        return list;
+    }
+    //----分配服务类型
+    @RequestMapping(value = "findCosStyle")
+    public @ResponseBody List<Tblfc> findCosStyle(HttpSession session)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        List<Tblfc> list=companyBiz.findCosStyle(fid);
+        return list;
+    }
+    //-------分配
+    @RequestMapping(value = "fenPei",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPei(HttpServletRequest request,TblCOStype tblCOStype)
+    {
+        Integer ctid=tblCOStype.getCtid();
+        if(ctid!=null)
+        {
+            request.getSession().setAttribute("ctid",ctid);
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //----分配服务
+    @RequestMapping(value = "findCos")
+    public @ResponseBody List<TblCOS> findCos(HttpSession session,String ctid)
+    {
+       Integer ctid1=Integer.parseInt(ctid);
+        List<TblCOS> list =companyBiz.findCos(ctid1);
+        return list;
+    }
+    //------修改员工服务
+    @RequestMapping(value = "fenPeiCos",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPeiCos(String cosid,String sfid)
+    {
+        Integer sfid1=Integer.parseInt(sfid);
+        Integer cosid1=Integer.parseInt(cosid);
+        Integer b =companyBiz.fenPeiCos(cosid1,sfid1);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+
+    //-----售后接受
+    @RequestMapping(value = "after",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String after(Tblorder tblorder)
+    {
+        tblorder.setOsid(10);
+        Integer b = companyBiz.after(tblorder);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //-----拒绝售后
+    @RequestMapping(value = "afterResult",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String afterResult(Tblorder tblorder)
+    {
+        tblorder.setOsid(10);
+        Integer b = companyBiz.afterResult(tblorder);
         if(b>0)
         {
             return "ok";

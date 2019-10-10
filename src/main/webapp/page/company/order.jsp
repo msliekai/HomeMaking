@@ -71,6 +71,14 @@
     <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
     {{# } if(d.tbloderstate.osname =="已取消"){}}
     <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
+    {{# } if(d.tbloderstate.osname =="申请售后"){}}
+    <a class="layui-btn layui-btn-xs " lay-event="deal">售后详情</a>
+    <a class="layui-btn layui-btn-xs " lay-event="ok">接受</a>
+    <a class="layui-btn layui-btn-xs" lay-event="no">拒绝</a>
+    {{# } if(d.tbloderstate.osname =="售后结束"){}}
+    <a class="layui-btn layui-btn-xs " lay-event="after">订单详情</a>
+    {{# } if(d.tbloderstate.osname =="售后失败"){}}
+    <a class="layui-btn layui-btn-xs " lay-event="yo">订单详情</a>
     {{#  } }}
 </script>
 
@@ -99,10 +107,11 @@
                 , {field: 'sfname', title: '保姆名字', minWidth: 100,templet:function (d){return d.staff.sfname}}
                 , {field: 'fname', title: '所属家政公司', minWidth: 150,templet:function (d){return d.staff.company.fname}}
                 , {field: 'otime', title: '订单时间', minWidth: 80}
+                , {field: 'onumber', title: '订单号', minWidth: 80,hide:true}
                 , {field: 'svtime', title: '服务时间', minWidth:150}
                 , {field: 'sfcos', title: '费用', minWidth: 80,templet:function (d){return d.staff.sfcos}}
                 , {field: 'osname', title: '状态', minWidth: 80,templet:function (d){return d.tbloderstate.osname}}
-                , {field: 'userid', title: '服务对象', minWidth: 80}
+                , {field: 'username', title: '服务对象', minWidth: 80,templet:function (d){return d.tblUser.username}}
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 200,templet:function (d){return d.tbloderstate.osname}}
             ]]
         });
@@ -137,9 +146,86 @@
                     layer.close(index);
                 });
             }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "订单信息",
+                    area: ['500px', '400px'],
+                    content: "ordermsg.jsp"+
+                        "?onumber="+encodeURIComponent(data.onumber)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&userid="+encodeURIComponent(data.userid)+
+                        "&username="+encodeURIComponent(data.tblUser.username)+
+                        "&sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&svtime="+encodeURIComponent(data.svtime)+
+                        "&otitle="+encodeURIComponent(data.otitle)+
+                        "&ocontext="+encodeURIComponent(data.ocontext)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="ok")
+            {
+                layer.open({
+                    type:2,
+                    title: "售后详情",
+                    area: ['500px', '300px'],
+                    content: "after.jsp"+
+                        "?oid="+encodeURIComponent(data.oid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="no")
+            {
+                layer.open({
+                    type:2,
+                    title: "拒绝反馈",
+                    area: ['500px', '300px'],
+                    content: "afterresult.jsp"+
+                        "?oid="+encodeURIComponent(data.oid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="deal")
+            {
+                layer.open({
+                    type:2,
+                    title: "售后详情",
+                    area: ['500px', '300px'],
+                    content: "afterdeal.jsp"+
+                        "?username="+encodeURIComponent(data.tblUser.username)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&aftercontext="+encodeURIComponent(data.aftercontext)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="after")
+            {
+                layer.open({
+                    type:2,
+                    title: "售后详情",
+                    area: ['500px', '600px'],
+                    content: "afterss.jsp"+
+                        "?onumber="+encodeURIComponent(data.onumber)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&userid="+encodeURIComponent(data.userid)+
+                        "&username="+encodeURIComponent(data.tblUser.username)+
+                        "&sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&svtime="+encodeURIComponent(data.svtime)+
+                        "&otitle="+encodeURIComponent(data.otitle)+
+                        "&ocontext="+encodeURIComponent(data.ocontext)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)+
+                        "&aftercontext="+encodeURIComponent(data.aftercontext)+
+                        "&afterstaff="+encodeURIComponent(data.afterstaff)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="yo")
+            {
+                layer.open({
+                    type:2,
+                    title: "售后详情",
+                    area: ['500px', '300px'],
+                    content: "afterfa.jsp"+
+                        "?onumber="+encodeURIComponent(data.onumber)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&aftercontext="+encodeURIComponent(data.aftercontext)+
+                        "&afterresult="+encodeURIComponent(data.afterresult)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });

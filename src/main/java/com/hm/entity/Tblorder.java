@@ -27,6 +27,9 @@ public class Tblorder {
     private String hzname;
     private String fname;
     private String osname;
+    private String aftercontext;
+    private Integer afterstaff;
+    private String afterresult;
     private String sfname;
     private TblCOS tblCOS;
     private TblUser tblUser;
