@@ -29,7 +29,7 @@ public class TblUser {
     // 头像url
     private String userurl;
     // 银行卡号码
-    private Integer usercard;
+    private String usercard;
     // 角色id
     private Integer rid;
     //状态名
@@ -122,11 +122,11 @@ public class TblUser {
         this.userurl = userurl;
     }
 
-    public Integer getUsercard() {
+    public String getUsercard() {
         return usercard;
     }
 
-    public void setUsercard(Integer usercard) {
+    public void setUsercard(String usercard) {
         this.usercard = usercard;
     }
 

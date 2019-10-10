@@ -141,5 +141,90 @@ public class MangerBizImpl implements MangerBiz {
         return mangerMapper.addTrain(tbltrain);
     }
 
+    @Override
+    public int delTrain(int trid) {
+        return mangerMapper.delTrain(trid);
+    }
+
+    @Override
+    public int updateTrain(Tbltrain tbltrain) {
+        return mangerMapper.updateTrain(tbltrain);
+    }
+
+    @Override
+    public int addServiceType(TblCOStype tblCOStype) {
+        return mangerMapper.addServiceType(tblCOStype);
+    }
+
+    @Override
+    public int delServiceType(int ctid) {
+        return mangerMapper.delServiceType(ctid);
+    }
+
+    @Override
+    public int updateServiceType(TblCOStype tblCOStype) {
+        return mangerMapper.updateServiceType(tblCOStype);
+    }
+
+    @Override
+    public int addService(TblCOS tblCOS) {
+        return mangerMapper.addService(tblCOS);
+    }
+
+    @Override
+    public int delService(int cosid) {
+        return mangerMapper.delService(cosid);
+    }
+
+    @Override
+    public int updateService(TblCOS tblCOS) {
+        return mangerMapper.updateService(tblCOS);
+    }
+
+    @Override
+    public int AddDynamic(Tblnotice tblnotice) {
+        return mangerMapper.AddDynamic(tblnotice);
+    }
+
+    @Override
+    public int delDynamic(int nid) {
+        return mangerMapper.delDynamic(nid);
+    }
+
+    @Override
+    public int updateDynamic(Tblnotice tblnotice) {
+        return mangerMapper.updateDynamic(tblnotice);
+    }
+
+    @Override
+    public int AddTritem(Tbltritem tbltritem) {
+        return mangerMapper.AddTritem(tbltritem);
+    }
+
+    @Override
+    public int delTritem(int itid) {
+        return mangerMapper.delTritem(itid);
+    }
+
+    @Override
+    public int updateTritem(Tbltritem tbltritem) {
+        return mangerMapper.updateTritem(tbltritem);
+    }
+
+    @Override
+    public int AddDKap(Tblkap tblkap) {
+        return mangerMapper.AddDKap(tblkap);
+    }
+
+    @Override
+    public int delKap(int kid) {
+        return mangerMapper.delKap(kid);
+    }
+
+    @Override
+    public int updateKap(Tblkap tblkap) {
+        return mangerMapper.updateKap(tblkap);
+    }
+
 
 }

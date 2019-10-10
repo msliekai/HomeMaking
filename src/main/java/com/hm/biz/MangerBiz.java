@@ -61,6 +61,40 @@ public interface MangerBiz {
     public int updateCompanyRole2(int fid);
     //添加培训安排
     public  int addTrain(Tbltrain tbltrain);
+    //删除培训安排
+    public int delTrain(int trid);
+    //修改培训安排
+    public int updateTrain(Tbltrain tbltrain);
+    //添加服务类别
+    public  int addServiceType(TblCOStype tblCOStype);
+    //删除服务类别
+    public int delServiceType(int ctid);
+    //修改服务类别
+    public int updateServiceType(TblCOStype tblCOStype);
+    //添加服务
+    public  int addService(TblCOS tblCOS);
+    //删除服务
+    public int delService(int cosid);
+    //修改服务
+    public int updateService(TblCOS tblCOS);
+    //添加公告
+    public  int AddDynamic(Tblnotice tblnotice);
+    //删除公告
+    public int delDynamic(int nid);
+    //修改公告
+    public int updateDynamic(Tblnotice tblnotice);
+    //添加技能培训
+    public  int AddTritem(Tbltritem tbltritem);
+    //删除技能培训
+    public int delTritem(int itid);
+    //修改技能培训
+    public int updateTritem(Tbltritem tbltritem);
+    //添加育婴知识
+    public  int AddDKap(Tblkap tblkap);
+    //删除育婴知识
+    public int delKap(int kid);
+    //修改育婴公告
+    public int updateKap(Tblkap tblkap);
 
 
 }

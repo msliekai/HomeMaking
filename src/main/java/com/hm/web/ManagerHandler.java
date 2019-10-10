@@ -357,4 +357,136 @@ public class ManagerHandler {
 
         return mangerBizImpl.addTrain(tbltrain);
     }
+    //删除培训安排
+    @RequestMapping(value ="/delTrain.action")
+    public  @ResponseBody String delTrain(int trid){
+        int num=mangerBizImpl.delTrain(trid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改培训安排
+    @RequestMapping("/updateTrain.action")
+    public @ResponseBody int updateTrain(Tbltrain tbltrain){
+
+        return mangerBizImpl.updateTrain(tbltrain);
+    }
+    //添加服务类型
+    @RequestMapping("/addServiceType.action")
+    public @ResponseBody int addServiceType(TblCOStype tblCOStype){
+
+        return mangerBizImpl.addServiceType(tblCOStype);
+    }
+    //删除服务类型
+    @RequestMapping(value ="/delServiceType.action")
+    public  @ResponseBody String delServiceType(int ctid){
+        int num=mangerBizImpl.delServiceType(ctid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改服务类别
+    @RequestMapping("/updateServiceType.action")
+    public @ResponseBody int updateServiceType(TblCOStype tblCOStype){
+
+        return mangerBizImpl.updateServiceType(tblCOStype);
+    }
+    //添加服务
+    @RequestMapping("/addService.action")
+    public @ResponseBody int addService(TblCOS tblCOS){
+
+        return mangerBizImpl.addService(tblCOS);
+    }
+    //删除服务类型
+    @RequestMapping(value ="/delService.action")
+    public  @ResponseBody String delService(int cosid){
+        int num=mangerBizImpl.delService(cosid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改服务
+    @RequestMapping("/updateService.action")
+    public @ResponseBody int updateService(TblCOS tblCOS){
+
+        return mangerBizImpl.updateService(tblCOS);
+    }
+    //添加公告
+    @RequestMapping("/AddDynamic.action")
+    public @ResponseBody int AddDynamic(Tblnotice tblnotice){
+
+        return mangerBizImpl.AddDynamic(tblnotice);
+    }
+    //删除公告
+    @RequestMapping(value ="/delDynamic.action")
+    public  @ResponseBody String delDynamic(int nid){
+        int num=mangerBizImpl.delDynamic(nid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改公告
+    @RequestMapping("/updateDynamic.action")
+    public @ResponseBody int updateDynamic(Tblnotice tblnotice){
+
+        return mangerBizImpl.updateDynamic(tblnotice);
+    }
+    //添加技能培训
+    @RequestMapping("/AddTritem.action")
+    public @ResponseBody int AddTritem(Tbltritem tbltritem){
+
+        return mangerBizImpl.AddTritem(tbltritem);
+    }
+    //删除技能培训
+    @RequestMapping(value ="/delTritem.action")
+    public  @ResponseBody String delTritem(int itid){
+        int num=mangerBizImpl.delTritem(itid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改公告
+    @RequestMapping("/updateTritem.action")
+    public @ResponseBody int updateTritem(Tbltritem tbltritem){
+
+        return mangerBizImpl.updateTritem(tbltritem);
+    }
+    //添加育婴知识
+    @RequestMapping("/AddDKap.action")
+    public @ResponseBody int AddDKap(Tblkap tblkap){
+
+        return mangerBizImpl.AddDKap(tblkap);
+    }
+    //删除育婴知识
+    @RequestMapping(value ="/delKap.action")
+    public  @ResponseBody String delKap(int kid){
+        int num=mangerBizImpl.delKap(kid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改育婴知识
+    @RequestMapping("/updateKap.action")
+    public @ResponseBody int updateKap(Tblkap tblkap){
+
+        return mangerBizImpl.updateKap(tblkap);
+    }
 }

@@ -34,6 +34,10 @@ public class Tblorder {
     private TblSite tblSite;
     private Integer page;
     private Integer limit;
+    private String start;
+    private String end;
+
+
 
 
 }

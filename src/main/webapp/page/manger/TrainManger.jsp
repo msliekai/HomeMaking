@@ -144,29 +144,45 @@
             var data = obj.data;
             if (obj.event === 'tdel') {
                 layer.confirm('确定删除？', function (index) {
-                    fal("<%=path%>",data.uid);
+                    fal("<%=path%>manager/delTrain.action",data.trid);
                     layer.close(index);
                 });
             }else if(obj.event==="tupdate"){
-                layer.confirm('确定修改？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "培训安排修改",
+                    area: ['450px', '430px'],
+                    content: "UpdateTrain.jsp"+
+                        "?trtime="+encodeURIComponent(data.trtime)+
+                        "&trtitle="+encodeURIComponent(data.trtitle)+
+                        "&trcontext="+encodeURIComponent(data.trcontext)+
+                        "&trsum="+encodeURIComponent(data.trsum)+
+                        "&trid="+encodeURIComponent(data.trid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            } else if(obj.event==="useContext"){
-                layer.confirm('查看详情？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+            } else if(obj.event==="trainContext"){
+                layer.open({
+                    type:2,
+                    title: "培训安排详情",
+                    area: ['450px', '430px'],
+                    content: "UpdateContext.jsp"+
+                        "?trtime="+encodeURIComponent(data.trtime)+
+                        "&trtitle="+encodeURIComponent(data.trtitle)+
+                        "&trcontext="+encodeURIComponent(data.trcontext)+
+                        "&trsum="+encodeURIComponent(data.trsum)+
+                        "&trid="+encodeURIComponent(data.trid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,trid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"trid":trid},
                 success: function (dat) {
                     if(dat==1){
                         layer.msg("操作成功");
@@ -176,9 +192,7 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
+                            trid: trid.value,
                         }
                     }, 'data');
                 },

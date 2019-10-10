@@ -81,6 +81,7 @@
     <!--    培训计划列表-->
     <select id="cFindtrainAll" parameterType="com.hm.entity.Tbltrain" resultType="com.hm.entity.Tbltrain">
         select * from tbltrain
+        ORDER BY trid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -89,6 +90,7 @@
     <!--    服务类型列表-->
     <select id="cFindServiceTypeAll" parameterType="com.hm.entity.TblCOStype" resultType="com.hm.entity.TblCOStype">
         select * from tblCOStype
+        ORDER BY ctid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -97,6 +99,7 @@
     <!--    服务列表-->
     <select id="cFindServiceAll" parameterType="com.hm.entity.TblCOS" resultType="com.hm.entity.TblCOS">
         SELECT c.*,t.ctname FROM tblCOS c,tblCOStype t WHERE c.ctid=t.ctid
+        ORDER BY c.cosid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -115,6 +118,12 @@
         SELECT o.oid,o.svtime,c.cosname,ct.ctname,o.sendtime,f.fname,z.hzname,u.username,e.osname from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z,
         tbloderstate e
         WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid=e.osid
+        <if test="start!= null and start neq ''">
+            and o.sendtime &gt;= #{start}
+        </if>
+        <if test="end!= null and end neq ''">
+            and o.sendtime &lt;= #{end}
+        </if>
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -122,7 +131,14 @@
     </select>
     <!--  公告列表-->
     <select id="cFindDynamiclistAll" parameterType="com.hm.entity.Tblnotice" resultType="com.hm.entity.Tblnotice">
-        SELECT * from tblnotice
+        SELECT * from tblnotice where 1=1
+        <if test="start!= null and start neq ''">
+            and ntime &gt;= #{start}
+        </if>
+        <if test="end!= null and end neq ''">
+            and ntime &lt;= #{end}
+        </if>
+        ORDER BY nid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -130,7 +146,7 @@
     </select>
     <!--  技能培训-->
     <select id="cFindtritemlistAll" parameterType="com.hm.entity.Tbltritem" resultType="com.hm.entity.Tbltritem">
-        SELECT * from tbltritem
+        SELECT * from tbltritem ORDER BY itid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -139,6 +155,7 @@
     <!--  育婴知识-->
     <select id="cFindkaptAll" parameterType="com.hm.entity.Tblkap" resultType="com.hm.entity.Tblkap">
         SELECT k.*, f.ftname from tblkap k,tblfiletype f WHERE k.ftid=f.ftid
+        ORDER BY k.kid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -150,6 +167,10 @@
         from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z,tbloderstate e
         WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid
         and c.ctid = ct.ctid and o.osid=e.osid
+        <if test="fname!=null and fname!=''">
+            and f.fname like "%"#{fname}"%"
+        </if>
+        ORDER BY o.oid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>
             limit #{page} ,#{limit}
@@ -192,4 +213,77 @@
 		insert into tbltrain(trtitle,trcontext,trsum,trtime)
 		values (#{trtitle},#{trcontext},#{trsum},#{trtime})
 	</insert>
+    <!--	删除培训安排-->
+    <delete id="delTrain" parameterType="com.hm.entity.Tbltrain">
+		delete from tbltrain where trid=#{trid}
+	</delete>
+    <!--   修改培训安排-->
+    <update id="updateTrain" parameterType="com.hm.entity.Tbltrain">
+		update tbltrain set trtitle=#{trtitle},trcontext=#{trcontext},trsum=#{trsum},trtime=#{trtime} where trid=#{trid}
+	</update>
+    <!--    添加服务类别-->
+    <insert id="addServiceType" parameterType="com.hm.entity.TblCOStype">
+		insert into tblCOStype(ctname,ctcontext,cttime)
+		values (#{ctname},#{ctcontext},#{cttime})
+	</insert>
+    <!--	删除服务类别-->
+    <delete id="delServiceType" parameterType="com.hm.entity.TblCOStype">
+		delete from tblCOStype where ctid=#{ctid}
+	</delete>
+    <!--   修改服务类型-->
+    <update id="updateServiceType" parameterType="com.hm.entity.TblCOStype">
+		update tblCOStype set ctname=#{ctname},ctcontext=#{ctcontext},cttime=#{cttime} where ctid=#{ctid}
+	</update>
+    <!--	添加服务-->
+    <insert id="addService" parameterType="com.hm.entity.TblCOS">
+		insert into tblCOS(cosname,cosdeta,ctid,costime)
+		values (#{cosname},#{cosdeta},#{ctid},#{costime})
+	</insert>
+    <!--	删除服务-->
+    <delete id="delService" parameterType="com.hm.entity.TblCOS">
+		delete from tblCOS where cosid=#{cosid}
+	</delete>
+    <!--   修改服务-->
+    <update id="updateService" parameterType="com.hm.entity.TblCOS">
+		update tblCOS set cosname=#{cosname},cosdeta=#{cosdeta},ctid=#{ctid},costime=#{costime} where cosid=#{cosid}
+	</update>
+    <!--	添加公告-->
+    <insert id="AddDynamic" parameterType="com.hm.entity.Tblnotice">
+		insert into tblnotice(ntime,ntitle)
+		values (#{ntime},#{ntitle})
+	</insert>
+    <!--	删除公告-->
+    <delete id="delDynamic" parameterType="com.hm.entity.Tblnotice">
+		delete from tblnotice where nid=#{nid}
+	</delete>
+    <!--   修改公告-->
+    <update id="updateDynamic" parameterType="com.hm.entity.Tblnotice">
+		update tblnotice set ntime=#{ntime},ntitle=#{ntitle} where nid=#{nid}
+	</update>
+    <!--	添加培训项目-->
+    <insert id="AddTritem" parameterType="com.hm.entity.Tbltritem">
+		insert into tbltritem(itname,ittime,itbook)
+		values (#{itname},#{ittime},#{itbook})
+	</insert>
+    <!--	删除技能培训-->
+    <delete id="delTritem" parameterType="com.hm.entity.Tbltritem">
+		delete from tbltritem where itid=#{itid}
+	</delete>
+    <!--   修改技能培训-->
+    <update id="updateTritem" parameterType="com.hm.entity.Tbltritem">
+		update tbltritem set itname=#{itname},ittime=#{ittime},itbook=#{itbook} where itid=#{itid}
+	</update>
+    <!--	添加育婴知识-->
+    <insert id="AddDKap" parameterType="com.hm.entity.Tblkap">
+		insert into tblkap(ktitle,ftid,ktime)
+		values (#{ktitle},#{ftid},#{ktime})
+	</insert>
+    <!--	删除育婴知识-->
+    <delete id="delKap" parameterType="com.hm.entity.Tblkap">
+		delete from tblkap where kid=#{kid}
+	</delete>
+    <!--   修改育婴知识-->
+    <update id="updateKap" parameterType="com.hm.entity.Tblkap">
+		update tblkap set ktitle=#{ktitle},ftid=#{ftid},ktime=#{ktime} where kid=#{kid}
+	</update>
 </mapper>
