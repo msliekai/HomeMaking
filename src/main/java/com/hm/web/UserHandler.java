@@ -333,6 +333,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody
     Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
@@ -347,6 +348,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserAppraise.action")
     public @ResponseBody
     Map jUserAppraise(HttpServletRequest request, int page, int limit, Integer userid) {
@@ -362,6 +364,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserSite.action")
     public @ResponseBody
     Map jUserSite(HttpServletRequest request, int page, int limit, Integer userid) {
@@ -376,6 +379,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUsersfcoll.action")
     public @ResponseBody
     Map jUsersfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
@@ -414,6 +418,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserHistory.action")
     public @ResponseBody
     Map jUserHistory(HttpServletRequest request, int page, int limit, Integer userid) {
@@ -428,6 +433,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserfoot.action")
     public @ResponseBody
     Map jUserfoot(HttpServletRequest request, int page, int limit, Integer userid) {
@@ -442,6 +448,7 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserPay.action")
     public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
@@ -461,6 +468,7 @@ public class UserHandler {
         return b;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserCard.action")
     public @ResponseBody String jUserCard(HttpServletRequest request,Integer userid,String usercard,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
@@ -505,44 +513,52 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelorder.action")
     public @ResponseBody int jdelorder( Tblorder tblorder){
         return biz.jdelorder(tblorder);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelsfcoll.action")
     public @ResponseBody int jdelsfcoll( Tblsfcoll tblsfcoll){
         System.out.println("删除的列是："+tblsfcoll.getScoid());
         return biz.jdelsfcoll(tblsfcoll);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelfcoll.action")
     public @ResponseBody int jdelfcoll( Tblfcoll tblfcoll){
         System.out.println("删除的列是："+tblfcoll.getFcoid());
         return biz.jdelfcoll(tblfcoll);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelhistory.action")
     public @ResponseBody int jdelhistory( Tblorder tblorder){
         return biz.jdelhistory(tblorder);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelsite.action")
     public @ResponseBody int jdelsite( TblSite tblSite){
         System.out.println("删除的列是："+tblSite.getSid());
         return biz.jdelsite(tblSite);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdeleva.action")
     public @ResponseBody int jdeleva( Tbleva tbleva){
         return biz.jdeleva(tbleva);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelfoot.action")
     public @ResponseBody int jdelfoot( Tblfoot tblfoot){
         return biz.jdelfoot(tblfoot);
     }
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jsetsite.action")
     public @ResponseBody String jsetsite(HttpServletRequest request, TblSite tblSite){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
@@ -558,7 +574,7 @@ public class UserHandler {
         }
         return b;
     }
-
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jUserAddApp.action")
     public @ResponseBody String jUserAddApp(HttpServletRequest request, Tbleva tbleva){
         System.out.println(tbleva);
@@ -577,7 +593,7 @@ public class UserHandler {
         }
         return b;
     }
-
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jUserAddAfter.action")
     public @ResponseBody String jUserAddAfter(HttpServletRequest request, Tblorder tblorder){
         System.out.println(tblorder);
