@@ -74,7 +74,7 @@
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data">
+                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data" onsubmit="return reg()">
                             <%--<div>
                                 <label for="showname"><h4>头像</h4></label>
                                 <!-- 用于展示上传文件名的表单 -->
@@ -109,11 +109,11 @@
                                 <span id="ddd"></span><p/>
                             </div><!--/.form-group -->
 
-                            <div class="form-group">
-                                <label for="flawphone">法人电话</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入法人电话" onblur="checkflawphone()">
-                                <span id="eee" ></span><p/>
-                            </div><!--/.form-group -->
+<%--                            <div class="form-group">--%>
+<%--                                <label for="flawphone">法人电话</label>--%>
+<%--                                <input type="number" class="form-control" autocomplete="off" required="required" id="flawphone" name="flawphone" placeholder="请输入法人电话" onblur="checkflawphone()">--%>
+<%--                                <span id="eee" ></span><p/>--%>
+<%--                            </div><!--/.form-group -->--%>
                             <div class="form-group">
                                 <label for="ftime">注册时间</label>
                                 <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
@@ -188,7 +188,7 @@
                             <!-- end .city-picker-selector -->
 
                             <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal"
-                                   data-target=".signin_modal" value="注册" onsubmit="submit()" />
+                                   data-target=".signin_modal" value="注册" />
                         </form><!--/form -->
                     </div><!--/.col -->
                 </div><!--/.row -->
@@ -210,19 +210,6 @@
 
 </section><!--/.signin -->
 
-<!-- signin end -->
-
-<%--<!--footer copyright start -->--%>
-<%--<footer class="footer-copyright">--%>
-<%--    <div id="scroll-Top">--%>
-<%--        <i class="fa fa-angle-double-up return-to-top" id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>--%>
-<%--    </div><!--/.scroll-Top-->--%>
-
-<%--</footer><!--/.hm-footer-copyright-->--%>
-<%--<!--footer copyright  end -->--%>
-
-
-<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
 <script src="<%=path%>page/client/js/jquery.js"></script>
 
@@ -253,7 +240,22 @@
 
 <script>
 
-    function submit() {
+    function reg() {
+
+        if(!checkfpwd()){
+            return false;
+        }
+        if(!checknfpwd()){
+            return false;
+        }
+        if(!checkflawphone()){
+            return false;
+        }
+        if(!$("#aaa").text()=='该账号可用'){
+            return false;
+        }
+        return true;
+    }
         function checkfpwd(){
             var fpwd=$("#fpwd").val();
             var reg=/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)\S{6,}$/
@@ -269,6 +271,8 @@
                 return false;
             }else{
                 $("#bbb").html("");
+                return true;
+
             }
         }
         function checknfpwd(){
@@ -279,6 +283,7 @@
                 return false;
             }else{
                 $("#ccc").html("");
+                return true;
             }
         }
         function checkflawphone(){
@@ -290,30 +295,34 @@
                 return false;
             }else {
                 $("#eee").html("");
+                return true;
             }
         }
-    }
 
-    $(document).ready(function () {
-        $("#facc").blur(function () {
-            var facc=$("#facc").val();
-            var regular=new RegExp(/^1[3456789]\d{9}$/);
-            if(!(regular.test(facc))){
-                $("#aaa").html("手机号码有误，请重填");
-                return false;
-            }
-            $.post("<%=path%>page/checkfacc.action",
-                {"facc":facc},
-                function (data) {
-                    if(data=="1"){
-                        $("#aaa").html("该账号可用");
-                    }else{
-                        $("#aaa").html("该账号已被注册，请重新填写");
-                    }
+        $(document).ready(function () {
+            $("#facc").blur(function () {
+                var facc=$("#facc").val();
+                var regular=new RegExp(/^1[3456789]\d{9}$/);
+                if(!(regular.test(facc))){
+                    $("#aaa").html("手机号码有误，请重填");
+                    return false;
                 }
-            )
+                $.post("<%=path%>page/checkfacc.action",
+                    {"facc":facc},
+                    function (data) {
+                        if(data=="1"){
+                            $("#aaa").html("该账号可用");
+                            return true;
+                        }else{
+                            $("#aaa").html("该账号已被注册，请重新填写");
+                        }
+                    }
+                )
+            });
         });
-    });
+        
+
+
 </script>
 
 

@@ -41,6 +41,8 @@
         </span>
         <input type="text" name="securityCode" placeholder="验证码" />
         <hr class="hr15">
+        <a href="<%=path%>page/company/forgotpwd.jsp">忘记密码?</a>
+        <p/>
         <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
         <span style="color: aliceblue">--</span>
         <a href="<%=path%>page/company/reg.jsp"><input value="注册" lay-submit  style="width:100%;" type="button"></a>

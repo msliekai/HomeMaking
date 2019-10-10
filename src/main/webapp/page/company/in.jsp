@@ -74,28 +74,24 @@
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>page/addCompany.action" method="post" enctype="multipart/form-data">
-                            <%--<div>
-                                <label for="showname"><h4>头像</h4></label>
-                                <!-- 用于展示上传文件名的表单 -->
-                                <input id="showname" type="text" style="height:25px;" autocomplete="off" readonly="true">
-                                <!-- 点击触发按钮 -->
-                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>
-                            </div>--%>
-                            <%--                            真头像在这--%>
+<%--                        <form action="<%=path%>page/infirm.action" method="post" enctype="multipart/form-data">--%>
+
                             <input name="fileact" type="file" id="fileact" style="display: none"/>
 
                             <div class="form-group">
                                 <label for="fname">公司名:</label>
-                                <input type="text" class="form-control" autocomplete="off" id="fname" name="fname">
+                                <input type="text" class="form-control" autocomplete="off" id="fname" name="fname" placeholder="请输入中文名" onblur="checkfacc()">
+                                <span id="aaa"></span><p/>
 
                             </div><!--/.form-group -->
 
-                                <div class="form-group">
-                                    <label for="fsite">资料上传:<input type="file" class="form-control" autocomplete="off" id="fsite" name="fsite"></label>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="fsite">资料上传:<input type="file" class="form-control" autocomplete="off" id="fsite" name="fsite"></label>--%>
 
 
-                                </div><!--/.form-group -->
+<%--                                </div>--%>
+
+                            <!--/.form-group -->
 
                                 <div class="form-group" >
                                 <label > 服务类别:
@@ -110,7 +106,8 @@
                                 </label>
 
 
-                                <input type="submit" value="提交"/><input type="button" value="取消"/>
+                                <input type="button" value="提交" onclick="return infirm()"/>
+                                    <input type="button" value="取消"/>
                                 </div><!--/.form-group -->
 
 <script src="<%=path%>page/client/js/jquery.js"></script>
@@ -147,68 +144,66 @@
         function (data) {
             var html = '';
             for(var i in data){
-                html += '<input type="checkbox" name="ctname">' + data[i].ctname
+                html += '<input type="checkbox" name="ctname" value="'+data[i].ctid+'">' + data[i].ctname
             }
             $("#costype").append(html);
-            console.log(html);
+            // console.log(html);
         });
     });
 
 
-
-
-
-    function checkfpwd(){
-        var fpwd=$("#fpwd").val();
-        if(fpwd==""){
-            $("#bbb").html("密码不能为空");
+    function checkfacc(){
+        var fname=$("#fname").val();
+        var regular=new RegExp(/[\u4e00-\u9fa5]/);
+        if(!regular.test(fname)){
+            $("#aaa").html("公司名不符合要求");
             return false;
-        }else if(fpwd.length<6){
-            $("#bbb").html("密码位数不能低于6位数");
+        } else if(fname==""){
+            $("#aaa").html("公司账号不能为空");
             return false;
         }else{
-            $("#bbb").html("");
-        }
-    }
-    function checknfpwd(){
-        var fpwd=$("#fpwd").val();
-        var nfpwd=$("#nfpwd").val();
-        if(fpwd!=nfpwd){
-            $("#ccc").html("两次输入密码不一致");
-            return false;
-        }else{
-            $("#ccc").html("");
-        }
-    }
-    function checkflawphone(){
-        var flawphone=$("#flawphone").val();
-        if(flawphone.length!=11){
-            $("#eee").html("输入手机号有误");
-            return false;
-        }else {
-            $("#eee").html("");
+            $("#aaa").html("公司名可用");
+            return true;
         }
     }
 
-    $(document).ready(function () {
-        $("#facc").blur(function () {
-            var facc=$("#facc").val();
-            if(facc==""){
-                $("#aaa").html("公司账号不能为空");
-                return false;
-            }
-            $.post("<%=path%>page/checkfacc.action",
-                {"facc":facc},
-                function (data) {
+
+    function infirm() {
+        var ctids = getCheckBoxValueThree();
+        var ctidsAll = getAllCheckBoxValueThree();
+        var fname=$("#fname").val();
+        if(!checkfacc()){
+            alert("请使用中文名");
+            return false;
+        }
+        else
+            {
+                alert(ctids);
+                $.post("<%=path%>page/infirm.action",{"fname":fname,"ctids":ctids,"ctidsAll":ctidsAll},function (data) {
                     if(data=="1"){
-                        $("#aaa").html("该账号可用");
-                    }else{
-                        $("#aaa").html("该账号已被注册，请重新填写");
+                        alert("入驻成功");
                     }
-                }
-            )
-        });
-    });
+                    else {
+                        alert("入驻失败");
+                    }
+
+                });
+        }
+    }
+    function getCheckBoxValueThree() {
+        //获取input类型是checkBox并且 name="box"选中的checkBox的元素
+        var data = $('input:checkbox[name="ctname"]:checked').map(function () {
+            return $(this).val();
+        }).get().join(",");
+        return data;
+    }
+    function getAllCheckBoxValueThree() {
+        //获取input类型是checkBox并且 name="box"选中的checkBox的元素
+        var data = $('input:checkbox[name="ctname"]').map(function () {
+            return $(this).val();
+        }).get().join(",");
+        return data;
+    }
 </script>
 
 
@@ -249,5 +244,6 @@
 <script>
     alert("验证码错误");
 </script>
+
 <%}%>
 </html>

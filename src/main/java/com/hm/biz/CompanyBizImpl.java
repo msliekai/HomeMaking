@@ -101,15 +101,34 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.queryscard(scard);
     }
 
+    //入驻
     @Override
-    public Integer countcomment(Integer fid, Integer page, Integer limit) {
-        return companyMapper.countcomment(fid,page,limit);
+    public Integer infirm(String fname, String facc) {
+
+        return companyMapper.infirm(fname,facc);
+    }
+
+    //修改密码
+    @Override
+    public Integer changepwd(String fpwd, String facc) {
+        return companyMapper.changepwd(fpwd,facc);
+    }
+
+    //忘记密码
+    @Override
+    public Company forgotpwd(String facc) {
+        return companyMapper.forgotpwd(facc);
+    }
+
+    @Override
+    public Integer countcomment(Integer fid, Integer page, Integer limit,String date1,String date2) {
+        return companyMapper.countcomment(fid,page,limit,date1,date2);
     }
 
     //评价
     @Override
-    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit) {
-        return companyMapper.querycomment(fid,page,limit);
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit,String date1,String date2) {
+        return companyMapper.querycomment(fid,page,limit,date1,date2);
     }
 
     //    培训表总数

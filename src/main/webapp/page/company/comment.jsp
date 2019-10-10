@@ -32,47 +32,43 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
+                    <div class="demoTable">
                     评论信息
                     <hr class="layui-bg-red">
 
-                    <%--<div class="layui-form-item">
-                            <div class="layui-inline">
-                            <label class="layui-form-label">账户类型:</label>
-                            <div class="layui-input-inline">
-                                <input type="tel" name="cardtype" lay-verify="required|phone" autocomplete="off" class="layui-input" id="cardtype">
-                            </div>--%>
-                    <form class="layui-form" action="<%=path%>rrr/addStaff.action" method="post" lay-filter="example" enctype="multipart/form-data">
+<%--                    <form class="layui-form"  method="post" lay-filter="example" enctype="multipart/form-data">--%>
                     <div class="layui-inline">
                         <label class="layui-form-label">起始时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="sfdob" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                            <input type="text" name="date1" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-inline">
                             <label class="layui-form-label">结束时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="sfdob" id="date2" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                            <input type="text" name="date2" id="date2" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                        <div class="layui-inline layui-show-xs-block">
-                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
-                        </div>
+                    <div class="layui-inline layui-show-xs-block">
+                        <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
+                    </div>
 
-                    </form>
+<%--                    </form>--%>
 
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
                     </table>
                 </div>
+                    </div>
             </div>
         </div>
     </div>
 </div>
 
-
+</div>
 </body>
 
 <script>
@@ -112,11 +108,13 @@
                 , {field: 'etime', title: '评价时间', minWidth: 80}
             ]]
         });
+
         //触发查询按钮
         var $ = layui.$, active = {
             reload: function(){
-                var date1 = $('#date1');
-                var date2=$('#date2');
+                // var osname = $('#osname');
+                var date1=$("#date1");
+                var date2=$("#date2");
                 //执行重载
                 table.reload('testReload', {
                     page: {
@@ -124,15 +122,14 @@
                     }
                     ,where: {
                         date1: date1.val(),
-                        date2:date2.val(),
+                        date2: date2.val(),
                     }
                 }, 'data');
             }
         };
-
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
-            alert(type);
+            // alert(type);
             active[type] ? active[type].call(this) : '';
         })
 
@@ -167,9 +164,8 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
+                            date1: date1.value,
+                            date2: date2.value,
                         }
                     }, 'data');
                 },
