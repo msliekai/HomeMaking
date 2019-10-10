@@ -26,12 +26,10 @@ import javax.annotation.Resource;
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+
 @Component
 @Controller
 @RequestMapping("page")
@@ -204,10 +202,8 @@ public @ResponseBody String useDel(String sfid){
     //提供给公司的所有服务
     @RequestMapping(value = "querycostype",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public @ResponseBody List querycostype(HttpServletRequest request){
-
         List<TblCOStype> querycostype = companyBiz.querycostype();
         request.setAttribute("costype",querycostype);
-        System.out.println(querycostype+"*********");
         return querycostype;
 
     }
@@ -338,16 +334,17 @@ public @ResponseBody String useDel(String sfid){
 
     //评价
     @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
-    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva){
+    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva,String date1,String date2){
         System.out.println("评价");
+        System.out.println(date1+date2);
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer page = tbleva.getPage();
         Integer limit = tbleva.getLimit();
-        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit);
+        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit,date1,date2);
         Map<String,Object> map=new HashMap<String,Object>();
 //        int count=0;
-        int count = companyBiz.countcomment(fid,page,limit);
+        int count = companyBiz.countcomment(fid,page,limit,date1,date2);
         map.put("code",0);
         map.put("count",count);
         map.put("data",querycomment);
@@ -361,13 +358,9 @@ public @ResponseBody String useDel(String sfid){
         String sfname = staff.getSfname();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
-        System.out.println(fid+"//////");
         Tblfirmacc queryfacard = companyBiz.queryfacard(fid);
         String facard = queryfacard.getFacard();
-        System.out.println(queryfacard+"**********");
         String famoney = queryfacard.getFamoney();//余额
-        System.out.println(famoney+"+++++");
-        System.out.println(transfermoney+"****");
         int i = Integer.parseInt(famoney);
         int j = Integer.parseInt(transfermoney);
         String flaw = queryfacard.getCompany().getFlaw();//法人
@@ -413,7 +406,6 @@ public @ResponseBody String useDel(String sfid){
     {
         Integer userid = tblUser.getUserid();
         TblUser user = companyBiz.findUser(userid);
-        System.out.println(user);
         return user;
     }
     //--------查找员工信息
@@ -423,7 +415,6 @@ public @ResponseBody String useDel(String sfid){
         Company company = (Company) session.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
         List<Staff> list=companyBiz.findStaff(fid);
-        System.out.println(list);
         return list;
     }
     //--------------接单
@@ -469,6 +460,152 @@ public @ResponseBody String useDel(String sfid){
             return "ok";
         }else {
             return "no";
+        }
+    }
+    //----查看培训详情
+    @RequestMapping(value = "trainMsg")
+    public @ResponseBody Tbltrain trainMsg(String trid)
+    {
+
+      Tbltrain tbltrain=companyBiz.trainMsg(Integer.parseInt(trid));
+
+       return tbltrain;
+    }
+    //--查看员工评价信息
+    @RequestMapping(value = "findStaffEva")
+    public @ResponseBody List<Tbleva> findStaffEva(String sfid)
+    {
+
+       List<Tbleva> list=companyBiz.findStaffEva(Integer.parseInt(sfid));
+        System.out.println(list);
+
+        return list;
+    }
+    //----分配服务类型
+    @RequestMapping(value = "findCosStyle")
+    public @ResponseBody List<Tblfc> findCosStyle(HttpSession session)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid = company.getFid();//获取公司fid
+        List<Tblfc> list=companyBiz.findCosStyle(fid);
+        return list;
+    }
+    //-------分配
+    @RequestMapping(value = "fenPei",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPei(HttpServletRequest request,TblCOStype tblCOStype)
+    {
+        Integer ctid=tblCOStype.getCtid();
+        if(ctid!=null)
+        {
+            request.getSession().setAttribute("ctid",ctid);
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //----分配服务
+    @RequestMapping(value = "findCos")
+    public @ResponseBody List<TblCOS> findCos(HttpSession session,String ctid)
+    {
+       Integer ctid1=Integer.parseInt(ctid);
+        List<TblCOS> list =companyBiz.findCos(ctid1);
+        return list;
+    }
+    //------修改员工服务
+    @RequestMapping(value = "fenPeiCos",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPeiCos(String cosid,String sfid)
+    {
+        Integer sfid1=Integer.parseInt(sfid);
+        Integer cosid1=Integer.parseInt(cosid);
+        Integer b =companyBiz.fenPeiCos(cosid1,sfid1);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+
+    //-----售后接受
+    @RequestMapping(value = "after",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String after(Tblorder tblorder)
+    {
+        tblorder.setOsid(10);
+        Integer b = companyBiz.after(tblorder);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+    //-----拒绝售后
+    @RequestMapping(value = "afterResult",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String afterResult(Tblorder tblorder)
+    {
+        tblorder.setOsid(10);
+        Integer b = companyBiz.afterResult(tblorder);
+        if(b>0)
+        {
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
+
+    //忘记密码
+    @RequestMapping("forgotpwd")
+    public @ResponseBody String forgotpwd(HttpSession httpSession,String facc){
+        System.out.println("忘记密码");
+        Company forgotpwd = companyBiz.forgotpwd(facc);
+        if(forgotpwd!=null){
+            return "1";
+        }else{
+            return "0";
+        }
+
+    }
+    //修改密码
+    @RequestMapping("changepwd")
+    public @ResponseBody String changepwd(HttpSession httpSession,String facc,String fpwd){
+        Integer i = companyBiz.changepwd(fpwd, facc);
+        if(i>0){
+            return "1";
+        }else {
+            return "0";
+        }
+
+    }
+    //入驻
+    @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
+    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
+        Company company = (Company) httpSession.getAttribute("company");
+        String facc = company.getFacc();
+        Integer fid = company.getFid();
+        System.out.println(ctids);
+        System.out.println(ctidsAll);
+        System.out.println("公司入驻");
+        List<Tblfc> tblfcs = new ArrayList<>();
+        String[] ctidss = ctids.split(",");
+        String[] ctidsAlls = ctidsAll.split(",");
+        for (String s:ctidsAlls){
+            Tblfc tblfc = new Tblfc();
+            tblfc.setFid(fid);
+            tblfc.setCtid(Integer.parseInt(s));
+            tblfc.setStid(6);
+            for (String ss:ctidss){
+                if (s.equals(ss)){
+                    tblfc.setStid(7);
+                }
+            }
+            tblfcs.add(tblfc);
+        }
+
+        Integer i = companyBiz.infirm(fname, facc);
+        if(i>0){
+            return "1";
+        }else {
+            return "0";
         }
     }
 }

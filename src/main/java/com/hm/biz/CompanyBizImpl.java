@@ -101,15 +101,34 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.queryscard(scard);
     }
 
+    //入驻
     @Override
-    public Integer countcomment(Integer fid, Integer page, Integer limit) {
-        return companyMapper.countcomment(fid,page,limit);
+    public Integer infirm(String fname, String facc) {
+
+        return companyMapper.infirm(fname,facc);
+    }
+
+    //修改密码
+    @Override
+    public Integer changepwd(String fpwd, String facc) {
+        return companyMapper.changepwd(fpwd,facc);
+    }
+
+    //忘记密码
+    @Override
+    public Company forgotpwd(String facc) {
+        return companyMapper.forgotpwd(facc);
+    }
+
+    @Override
+    public Integer countcomment(Integer fid, Integer page, Integer limit,String date1,String date2) {
+        return companyMapper.countcomment(fid,page,limit,date1,date2);
     }
 
     //评价
     @Override
-    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit) {
-        return companyMapper.querycomment(fid,page,limit);
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit,String date1,String date2) {
+        return companyMapper.querycomment(fid,page,limit,date1,date2);
     }
 
     //    培训表总数
@@ -191,6 +210,42 @@ public class CompanyBizImpl implements CompanyBiz {
     @Override
     public Integer staffFix(Staff staff) {
         return companyMapper.staffFix(staff);
+    }
+    //---培训内容
+    @Override
+    public Tbltrain trainMsg(Integer trid) {
+        return companyMapper.trainMsg(trid);
+    }
+    //---员工评价
+    @Override
+    public List<Tbleva> findStaffEva(Integer sfid) {
+
+        return companyMapper.findStaffEva(sfid);
+    }
+    //----分配服务类型
+    @Override
+    public List<Tblfc> findCosStyle(Integer fid) {
+        return companyMapper.findCosStyle(fid);
+    }
+    //----分配服务
+    @Override
+    public List<TblCOS> findCos(Integer ctid) {
+        return companyMapper.findCos(ctid);
+    }
+    //---员工修改服务
+    @Override
+    public Integer fenPeiCos(Integer cosid,Integer sfid) {
+        return companyMapper.fenPeiCos(cosid,sfid);
+    }
+    //-----售后接受
+    @Override
+    public Integer after(Tblorder tblorder) {
+        return companyMapper.after(tblorder);
+    }
+    //-----拒绝售后
+    @Override
+    public Integer afterResult(Tblorder tblorder) {
+        return companyMapper.afterResult(tblorder);
     }
 
     //某个公司提供的服务数量

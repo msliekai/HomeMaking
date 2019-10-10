@@ -63,8 +63,8 @@ public interface CompanyBiz {
     public List<Tblfc> queryserve(Integer fid,Integer page,Integer limit);
     public Integer countserve(Integer fid,Integer page,Integer limit);
     //评价
-    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit);
-    public Integer countcomment(Integer fid,Integer page,Integer limit);
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit,String date1,String date2);
+    public Integer countcomment(Integer fid,Integer page,Integer limit,String date1,String date2);
 
 
     //员工新增
@@ -79,4 +79,24 @@ public interface CompanyBiz {
     public Integer addOrder(Tblorder tblorder);
     //---员工修改
     public Integer staffFix(Staff staff);
+    //---培训内容
+    public Tbltrain trainMsg(Integer trid);
+    //---员工评价
+    public List<Tbleva> findStaffEva(Integer sfid);
+    //----分配服务类型
+    public List<Tblfc> findCosStyle(Integer fid);
+    //----分配服务
+    public List<TblCOS> findCos(Integer ctid);
+    //---员工修改服务
+    public Integer fenPeiCos(Integer cosid,Integer sfid);
+    //-----售后接受
+    public Integer after(Tblorder tblorder);
+    //-----拒绝售后
+    public Integer afterResult(Tblorder tblorder);
+    //忘记密码
+    public Company forgotpwd(String facc);
+    //修改密码
+    public Integer changepwd(String fpwd,String facc);
+    //入驻
+    public Integer infirm(String fname,String facc);
 }

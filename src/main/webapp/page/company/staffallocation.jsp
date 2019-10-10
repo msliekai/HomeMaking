@@ -58,7 +58,7 @@
     <a class="layui-btn layui-btn-xs " lay-event="useEna">分配服务类别</a>
 </script>
 <script id="barDemo2" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">分配服务</a>
+    <a class="layui-btn layui-btn-xs " lay-event="useDis">分配服务</a>
 </script>
 
 <script>
@@ -90,56 +90,27 @@
         });
 
 
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
-        })
-
         //监听行工具事件
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "分配服务类别",
+                    area: ['500px', '200px'],
+                    content: "staffcosstyle.jsp"//引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "分配服务",
+                    area: ['500px', '200px'],
+                    content: "staffcos.jsp"+"?sfid="+encodeURIComponent(data.sfid)//引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: url,
-                dataType: "text",
-                data: {"uid":uid},
-                success: function (dat) {
-                    if(dat==1){
-                        layer.msg("修改成功");
-                    }else{
-                        layer.msg("修改失败");
-                    }
-                    //执行重载
-                    table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
-                    }, 'data');
-                },
-                error: function (dat) {
-                    layer.msg('裂开');
-                }
-            })
 
-        }
     });
 
 </script>
