@@ -112,7 +112,7 @@
 		
 		function tips(a) {
 			  if (confirm("确定要退出?")) {
-			   location.href = a;
+			   location.href = "<%=path%>page/Wellcome.jsp";
 			   alert("已退出");
 			  } else {
 			   alert("已取消");

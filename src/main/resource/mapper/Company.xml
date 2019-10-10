@@ -169,23 +169,17 @@
     <!--查询某个公司的有关服务-->
 
     <select id="servicetype" resultMap="costype" parameterType="java.lang.Integer">
-        select * from tblCOStype c left join
-        (select s.stname,f.ctid from tblfc f,tblstate s where s.stid=f.stid and f.fid=#{fid})m
-        on c.ctid=m.ctid
+        select c.*,s.stname from tblCOStype c,tblstate s,tblfc f,tblfirm m
+        where f.fid=m.fid and f.ctid=c.ctid and f.stid=s.stid and m.fid=#{fid}
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
     </select>
 
     <select id="countservicetype" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select count(*) from tblCOStype c left join
-        (select s.stname,f.ctid from tblfc f,tblstate s where s.stid=f.stid and f.fid=#{fid})m
-        on c.ctid=m.ctid
+        select count(*) from tblCOStype c,tblstate s,tblfc f,tblfirm m
+        where f.fid=m.fid and f.ctid=c.ctid and f.stid=s.stid and m.fid=#{fid}
     </select>
 
-    <!--公司入驻申请-->
-    <update id="">
-
-    </update>
 
     <!--公司银行账号-->
     <select id="queryfirmacc" resultType="com.hm.entity.Tblfirmacc" parameterType="java.lang.Integer">
@@ -313,11 +307,17 @@
 
 
     <!--服务评价-->
-    <select id="querycomment" resultMap="comment" parameterType="java.lang.Integer">
+    <select id="querycomment" resultMap="comment" >
         select * from tbleva t,
         (select o.oid,u.userid,u.userurl from tblorder o,tblstaff s,tbluser u
         where u.userid=o.userid and s.sfid=o.sfid and s.fid=#{fid})m
         where t.oid=m.oid
+        <if test="date1!=null and date1!=''">
+        and t.etime &gt;=#{date1}
+        </if>
+        <if test="date2!=null and date2!=''">
+            and t.etime &lt;=#{date2}
+        </if>
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
     </select>
@@ -345,6 +345,12 @@
         (select o.oid,u.userid,u.userurl from tblorder o,tblstaff s,tbluser u
         where u.userid=o.userid and s.sfid=o.sfid and s.fid=#{fid})m
         where t.oid=m.oid
+        <if test="date1!=null and date1!=''">
+            and t.etime &gt;=#{date1}
+        </if>
+        <if test="date2!=null and date2!=''">
+            and t.etime &lt;=#{date2}
+        </if>
     </select>
 
     <!--查询员工银行卡号-->
@@ -473,4 +479,24 @@ where ts.ctid=m.ctid
     <update id="afterResult" parameterType="com.hm.entity.Tblorder">
         update tblorder set osid=#{osid},afterresult=#{afterresult} where oid=#{oid}
     </update>
+
+    <!--忘记密码-->
+    <select id="forgotpwd" resultType="com.hm.entity.Company">
+    select * from tblfirm where facc=#{facc}
+    </select>
+    <!--修改密码-->
+    <update id="changepwd" parameterType="java.lang.String">
+        UPDATE tblfirm set fpwd=#{fpwd} where facc=#{facc}
+    </update>
+    <!--入驻-->
+   <update id="infirm" parameterType="java.lang.String">
+       update tblfirm set fname=#{fname},rid=3  where facc=#{facc}
+   </update>
+    <!--循环插入服务-->
+    <insert id="addserve" parameterType="java.util.List">
+        insert into tblfc (fid,ctid,stid) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.fid},#{item.ctid},#{item.stid})
+        </foreach>
+    </insert>
 </mapper>

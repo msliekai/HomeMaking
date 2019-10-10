@@ -26,12 +26,10 @@ import javax.annotation.Resource;
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+
 @Component
 @Controller
 @RequestMapping("page")
@@ -204,10 +202,8 @@ public @ResponseBody String useDel(String sfid){
     //提供给公司的所有服务
     @RequestMapping(value = "querycostype",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public @ResponseBody List querycostype(HttpServletRequest request){
-
         List<TblCOStype> querycostype = companyBiz.querycostype();
         request.setAttribute("costype",querycostype);
-        System.out.println(querycostype+"*********");
         return querycostype;
 
     }
@@ -338,16 +334,17 @@ public @ResponseBody String useDel(String sfid){
 
     //评价
     @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
-    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva){
+    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva,String date1,String date2){
         System.out.println("评价");
+        System.out.println(date1+date2);
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer page = tbleva.getPage();
         Integer limit = tbleva.getLimit();
-        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit);
+        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit,date1,date2);
         Map<String,Object> map=new HashMap<String,Object>();
 //        int count=0;
-        int count = companyBiz.countcomment(fid,page,limit);
+        int count = companyBiz.countcomment(fid,page,limit,date1,date2);
         map.put("code",0);
         map.put("count",count);
         map.put("data",querycomment);
@@ -361,13 +358,9 @@ public @ResponseBody String useDel(String sfid){
         String sfname = staff.getSfname();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
-        System.out.println(fid+"//////");
         Tblfirmacc queryfacard = companyBiz.queryfacard(fid);
         String facard = queryfacard.getFacard();
-        System.out.println(queryfacard+"**********");
         String famoney = queryfacard.getFamoney();//余额
-        System.out.println(famoney+"+++++");
-        System.out.println(transfermoney+"****");
         int i = Integer.parseInt(famoney);
         int j = Integer.parseInt(transfermoney);
         String flaw = queryfacard.getCompany().getFlaw();//法人
@@ -413,7 +406,6 @@ public @ResponseBody String useDel(String sfid){
     {
         Integer userid = tblUser.getUserid();
         TblUser user = companyBiz.findUser(userid);
-        System.out.println(user);
         return user;
     }
     //--------查找员工信息
@@ -558,6 +550,62 @@ public @ResponseBody String useDel(String sfid){
             return "ok";
         }else {
             return "no";
+        }
+    }
+
+    //忘记密码
+    @RequestMapping("forgotpwd")
+    public @ResponseBody String forgotpwd(HttpSession httpSession,String facc){
+        System.out.println("忘记密码");
+        Company forgotpwd = companyBiz.forgotpwd(facc);
+        if(forgotpwd!=null){
+            return "1";
+        }else{
+            return "0";
+        }
+
+    }
+    //修改密码
+    @RequestMapping("changepwd")
+    public @ResponseBody String changepwd(HttpSession httpSession,String facc,String fpwd){
+        Integer i = companyBiz.changepwd(fpwd, facc);
+        if(i>0){
+            return "1";
+        }else {
+            return "0";
+        }
+
+    }
+    //入驻
+    @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
+    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
+        Company company = (Company) httpSession.getAttribute("company");
+        String facc = company.getFacc();
+        Integer fid = company.getFid();
+        System.out.println(ctids);
+        System.out.println(ctidsAll);
+        System.out.println("公司入驻");
+        List<Tblfc> tblfcs = new ArrayList<>();
+        String[] ctidss = ctids.split(",");
+        String[] ctidsAlls = ctidsAll.split(",");
+        for (String s:ctidsAlls){
+            Tblfc tblfc = new Tblfc();
+            tblfc.setFid(fid);
+            tblfc.setCtid(Integer.parseInt(s));
+            tblfc.setStid(6);
+            for (String ss:ctidss){
+                if (s.equals(ss)){
+                    tblfc.setStid(7);
+                }
+            }
+            tblfcs.add(tblfc);
+        }
+
+        Integer i = companyBiz.infirm(fname, facc);
+        if(i>0){
+            return "1";
+        }else {
+            return "0";
         }
     }
 }
