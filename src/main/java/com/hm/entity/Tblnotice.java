@@ -10,4 +10,6 @@ public class Tblnotice {
     private String ntitle;
     private Integer page;
     private Integer limit;
+    private String start;
+    private String end;
 }

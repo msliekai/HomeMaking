@@ -209,6 +209,12 @@
     </dependency>
 
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>2.0.2</version>
@@ -243,11 +249,6 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.9.6</version>
     </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-          <version>2.3</version>
-      </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok  插件-->
       <dependency>

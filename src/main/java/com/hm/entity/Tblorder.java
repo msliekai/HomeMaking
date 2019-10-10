@@ -36,6 +36,10 @@ public class Tblorder {
     private String money;//总金额
     private Integer page;
     private Integer limit;
+    private String start;
+    private String end;
+
+
 
 
 

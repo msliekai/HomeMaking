@@ -42,28 +42,28 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-body ">
-<%--                    <form class="layui-form layui-col-space5">--%>
-                    <div class="demoTable">
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
-                        </div>
-                    </div>
-<%--                    </form>--%>
-                </div>
+<%--                <div class="layui-card-body ">--%>
+<%--&lt;%&ndash;                    <form class="layui-form layui-col-space5">&ndash;%&gt;--%>
+<%--                    <div class="demoTable">--%>
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">--%>
+<%--                        </div>--%>
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">--%>
+<%--                        </div>--%>
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">--%>
+<%--                        </div>--%>
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--&lt;%&ndash;                    </form>&ndash;%&gt;--%>
+<%--                </div>--%>
 <%--                <s:property value="list"></s:property>--%>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
+<%--                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
+                    <button class="layui-btn" onclick="xadmin.open('添加','<%=path%>page/manger/AddTrain.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>
 
                 <div class="layui-card-body" align="center" >
@@ -144,29 +144,45 @@
             var data = obj.data;
             if (obj.event === 'tdel') {
                 layer.confirm('确定删除？', function (index) {
-                    fal("<%=path%>",data.uid);
+                    fal("<%=path%>manager/delTrain.action",data.trid);
                     layer.close(index);
                 });
             }else if(obj.event==="tupdate"){
-                layer.confirm('确定修改？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "培训安排修改",
+                    area: ['450px', '430px'],
+                    content: "UpdateTrain.jsp"+
+                        "?trtime="+encodeURIComponent(data.trtime)+
+                        "&trtitle="+encodeURIComponent(data.trtitle)+
+                        "&trcontext="+encodeURIComponent(data.trcontext)+
+                        "&trsum="+encodeURIComponent(data.trsum)+
+                        "&trid="+encodeURIComponent(data.trid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            } else if(obj.event==="useContext"){
-                layer.confirm('查看详情？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+            } else if(obj.event==="trainContext"){
+                layer.open({
+                    type:2,
+                    title: "培训安排详情",
+                    area: ['450px', '430px'],
+                    content: "UpdateContext.jsp"+
+                        "?trtime="+encodeURIComponent(data.trtime)+
+                        "&trtitle="+encodeURIComponent(data.trtitle)+
+                        "&trcontext="+encodeURIComponent(data.trcontext)+
+                        "&trsum="+encodeURIComponent(data.trsum)+
+                        "&trid="+encodeURIComponent(data.trid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,trid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"trid":trid},
                 success: function (dat) {
                     if(dat==1){
                         layer.msg("操作成功");
@@ -176,9 +192,7 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
+                            trid: trid.value,
                         }
                     }, 'data');
                 },

@@ -46,13 +46,10 @@
 <%--                    <form class="layui-form layui-col-space5">--%>
                     <div class="demoTable">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
+                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="start" id="start">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">
+                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="end" id="end">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
@@ -61,10 +58,6 @@
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
-                <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
-                </div>
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
@@ -78,8 +71,6 @@
 </body>
 
 <script id="barDemo" type="text/html">
-<%--    <a class="layui-btn layui-btn-xs " lay-event="tdel">删除</a>--%>
-<%--    <a class="layui-btn layui-btn-primary " lay-event="tupdate">修改</a>--%>
     <a class="layui-btn layui-btn-normal" lay-event="serviceIfmContext">查看详情</a>
 </script>
 
@@ -120,159 +111,46 @@
         //触发查询按钮
             var $ = layui.$, active = {
                 reload: function(){
-                    var uname = $('#uname');
-                    var cong=$('#cong');
-                    var dao=$('#dao');
+                    var start = $('#start');
+                    var end = $('#end');
                     //执行重载
                     table.reload('testReload', {
                         page: {
                             curr: 1 //重新从第 1 页开始
                         }
                         ,where: {
-                            uname: uname.val(),
-                            cong:cong.val(),
-                            dao:dao.val(),
+                            start: start.val(),
+                            end: end.val(),
                         }
                     }, 'data');
                 }
         };
 
-        <%--$('.demoTable .layui-btn').on('click', function(){--%>
-        <%--    var type = $(this).data('type');--%>
-        <%--    alert(type);--%>
-        <%--    active[type] ? active[type].call(this) : '';--%>
-        <%--})--%>
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            alert(type);
+            active[type] ? active[type].call(this) : '';
+        })
 
-        <%--//监听行工具事件--%>
-        <%--table.on('tool(test)', function(obj) {--%>
-        <%--    var data = obj.data;--%>
-        <%--    if (obj.event === 'tdel') {--%>
-        <%--        layer.confirm('确定删除？', function (index) {--%>
-        <%--            fal("<%=path%>",data.uid);--%>
-        <%--            layer.close(index);--%>
-        <%--        });--%>
-        <%--    }else if(obj.event==="tupdate"){--%>
-        <%--        layer.confirm('确定修改？', function (index) {--%>
-        <%--            fal("<%=path%>",data.uid);--%>
-        <%--            layer.close(index);--%>
-        <%--        });--%>
-        <%--    } else if(obj.event==="serviceIfmContext"){--%>
-        <%--        layer.confirm('查看详情？', function (index) {--%>
-        <%--            fal("<%=path%>",data.uid);--%>
-        <%--            layer.close(index);--%>
-        <%--        });--%>
-        <%--    }--%>
-        <%--});--%>
+        //监听行工具事件
+        table.on('tool(test)', function(obj) {
+            var data = obj.data;
+           if(obj.event==="serviceIfmContext"){
+               layer.open({
+                   type:2,
+                   title: "服务信息详情",
+                   area: ['450px', '430px'],
+                   content: "ServiceIfmContext.jsp"+
+                       "?username="+encodeURIComponent(data.username)+
+                       "&fname="+encodeURIComponent(data.fname)+
+                       "&osname="+encodeURIComponent(data.osname)
+                   //引用的弹出层的页面层的方式加载修改界面表单
+               });
+           }
+        });
 
-        // function fal(url,uid) {
-        //     $.ajax({
-        //         async: true,
-        //         type: "post",
-        //         url: url,
-        //         dataType: "text",
-        //         data: {"uid":uid},
-        //         success: function (dat) {
-        //             if(dat==1){
-        //                 layer.msg("操作成功");
-        //             }else{
-        //                 layer.msg("操作失败");
-        //             }
-        //             //执行重载
-        //             table.reload('testReload', {
-        //                 where: {
-        //                     uname: uname.value,
-        //                     cong:cong.value,
-        //                     dao:dao.value,
-        //                 }
-        //             }, 'data');
-        //         },
-        //         error: function (dat) {
-        //             layer.msg('裂开');
-        //         }
-        //     })
-        //
-        // }
     });
 
 </script>
 
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
-
-
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

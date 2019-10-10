@@ -32,11 +32,6 @@ public class TblUser {
     private String usercard;
     // 角色id
     private Integer rid;
-    //地址类
-    private TblSite tblSite;
-    private Integer sid;
-
-
     //状态名
     private String stname;
     //页码
@@ -111,30 +106,20 @@ public class TblUser {
         this.usercon = usercon;
     }
 
-    public String getUserurl() {
-        return userurl;
-    }
-
-    public void setUserurl(String userurl) {
-        this.userurl = userurl;
-    }
-
-
-    public Integer getRid() {
-        return rid;
-    }
-
-    public void setRid(Integer rid) {
-        this.rid = rid;
-    }
-
-
     public Integer getStid() {
         return stid;
     }
 
     public void setStid(Integer stid) {
         this.stid = stid;
+    }
+
+    public String getUserurl() {
+        return userurl;
+    }
+
+    public void setUserurl(String userurl) {
+        this.userurl = userurl;
     }
 
     public String getUsercard() {
@@ -145,13 +130,12 @@ public class TblUser {
         this.usercard = usercard;
     }
 
-
-    public Integer getSid() {
-        return sid;
+    public Integer getRid() {
+        return rid;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 
     public String getStname() {
@@ -176,13 +160,5 @@ public class TblUser {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
-    }
-
-    public TblSite getTblSite() {
-        return tblSite;
-    }
-
-    public void setTblSite(TblSite tblSite) {
-        this.tblSite = tblSite;
     }
 }

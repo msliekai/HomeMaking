@@ -24,6 +24,10 @@ public class Company {
     private Integer page;
     private Integer limit;
     private TblCOStype tblCOStype;
+    //状态名
+    private String stname;
+    private String ctname;
+    private String rname;
     @Resource
     private List<CompanyService> list;//公司的服务类型
 

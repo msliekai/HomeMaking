@@ -14,7 +14,7 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>服务类型</title>
+    <title>服务列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -44,26 +44,11 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
 <%--                    <form class="layui-form layui-col-space5">--%>
-                    <div class="demoTable">
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
-                        </div>
-                    </div>
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
+                    <button class="layui-btn" onclick="xadmin.open('添加','<%=path%>page/manger/AddServiceM.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>
 
                 <div class="layui-card-body" align="center" >
@@ -144,29 +129,45 @@
             var data = obj.data;
             if (obj.event === 'tdel') {
                 layer.confirm('确定删除？', function (index) {
-                    fal("<%=path%>",data.uid);
+                    fal("<%=path%>manager/delService.action",data.cosid);
                     layer.close(index);
                 });
             }else if(obj.event==="tupdate"){
-                layer.confirm('确定修改？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+                layer.open({
+                    type:2,
+                    title: "服务修改",
+                    area: ['450px', '430px'],
+                    content: "UpdateServiceM.jsp"+
+                        "?cosname="+encodeURIComponent(data.cosname)+
+                        "&cosdeta="+encodeURIComponent(data.cosdeta)+
+                        "&ctid="+encodeURIComponent(data.ctid)+
+                        "&costime="+encodeURIComponent(data.costime)+
+                        "&cosid="+encodeURIComponent(data.cosid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            } else if(obj.event==="useContext"){
-                layer.confirm('查看详情？', function (index) {
-                    fal("<%=path%>",data.uid);
-                    layer.close(index);
+            } else if(obj.event==="trainContext"){
+                layer.open({
+                    type:2,
+                    title: "服务详情",
+                    area: ['450px', '430px'],
+                    content: "ServiceMContext.jsp"+
+                        "?cosname="+encodeURIComponent(data.cosname)+
+                        "&cosdeta="+encodeURIComponent(data.cosdeta)+
+                        "&ctid="+encodeURIComponent(data.ctid)+
+                        "&costime="+encodeURIComponent(data.costime)+
+                        "&cosid="+encodeURIComponent(data.cosid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,cosid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"cosid":cosid},
                 success: function (dat) {
                     if(dat==1){
                         layer.msg("操作成功");
@@ -176,9 +177,8 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
+                            cosid: cosid.value,
+
                         }
                     }, 'data');
                 },
@@ -192,83 +192,4 @@
 
 </script>
 
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
-
-
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

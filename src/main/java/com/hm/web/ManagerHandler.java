@@ -5,8 +5,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hm.biz.MangerBiz;
 import com.hm.biz.MenuBiz;
+import com.hm.biz.UserBiz;
 import com.hm.entity.*;
 import com.hm.biz.StatisticsBizImpl;
+import com.hm.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,12 +21,16 @@ import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerHandler {
     private Map<String,Object> map=new HashMap<String,Object>();
     private int count;
+    private String result;
     @Resource
     private MangerBiz mangerBizImpl;
     @Resource
@@ -168,6 +174,17 @@ public class ManagerHandler {
         map.put("data",list);
         return map;
     }
+    //家政司公审核列表
+    @RequestMapping(value ="/cmFindCompanyAll.action")
+    public  @ResponseBody
+    Map cmFindCompanyAll(HttpServletRequest req, Company company){
+        count=mangerBizImpl.cmFindCompanyAll(null).size();
+        List<Company>list =mangerBizImpl.cmFindCompanyAll(company);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
+    }
     //培训计划列表
     @RequestMapping(value ="/Mtrainlist.action")
     public  @ResponseBody
@@ -277,5 +294,209 @@ public class ManagerHandler {
         map.put("count",count);
         map.put("data",list);
         return map;
+    }
+    //用户列表禁用
+    @RequestMapping(value ="/updateUserState.action")
+    public  @ResponseBody String updateUserState(int userid){
+        int num=mangerBizImpl.updateUserState(userid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //用户列表启用
+    @RequestMapping(value ="/updateUserState2.action")
+    public  @ResponseBody String updateUserState2(int userid){
+        int num=mangerBizImpl.updateUserState2(userid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //家政公司列表禁用
+    @RequestMapping(value ="/updateCompanyState.action")
+    public  @ResponseBody String updateCompanyState(int fid){
+        int num=mangerBizImpl.updateCompanyState(fid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //家政公司列表启用
+    @RequestMapping(value ="/updateCompanyState2.action")
+    public  @ResponseBody String updateCompanyState2(int fid){
+        int num=mangerBizImpl.updateCompanyState2(fid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //入驻审核不通过
+    @RequestMapping(value ="/updateCompanyRole.action")
+    public  @ResponseBody String updateCompanyRole(int fid){
+        int num=mangerBizImpl.updateCompanyRole(fid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //入驻审核通过
+    @RequestMapping(value ="/updateCompanyRole2.action")
+    public  @ResponseBody String updateCompanyRole2(int fid){
+        int num=mangerBizImpl.updateCompanyRole2(fid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //添加培训安排
+    @RequestMapping("/addtrain.action")
+    public @ResponseBody int addtrain(Tbltrain tbltrain){
+
+        return mangerBizImpl.addTrain(tbltrain);
+    }
+    //删除培训安排
+    @RequestMapping(value ="/delTrain.action")
+    public  @ResponseBody String delTrain(int trid){
+        int num=mangerBizImpl.delTrain(trid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改培训安排
+    @RequestMapping("/updateTrain.action")
+    public @ResponseBody int updateTrain(Tbltrain tbltrain){
+
+        return mangerBizImpl.updateTrain(tbltrain);
+    }
+    //添加服务类型
+    @RequestMapping("/addServiceType.action")
+    public @ResponseBody int addServiceType(TblCOStype tblCOStype){
+
+        return mangerBizImpl.addServiceType(tblCOStype);
+    }
+    //删除服务类型
+    @RequestMapping(value ="/delServiceType.action")
+    public  @ResponseBody String delServiceType(int ctid){
+        int num=mangerBizImpl.delServiceType(ctid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改服务类别
+    @RequestMapping("/updateServiceType.action")
+    public @ResponseBody int updateServiceType(TblCOStype tblCOStype){
+
+        return mangerBizImpl.updateServiceType(tblCOStype);
+    }
+    //添加服务
+    @RequestMapping("/addService.action")
+    public @ResponseBody int addService(TblCOS tblCOS){
+
+        return mangerBizImpl.addService(tblCOS);
+    }
+    //删除服务类型
+    @RequestMapping(value ="/delService.action")
+    public  @ResponseBody String delService(int cosid){
+        int num=mangerBizImpl.delService(cosid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改服务
+    @RequestMapping("/updateService.action")
+    public @ResponseBody int updateService(TblCOS tblCOS){
+
+        return mangerBizImpl.updateService(tblCOS);
+    }
+    //添加公告
+    @RequestMapping("/AddDynamic.action")
+    public @ResponseBody int AddDynamic(Tblnotice tblnotice){
+
+        return mangerBizImpl.AddDynamic(tblnotice);
+    }
+    //删除公告
+    @RequestMapping(value ="/delDynamic.action")
+    public  @ResponseBody String delDynamic(int nid){
+        int num=mangerBizImpl.delDynamic(nid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改公告
+    @RequestMapping("/updateDynamic.action")
+    public @ResponseBody int updateDynamic(Tblnotice tblnotice){
+
+        return mangerBizImpl.updateDynamic(tblnotice);
+    }
+    //添加技能培训
+    @RequestMapping("/AddTritem.action")
+    public @ResponseBody int AddTritem(Tbltritem tbltritem){
+
+        return mangerBizImpl.AddTritem(tbltritem);
+    }
+    //删除技能培训
+    @RequestMapping(value ="/delTritem.action")
+    public  @ResponseBody String delTritem(int itid){
+        int num=mangerBizImpl.delTritem(itid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改公告
+    @RequestMapping("/updateTritem.action")
+    public @ResponseBody int updateTritem(Tbltritem tbltritem){
+
+        return mangerBizImpl.updateTritem(tbltritem);
+    }
+    //添加育婴知识
+    @RequestMapping("/AddDKap.action")
+    public @ResponseBody int AddDKap(Tblkap tblkap){
+
+        return mangerBizImpl.AddDKap(tblkap);
+    }
+    //删除育婴知识
+    @RequestMapping(value ="/delKap.action")
+    public  @ResponseBody String delKap(int kid){
+        int num=mangerBizImpl.delKap(kid);
+        if(num>0){
+            result="1";
+        }else{
+            result="0";
+        }
+        return result;
+    }
+    //修改育婴知识
+    @RequestMapping("/updateKap.action")
+    public @ResponseBody int updateKap(Tblkap tblkap){
+
+        return mangerBizImpl.updateKap(tblkap);
     }
 }
