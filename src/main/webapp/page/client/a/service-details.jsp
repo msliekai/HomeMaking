@@ -21,34 +21,34 @@
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="../assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="../assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="../assets/css/jquery.mmenu.css">
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="../assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="../assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="../assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="../assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 
 <body>
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -117,7 +117,7 @@
             </div>
             <div class="col-lg-8">
                 <div class="service-details mt-sm-50">
-                    <img src="assets/images/services/details/1.jpg" alt="" />
+                    <img src="../assets/images/services/details/1.jpg" alt="" />
                     <div class="mt-45"></div>
                     <h3>Services Overview </h3>
                     <p>Maintenance is key to ensuring your house is kept looking at its best year round! We recommend having your home cleaned every 2 weeks, but know every customer's needs are different. The domestic workers offer an array of scheduling options to ensure their services are easy and convenient for you! Most of our first time customers will begin services by having the Spring Cleaning (detailed service), and follow up with the Basic Cleaning.</p>
@@ -141,7 +141,7 @@
                     <blockquote class="mt-45"><span>Not only will we provide you with a full-service, janitorial cleaning program, but we will provide you with all your restroom supplies and manage the inventory for you, freeing up your time to do what you do best.</span></blockquote>
                     <div class="row mt-60">
                         <div class="col-lg-6">
-                            <img src="assets/images/services/details/2.jpg" alt="" />
+                            <img src="../assets/images/services/details/2.jpg" alt="" />
                         </div>
                         <div class="col-lg-6">
                             <p>Our unique 22-Step Healthy Touch Deep Cleaning System will ensure you'll receive a healthy, thorough housecleaning with every visit. We’ll tackle mold and mildew. We’ll eliminate dust. We’ll eliminate on pet dander and hair. We use cleaning products that are friendly to the environment—that includes Mother Nature’s home and your own.</p>
@@ -295,7 +295,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -317,7 +317,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

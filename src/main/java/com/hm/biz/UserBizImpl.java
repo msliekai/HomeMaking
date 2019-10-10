@@ -6,6 +6,7 @@ import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
 import com.hm.entity.Tblfc;
 import com.hm.mapper.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public TblUser cUserReg(TblUser tblUser,TblSite tblSite) {
+    public TblUser cUserReg(TblUser tblUser) {
         Integer num=0;
         TblUser obj=tblUser;
         userMapper.cUserReg(obj);
@@ -53,6 +54,11 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
+    public List<TblSite> querySite(Integer userid) {
+        return userMapper.querySite(userid);
+    }
+
+    @Override
     public TblUser cUserLogin(TblUser tblUser) {
         return userMapper.cUserLogin(tblUser);
     }
@@ -61,6 +67,21 @@ public class UserBizImpl implements UserBiz
     public Integer queryUserState(String userphone) {
 
         return userMapper.queryUserState(userphone);
+    }
+
+    @Override
+    public List<TblCOStype> queryCOSType() {
+        return userMapper.queryCOSType();
+    }
+
+    @Override
+    public List<TblCOS> queryCOS(Integer ctid) {
+        return userMapper.queryCOS(ctid);
+    }
+
+    @Override
+    public Integer addOrder(Tblorder tblorder) {
+        return userMapper.addOrder(tblorder);
     }
 
     @Override
@@ -123,6 +144,56 @@ public class UserBizImpl implements UserBiz
         return userMapper.jUserCard(userid,usercard,userpwd);
     }
 
+    @Override
+    public int jdelorder(Tblorder tblorder) {
+        return userMapper.jdelorder(tblorder);
+    }
+
+    @Override
+    public int jdelsfcoll(Tblsfcoll tblsfcoll) {
+        return userMapper.jdelsfcoll(tblsfcoll);
+    }
+
+    @Override
+    public int jdelfcoll(Tblfcoll tblfcoll) {
+        return userMapper.jdelfcoll(tblfcoll);
+    }
+
+    @Override
+    public int jdelhistory(Tblorder tblorder) {
+        return userMapper.jdelhistory(tblorder);
+    }
+
+    @Override
+    public int jdelsite(TblSite tblSite) {
+        return userMapper.jdelsite(tblSite);
+    }
+
+    @Override
+    public int jdeleva(Tbleva tbleva) {
+        return userMapper.jdeleva(tbleva);
+    }
+
+    @Override
+    public int jdelfoot(Tblfoot tblfoot) {
+        return userMapper.jdelfoot(tblfoot);
+    }
+
+    @Override
+    public int jUserAddApp(Tbleva tbleva) {
+        return userMapper.jUserAddApp(tbleva);
+    }
+
+    @Override
+    public int jUserAddAfter(Tblorder tblorder) {
+        return userMapper.jUserAddAfter(tblorder);
+    }
+
+    @Override
+    public int jcorder(Integer oid,Integer state) {
+        return userMapper.jcorder(oid,state);
+    }
+
 
     @Override
     public List<Staff> queryStaff(Staff staff) {
@@ -130,8 +201,23 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
+    public Staff queryOneStaff(Integer sfid ,Integer userid) {
+        return userMapper.queryOneStaff(sfid,userid);
+    }
+
+    @Override
     public Integer getStaffCount(Staff staff) {
         return userMapper.getStaffCount(staff);
+    }
+
+    @Override
+    public Integer addsfcoll(Tblsfcoll tblsfcoll) {
+        return userMapper.addsfcoll(tblsfcoll);
+    }
+
+    @Override
+    public Integer delsfcoll(Integer scoid) {
+        return userMapper.delsfcoll(scoid);
     }
 
     @Override
@@ -164,6 +250,16 @@ public class UserBizImpl implements UserBiz
         }
 
         return map;
+    }
+
+    @Override
+    public Integer queryMoney(Integer userid) {
+        return userMapper.queryMoney(userid);
+    }
+
+    @Override
+    public Integer updateMoney(Integer usermoney, Integer userid) {
+        return userMapper.updateMoney(usermoney,userid);
     }
 
 

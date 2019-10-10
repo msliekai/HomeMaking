@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 19:26
+  Time: 19:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Contact - HomeCleaner</title>
+    <title>Order Form - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -52,9 +52,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -63,13 +63,13 @@
         <div class="row height-400 align-items-center">
             <div class="col-lg-12">
                 <div class="page-banner text-center">
-                    <h2>Contact</h2>
+                    <h2>Order Form</h2>
                     <div class="site-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                                <li class="breadcrumb-item active" aria-current="page">Order Form</li>
                             </ol>
                         </nav>
                     </div>
@@ -80,85 +80,192 @@
 </div>
 <!--page-banner-end-->
 
-<!--contact-area start-->
-<div class="contact-area bg-f3f4f7 pt-105 pt-sm-65 pb-120 pb-sm-80">
-    <div class="container">
+<!--booking-area start-->
+<div class="booking-area bg-f3f4f7 pt-105 pt-sm-65 pb-120 pb-sm-80">
+    <div class="container booking-form">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2>Keep In Touch With Us</h2>
-                    <p>Below is the Contact Information for A Cleaning service. Call or email us to learn more about our house cleaning <br/> services in CleanPro and start enjoying a cleaner home today!</p>
+                    <h2>Complete Your Booking</h2>
+                    <p>Great! Just a few details and we can complete your booking. If you need help <br/> please do not hesitate to call us at (0131) 804 1808</p>
                 </div>
             </div>
         </div>
-        <div class="row mt-65 mt-sm-55">
-            <div class="col-lg-4">
-                <div class="contact-info">
-                    <div class="single-contact-info">
-                        <h5>Address</h5>
-                        <p>Franse Stormboulevard 2 9677  JB Gasselternijveen</p>
+        <div class="row mt-60">
+            <div class="col-lg-6 col-sm-6">
+                <h3>CHOOSE YOUR SERVICE</h3>
+                <p>Tell us about the service you are looking for</p>
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Choose Services</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Choose A Date</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                    <div class="single-contact-info">
-                        <h5>Telephone Numbers</h5>
-                        <p>(+88) 0111 223 445</p>
+                    <div class="col-lg-6">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Number of Cleaners</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                    <div class="single-contact-info">
-                        <h5>Email Address</h5>
-                        <p>CleanProtheme@gmail.com</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-6">
+                        <input type="radio" id="one_time" name="one_time" value="One Time" checked>
+                        <label for="one_time">One Time</label>
                     </div>
-                    <div class="single-contact-info">
-                        <h5>Open Hours</h5>
-                        <p>8:00 - 17:00 Mon - Sat</p>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                        <input type="radio" id="weekly" name="weekly" value="Weekly">
+                        <label for="weekly">Weekly</label>
                     </div>
-                    <div class="social-icons style-3">
-                        <a href="#"><i class="social_facebook"></i></a>
-                        <a href="#"><i class="social_twitter"></i></a>
-                        <a href="#"><i class="social_linkedin"></i></a>
-                        <a href="#"><i class="social_pinterest"></i></a>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                        <input type="radio" id="biweekly" name="biweekly" value="Biweekly">
+                        <label for="biweekly">Biweekly</label>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                        <input type="radio" id="monthly" name="monthly" value="Monthly">
+                        <label for="monthly">Monthly</label>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <div class="contact-form style-2 mt-sm-50">
-                    <form id="contactForm" method="POST" action="https://formspree.io/lionsbite69@gmail.com">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name:*" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email:*" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Subject:*" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <textarea class="form-control" name="message" placeholder="Message" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn-common btn-full">SEND MESSAGE</button>
-                            </div>
+            <div class="col-lg-6 col-sm-6">
+                <h3>TELL US ABOUT YOUR HOME</h3>
+                <p> Please provide more information about your home</p>
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>Size of Your Home (Square Feet)</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Size of your kitchen</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Number of bathrooms</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Number of living rooms</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Number of bedrooms</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-50">
+            <div class="col-lg-12 text-center">
+                <h4>TOTAL (TAX INCLUDED)</h4>
+                <h2>$150.00</h2>
+                <p>This information will be used to contact you about your service</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="row mt-15">
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="First Name***">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email***">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Last Name***">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Phone***">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Address***">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="City***">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="State***">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="Questions Or Comments"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mt-25">
+                        <button type="button" class="btn-common">BOOK NOW</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--contact-area end-->
-
-<!--google-map area start-->
-<div class="google-map-area">
-    <div id="googleMap" class="google-map"></div>
-</div>
-<!--google-map area end-->
+<!--booking-area end-->
 
 <!--footer-area start-->
 <footer>
@@ -229,7 +336,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -251,7 +358,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
@@ -284,10 +391,6 @@
 
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
-
-<!--google-map-->
-<script src="http://ditu.google.cn/maps/api/js?sensor=false&libraries=geometry&v=3.22&key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
-<script src="<%=path%>page/client/assets/js/google-map.js"></script>
 
 </body>
 </html>

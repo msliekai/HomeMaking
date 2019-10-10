@@ -16,6 +16,7 @@ public class Tblorder {
     private Integer hzid;
     private String otitle;
     private String ocontext;
+    private String odeta;
     private String ophone;
     private String onumber;
     private Integer sid;
@@ -26,6 +27,9 @@ public class Tblorder {
     private String hzname;
     private String fname;
     private String osname;
+    private String aftercontext;
+    private Integer afterstaff;
+    private String afterresult;
     private String sfname;
     private TblCOS tblCOS;
     private TblUser tblUser;

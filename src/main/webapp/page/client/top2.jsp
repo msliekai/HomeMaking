@@ -28,18 +28,18 @@
                         <nav>
                             <ul class="list-none">
                                 <li><a href="<%=path%>page/client/chome.jsp">首页</a></li>
-                                <li><a href="#">其他界面
-                                    <i class="arrow_carrot-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="<%=path%>page/client/about.jsp">关于我们</a></li>
-                                        <li><a href="<%=path%>page/client/testimonials.jsp">推荐</a></li>
-                                        <li><a href="<%=path%>page/client/pricing.jsp">定价和计划</a></li>
-                                        <li><a href="<%=path%>page/client/order-form.jsp">订单表格</a></li>
-                                        <li><a href="<%=path%>page/client/faq.jsp">常见问题/解答</a></li>
-                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>
-                                        <li><a href="<%=path%>page/client/coming-soon.jsp">即将推出</a></li>
-                                    </ul>
-                                </li>
+<%--                                <li><a href="#">其他界面--%>
+<%--                                    <i class="arrow_carrot-down"></i></a>--%>
+<%--                                    <ul class="submenu">--%>
+<%--                                        <li><a href="<%=path%>page/client/about.jsp">关于我们</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/testimonials.jsp">推荐</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/pricing.jsp">定价和计划</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/order-form.jsp">订单表格</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/faq.jsp">常见问题/解答</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/404.jsp">404 Error</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/coming-soon.jsp">即将推出</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </li>--%>
                                 <li><a href="#">服务
                                     <i class="arrow_carrot-down"></i></a>
                                     <ul class="submenu">
@@ -52,32 +52,32 @@
 <%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
                                     </ul>
                                 </li>
-                                <li><a href="#">项目
-                                    <i class="arrow_carrot-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>
-                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects
-                                            Fullwidth</a></li>
-                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">店
-                                    <i class="arrow_carrot-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>
-                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>
-                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>
-                                        <li><a href="<%=path%>page/client/checkout.jsp">Checkout</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">微博
-                                    <i class="arrow_carrot-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>
-                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>
-                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>
-                                    </ul>
-                                </li>
+<%--                                <li><a href="#">项目--%>
+<%--                                    <i class="arrow_carrot-down"></i></a>--%>
+<%--                                    <ul class="submenu">--%>
+<%--                                        <li><a href="<%=path%>page/client/projects-grid.jsp">Projects Grid</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/projects-grid-fullwidth.jsp">Projects--%>
+<%--                                            Fullwidth</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/project-details.jsp">Project Details</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </li>--%>
+<%--                                <li><a href="#">店--%>
+<%--                                    <i class="arrow_carrot-down"></i></a>--%>
+<%--                                    <ul class="submenu">--%>
+<%--                                        <li><a href="<%=path%>page/client/shop.jsp">Shop Grid</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/product-details.jsp">Product Details</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/shopping-cart.jsp">Shopping Cart</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/checkout.jsp">Checkout</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </li>--%>
+<%--                                <li><a href="#">微博--%>
+<%--                                    <i class="arrow_carrot-down"></i></a>--%>
+<%--                                    <ul class="submenu">--%>
+<%--                                        <li><a href="<%=path%>page/client/blog.jsp">Blog List</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/blog-sidebar.jsp">Blog With Sidebar</a></li>--%>
+<%--                                        <li><a href="<%=path%>page/client/blog-details.jsp">Blog Details</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </li>--%>
                                 <li><a href="<%=path%>page/client/contact.jsp">联系</a></li>
                             </ul>
                         </nav>

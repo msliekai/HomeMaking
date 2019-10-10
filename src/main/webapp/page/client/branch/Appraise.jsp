@@ -20,13 +20,12 @@
 <body>
 <%
     String sfname = request.getParameter("sfname")==null?"":request.getParameter("sfname");
-    String cosname = request.getParameter("cosname")==null?"":request.getParameter("cosname");
-    String ctname = request.getParameter("ctname")==null?"":request.getParameter("ctname");
-    String onumber =request.getParameter("onumber")==null?"":request.getParameter("onumber");
-    String oid =request.getParameter("oid")==null?"":request.getParameter("oid");
-    String aftercontext =request.getParameter("aftercontext")==null?"":request.getParameter("aftercontext");
-    String afterstaff =request.getParameter("afterstaff")==null?"":request.getParameter("afterstaff");
-    String afterresult =request.getParameter("afterresult")==null?"":request.getParameter("afterresult");
+    String fname = request.getParameter("fname")==null?"":request.getParameter("fname");
+    String svtime = request.getParameter("svtime")==null?"":request.getParameter("svtime");
+    String money = request.getParameter("money")==null?"":request.getParameter("money");
+    String etime = request.getParameter("etime")==null?"":request.getParameter("etime");
+    String econtext = request.getParameter("econtext")==null?"":request.getParameter("econtext");
+    String econut = request.getParameter("econut")==null?"":request.getParameter("econut");
 %>
 
 <div class="layui-fluid">
@@ -36,69 +35,59 @@
             <input id="anotherAimg" name="aimg" type="hidden" value=""/>
 
             <div class="layui-form-item">
-                <label for="onumber" class="layui-form-label">
-                    <span class="x-red">*</span>订单编号</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="onumber" name="onumber" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=onumber%>" style="width: 200px">
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label for="sfname" class="layui-form-label">
                     <span class="x-red">*</span>服务人员</label>
                 <div class="layui-input-inline">
                     <input type="text" id="sfname" name="sfname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=sfname%>" style="width: 200px">
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=sfname%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="cosname" class="layui-form-label">
-                    <span class="x-red">*</span>服务事项</label>
+                <label for="fname" class="layui-form-label">
+                    <span class="x-red">*</span>所属公司</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="cosname" name="cosname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=cosname%>" style="width: 200px">
+                    <input type="text" id="fname" name="fname" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=fname%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="ctname" class="layui-form-label">
-                    <span class="x-red">*</span>服务类型</label>
+                <label for="svtime" class="layui-form-label">
+                    <span class="x-red">*</span>服务时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="ctname" name="ctname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=ctname%>" style="width: 200px">
+                    <input type="text" id="svtime" name="svtime" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=svtime%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="aftercontext" class="layui-form-label">
-                    <span class="x-red">*</span>售后原因</label>
+                <label for="money" class="layui-form-label">
+                    <span class="x-red">*</span>服务费用</label>
                 <div class="layui-input-inline">
-                    <textarea id="aftercontext" name="aftercontext" required="" lay-verify="card"
-                              autocomplete="off" class="layui-input" readonly="readonly" style="width: 200px;height: 100px;resize:none;" ></textarea>
-                    <%--<input type="hidden" id="oid" name="oid" required=""
-                           autocomplete="off" class="layui-input" value="<%=oid%>"/>--%>
+                    <input type="text" id="money" name="money" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=money%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="afterstaff" class="layui-form-label">
-                    <span class="x-red">*</span>客服人员</label>
+                <label for="etime" class="layui-form-label">
+                    <span class="x-red">*</span>评价时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="afterstaff" name="afterstaff" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterstaff%>" style="width: 200px">
+                    <input type="text" id="etime" name="etime" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=etime%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="afterresult" class="layui-form-label">
-                    <span class="x-red">*</span>售后回执</label>
+                <label for="econtext" class="layui-form-label">
+                    <span class="x-red">*</span>评价内容</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="afterresult" name="afterresult" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterresult%>" style="width: 200px">
+                    <input type="text" id="econtext" name="econtext" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=econtext%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="oid" class="layui-form-label">
-                </label>
+                <label for="econut" class="layui-form-label">
+                    <span class="x-red">*</span>星级评价</label>
                 <div class="layui-input-inline">
-                    <input type="hidden" id="oid" name="oid" required=""
-                           autocomplete="off" class="layui-input" value="<%=oid%>"/>
+                    <input type="text" id="econut" name="econut" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=econut%>">
                 </div>
             </div>
         </form>

@@ -20,6 +20,7 @@
 
 </head>
 <body>
+
 <div class="x-nav">
           <span class="layui-breadcrumb">
             <a href="">首页</a>
@@ -38,56 +39,20 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-<%--                    <form class="layui-form layui-col-space5">--%>
-
-    <%--账户信息<hr class="layui-bg-blue">
-                    <div class="demoTable" align="center">
-                        <table width="50%" border="0">
-                            <tbody>
-                            <tr>
-                                <td width="30%">账号类型：</td>
-                                <td>个人账号</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td>账户余额：</td>
-                                <td>${sessionScope.userbacc.usermoney}元</td>
-                                <td><button class="layui-btn layui-btn-normal">充值</button></td>
-                            </tr>
-                            <tr>
-                                <td>绑定账户：</td>
-                                <td>${sessionScope.userbacc.usercard}</td>
-                                <td><button class="layui-btn layui-btn-primary">修改</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>--%>
-
-
-                        <%--<div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
-                        </div>--%>
 
     订单记录<hr class="layui-bg-blue">
-    <form class="layui-form" enctype="multipart/form-data">
-        <select name="osid" id="osid" lay-verify="" lay-search>
-            <option value="" selected>全部</option>
-            <option value="7">待确认</option>
-            <option value="1">待处理</option>
-            <option value="2">已处理</option>
-            <option value="5">已评价</option>
-        </select>
-    </form>
-<%--                    </form>--%>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <select name="osid" id="osid" >
+                                <option value="">全部</option>
+                                <option value="7">待确认</option>
+                                <option value="1">待处理</option>
+                                <option value="2">已处理</option>
+                                <option value="5">已评价</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
 
@@ -116,9 +81,13 @@
 
 <script>
 
+function a(){
+    alert("---------------------");
+}
 
     layui.use('table', function() {
         var table = layui.table;
+
 
         table.render({
             elem: '#utable'
@@ -128,9 +97,8 @@
             ,limit:3
             // ,method:"get"
             , id: 'testReload'
+
             , parseData: function (res) {
-
-
                     return {
                     "code": eval(res.code), //解析接口状态
                     // "msg": res.msg, //解析提示文本
@@ -155,9 +123,9 @@
                             tem.push('<a lay-event="userCK" class="layui-btn layui-btn-normal">查看</a>');
                         }
                         if(item.osid == "2"){
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">编辑</a>');
+                            tem.push('<a lay-event="userEdit" class="layui-btn layui-btn-normal">编辑</a>');
                         }
-                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        tem.push('<a lay-event="userDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         return tem.join(' <font></font> ')
                     }}
             ]]
@@ -184,35 +152,7 @@
             active[type] ? active[type].call(this) : '';
         })
 
-        //下拉框筛选
-        /*form.on('submit(add)',
-            function (data) {
 
-                $.ajax({
-                    async: false,
-                    type: "post",
-                    url: "<%=path%>admin/jUserPay.action",
-                    data: data.field,
-                    success: function (bac) {
-                        if (bac == "1") {
-                            /!*layer.msg("添加成功")*!/
-                            layer.alert("充值成功", {
-                                icon: 6
-                            }, function () {
-                                //关闭当前frame
-                                xadmin.close();
-                                // 可以对父窗口进行刷新
-                                xadmin.father_reload();
-                            });
-                        } else {
-                            layer.msg("充值失败");
-                        }
-                    }
-                })
-                return false;
-            });*/
-
-        //查看详情
 
         //监听行工具事件
         table.on('tool(test)', function(obj) {
@@ -220,7 +160,7 @@
             if (obj.event === 'userCK') {
                 layer.open({
                     type:2,
-                    title: "用户详情",
+                    title: "详情",
                     area: ['300px', '400px'],
                     content: "<%=path%>page/client/branch/Order.jsp"+
                         "?ordernum="+encodeURIComponent(data.onumber)+
@@ -232,152 +172,52 @@
                         "&allmoney="+encodeURIComponent(data.money)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            } else if (obj.event === 'useEna') {
+            } else if (obj.event === 'userEdit') {
                 layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
+                    fal("<%=path%>admin/jdel.action",data.oid);
                     layer.close(index);
                 });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
+            }else if(obj.event==="userDel"){
+                layer.confirm('确定删除？', function (index) {
+                    fal("<%=path%>admin/jdelorder.action",data.oid);
                     layer.close(index);
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,oid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"oid":oid},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
+                        /*where: {
                             uname: uname.value,
                             cong:cong.value,
                             dao:dao.value,
-                        }
+                        }*/
                     }, 'data');
                 },
                 error: function (dat) {
-                    layer.msg('裂开');
+                    layer.msg('未知错误');
                 }
             })
 
         }
 
-        /*function chakan(){
-            layer.open({
-                type:2,
-                title: "用户详情",
-                area: ['450px', '430px'],
-                content: "<%=path%>page/client/branch/Order.jsp"+
-                    "?ordernum="+encodeURIComponent(data.onumber)+
-                    "&ordertype="+encodeURIComponent(data.osname)+
-                    "&cos="+encodeURIComponent(data.cosname)+
-                    "&costype="+encodeURIComponent(data.ctname)+
-                    "&otime="+encodeURIComponent(data.otime)+
-                    "&fname="+encodeURIComponent(data.fname)+
-                    "&allmoney="+encodeURIComponent(data.money)
-                //引用的弹出层的页面层的方式加载修改界面表单
-            });
-        }*/
+
     });
 
 
 
 </script>
-
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
-
-
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

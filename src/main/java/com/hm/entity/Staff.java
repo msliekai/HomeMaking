@@ -19,16 +19,17 @@ public class Staff {
     private String sfgood;//擅长
     private String sfedu;//学历
     private String sfurl;
-    private Company company;//所属公司类
     private String sftag;//阿姨类型
 
     private Integer page;
     private Integer limit=6;
 
+    private Integer userid;
+    private Company company;//所属公司类
     private Tblstate tblstate;//状态
-
     private TblCOS tblCOS;//服务
-
+    private TblCOStype tblCOStype;
+    private Tblsfcoll tblsfcoll;
     private String aunt;
 
     public Staff() {

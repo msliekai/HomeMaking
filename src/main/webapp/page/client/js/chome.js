@@ -124,7 +124,6 @@ function valpass2() {
     var userpwd = $("#userpwd");
     var userpwd2 = $("#userpwd2");
     var passErr2 = $("#passErr2");
-    // console.log(userpwd2.val()===userpwd.val())
     if (userpwd2.val() === userpwd.val()) {
         passErr2.html("");
         return true;
@@ -157,7 +156,6 @@ function uname() {
     var useerr = $("#useerr");
     var na = /^[\u4e00-\u9fa5]{0,}$/;
     if (!na.test(username.val())) {
-        console.log(na.test(username.val()));
         useerr.html("用户名只能输入中文");
         return false;
     } else {
@@ -189,6 +187,7 @@ function scity() {
         cityerr.html("请选择地址");
         return false;
     }
+
     cityerr.html("");
     var scontext = $("#scontext")
     var scontexterr = $("#scontexterr");
@@ -273,3 +272,128 @@ function forg() {
     }
     return true;
 }
+
+function getct() {
+    var ctid = $("#ctid");
+    var cosid = $("#cosid");
+    $.ajax({
+        async: true,
+        type: "post", //提交方式
+        url: "../../admin/queryCOSType.action",
+        // dataType:"text", //返回类型
+        success: function (jso) {//执行结果
+            var ht = "<option value='0'>选择服务类型</option>";
+            $.each(jso, function (k, v) {
+                ht += "<option value='" + v.ctid + "' >" + v.ctname + "</option>";
+            })
+            ctid.html(ht);
+            cosid.html("选择服务事项");
+        },
+    })
+}
+
+$(document).ready(function () {
+    var cosid=$("#cosid");
+    $("#ctid").change(function () {
+        cosid.html("服务事项载入中。。。");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/queryCOS.action",
+            data:{
+                "ctid":$("#ctid").val()
+            },
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                var ht="";
+                $.each(jso,function(k,v){
+                    ht+="<option value='"+ v.cosid +"' >"+ v.cosname +"</option>";
+                })
+                cosid.html(ht);
+            }
+        })
+
+    })
+})
+
+
+
+function addOrder() {
+    layui.use('layer', function () {
+        var ctid = $("#ctid");
+        var cosid = $("#cosid");
+        var self = $("form");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/addOrder.action",
+            data: self.serialize(), //获得表单的信息
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                if (jso.flog == "addok") {
+                    layer.msg("发布成功")
+                } else {
+                    layer.msg("发布失败")
+                }
+            },
+        })
+    })
+}
+
+$(document).ready(function(){
+    $("#addor").click(function(){
+        addOrder()
+    })
+})
+
+function querySity(){
+    layui.use('layer', function () {
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../../admin/querySite.action",
+            success: function (jso) {//执行结果
+                var ht="";
+                if(jso.defaulAddress!=null){
+                    var defaul=jso.defaulAddress;
+                    ht+="<option value='"+ defaul.sid +"' >"+ defaul.sa+"-"+defaul.sb+"-"+defaul.sc+"-"+defaul.scontext+"（默认地址）</option>";
+                }
+                $.each(jso.list,function(k,v){
+                    ht+="<option value='"+ v.sid +"' >"+ v.sa+"-"+v.sb+"-"+v.sc+"-"+v.scontext+"</option>";
+                })
+                $("#sid").html(ht);
+            },
+        })
+    })
+}
+
+//选择阿姨并下单
+function Appointord() {
+
+    layui.use('layer', function () {
+        var self = $("form");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "../admin/addOrder2.action",
+            data: self.serialize(), //获得表单的信息
+            // dataType:"text", //返回类型
+            success: function (jso) {//执行结果
+                if (jso.flog == "addok") {
+                    layer.msg('发布成功', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        location.href="../page/client/chome.jsp";
+                    });
+
+                } else if(jso.flog=="moneyerr"){
+                    layer.msg("余额不足请充值")
+                }else{
+                    layer.msg("发布失败")
+                }
+            },
+        })
+    })
+    
+}
+

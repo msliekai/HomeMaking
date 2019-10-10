@@ -35,8 +35,17 @@ public interface UserMapper {
     //查阿姨
     public List<Staff> queryStaff(Staff staff);
 
+    //根据id查一个阿姨
+    public Staff queryOneStaff(@Param("sfid") Integer sfid,@Param("userid") Integer userid);
+
     //阿姨总数
     public Integer getStaffCount(Staff staff);
+
+    //收藏阿姨
+    public Integer addsfcoll(Tblsfcoll tblsfcoll);
+
+    //取消收藏阿姨
+    public Integer delsfcoll(@Param("scoid") Integer scoid);
 
     //忘记密码
     public Integer userForgetPassword(@Param("userpwd") String String, @Param("userphone") String userphone);
@@ -47,6 +56,17 @@ public interface UserMapper {
     //热门公司服务
     public List<Map<String, Object>> thwWelcome();
 
+    //查寻全部服务类
+    public List<TblCOStype> queryCOSType();
+
+    //查服务类中的事项
+    public List<TblCOS> queryCOS(@Param("ctid")Integer ctid);
+
+    //查用户自己的地址
+    public List<TblSite> querySite(@Param("userid")Integer userid);
+
+    //增加订单
+    public Integer addOrder(Tblorder tblorder);
 
     //查询消费记录
     public List<UserMoney> jUserMoney(UserMoney userMoney);
@@ -58,10 +78,16 @@ public interface UserMapper {
     public List<TblSite> jUserSite(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
 
     //收藏的阿姨
-    public List<Tblsfcoll> jUsersfcoll(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
+    public List<Tblsfcoll>  jUsersfcoll(@Param("page")int page, @Param("limit")int limit, @Param("userid")Integer userid);
 
     //收藏的公司
     public List<Tblfcoll> jUserfcoll(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
+
+    //查钱
+    public Integer queryMoney(@Param("userid")Integer userid);
+
+    //改钱
+    public Integer updateMoney(@Param("usermoney")Integer usermoney,@Param("userid")Integer userid);
 
     //历史服务
     public List<Tblorder> jUserHistory(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
@@ -82,4 +108,25 @@ public interface UserMapper {
     public int jUserPay(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney,@Param("userpwd") String userpwd);
     //修改卡号
     public int jUserCard(@Param("userid") Integer userid,@Param("usercard") String usercard,@Param("userpwd") String userpwd);
+
+    //删除订单
+    public int jdelorder(Tblorder tblorder);
+    //删除收藏阿姨
+    public int jdelsfcoll(Tblsfcoll tblsfcoll);
+    //删除收藏公司
+    public int jdelfcoll(Tblfcoll tblfcoll);
+    //删除历史记录
+    public int jdelhistory(Tblorder tblorder);
+    //删除地址
+    public int jdelsite(TblSite tblSite);
+    //删除评论
+    public int jdeleva(Tbleva tbleva);
+    //删除足迹
+    public int jdelfoot(Tblfoot tblfoot);
+    //添加评论
+    public int jUserAddApp(Tbleva tbleva);
+    //申请售后
+    public int jUserAddAfter(Tblorder tblorder);
+    //订单状态改变
+    public int jcorder(@Param("oid") Integer oid,@Param("state")Integer state);
 }

@@ -11,4 +11,13 @@ public class Tblsfcoll {
     private Integer sfid;
     private TblUser tblUser;
     private Staff staff;
+
+    public Tblsfcoll() {
+    }
+
+    public Tblsfcoll(Integer userid, String scotime, Integer sfid) {
+        this.userid = userid;
+        this.scotime = scotime;
+        this.sfid = sfid;
+    }
 }

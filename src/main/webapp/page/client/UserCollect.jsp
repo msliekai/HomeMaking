@@ -10,7 +10,6 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>我的收藏</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -52,11 +51,11 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show"><div class="layui-card-body" align="center" >
-                            <table class="layui-table"  id="utable" align="center">
+                            <table class="layui-table"  id="utable" align="center" lay-filter="test">
                             </table>
                         </div></div>
                         <div class="layui-tab-item"><div class="layui-card-body" align="center" >
-                            <table class="layui-table"  id="utable2" align="center">
+                            <table class="layui-table"  id="utable2" align="center" lay-filter="test">
                             </table>
                         </div></div>
                     </div>
@@ -72,43 +71,16 @@
 
 <script id="barDemo" type="text/html">
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">查看详情</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+    <a class="layui-btn layui-btn-normal" lay-event="userCK">查看详情</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="userDel"><i class="layui-icon layui-icon-delete"></i>删除</a>
+</script>
+<script id="abarDemo" type="text/html">
+    <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
+    <a class="layui-btn layui-btn-normal" lay-event="auserCK">查看详情</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="auserDel"><i class="layui-icon layui-icon-delete"></i>删除</a>
 
     <%--默认地址是灰色--%>
 </script>
-
-<%--<script>
-    layui.use('table', function() {
-        var table = layui.table;
-
-        table.render({
-            elem: '#utable'
-            // , height: 500
-            , url: '<%=path%>admin/jUsersfcoll.action' //数据接口
-            , page: true //开启分页
-            ,limit:2
-            // ,method:"get"
-            , id: 'testReload'
-            , parseData: function (res) {
-
-
-                    return {
-                    "code": eval(res.code), //解析接口状态
-                    // "msg": res.msg, //解析提示文本
-                    "count": res.count, //解析数据长度
-                    "data": res.data//解析数据列表
-                };
-            }
-            , cols: [[ //表头
-                {field: 'sfname', title: '服务人员', minWidth: 80,templet:function (d) {return d.staff.sfname}}
-                , {field: 'scotime', title: '收藏时间', minWidth: 150}
-                , {field: 'fname', title: '所属公司', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 80}
-            ]]
-        });
-    });
-</script>--%>
 
 <script>
     layui.use(['element', 'table'], function () {
@@ -141,10 +113,9 @@
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , page: true
                     , limit: 2
+                    , limits: [2,3,5]
                     , id: 'testReload'
                     , parseData: function (res) {
-
-
                         return {
                             "code": eval(res.code), //解析接口状态
                             // "msg": res.msg, //解析提示文本
@@ -153,12 +124,17 @@
                         };
                     }
                     , cols: [[ //表头
-                        {field: 'sfname', title: '服务人员', minWidth: 80,templet:function (d) {return d.staff.sfname}}
+                        {field:'scoid', width:80, title: 'ID', hide: true}
+                        ,{field: 'sfname', title: '服务人员', minWidth: 80,templet:function (d) {return d.staff.sfname}}
                         , {field: 'scotime', title: '收藏时间', minWidth: 150}
                         , {field: 'fname', title: '所属公司', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
-                        , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 120}
+                        , {field: 'right',fixed:'right', title: '操作', toolbar: '#abarDemo', minWidth: 170}
                     ]]
+                    ,done: function () {
+
+                        $("[data-field='scoid']").css('display','none');}
                 });
+
             } else {
                 table.render({
                     elem: position
@@ -169,10 +145,9 @@
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , page: true
                     , limit: 2
+                    , limits: [2,3,5]
                     , id: 'testReload'
                     , parseData: function (res) {
-
-
                         return {
                             "code": eval(res.code), //解析接口状态
                             // "msg": res.msg, //解析提示文本
@@ -182,15 +157,107 @@
                     }
                     , cols: [[ //表头
                         {field: 'fname', title: '公司名字', minWidth: 80,templet:function (d) {return d.company.fname}}
+                        ,{field:'fcoid', width:80, title: 'ID', hide: true}
                         ,{field: 'fcotime', title: '收藏时间', minWidth: 80}
                         , {field: 'ctname', title: '服务类型', minWidth: 80,templet:function (d) {return d.company.tblCOStype.ctname}}
                         , {field: 'ctcontext', title: '服务介绍', minWidth: 80,templet:function (d) {return d.company.tblCOStype.ctcontext}}
-                        , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 120}
+                        , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 170}
                     ]]
+                    ,done: function () {
+
+                        $("[data-field='fcoid']").css('display','none');}
                 });
             }
 
+
+
         }
-    })
+        //监听行工具事件
+        table.on('tool(test)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'userCK') {
+                layer.open({
+                    type:2,
+                    title: "详情",
+                    area: ['300px', '300px'],
+                    content: "<%=path%>page/client/branch/Fcoll.jsp"+
+                        "?fname="+encodeURIComponent(data.company.fname)+
+                        "&fcotime="+encodeURIComponent(data.fcotime)+
+                        "&ctname="+encodeURIComponent(data.company.tblCOStype.ctname)+
+                        "&ctcontext="+encodeURIComponent(data.company.tblCOStype.ctcontext)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="userDel"){
+                layer.confirm('确定删除？', function (index) {
+                    fal("<%=path%>admin/jdelfcoll.action",data.fcoid);
+                    layer.close(index);
+                });
+            }else if (obj.event === 'auserCK') {
+                layer.open({
+                    type:2,
+                    title: "详情",
+                    area: ['300px', '300px'],
+                    content: "<%=path%>page/client/branch/Sfcoll.jsp"+
+                        "?sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&scotime="+encodeURIComponent(data.scotime)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }else if(obj.event==="auserDel"){
+                layer.confirm('确定删除？', function (index) {
+                    afal("<%=path%>admin/jdelsfcoll.action",data.scoid);
+                    layer.close(index);
+                });
+            }
+        });
+
+        function afal(url,scoid) {
+            $.ajax({
+                async: true,
+                type: "post",
+                url: url,
+                dataType: "text",
+                data: {"scoid":scoid},
+                success: function (dat) {
+                    if(dat==1){
+                        layer.msg("操作成功");
+                    }else{
+                        layer.msg("操作失败");
+                    }
+                    //执行重载
+                    table.reload('testReload', {
+
+                    }, 'data');
+                },
+                error: function (dat) {
+                    layer.msg('未知错误');
+                }
+            })
+        }
+        function fal(url,fcoid) {
+            $.ajax({
+                async: true,
+                type: "post",
+                url: url,
+                dataType: "text",
+                data: {"fcoid":fcoid},
+                success: function (dat) {
+                    if(dat==1){
+                        layer.msg("操作成功");
+                    }else{
+                        layer.msg("操作失败");
+                    }
+                    //执行重载
+                    table.reload('testReload', {
+
+                    }, 'data');
+                },
+                error: function (dat) {
+                    layer.msg('未知错误');
+                }
+            })
+        }
+
+ })
 </script>
 </html>

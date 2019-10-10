@@ -71,7 +71,7 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<%=path%>page/client/chome.jsp">首页<span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown active">

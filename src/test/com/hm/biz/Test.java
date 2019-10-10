@@ -5,6 +5,7 @@ package com.hm.biz;
 
 import com.google.gson.Gson;
 import com.hm.entity.Staff;
+import com.hm.entity.Tblorder;
 import com.hm.entity.Tblrole;
 import junit.framework.TestCase;
 import org.junit.runner.RunWith;
@@ -30,7 +31,9 @@ public class Test extends TestCase {
     public void menuTest() {
 
         Gson g = new Gson();
-        System.out.println(g.toJson(userBiz.queryphone("13860811761")));
+        Staff t= new Staff();
+        t.setPage(1);
+        System.out.println(g.toJson(userBiz.queryStaff(t)));
     }
 
     @org.junit.Test

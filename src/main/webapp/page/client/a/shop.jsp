@@ -21,34 +21,34 @@
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="../assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="../assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="../assets/css/jquery.mmenu.css">
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="../assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="../assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="../assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="../assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 
 <body>
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -91,7 +91,7 @@
                         <ul class="list-none">
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/1.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/1.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">Which Cleaning Service Is Best For You?</a></h4>
@@ -100,7 +100,7 @@
                             </li>
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/2.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/2.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">Cleaning Tip: How to Clean Stainless Steel</a></h4>
@@ -109,7 +109,7 @@
                             </li>
                             <li class="d-table">
                                 <div class="popular-thumb table-cell">
-                                    <a href="#"><img src="assets/images/blog/popular-posts/3.jpg" alt="" /></a>
+                                    <a href="#"><img src="../assets/images/blog/popular-posts/3.jpg" alt="" /></a>
                                 </div>
                                 <div class="popular-desc table-cell">
                                     <h4><a href="#">The Top 3 Germiest Places in Your Office</a></h4>
@@ -162,7 +162,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/1.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/1.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -174,7 +174,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/2.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/2.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -186,7 +186,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/3.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/3.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -198,7 +198,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/4.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/4.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -210,7 +210,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/5.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/5.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -222,7 +222,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/6.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/6.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -234,7 +234,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/7.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/7.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -246,7 +246,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/8.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/8.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -258,7 +258,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="product-single">
                             <div class="product-thumb">
-                                <a href="#"><img src="assets/images/products/9.jpg" alt="" /></a>
+                                <a href="#"><img src="../assets/images/products/9.jpg" alt="" /></a>
                                 <a href="#" class="btn-common">Add To Cart</a>
                             </div>
                             <div class="product-caption">
@@ -357,7 +357,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -379,7 +379,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

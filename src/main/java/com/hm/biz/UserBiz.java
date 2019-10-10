@@ -28,10 +28,9 @@ public interface UserBiz {
      * 新增普通用户账号
      * 并新增地址
      * @param tblUser 用户实体类
-     * @param tblSite 地址实体
      * @return
      */
-    public TblUser cUserReg(TblUser tblUser,TblSite tblSite);
+    public TblUser cUserReg(TblUser tblUser);
 
     /**
      * 增加地址
@@ -48,6 +47,13 @@ public interface UserBiz {
     public Integer updateUserSid(Integer sid,Integer userid);
 
     /**
+     * 查用户自己的地址
+     * @param userid
+     * @return
+     */
+    public List<TblSite> querySite(@Param("userid")Integer userid);
+
+    /**
      * 普通用户登陆
      * @param tblUser 用户实体
      * @return 用户实体
@@ -60,6 +66,26 @@ public interface UserBiz {
      * @return 状态id
      */
     public Integer queryUserState(String userphone);
+
+    /**
+     * 查寻全部服务类
+     * @return
+     */
+    public List<TblCOStype> queryCOSType();
+
+    /**
+     * 查服务类中的事项
+     * @param ctid
+     * @return
+     */
+    public List<TblCOS> queryCOS(@Param("ctid")Integer ctid);
+
+    /**
+     * 增加订单
+     * @param tblorder
+     * @return
+     */
+    public Integer addOrder(Tblorder tblorder);
 
     //账户
     public List<UserMoney> jUserMoney(UserMoney userMoney);
@@ -86,6 +112,26 @@ public interface UserBiz {
     public int jUserPay(Integer userid,Integer money,String userpwd);
     //修改卡号
     public int jUserCard(Integer userid,String usercard,String userpwd);
+    //删除订单
+    public int jdelorder(Tblorder tblorder);
+    //删除收藏阿姨
+    public int jdelsfcoll(Tblsfcoll tblsfcoll);
+    //删除收藏公司
+    public int jdelfcoll(Tblfcoll tblfcoll);
+    //删除历史记录
+    public int jdelhistory(Tblorder tblorder);
+    //删除地址
+    public int jdelsite(TblSite tblSite);
+    //删除评论
+    public int jdeleva(Tbleva tbleva);
+    //删除足迹
+    public int jdelfoot(Tblfoot tblfoot);
+    //添加评论
+    public int jUserAddApp(Tbleva tbleva);
+    //申请售后
+    public int jUserAddAfter(Tblorder tblorder);
+    //订单状态改变
+    public int jcorder(@Param("oid") Integer oid,@Param("state") Integer state);
     //public Integer queryUserState(String userphone);
 
     /**
@@ -96,10 +142,31 @@ public interface UserBiz {
     public List<Staff> queryStaff(Staff staff);
 
     /**
+     * 根据id查一个阿姨
+     * @param sfid
+     * @return
+     */
+    public Staff queryOneStaff(Integer sfid,Integer userid);
+
+    /**
      * 阿姨总数
      * @return
      */
     public Integer getStaffCount(Staff staff);
+
+    /**
+     * 收藏阿姨
+     * @param tblsfcoll
+     * @return
+     */
+    public Integer addsfcoll(Tblsfcoll tblsfcoll);
+
+    /**
+     * 取消收藏阿姨
+     * @param scoid
+     * @return
+     */
+    public Integer delsfcoll(Integer scoid);
 
     /**
      * 忘记密码
@@ -122,5 +189,20 @@ public interface UserBiz {
      * @return
      */
     public Map<String,Object> thwWelcome();
+
+    /**
+     * 查钱
+     * @param userid
+     * @return
+     */
+    public Integer queryMoney(Integer userid);
+
+    /**
+     * 改钱
+     * @param usermoney
+     * @param userid
+     * @return
+     */
+    public Integer updateMoney(Integer usermoney,Integer userid);
 
 }

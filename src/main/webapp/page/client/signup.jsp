@@ -77,14 +77,16 @@
 
                         <form action="<%=path%>admin/cUserReq.action" method="post" onsubmit="return reqsubmit()" enctype="multipart/form-data" >
                             <div>
-                                <label for="showname"><h4>头像：</h4></label>
+                                <label for="fileact"><span>头像：</span><input name="fileact" type="file" id="fileact" /></label>
                                 <!-- 用于展示上传文件名的表单 -->
-                                <input id="showname" type="text" style="height:25px;" autocomplete="off" readonly="true">
-                                <!-- 点击触发按钮 -->
-                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>
+<%--                                <input id="showname" type="text" style="height:25px;" autocomplete="off" readonly="true">--%>
+<%--                                <!-- 点击触发按钮 -->--%>
+<%--                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>--%>
+                                <%-- 真头像在这--%>
+
                             </div>
-                            <%-- 真头像在这--%>
-                            <input name="fileact" type="file" id="fileact" style="display: none"/>
+
+
 
                             <div class="form-group">
                                 <label for="userphone">手机号：</label>
@@ -168,6 +170,7 @@
                                     <select id="s_province" name="sa"></select>  
                                     <select id="s_city" name="sb"></select>  
                                     <select id="s_county" name="sc"></select>
+<%--加载城市下拉框--%>
                                     <script class="resources library" src="<%=path%>page/client/js/city-data.js"
                                             type="text/javascript"></script>
 

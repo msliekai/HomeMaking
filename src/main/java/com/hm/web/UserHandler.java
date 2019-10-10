@@ -1,9 +1,11 @@
 package com.hm.web;
 
 
+import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
 import com.hm.biz.UserBiz;
 import com.hm.entity.Staff;
 import com.hm.entity.*;
+import com.hm.tools.TimeTools;
 import com.sun.javafx.collections.MappingChange;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Controller
@@ -28,8 +28,10 @@ import java.util.Map;
 public class UserHandler {
     @Resource
     private UserBiz biz;
+
     private ModelAndView mav = null;
-    private Map<String,Object> map = new HashMap<String, Object>();
+
+    private Map<String, Object> map = new HashMap<String, Object>();
 
 //    @RequestMapping(value = "/cUserReq.action")
 //    public @ResponseBody
@@ -60,7 +62,7 @@ public class UserHandler {
                 //判断是否保存成功
                 if (file.exists()) {
 
-                    TblUser num = biz.cUserReg(tblUser, tblSite);//注册
+                    TblUser num = biz.cUserReg(tblUser);//注册
                     tblSite.setUserid(num.getUserid());//set用户id
                     TblSite sit = biz.addSite(tblSite);
                     int fl = biz.updateUserSid(sit.getSid(), sit.getUserid());
@@ -90,8 +92,8 @@ public class UserHandler {
     public @ResponseBody
     Map<String, String> userForgetPassword(HttpSession session, String userphone, String userpwd, String phcode) {
         Map<String, String> flog = new HashMap();
-        Integer count=biz.queryphone(userphone);
-        if(count>0){
+        Integer count = biz.queryphone(userphone);
+        if (count > 0) {
             String code = (String) session.getAttribute(userphone + "_code_req");
 
             if (phcode.equals(code)) {
@@ -105,7 +107,7 @@ public class UserHandler {
             } else {
                 flog.put("flog", "codeerr");
             }
-        }else{
+        } else {
             flog.put("flog", "notphone");
         }
 
@@ -148,6 +150,10 @@ public class UserHandler {
     public @ResponseBody
     Map<String, Object> classifyA(HttpServletRequest request, HttpSession session, Staff staff) {
 
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+        if (null != use) {
+            staff.setUserid(use.getUserid());
+        }
         Integer count = biz.getStaffCount(staff);
 
         List<Staff> list = biz.queryStaff(staff);
@@ -162,7 +168,7 @@ public class UserHandler {
 
     @RequestMapping(value = "/thwWelcome.action")
     public @ResponseBody
-    Map<String, Object> thwWelcome(HttpServletRequest request, HttpSession session, Staff staff) {
+    Map<String, Object> thwWelcome(Staff staff) {
 
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -174,58 +180,196 @@ public class UserHandler {
         return map;
     }
 
-    /*@RequestMapping(value = "/jUserMoney.action")
-    public ModelAndView jUserMoney(HttpServletRequest request, TblUser tblUser) {
-        List<UserMoney> list = biz.jUserMoney((TblUser) request.getSession().getAttribute("userbacc"),-1,0);
+    @RequestMapping(value = "/queryCOSType.action")
+    public @ResponseBody
+    List<TblCOStype> queryCOSType(HttpServletRequest request) {
 
-        System.out.println(list.size());
-        if (0 <=list.size()) {
-            mav = new ModelAndView();
-            mav.setViewName("client/UserBalance");
-            mav.addObject("Moneylist",list);
+        List list = biz.queryCOSType();
+
+        return list;
+    }
+
+    @RequestMapping(value = "/queryCOS.action")
+    public @ResponseBody
+    List<TblCOS> queryCOS(HttpServletRequest request, Integer ctid) {
+
+        List list = biz.queryCOS(ctid);
+
+        return list;
+    }
+
+    @RequestMapping("/addOrder.action")
+    public @ResponseBody
+    Map addOrder(HttpSession session, Tblorder tblorder) {
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        tblorder.setUserid(use.getUserid());
+        tblorder.setOsid(6);
+        tblorder.setSendtime(TimeTools.getStringDateMin());
+        tblorder.setOnumber(TimeTools.getOrderIdByTime());
+
+        Integer num = biz.addOrder(tblorder);
+        if (num != null && num != 0) {
+            map.put("flog", "addok");
         } else {
-            return null;
+            map.put("flog", "addnot");
         }
-        return mav;
-    }*/
+
+        return map;
+    }
+
+    /**
+     * 先判断金额够不够，够再确认订单
+     *
+     * @param session
+     * @param tblorder
+     * @return
+     */
+    @RequestMapping("/addOrder2.action")
+    public @ResponseBody
+    Map addOrder2(HttpSession session, Tblorder tblorder) {
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        Integer money = biz.queryMoney(use.getUserid());
+        Integer ji = Integer.parseInt(tblorder.getMoney());
+        if ((money - ji) >= 0) {
+            tblorder.setUserid(use.getUserid());
+            tblorder.setOsid(1);
+            tblorder.setSendtime(TimeTools.getStringDateMin());
+            System.out.print("");
+            tblorder.setOnumber(TimeTools.getOrderIdByTime());
+            int num1 = biz.updateMoney(ji, use.getUserid());
+            if (num1 > 0) {
+                Integer num = biz.addOrder(tblorder);
+                if (num != null && num != 0) {
+                    map.put("flog", "addok");
+                } else {
+                    map.put("flog", "addnot");
+                }
+            }else{
+                map.put("flog", "addnot");
+            }
+        } else {
+            map.put("flog", "moneyerr");
+        }
+        return map;
+    }
+
+    @RequestMapping("/querySite.action")
+    public @ResponseBody
+    Map querySite(HttpSession session) {
+
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        Map<String, Object> mpas = new HashMap<>();
+
+        List<TblSite> list = biz.querySite(use.getUserid());
+        TblSite tblSite = null;
+        Iterator<TblSite> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            TblSite str = iterator.next();
+            if (str.getSid() == use.getSid()) {
+                tblSite = str;
+                iterator.remove();
+                break;
+            }
+        }
+
+        mpas.put("defaulAddress", tblSite);
+        mpas.put("list", list);
+
+        return mpas;
+    }
+
+    @RequestMapping(value = "/product-details.action")
+    public String productdetails(HttpServletRequest request, HttpSession session, Integer sfid) {
+
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        Staff staff = biz.queryOneStaff(sfid, use.getUserid());
+
+        request.setAttribute("staff", staff);
+
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("client/product-details");
+//        modelAndView.addObject("staff", staff);
+
+        return "client/product-details";
+    }
+
+    @RequestMapping("/addsfcoll.action")
+    public @ResponseBody
+    Map addsfcoll(HttpSession session, Tblsfcoll tblsfcoll) {
+
+        TblUser use = (TblUser) session.getAttribute("userbacc");
+
+        tblsfcoll.setUserid(use.getUserid());
+        tblsfcoll.setScotime(TimeTools.getStringDateMin());
+
+        Integer num = biz.addsfcoll(tblsfcoll);
+
+        if (num > 0) {
+            map.put("flog", "OK");
+        } else {
+            map.put("flog", "NO");
+        }
+        return map;
+    }
+
+    @RequestMapping("/delsfcoll.action")
+    public @ResponseBody
+    Map delsfcoll(HttpSession session, Integer scoid) {
+
+        Integer num = biz.delsfcoll(scoid);
+
+        if (num > 0) {
+            map.put("flog", "OK");
+        } else {
+            map.put("flog", "NO");
+        }
+        return map;
+    }
 
     @RequestMapping("/jUserMoney.action")
-    public @ResponseBody Map jUserMoney(HttpServletRequest request,UserMoney userMoney){
+    public @ResponseBody
+    Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
         userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
         List<UserMoney> list = biz.jUserMoney(userMoney);
         System.out.println(list);//UserID
-        map.put("code",0);
+        map.put("code", 0);
         UserMoney userMoney1 = new UserMoney();
         userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        map.put("count",biz.jUserMoney(userMoney1).size());
-        map.put("data",list);
+        map.put("count", biz.jUserMoney(userMoney1).size());
+        map.put("data", list);
         return map;
     }
 
     @RequestMapping("/jUserAppraise.action")
-    public @ResponseBody Map jUserAppraise(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<Tbleva> list = biz.jUserAppraise(page,limit,userid);
+    public @ResponseBody
+    Map jUserAppraise(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<Tbleva> list = biz.jUserAppraise(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUserAppraise(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUserAppraise(-1, 0, userid).size());
+        map.put("data", list);
 
         return map;
     }
 
     @RequestMapping("/jUserSite.action")
-    public @ResponseBody Map jUserSite(HttpServletRequest request,int page,int limit,Integer userid){
-        userid = (Integer)((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        List<TblSite> list = biz.jUserSite(page,limit,userid);
+    public @ResponseBody
+    Map jUserSite(HttpServletRequest request, int page, int limit, Integer userid) {
+        userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        List<TblSite> list = biz.jUserSite(page, limit, userid);
         System.out.println(userid);
-        System.out.println("列表长度："+list.size());
+        System.out.println("列表长度：" + list.size());
         System.out.println(list);
-        map.put("code",0);
-        map.put("count",biz.jUserSite(-1,0,userid).size());
-        map.put("data",list);
+        map.put("code", 0);
+        map.put("count", biz.jUserSite(-1, 0, userid).size());
+        map.put("data", list);
         return map;
     }
 
@@ -327,4 +471,123 @@ public class UserHandler {
         System.out.println(b);
         return b;
     }
+
+
+    @RequestMapping("/myMap.action")
+    public @ResponseBody
+    Map myMap(HttpSession session,String csc) {
+
+        String city=(String)session.getAttribute("csc");
+        if(null==city){
+                session.setAttribute("csc",csc);
+                map.put("csc",csc);
+        }else{
+            map.put("csc",city);
+        }
+        return map;
+    }
+    @RequestMapping("/upmyMap.action")
+    public @ResponseBody
+    Map upmyMap(HttpSession session,String csc) {
+
+        if(null!=csc){
+            session.setAttribute("csc",csc);
+            map.put("flog","OK");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/jdelorder.action")
+    public @ResponseBody int jdelorder( Tblorder tblorder){
+        return biz.jdelorder(tblorder);
+    }
+
+    @RequestMapping(value = "/jdelsfcoll.action")
+    public @ResponseBody int jdelsfcoll( Tblsfcoll tblsfcoll){
+        System.out.println("删除的列是："+tblsfcoll.getScoid());
+        return biz.jdelsfcoll(tblsfcoll);
+    }
+
+    @RequestMapping(value = "/jdelfcoll.action")
+    public @ResponseBody int jdelfcoll( Tblfcoll tblfcoll){
+        System.out.println("删除的列是："+tblfcoll.getFcoid());
+        return biz.jdelfcoll(tblfcoll);
+    }
+
+    @RequestMapping(value = "/jdelhistory.action")
+    public @ResponseBody int jdelhistory( Tblorder tblorder){
+        return biz.jdelhistory(tblorder);
+    }
+
+    @RequestMapping(value = "/jdelsite.action")
+    public @ResponseBody int jdelsite( TblSite tblSite){
+        System.out.println("删除的列是："+tblSite.getSid());
+        return biz.jdelsite(tblSite);
+    }
+
+    @RequestMapping(value = "/jdeleva.action")
+    public @ResponseBody int jdeleva( Tbleva tbleva){
+        return biz.jdeleva(tbleva);
+    }
+
+    @RequestMapping(value = "/jdelfoot.action")
+    public @ResponseBody int jdelfoot( Tblfoot tblfoot){
+        return biz.jdelfoot(tblfoot);
+    }
+
+    @RequestMapping(value = "/jsetsite.action")
+    public @ResponseBody String jsetsite(HttpServletRequest request, TblSite tblSite){
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        Integer userid = user.getUserid();
+        int succ = biz.updateUserSid(tblSite.getSid(),userid);
+        String b =null;
+        if (0<succ){
+            b="1";
+            user.setSid(tblSite.getSid());
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+    @RequestMapping(value = "/jUserAddApp.action")
+    public @ResponseBody String jUserAddApp(HttpServletRequest request, Tbleva tbleva){
+        System.out.println(tbleva);
+        tbleva.setEconut("5");
+        int succ = biz.jUserAddApp(tbleva);
+        String b =null;
+        if (0<succ){
+            int c = biz.jcorder(tbleva.getOid(),5);
+            if (0<c){
+                b="1";
+            }else{
+                b="0";
+            }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+    @RequestMapping(value = "/jUserAddAfter.action")
+    public @ResponseBody String jUserAddAfter(HttpServletRequest request, Tblorder tblorder){
+        System.out.println(tblorder);
+        int succ = biz.jUserAddAfter(tblorder);
+        String b =null;
+        if (0<succ){
+            int c = biz.jcorder(tblorder.getOid(),9);
+            if (0<c){
+                b="1";
+            }else{
+                b="0";
+            }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+
+
+
 }

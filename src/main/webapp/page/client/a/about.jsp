@@ -52,9 +52,9 @@
 <body>
 
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
 <!--page-banner-start-->
@@ -105,7 +105,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6 ds-sm-none">
-                <img src="assets/images/about/1.jpg" alt="" />
+                <img src="../assets/images/about/1.jpg" alt="" />
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="service-single">
@@ -180,7 +180,7 @@
             <div class="col-lg-4">
                 <div class="team-single text-center">
                     <div class="team-thumb">
-                        <img src="assets/images/team/1.jpg" alt="" />
+                        <img src="../assets/images/team/1.jpg" alt="" />
                         <div class="team-social">
                             <a href="#"><i class="social_facebook"></i></a>
                             <a href="#"><i class="social_twitter"></i></a>
@@ -196,7 +196,7 @@
             <div class="col-lg-4">
                 <div class="team-single text-center">
                     <div class="team-thumb">
-                        <img src="assets/images/team/2.jpg" alt="" />
+                        <img src="../assets/images/team/2.jpg" alt="" />
                         <div class="team-social">
                             <a href="#"><i class="social_facebook"></i></a>
                             <a href="#"><i class="social_twitter"></i></a>
@@ -212,7 +212,7 @@
             <div class="col-lg-4">
                 <div class="team-single text-center">
                     <div class="team-thumb">
-                        <img src="assets/images/team/3.jpg" alt="" />
+                        <img src="../assets/images/team/3.jpg" alt="" />
                         <div class="team-social">
                             <a href="#"><i class="social_facebook"></i></a>
                             <a href="#"><i class="social_twitter"></i></a>
@@ -228,7 +228,7 @@
             <div class="col-lg-4">
                 <div class="team-single text-center">
                     <div class="team-thumb">
-                        <img src="assets/images/team/1.jpg" alt="" />
+                        <img src="../assets/images/team/1.jpg" alt="" />
                         <div class="team-social">
                             <a href="#"><i class="social_facebook"></i></a>
                             <a href="#"><i class="social_twitter"></i></a>
@@ -260,7 +260,7 @@
         <div class="row two-col-testimonial mt-70">
             <div class="col-lg-6">
                 <div class="testimonial-single style-2 bg-white text-center">
-                    <img src="assets/images/testimonials/1.png" alt="" />
+                    <img src="../assets/images/testimonials/1.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Caleigh Jerde</h5>
                         <small>Physician</small>
@@ -277,7 +277,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="testimonial-single style-2 bg-white text-center">
-                    <img src="assets/images/testimonials/2.png" alt="" />
+                    <img src="../assets/images/testimonials/2.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Mary Katherine</h5>
                         <small>Accountant</small>
@@ -294,7 +294,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="testimonial-single style-2 bg-white text-center">
-                    <img src="assets/images/testimonials/3.png" alt="" />
+                    <img src="../assets/images/testimonials/3.png" alt="" />
                     <div class="testimonial-title">
                         <h5>Caleigh Jerde</h5>
                         <small>Physician</small>
@@ -403,7 +403,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -425,7 +425,7 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+<script src="../../layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->

@@ -2,10 +2,11 @@
   Created by IntelliJ IDEA.
   User: HANG
   Date: 2019/9/21
-  Time: 14:41
+  Time: 19:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -14,161 +15,146 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Services - HomeCleaner</title>
+    <title>Projects Grid - HomeCleaner</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- bootstrap v4.0.0 -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <!-- linear-icons css -->
-    <link rel="stylesheet" href="assets/css/linear-icons.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/linear-icons.css">
     <!-- elegant css -->
-    <link rel="stylesheet" href="assets/css/elegant.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/elegant.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/animate.css">
     <!-- jquery.mmenu css -->
-    <link rel="stylesheet" href="assets/css/jquery.mmenu.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/mmenu/dist/mmenu.css"/>
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick.css">
     <!-- slick-theme css -->
-    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/slick-theme.css">
     <!-- venobox css -->
-    <link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/venobox.css">
     <!-- helper css -->
-    <link rel="stylesheet" href="assets/css/helper.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/helper.css">
     <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<%=path%>page/client/style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
+<%--layui--%>
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
+
+    <%--我的css--%>
+    <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
+
+
 </head>
 
 <body>
+
 <!--header-top-->
-<jsp:include page="top1.jsp" flush="true"/>
+<jsp:include page="../top1.jsp" flush="true"/>
 <!--header-bottom-->
-<jsp:include page="top2.jsp" flush="true"/>
+<jsp:include page="../top2.jsp" flush="true"/>
 <!--header-ends-->
 
-<!--services-area start-->
-<div class="services-area bg-f3f4f7 pt-108 pt-sm-65 pb-90 pb-sm-50">
+<!--page-banner-start-->
+<%--<div class="page-banner-area bg-1">--%>
+<%--    <div class="container">--%>
+<%--        <div class="row height-400 align-items-center">--%>
+<%--            <div class="col-lg-12">--%>
+<%--                <div class="page-banner text-center">--%>
+<%--                    <h2>Projects Grid</h2>--%>
+<%--                    <div class="site-breadcrumb">--%>
+<%--                        <nav aria-label="breadcrumb">--%>
+<%--                            <ol class="breadcrumb">--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Home</a></li>--%>
+<%--                                <li class="breadcrumb-item"><a href="#">Pages</a></li>--%>
+<%--                                <li class="breadcrumb-item active" aria-current="page">Projects Grid</li>--%>
+<%--                            </ol>--%>
+<%--                        </nav>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<!--page-banner-end-->
+
+<!--projects-area start-->
+<div class="projects-area pt-120 pt-sm-80 pb-118 pb-sm-60">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2>Our Main Services</h2>
-                    <p>With an outstanding reputation for quality, integrity and service, <br/> we can clean anything you throw at us!</p>
+                <div class="projects-nav style-2 text-center">
+                    <ul>
+                        <li data-filter="*" class="active">所有服务</li>
+                        <li>日常保洁</li>
+                        <li>品类保洁</li>
+                        <li>保姆</li>
+                        <li>月嫂</li>
+                        <li>育儿嫂</li>
+                        <li>照顾宠物</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row mt-65 mt-sm-55">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/1.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Home Cleaning</h4>
-                        <p>Imagine coming home to a completely clean, fresh smelling home after a long day of work. You didn't have to lift a finger...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/2.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Office Cleaning</h4>
-                        <p>We provide full office cleaning services from highly trained cleaning staff. Offering businesses after hours daily office cleaning..</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/3.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Window Cleaning</h4>
-                        <p>Contract us for ongoing window cleaning services and we can make sure your building is always sparkling whatever the weather...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/4.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Upholstery Cleaning</h4>
-                        <p>Cleaning and protecting your furniture not only makes your home look great, it extends the life of one of your home’s...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/5.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Carpet Cleaning</h4>
-                        <p>The Carpet Cleaners we refer to you have years of experience and will make sure to leave your carpet as beautiful as possible!...</p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service-single text-center">
-                    <div class="service-thumb">
-                        <img src="assets/images/services/6.jpg" alt="" />
-                    </div>
-                    <div class="service-desc">
-                        <h4>Clutter Cleanup</h4>
-                        <p>We understand you may have a difficult time getting rid of personal belongings, or clutter that may have accumulated... </p>
-                        <a href="#" class="btn-common">READ MORE</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--services-area end-->
 
-<!--contact-area start-->
-<div class="contact-area bg-1 pt-100 pt-sm-80 pb-100 pb-sm-80">
-    <div class="container">
+        <div class="row project-items mt-60 mt-sm-50" id="ayitable">
+
+            <div class="col-lg-4 col-sm-6 house">
+                <div class="project-single style-2 mb-15">
+                <div class="">
+                        <img src="../assets/images/projects/1.jpg" alt="" />
+<%--                        <div class="project-caption">--%>
+<%--                            <a href="assets/images/projects/1.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>--%>
+<%--                        </div>--%>
+                    </div>
+                    <div class="project-title">
+                        <small>House, Office</small>
+                        <h4><a href="#">Wood Floor Cleaning Machine for Home</a></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 office">
+                <div class="project-single style-2 mb-30">
+                    <div class="project-thumb">
+                        <img src="../assets/images/projects/2.jpg" alt="" />
+                        <div class="project-caption">
+                            <a href="../assets/images/projects/2.jpg" class="venobox icon-plus" data-gall="projectGallery"><i class="icon_plus"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-title">
+                        <small>Maintenance</small>
+                        <h4><a href="#">Garden Cleaning Archives</a></h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-6">
-                <div class="contact-form style-3">
-                    <h2>Ask Us Anything</h2>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Name*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email*">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Phone*">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Message *"></textarea>
-                        </div>
-                        <button type="button" class="btn-common mt-20">BOOK NOW</button>
-                    </form>
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div id="htmlDiv"></div>
+                    <div class="site-pagination style-3" align="center">
+                        <!-- 分页控件，标签必须是<ul> -->
+                        <ul id="pageButton">
+<%--                            <li>1</li>--%>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-<!--contact-area end-->
+<%--分页--%>
+
+<!--projects-area end-->
 
 <!--footer-area start-->
 <footer>
@@ -239,7 +225,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 ds-sm-none">
                     <div class="logo">
-                        <img src="assets/images/footer/logo.png" alt="" />
+                        <img src="../assets/images/footer/logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -261,7 +247,8 @@
 </footer>
 <!--footer-area end-->
 
-<script src="../layui/layui.js"></script>
+
+<script src="<%=path%>page/layui/layui.js"></script>
 <!-- modernizr js -->
 <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <!-- jquery-3.4.1 version -->
@@ -291,10 +278,12 @@
 <script src="<%=path%>page/client/assets/js/plugins.js"></script>
 <!-- main js -->
 <script src="<%=path%>page/client/assets/js/main.js"></script>
-
+<%--bootstrap分页--%>
+<script src="<%=path%>page/client/js/bootstrap-paginator.js"></script>
+<script src="<%=path%>page/client/js/pageing.js"></script>
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
-
 </body>
-</html>
 
+
+</html>

@@ -87,10 +87,10 @@
                             %>
                             搜索：
                             <input placeholder="输入要搜索内容" type="text" value="<%=aunt%>" id="aunt">
-<%--                            价格：--%>
-<%--                            <input placeholder="输入最低价格" type="text" value="" id="aunt">--%>
-<%--                                至--%>
-<%--                            <input placeholder="输入最高价格" type="text" value="" id="aunt">--%>
+                            <%--                            价格：--%>
+                            <%--                            <input placeholder="输入最低价格" type="text" value="" id="aunt">--%>
+                            <%--                                至--%>
+                            <%--                            <input placeholder="输入最高价格" type="text" value="" id="aunt">--%>
                             <%--                            </form>--%>
                         </div>
                         <button class="layui-btn layui-btn-normal" style="width: 100%;" onclick="getPageOfMemo(1)"><i
@@ -141,102 +141,102 @@
                     <%--                    </div>--%>
 
                     <%--热门--%>
-                    <div class="sidebar-widget mb-50">
-                        <h3 class="sidebar-title">TOP3</h3>
-                        <div class="sidebar-top-rated-all">
+                    <%--                    <div class="sidebar-widget mb-50">--%>
+                    <%--                        <h3 class="sidebar-title">TOP3</h3>--%>
+                    <%--                        <div class="sidebar-top-rated-all">--%>
 
-                            <div class="sidebar-top-rated mb-30">
+                    <%--                            <div class="sidebar-top-rated mb-30">--%>
 
-                                <div class="single-top-rated">
-                                    <div class="top-rated-img">
-                                        <a href="#"><img
-                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/1.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="top-rated-text">
-                                        <h4><a href="#">Flying Drone</a></h4>
-                                        <div class="top-rated-rating">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <span>$140.00</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <%--                                <div class="single-top-rated">--%>
+                    <%--                                    <div class="top-rated-img">--%>
+                    <%--                                        <a href="#"><img--%>
+                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/1.jpg"--%>
+                    <%--                                                alt=""></a>--%>
+                    <%--                                    </div>--%>
+                    <%--                                    <div class="top-rated-text">--%>
+                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
+                    <%--                                        <div class="top-rated-rating">--%>
+                    <%--                                            <ul>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                            </ul>--%>
+                    <%--                                        </div>--%>
+                    <%--                                        <span>$140.00</span>--%>
+                    <%--                                    </div>--%>
+                    <%--                                </div>--%>
+                    <%--                            </div>--%>
 
-                            <div class="sidebar-top-rated mb-30">
-                                <div class="single-top-rated">
-                                    <div class="top-rated-img">
-                                        <a href="#"><img
-                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/2.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="top-rated-text">
-                                        <h4><a href="#">Flying Drone</a></h4>
-                                        <div class="top-rated-rating">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <span>$140.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sidebar-top-rated mb-30">
-                                <div class="single-top-rated">
-                                    <div class="top-rated-img">
-                                        <a href="#"><img
-                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/3.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="top-rated-text">
-                                        <h4><a href="#">Flying Drone</a></h4>
-                                        <div class="top-rated-rating">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <span>$140.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sidebar-top-rated mb-30">
-                                <div class="single-top-rated">
-                                    <div class="top-rated-img">
-                                        <a href="#"><img
-                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/4.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="top-rated-text">
-                                        <h4><a href="#">Flying Drone</a></h4>
-                                        <div class="top-rated-rating">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <span>$140.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%--                            <div class="sidebar-top-rated mb-30">--%>
+                    <%--                                <div class="single-top-rated">--%>
+                    <%--                                    <div class="top-rated-img">--%>
+                    <%--                                        <a href="#"><img--%>
+                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/2.jpg"--%>
+                    <%--                                                alt=""></a>--%>
+                    <%--                                    </div>--%>
+                    <%--                                    <div class="top-rated-text">--%>
+                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
+                    <%--                                        <div class="top-rated-rating">--%>
+                    <%--                                            <ul>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                            </ul>--%>
+                    <%--                                        </div>--%>
+                    <%--                                        <span>$140.00</span>--%>
+                    <%--                                    </div>--%>
+                    <%--                                </div>--%>
+                    <%--                            </div>--%>
+                    <%--                            <div class="sidebar-top-rated mb-30">--%>
+                    <%--                                <div class="single-top-rated">--%>
+                    <%--                                    <div class="top-rated-img">--%>
+                    <%--                                        <a href="#"><img--%>
+                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/3.jpg"--%>
+                    <%--                                                alt=""></a>--%>
+                    <%--                                    </div>--%>
+                    <%--                                    <div class="top-rated-text">--%>
+                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
+                    <%--                                        <div class="top-rated-rating">--%>
+                    <%--                                            <ul>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                            </ul>--%>
+                    <%--                                        </div>--%>
+                    <%--                                        <span>$140.00</span>--%>
+                    <%--                                    </div>--%>
+                    <%--                                </div>--%>
+                    <%--                            </div>--%>
+                    <%--                            <div class="sidebar-top-rated mb-30">--%>
+                    <%--                                <div class="single-top-rated">--%>
+                    <%--                                    <div class="top-rated-img">--%>
+                    <%--                                        <a href="#"><img--%>
+                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/4.jpg"--%>
+                    <%--                                                alt=""></a>--%>
+                    <%--                                    </div>--%>
+                    <%--                                    <div class="top-rated-text">--%>
+                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
+                    <%--                                        <div class="top-rated-rating">--%>
+                    <%--                                            <ul>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
+                    <%--                                            </ul>--%>
+                    <%--                                        </div>--%>
+                    <%--                                        <span>$140.00</span>--%>
+                    <%--                                    </div>--%>
+                    <%--                                </div>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
                     <%--热门 end--%>
 
                 </div>
@@ -246,17 +246,18 @@
                     <div class="shop-bar-area">
                         <div class="shop-bar pb-60">
                             <div class="shop-found-selector">
-                                <%--                                <div class="shop-found">--%>
-                                <%--                                    <p><span>23</span> Product Found of <span>50</span></p>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="shop-selector">--%>
-                                <%--                                    <label>排序方式: </label>--%>
-                                <%--                                    <select name="select">--%>
-                                <%--                                        <option value="">默认</option>--%>
-                                <%--                                        <option value="">A to Z</option>--%>
-                                <%--                                        <option value=""> Z to A</option>--%>
-                                <%--                                    </select>--%>
-                                <%--                                </div>--%>
+                                <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
+                                <%--                                                                <div class="shop-found">--%>
+                                <%--                                                                    <p><span>23</span> Product Found of <span>50</span></p>--%>
+                                <%--                                                                </div>--%>
+                                <%--                                                                <div class="shop-selector">--%>
+                                <%--                                                                    <label>排序方式: </label>--%>
+                                <%--                                                                    <select name="select">--%>
+                                <%--                                                                        <option value="">默认</option>--%>
+                                <%--                                                                        <option value="">A to Z</option>--%>
+                                <%--                                                                        <option value=""> Z to A</option>--%>
+                                <%--                                                                    </select>--%>
+                                <%--                                                                </div>--%>
                             </div>
 
                         </div>
@@ -266,11 +267,12 @@
                             <%--阿姨展示--%>
                             <div id="grid-sidebar3" class="tab-pane fade active show">
                                 <div class="row" id="ayitable">
+
                                     <div class="col-md-6 col-xl-4">
                                         <div class="product-wrapper mb-30">
                                             <div class="product-img">
-                                                <a href="#">
-                                                    <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/1.jpg"
+                                                <a href="<%=path%>admin/product-details.action">
+                                                    <img src=""
                                                          alt="">
                                                 </a>
                                                 <span>hot</span>
@@ -288,38 +290,12 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h4><a href="#"> Dagger Smart Trousers </a></h4>
-                                                <span>$115.00</span>
+                                                <h4><a href="#"> 我是某阿姨</a></h4>
+                                                <span>￥998.00</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-xl-4">
-                                        <div class="product-wrapper mb-30">
-                                            <div class="product-img">
-                                                <a href="#">
-                                                    <img src="<%=path%>page/client/shopgrid/img/product/fashion-colorful/2.jpg"
-                                                         alt="">
-                                                </a>
-                                                <div class="product-action">
-                                                    <a class="animate-left" title="Wishlist" href="#">
-                                                        <i class="pe-7s-like"></i>
-                                                    </a>
-                                                    <a class="animate-top" title="Add To Cart" href="#">
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                    <a class="animate-right" title="Quick View" data-toggle="modal"
-                                                       data-target="#exampleModal" href="#">
-                                                        <i class="pe-7s-look"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h4><a href="#">Homme Tapered Smart </a></h4>
-                                                <span>$115.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -333,6 +309,7 @@
 
                     </ul>
                 </div>
+                <input type="hidden" id="thispage"/>
                 <%--                分页end--%>
             </div>
         </div>
@@ -340,91 +317,9 @@
 </div>
 
 <%--底部--%>
-<footer class="footer-area">
-    <div class="footer-top-area bg-img pt-105 pb-65"
-         style="background-image: url(<%=path%>page/client/shopgrid/img/bg/1.jpg)" data-overlay="9">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-md-3">
-                    <div class="footer-widget mb-40">
-                        <h3 class="footer-widget-title">Custom Service</h3>
-                        <div class="footer-widget-content">
-                            <ul>
-                                <li><a href="#">Cart</a></li>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Register</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Track</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-3">
-                    <div class="footer-widget mb-40">
-                        <h3 class="footer-widget-title">Categories</h3>
-                        <div class="footer-widget-content">
-                            <ul>
-                                <li><a href="shop.html">Dress</a></li>
-                                <li><a href="shop.html">Shoes</a></li>
-                                <li><a href="shop.html">Shirt</a></li>
-                                <li><a href="shop.html">Baby Product</a></li>
-                                <li><a href="shop.html">Mans Product</a></li>
-                                <li><a href="shop.html">Leather</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="footer-widget mb-40">
-                        <h3 class="footer-widget-title">Contact</h3>
-                        <div class="footer-newsletter">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is
-                                dummy.</p>
-                            <div id="mc_embed_signup" class="subscribe-form pr-40">
-                                <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-                                      method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                                      class="validate" target="_blank" novalidate>
-                                    <div id="mc_embed_signup_scroll" class="mc-form">
-                                        <input type="email" value="" name="EMAIL" class="email"
-                                               placeholder="Enter Your E-mail" required>
-                                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                        <div class="mc-news" aria-hidden="true">
-                                            <input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef"
-                                                   tabindex="-1" value="">
-                                        </div>
-                                        <div class="clear">
-                                            <input type="submit" value="Subscribe" name="subscribe"
-                                                   id="mc-embedded-subscribe" class="button">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="footer-contact">
-                                <p><span><i class="ti-location-pin"></i></span> 77 Seventh avenue USA 12555. </p>
-                                <p><span><i class=" ti-headphone-alt "></i></span> +88 (015) 609735 or +88 (012) 112266
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom black-bg ptb-20">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <div class="copyright">
-                        <p>Copyright &copy; 2019.Company name All rights reserved.<a target="_blank"
-                                                                                     href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<!--footer-area start-->
+<jsp:include page="bottom.jsp" flush="true"/>
+<!--footer-area end-->
 <!-- modal -->
 <!-- modal -->
 
@@ -477,6 +372,12 @@
 <script src="http://api.map.baidu.com/api?v=2.0&ak=ivzd6zdhLMevro9rnMKrYuGsYd4rrYvZ" type="text/javascript"></script>
 <script src="<%=path%>page/client/js/baidumap.js"></script>
 </body>
+<script>
+    // 初始化页面
+
+    // getPageOfMemo(1);
+    window.οnlοad=getPageOfMemo(1);
+</script>
 </html>
 
 
