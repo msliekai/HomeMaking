@@ -3,7 +3,7 @@ package com.hm.biz;
 import com.hm.entity.*;
 import com.hm.mapper.CompanyMapper;
 import org.apache.ibatis.annotations.Param;
-import org.bouncycastle.util.Integers;
+//import org.bouncycastle.util.Integers;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -8,6 +8,7 @@ public class UserMoney {
     private String otime;
     private String fname;
     private String osname;
+    private Integer osid;
     private Integer money;
     private Integer page;
     private Integer limit;
@@ -16,7 +17,7 @@ public class UserMoney {
     public UserMoney() {
     }
 
-    public UserMoney(Integer oid, String onumber, String cosname, String ctname, String otime, String fname, String osname, Integer money, Integer page, Integer limit, Integer userid) {
+    public UserMoney(Integer oid, String onumber, String cosname, String ctname, String otime, String fname, String osname, Integer osid, Integer money, Integer page, Integer limit, Integer userid) {
         this.oid = oid;
         this.onumber = onumber;
         this.cosname = cosname;
@@ -24,10 +25,27 @@ public class UserMoney {
         this.otime = otime;
         this.fname = fname;
         this.osname = osname;
+        this.osid = osid;
         this.money = money;
         this.page = page;
         this.limit = limit;
         this.userid = userid;
+    }
+
+    public String getOsname() {
+        return osname;
+    }
+
+    public void setOsname(String osname) {
+        this.osname = osname;
+    }
+
+    public Integer getOsid() {
+        return osid;
+    }
+
+    public void setOsid(Integer osid) {
+        this.osid = osid;
     }
 
     public Integer getOid() {

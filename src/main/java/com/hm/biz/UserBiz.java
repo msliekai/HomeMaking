@@ -109,7 +109,29 @@ public interface UserBiz {
     public List<Tblorder> jUserticket(int page,int limit,Integer userid);
 
     //充值
-    public int jUserPay(Integer userid,Integer money);
+    public int jUserPay(Integer userid,Integer money,String userpwd);
+    //修改卡号
+    public int jUserCard(Integer userid,String usercard,String userpwd);
+    //删除订单
+    public int jdelorder(Tblorder tblorder);
+    //删除收藏阿姨
+    public int jdelsfcoll(Tblsfcoll tblsfcoll);
+    //删除收藏公司
+    public int jdelfcoll(Tblfcoll tblfcoll);
+    //删除历史记录
+    public int jdelhistory(Tblorder tblorder);
+    //删除地址
+    public int jdelsite(TblSite tblSite);
+    //删除评论
+    public int jdeleva(Tbleva tbleva);
+    //删除足迹
+    public int jdelfoot(Tblfoot tblfoot);
+    //添加评论
+    public int jUserAddApp(Tbleva tbleva);
+    //申请售后
+    public int jUserAddAfter(Tblorder tblorder);
+    //订单状态改变
+    public int jcorder(@Param("oid") Integer oid,@Param("state") Integer state);
     //public Integer queryUserState(String userphone);
 
     /**
@@ -183,4 +205,24 @@ public interface UserBiz {
      */
     public Integer updateMoney(Integer usermoney,Integer userid);
 
+    /**
+     * 修改用户信息
+     * @param tblUser
+     * @return
+     */
+    public Integer upUser(TblUser tblUser);
+
+    /**
+     * 查询一个阿姨的评价
+     * @param sfid
+     * @return
+     */
+    public List<Tbleva> queryEva(@Param("sfid") Integer sfid);
+
+    /**
+     * 添加足迹
+     * @param tblfoot
+     * @return
+     */
+    public Integer addFoot(Tblfoot tblfoot);
 }

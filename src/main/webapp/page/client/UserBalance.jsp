@@ -58,7 +58,7 @@
                             <tr>
                                 <td>绑定账户：</td>
                                 <td>${sessionScope.userbacc.usercard}</td>
-                                <td><button class="layui-btn layui-btn-primary">修改</button></td>
+                                <td><button class="layui-btn layui-btn-primary" onclick="Card()">修改</button></td>
                             </tr>
                             </tbody>
                         </table>
@@ -100,41 +100,23 @@
 </body>
 
 <script id="barDemo" type="text/html">
-    <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
-    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">重置密码</a>--%>
-
-    <%--<c:if test="d.tblCOS.tblCOStype.ctid == 1">
-        <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
-    </c:if>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>--%>
-
-    <%--{{# if (d.tblCOS.tblCOStype.ctid ==4){}}
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="known"><i class="layui-icon">&#x1005;</i>已知</a>
-    {{#  } else if(d.tblCOS.tblCOStype.ctid ==2){ }}
-    {{#  if(d.tblCOS.tblCOStype.ctid ==0){ }}
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="known"><i class="layui-icon">&#x1005;</i>已知</a>
-    {{# }if(d.tblCOS.tblCOStype.ctid ==1) { }}
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="process"><i class="layui-icon">&#xe6b2;</i>处理</a>
-    {{#  } }}
-    {{#  } }}--%>
-
-<%--{{#  } else if(d.event_level ==2){ }}
-    {{#  if(d.event_type_state ==0){ }}
-
-    {{# }if(d.event_type_state ==1) { }}
-
-    {{#  } }}
-
-{{#  } }}--%>
 </script>
 <script>
     function Into() {
         layer.open({
             type:2,
-            title: "用户详情",
-            area: ['300px', '260px'],
+            title: "用户充值",
+            area: ['300px', '210px'],
             content: "<%=path%>page/client/branch/Intomoney.jsp"
+            //引用的弹出层的页面层的方式加载修改界面表单
+        });
+    }
+    function Card() {
+        layer.open({
+            type:2,
+            title: "绑定银行卡",
+            area: ['400px', '270px'],
+            content: "<%=path%>page/client/branch/Card.jsp"
             //引用的弹出层的页面层的方式加载修改界面表单
         });
     }

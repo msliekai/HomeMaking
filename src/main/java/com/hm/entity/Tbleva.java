@@ -15,4 +15,6 @@ public class Tbleva {
     private Integer limit;
     private String date1;
     private String date2;
+
+    private String cosname;
 }

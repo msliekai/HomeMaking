@@ -187,7 +187,6 @@
                                 <span id="scontexterr"></span>
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
-                    <input type="button" onclick="scity()" value="aaaaaaaaaa">
                             <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal" data-target=".signin_modal" value="注册"/>
                         </form><!--/form -->
                     </div><!--/.col -->
@@ -274,7 +273,7 @@
     if (request.getAttribute("flog") == "success") {%>
 <script>
     alert("注册成功");
-    <%--location.href="<%=path%>ON/hha.jsp";--%>
+    location.href="<%=path%>page/client/signin.jsp";
 </script>
 <%} else if (request.getAttribute("flog") == "reqerr") {%>
 <script>

@@ -201,7 +201,7 @@
                         </table>
                     </div>
                     <div class="proceed-checkout mt-30">
-                        <input  class="btn-common" id="addor" value="提交（请在选择完后提交）">
+                        <input type="button" class="btn-common" id="addor" value="提交（请在选择完后提交）">
                     </div>
                 </div>
             </div>
@@ -262,5 +262,30 @@
     $(document).ready(function(){
         getct();
     })
+
+    /**
+     * 获得地址
+     */
+    function querySity(){
+        layui.use('layer', function () {
+            $.ajax({
+                async: true,
+                type: "post", //提交方式
+                url: "<%=path%>admin/querySite.action",
+                success: function (jso) {//执行结果
+                    var ht="";
+                    if(jso.defaulAddress!=null){
+                        var defaul=jso.defaulAddress;
+                        ht+="<option value='"+ defaul.sid +"' >"+ defaul.sa+"-"+defaul.sb+"-"+defaul.sc+"-"+defaul.scontext+"（默认地址）</option>";
+                    }
+
+                    $.each(jso.list,function(k,v){
+                        ht+="<option value='"+ v.sid +"' >"+ v.sa+"-"+v.sb+"-"+v.sc+"-"+v.scontext+"</option>";
+                    })
+                    $("#sid").html(ht);
+                },
+            })
+        })
+    }
 </script>
 </html>

@@ -5,8 +5,11 @@ package com.hm.web;
  * @date 2019-08-30 15:55
  */
 
+import com.hm.aoplog.Log;
 import com.hm.biz.UserBiz;
 import com.hm.tools.CreateSecurityCodeANDImage;
+import com.hm.tools.ShortMessage;
+import com.hm.tools.ShortMessageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +35,7 @@ public class SecurityCodeImageAction {
     @Resource
     private UserBiz biz;
 
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "getimage.action")
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
         FileInputStream fis = null;
@@ -66,19 +70,20 @@ public class SecurityCodeImageAction {
             }
         }
     }
-
+    @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/sendSms.action")
     public @ResponseBody
     String sendSms(HttpServletRequest request, HttpSession session, String userphone) {
 
         String flog="";
         Integer count=biz.queryphone(userphone);
-        if(count<=0){
-
+        if(count!=null||count>0){
+            String code= ShortMessageUtil.vcode();
+            session.setAttribute(userphone+"_code_req",code);
+            flog=ShortMessageUtil.getVerificationCode(userphone,code);
         }else{
             flog="phoneerr";
         }
-
         return flog;
     }
 

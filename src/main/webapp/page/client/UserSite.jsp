@@ -130,22 +130,25 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'username', title: '姓名', minWidth: 80}
+                {field:'sid', title: '序号', minWidth: 80,templet:function (d) {return d.tblSite.sid}}
+                ,{field: 'username', title: '姓名', minWidth: 80}
                 , {field: 'site', title: '所在地区', minWidth: 150,templet:function (d) {return d.tblSite.site}}
                 , {field: 'scontext', title: '详细地址', minWidth: 80,templet:function (d) {return d.tblSite.scontext}}
                 , {field: 'sphone', title: '联系方式', minWidth:80,templet:function (d) {return d.tblSite.sphone}}
-                , {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                , {fixed: 'right',title: '操作', align:'center',minWidth:180,templet:function (item) {
                         var tem = [];
                         var usersid=$('#usersid').val();
 
                         console.log(usersid);
                         console.log(item)
                         if (item.tblSite.sid == usersid) {
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-disabled">默认地址</a>');
+                            tem.push('<a class="layui-btn layui-btn-disabled">默认地址</a>');
+                            tem.push('<a class="layui-btn layui-btn-disabled"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         }else {
-                            tem.push('<a lay-event="lookRes" class="layui-btn layui-btn-normal">设为默认</a>');
+                            tem.push('<a lay-event="useEna" class="layui-btn layui-btn-normal">设为默认</a>');
+                            tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         }
-                        tem.push('<a lay-event="deleteRes" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+
                         return tem.join(' <font></font> ')
                     }}
             ]]
@@ -180,52 +183,37 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
+                layer.confirm('确定删除？ID:'+data.tblSite.sid, function (index) {
+                    fal("<%=path%>admin/jdelsite.action",data.tblSite.sid);
                     layer.close(index);
                 });
             } else if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
-                });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
+                layer.confirm('该地址设为默认地址？ID:'+data.tblSite.sid, function (index) {
+                    fal("<%=path%>admin/jsetsite.action",data.tblSite.sid);
                     layer.close(index);
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,sid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"sid":sid},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
                     }, 'data');
                 },
                 error: function (dat) {
-                    layer.msg('裂开');
+                    layer.msg('未知错误');
                 }
             })
 

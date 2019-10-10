@@ -101,20 +101,22 @@
             <div class="col-md-12 col-lg-5 col-12">
                 <div class="product-details-content">
                     <h3>${requestScope.staff.sfname}</h3>
-                    <div class="rating-number">
-                        <div class="quick-view-number">
-                            <span>星级：</span>
-                        </div>
-                        <div class="quick-view-rating">
-                            <i class="pe-7s-star red-star"></i>
-                            <i class="pe-7s-star red-star"></i>
-                            <i class="pe-7s-star"></i>
-                            <i class="pe-7s-star"></i>
-                            <i class="pe-7s-star"></i>
-                        </div>
+<%--                    <div class="rating-number">--%>
+<%--                        <div class="quick-view-number">--%>
+<%--                            <span>星级：</span>--%>
+<%--                        </div>--%>
+<%--                        <div class="quick-view-rating">--%>
+<%--                            <i class="pe-7s-star red-star"></i>--%>
+<%--                            <i class="pe-7s-star red-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                            <i class="pe-7s-star"></i>--%>
+<%--                        </div>--%>
 
-                    </div>
+<%--                    </div>--%>
 
+<%--                    <p>擅长</p>--%>
+<%--                    <p>唱跳</p>--%>
                     <div class="product-details-cati-tag mt-35">
                         <ul>
                             <li class="categories-title">服务类型 :</li>
@@ -172,9 +174,14 @@
                             <c:if test="${requestScope.staff.tblsfcoll!=null}">
                                 <button type="button" class="layui-btn layui-btn-warm" onclick="proDelcollections(${requestScope.staff.tblsfcoll.scoid})">取消收藏</button>
                             </c:if>
+
                         </div>
                     </div>
+
                 </div>
+
+
+
             </div>
 
                 <div>
@@ -217,9 +224,9 @@
                 <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                     Description
                 </a>
-                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                    Reviews (0)
-                </a>
+<%--                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">--%>
+<%--                    Reviews (0)--%>
+<%--                </a>--%>
             </div>
             <div class="description-review-text tab-content">
                 <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
@@ -227,14 +234,17 @@
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
                 </div>
-                <div class="tab-pane fade" id="pro-review" role="tabpanel">
-                    <a href="#">Be the first to write your review!</a>
-                </div>
+<%--                <div class="tab-pane fade" id="pro-review" role="tabpanel">--%>
+<%--&lt;%&ndash;                    <a href="#">Be the first to write your review!</a>&ndash;%&gt;--%>
+<%--                </div>--%>
             </div>
         </div>
     </div>
 </div>
+
     <jsp:include page="bottom.jsp" flush="true"/>
+
+
     <!-- modernizr js -->
     <script src="<%=path%>page/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jquery-3.4.1 version -->
@@ -287,15 +297,18 @@
 <script>
     $(document).ready(function(){
         $("#sid").ready(function(){
-            theSity();
+            querySity();
         })
     })
-    function theSity(){
+    /**
+     * 获得地址
+     */
+    function querySity(){
         layui.use('layer', function () {
             $.ajax({
                 async: true,
                 type: "post", //提交方式
-                url: "../admin/querySite.action",
+                url: "<%=path%>admin/querySite.action",
                 success: function (jso) {//执行结果
                     var ht="";
                     if(jso.defaulAddress!=null){
@@ -311,6 +324,7 @@
             })
         })
     }
+
     function mapre(){
 
         $.ajax({
@@ -364,7 +378,37 @@
             }
         })
     }
+    //启动
     mapre();
+
+    //保存
+    function queryEva() {
+        var sfid=$("#sfid");
+        $.ajax({
+            async: true,
+            type: "post", //提交方式
+            url: "<%=path%>admin/queryEva.action",
+            data:{
+                "sfid":sfid.val(),
+            },
+            success: function (jso) {//执行结果
+                var htm="";
+                if(jso.length>0){
+                    $.each(jso,function(k,v){
+                        htm+="<h4>匿名用户"+(k+1) +"</h4>";
+                        htm+="<p>评价："+v.econtext+"</p>";
+                        htm+="<span>所选服务："+v.cosname+"评价时间："+v.etime+"</span>";
+                    });
+                }else{
+                    htm+="<p>暂无评价</p>";
+                }
+                $("#pro-dec").html(htm);
+            }
+        })
+    }
+// $("#queryEva").ready(function () {
+    window.onload=queryEva();
+// })
 </script>
 <script>
 <%--聊天--%>

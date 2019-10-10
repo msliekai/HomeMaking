@@ -12,4 +12,13 @@ public class Tblfoot {
     private Company company;
     private TblUser tblUser;
     private Staff staff;
+
+    public Tblfoot() {
+    }
+
+    public Tblfoot(Integer userid, Integer sfid, String foottime) {
+        this.userid = userid;
+        this.sfid = sfid;
+        this.foottime = foottime;
+    }
 }

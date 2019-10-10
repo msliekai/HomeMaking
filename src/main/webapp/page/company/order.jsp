@@ -66,7 +66,7 @@
 
 <script id="barDemo" type="text/html">
     {{#  if(d.tbloderstate.osname =="待处理"){}}
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">沟通</a>
+    <a class="layui-btn layui-btn-xs " lay-event="chat">沟通</a>
     <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
 
     {{# } if(d.tbloderstate.osname =="已处理"){}}
@@ -252,9 +252,8 @@
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="chat"){
-
-                alert(data.userid);
-                 layim.chat({id: data.userid, name: data.userid, type: "friend"});
+                alert(data.tblUser.userphone);
+                 layim.chat({id: data.userid, name: data.tblUser.username, type: "friend"});
             }
         });
 
@@ -288,6 +287,7 @@
 <%--聊天--%>
     var userid = "${company.fphone}";
     var uname =  "${company.fname}";
+    var avatar = "1";
     var system ={};
     var p = navigator.platform;
     system.win = p.indexOf("Win") == 0;
@@ -347,6 +347,11 @@
         var $ = layui.jquery;
         window.layim = layim;
         layim.config({
+            mine: {
+                "username":uname  //我的昵称
+                ,"id": userid //我的ID
+                // ,"avatar": avatar //我的头像
+            },
             brief: true //是否简约模式（如果true则不显示主面板）
         });
         layim.on('sendMessage', function(data){
@@ -357,41 +362,26 @@
                 // layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
             }
             console.log(data.mine.content);
-            socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname);
+            socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname+"-f,t-"+avatar);
         });
-        //面板外的操作
-        var $ = layui.jquery, active = {
-            chat: function(data){
-                alert(data);
-                var id =data;
-                //自定义会话
-                layim.chat({
-                    name: id
-                    ,type: 'friend'
-                    // ,avatar: '//tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
-                    ,id: id
-                });
-            }
-        };
-        $('.site-demo-layim').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this, $(this).data('toggle')) : '';
-        });
+        // //面板外的操作
+        // var $ = layui.jquery, active = {
+        //     chat: function(data){
+        //         alert(data);
+        //         var id =data;
+        //         //自定义会话
+        //         layim.chat({
+        //             name: id
+        //             ,type: 'friend'
+        //             // ,avatar: '//tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
+        //             ,id: id
+        //         });
+        //     }
+        // };
+        // $('.site-demo-layim').on('click', function(){
+        //     var type = $(this).data('type');
+        //     active[type] ? active[type].call(this, $(this).data('toggle')) : '';
+        // });
     });
-</script>
-
-<script id="barDemo" type="text/html">
-    {{#  if(d.tbloderstate.osname =="待处理"){}}
-    <a class="layui-btn layui-btn-xs" lay-event="chat">沟通</a>
-    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
-
-    {{# } if(d.tbloderstate.osname =="已处理"){}}
-    <a class="layui-btn layui-btn-xs " lay-event="useEna">回访</a>
-    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
-    {{# } if(d.tbloderstate.osname =="已评价"){}}
-    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
-    {{# } if(d.tbloderstate.osname =="已取消"){}}
-    <a class="layui-btn layui-btn-xs" lay-event="useDis">详情</a>
-    {{#  } }}
 </script>
 </html>

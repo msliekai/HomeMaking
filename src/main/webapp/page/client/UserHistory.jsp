@@ -102,8 +102,8 @@
 <script id="barDemo" type="text/html">
     <%--<a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
     <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd" onclick="xadmin.open('申请售后','<%=path%>page/client/branch/AfterSale.jsp',600,400)">申请售后</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>
+    <a class="layui-btn layui-btn-normal" lay-event="useCK">申请售后</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel"><i class="layui-icon layui-icon-delete"></i>删除</a>
 </script>
 
 <script>
@@ -130,15 +130,27 @@
             }
             , cols: [[ //表头
                 {field: 'onumber', title: '订单号', minWidth: 100}
+                , {field: 'sfname', title: '服务人员', minWidth: 80,templet:function (d) {return d.staff.sfname}}
                 , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.tblCOS.cosname}}
                 , {field: 'ctname', title: '服务类别', minWidth: 80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
-                , {field: 'hzname', title: '服务频次', minWidth: 80,templet:function (d) {return d.tblHZ.hzname}}
                 , {field: 'otitle', title: '标题', minWidth:80}
                 , {field: 'ocontext', title: '描述', minWidth: 150}
                 , {field: 'ophone', title: '联系方式', minWidth: 110}
                 , {field: 'site', title: '联系地址', minWidth: 180,templet:function (d) {return d.tblSite.site}}
-                , {field: 'money', title: '消费金额', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 150}
+                , {field: 'money', title: '消费金额', minWidth: 80,templet:function (d) {return d.staff.sfcos}}
+                ,, {fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                        var tem = [];
+                        console.log(item)
+                        if (item.osid == "5"||item.osid=="2") {
+                            tem.push('<a class="layui-btn layui-btn-normal" lay-event="useSQ">申请售后</a>');
+                        }
+                        if(item.osid == "9"||item.osid=="10"||item.osid=="11"){
+                            tem.push('<a class="layui-btn layui-btn-primary" lay-event="useCK">查看详情</a>');
+                        }
+                        tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        return tem.join(' <font></font> ')
+                    }}
+                /*{field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}*/
             ]]
         });
         //触发查询按钮
@@ -171,52 +183,66 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.uid, function (index) {
-                    fal("<%=path%>userManagement/useDel.action",data.uid);
+                layer.confirm('确定删除？订单号:'+data.onumber, function (index) {
+                    fal("<%=path%>admin/useDel.action",data.onumber);
                     layer.close(index);
                 });
-            } else if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
+            } else if (obj.event === 'useSQ') {
+                layer.open({
+                    type:2,
+                    title: "申请售后",
+                    area: ['400px', '400px'],
+                    content: "<%=path%>page/client/branch/AddAfter.jsp"+
+                        "?sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&cosname="+encodeURIComponent(data.tblCOS.cosname)+
+                        "&ctname="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
+                        "&onumber="+encodeURIComponent(data.onumber)
+                    +"&oid="+encodeURIComponent(data.oid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
-            } else if(obj.event==="useResetPwd"){
-                layer.confirm('确定重置？', function (index) {
-                    fal("<%=path%>userManagement/useResetPwd.action",data.uid);
-                    layer.close(index);
+            }else if (obj.event === 'useCK') {
+                layer.open({
+                    type:2,
+                    title: "申请售后",
+                    area: ['400px', '400px'],
+                    content: "<%=path%>page/client/branch/AfterSale.jsp"+
+                        "?sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&cosname="+encodeURIComponent(data.tblCOS.cosname)+
+                        "&ctname="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
+                        "&onumber="+encodeURIComponent(data.onumber)
+                        +"&oid="+encodeURIComponent(data.oid)+
+                        "&aftercontext="+encodeURIComponent(data.aftercontext)+
+                        "&afterstaff="+encodeURIComponent(data.afterstaff)+
+                        "&afterresult="+encodeURIComponent(data.afterresult)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });
 
-        function fal(url,uid) {
+        function fal(url,onumber) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"onumber":onumber},
                 success: function (dat) {
                     if(dat==1){
-                        layer.msg("修改成功");
+                        layer.msg("操作成功");
                     }else{
-                        layer.msg("修改失败");
+                        layer.msg("操作失败");
                     }
                     //执行重载
                     table.reload('testReload', {
-                        where: {
+                        /*where: {
                             uname: uname.value,
                             cong:cong.value,
                             dao:dao.value,
-                        }
+                        }*/
                     }, 'data');
                 },
                 error: function (dat) {
-                    layer.msg('裂开');
+                    layer.msg('未知错误');
                 }
             })
 

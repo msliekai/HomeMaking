@@ -341,7 +341,7 @@
     }
 
 
-    $(document).ready(function ({}) {
+    $(document).ready(function () {
         $.ajax({
             async: true,
             url: "<%=path%>admin/thwWelcome.action",
