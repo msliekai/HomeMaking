@@ -9,7 +9,7 @@
     </select>
     <!--公司账号验证-->
     <select id="checkfacc" resultType="com.hm.entity.Company">
-        select * from tblfirm where facc=#{facc}
+        select * from tblfibrm where facc=#{facc}
     </select>
     <!--公司注册-->
     <insert id="addCompany" parameterType="com.hm.entity.Company">

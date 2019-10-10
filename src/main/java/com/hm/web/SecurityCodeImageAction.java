@@ -5,12 +5,16 @@ package com.hm.web;
  * @date 2019-08-30 15:55
  */
 
+import com.hm.biz.UserBiz;
 import com.hm.tools.CreateSecurityCodeANDImage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +29,8 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping("/serial")
 public class SecurityCodeImageAction {
+    @Resource
+    private UserBiz biz;
 
     @RequestMapping(value = "getimage.action")
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
@@ -59,6 +65,21 @@ public class SecurityCodeImageAction {
                 }
             }
         }
+    }
+
+    @RequestMapping(value = "/sendSms.action")
+    public @ResponseBody
+    String sendSms(HttpServletRequest request, HttpSession session, String userphone) {
+
+        String flog="";
+        Integer count=biz.queryphone(userphone);
+        if(count<=0){
+
+        }else{
+            flog="phoneerr";
+        }
+
+        return flog;
     }
 
 }

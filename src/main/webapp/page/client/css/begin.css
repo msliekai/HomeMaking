@@ -1,0 +1,83 @@
+h1{
+    font-size: 30px;
+    text-align: center;
+    color: #666666;
+}
+
+<!-- 设置表格外边框 -->
+table.responsive{
+    width: 98%;
+    margin: 0 auto;
+    border: 1px solid #666666;/*设置表格单元格边框合并在一起*/
+    border-collapse: collapse;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+}
+<!-- 设置表格单元格边框 -->
+table.responsive th,table.responsive td{
+    border: 1px solid #666666;
+    padding: .5em 1em;
+}
+<!-- 设置表头颜色 -->
+table.responsive th{
+    background: #35B558;
+}
+<!-- 设置超链接格式 -->
+table.responsive .actions a{
+    color: #ff5c00;<!-- 设置超链接字体没有下划线 -->
+    text-decoration: none;
+    padding: 0 4px;
+}
+table.responsive .number,table.responsive .actions{
+    text-align: center;
+}
+
+<!-- 捕捉浏览器宽度最大为480px时触发以下css样式 -->
+@media (max-width: 480px) {
+    　　<!-- 清除其它宽度下所设置的表格样式 -->
+    table.responsive{
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border: none;
+    }
+    　　<!-- 隐藏表头（这里的隐藏与visiblity隐藏不同，这里的隐藏将不会为隐藏部分留下空白位置，而visiblity会为隐藏部分留下空白位置） -->
+    table.responsive thead{
+        display: none;
+    }
+    　　<!-- 将所有表格变成块级元素，以使表格独行显示 -->
+    table.responsive td{
+        display: block;
+        border: none;
+    }
+    　　<!-- 设置第一例左对齐并添加颜色 -->
+    table.responsive .number{
+        text-align: left;
+        background: #35B558;
+    }
+    　　<!-- 在第一例文字前面添加文字 -->
+    table.responsive .number:before{
+        content: '课程序号';<!-- 在此处设置padding是避免设置number为相对路径 -->
+        padding-right: 20px;
+        font-weight: bold;
+    }
+    table.responsive .name:before{
+        content: '课程名称';
+        padding-right: 20px;
+        font-weight: bold;
+    }
+    　　 <!-- 设置相对路径，以便子元素使用绝对路径 -->
+    table.responsive tr{
+        position: relative;
+    }
+    　　<!-- 通过绝对路径设置修改删除在第一行：
+           　　　　　　因number的position值为static，所以number会在tr容器的第一行，
+           　　　　　　这里修改删除通过绝对路径，设置距tr容器上面0px，则修改删除也会出现在tr容器第一行，这里一定要设置tr位置为相对路径 -->
+    table.responsive .actions{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+}

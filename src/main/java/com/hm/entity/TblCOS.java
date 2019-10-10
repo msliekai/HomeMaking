@@ -9,7 +9,7 @@ public class TblCOS {
 
     private Integer cosid;
     private String cosname;
-    private String cosdeta;
+    private String coscontext;
     private String costime;
     private Integer ctid;
     private String coshot;
@@ -18,6 +18,7 @@ public class TblCOS {
     private String ctname;
     private Integer page;
     private Integer limit;
+
 
 
 }

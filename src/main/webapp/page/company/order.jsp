@@ -67,7 +67,6 @@
 <script>
     layui.use('table', function() {
         var table = layui.table;
-
         table.render({
             elem: '#utable'
             // , height: 500
@@ -77,6 +76,9 @@
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
+
+                console.log("返回数据");
+                console.log(res.data);
                 return {
                     "code": eval(res.code), //解析接口状态
                     // "msg": res.msg, //解析提示文本
@@ -155,7 +157,6 @@
                  layim.chat({id: data.userid, name: data.userid, type: "friend"});
             }
         });
-
         function fal(url,uid) {
             $.ajax({
                 async: true,
@@ -184,7 +185,8 @@
         }
     });
 <%--聊天--%>
-    var userid = "${company.facc}";
+    var userid = "${company.fphone}";
+    var uname =  "${company.fname}";
     var system ={};
     var p = navigator.platform;
     system.win = p.indexOf("Win") == 0;
@@ -198,7 +200,7 @@
     var im = {
         init: function () {
             if ('WebSocket' in window) {
-                var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${company.facc}';
+                var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${company.fphone}';
                 socket = new WebSocket(socketUrl);
                 im.startListener();
             } else {
@@ -254,7 +256,7 @@
                 // layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
             }
             console.log(data.mine.content);
-            socket.send(To.id+"-f,t-"+data.mine.content);
+            socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname);
         });
         //面板外的操作
         var $ = layui.jquery, active = {

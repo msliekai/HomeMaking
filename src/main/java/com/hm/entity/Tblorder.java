@@ -33,6 +33,7 @@ public class Tblorder {
     private Tbloderstate tbloderstate;
     private TblHZ tblHZ;
     private TblSite tblSite;
+    private String money;//总金额
     private Integer page;
     private Integer limit;
 

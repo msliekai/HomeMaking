@@ -73,9 +73,17 @@ public class MyWebSocket {
         Message message1 = new Message();
         //接收者名称
         String toName = messages[0].trim();
-        message1.setId(toName);
+        //message1.setId(toName);
         //发送给接收者的信息
         String toMessage = 1 >= messages.length ? "" : messages[1];
+        //发送者名称与id
+        String fromId = messages[2].trim();
+        message1.setFromid(fromId);
+        message1.setId(fromId);
+        String fromName = messages[3].trim();
+        message1.setUsername(fromName);
+        String avatar =  messages[4].trim();
+        message1.setAvatar(avatar);
         //用户判断接收者是否存在
         boolean flag = false;
         message1.setContent(toMessage);
@@ -100,18 +108,6 @@ public class MyWebSocket {
             //session.getBasicRemote().sendText(toName + "用户不在线！"); //回复用户
             session.getBasicRemote().sendText("1"); //回复用户
         }
-//        //这里注释掉的内容是群发消息
-//        for(Map<String, MyWebSocket> item: mapSocket){
-//            try {
-//              for (String key : item.keySet()) {
-//                  MyWebSocket myWebSocket = item.get(key);
-//                  myWebSocket.sendMessage(key, toMessage);
-//              }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                continue;
-//            }
-//        }
     }
 
     /**

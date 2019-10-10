@@ -17,7 +17,7 @@ public class TblUser {
     //用户性别
     private String usersex;
     // 用户手机
-    private Long userphone;
+    private String userphone;
     //注册时间
     private String usertime;
     // 用户余额
@@ -25,21 +25,24 @@ public class TblUser {
     // 用户积分
     private Integer usercon;
     //状态
-    private String stid;
+    private Integer stid;
     // 头像url
     private String userurl;
     // 银行卡号码
-    private Integer usercard;
+    private String usercard;
     // 角色id
     private Integer rid;
+    //地址类
+    private TblSite tblSite;
+    private Integer sid;
+
+
     //状态名
     private String stname;
     //页码
     private Integer page;
     //条数
     private Integer limit;
-    //地址
-    private TblSite tblSite;
 
     public TblUser() {
     }
@@ -76,11 +79,11 @@ public class TblUser {
         this.usersex = usersex;
     }
 
-    public Long getUserphone() {
+    public String getUserphone() {
         return userphone;
     }
 
-    public void setUserphone(Long userphone) {
+    public void setUserphone(String userphone) {
         this.userphone = userphone;
     }
 
@@ -108,14 +111,6 @@ public class TblUser {
         this.usercon = usercon;
     }
 
-    public String getStid() {
-        return stid;
-    }
-
-    public void setStid(String stid) {
-        this.stid = stid;
-    }
-
     public String getUserurl() {
         return userurl;
     }
@@ -124,13 +119,6 @@ public class TblUser {
         this.userurl = userurl;
     }
 
-    public Integer getUsercard() {
-        return usercard;
-    }
-
-    public void setUsercard(Integer usercard) {
-        this.usercard = usercard;
-    }
 
     public Integer getRid() {
         return rid;
@@ -138,6 +126,32 @@ public class TblUser {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+
+    public Integer getStid() {
+        return stid;
+    }
+
+    public void setStid(Integer stid) {
+        this.stid = stid;
+    }
+
+    public String getUsercard() {
+        return usercard;
+    }
+
+    public void setUsercard(String usercard) {
+        this.usercard = usercard;
+    }
+
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
     public String getStname() {

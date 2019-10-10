@@ -19,6 +19,11 @@ public class TblSite {
     private String sb;
     //区
     private String sc;
+    //电话
+    private String sphone;
+
+    //省市区拼接
+    private String site;
 
     public TblSite() {
     }
@@ -69,5 +74,21 @@ public class TblSite {
 
     public void setSc(String sc) {
         this.sc = sc;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getSphone() {
+        return sphone;
+    }
+
+    public void setSphone(String sphone) {
+        this.sphone = sphone;
     }
 }

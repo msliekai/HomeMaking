@@ -1,6 +1,7 @@
 package com.hm.biz;
 
 import com.hm.entity.TblUser;
+import com.hm.entity.Tblmenu;
 import com.hm.entity.Tblrole;
 import com.hm.entity.*;
 import com.hm.mapper.MangerMapper;
@@ -13,7 +14,6 @@ import java.util.List;
 public class MangerBizImpl implements MangerBiz {
     @Resource
     private MangerMapper mangerMapper;
-
 
     @Override
     public TblUser cUserLogin(TblUser tblUser) {

@@ -11,4 +11,5 @@ public interface MenuBiz {
     public  Object getPower(Integer rid);
 
     public boolean changePower(List<Tblpower> list,Integer rid);
+
 }

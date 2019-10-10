@@ -1,13 +1,14 @@
 package com.hm.entity;
 
 public class Message {
-    private String username = "cckk";
-    private String id = "cckk";
+    private String username;
+    private String id;
     private String type = "friend";
     private String content;
     private boolean mine=false ;
     private String fromid; //消息的发送者id（比如群组中的某个消息发送者），可用于自动解决浏览器多窗口时的一些问题
     private String timestamp ; //服务端时间戳毫秒数。注意：如果你返回的是标准的 unix 时间戳，记得要 *1000
+    private String avatar;
 
     public String getUsername() {
         return username;
@@ -63,5 +64,17 @@ public class Message {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public boolean isMine() {
+        return mine;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
