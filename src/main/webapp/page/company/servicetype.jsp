@@ -98,13 +98,6 @@
     </div>
 </div>
 
-<%--<script id="barDemo" type="text/html">--%>
-<%--    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
-<%--    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
-<%--    <a class="layui-btn layui-btn-normal" lay-event="useResetPwd">重置密码</a>--%>
-<%--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="useDel">删除</a>--%>
-<%--</script>--%>
-
 <script>
     layui.use('table', function() {
         var table = layui.table;
@@ -118,7 +111,7 @@
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
-
+                console.log(res);
                 return {
                     "code": eval(res.code), //解析接口状态
                     // "msg": res.msg, //解析提示文本

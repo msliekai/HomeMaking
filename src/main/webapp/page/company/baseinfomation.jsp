@@ -167,6 +167,7 @@
             function (data) {
                 if(data=="1"){
                     alert("修改成功");
+                    location.reload(true);
                 }else {
                     alert("修改失败");
                 }

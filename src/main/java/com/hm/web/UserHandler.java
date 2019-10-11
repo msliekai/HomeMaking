@@ -285,7 +285,7 @@ public class UserHandler {
 
         Staff staff = biz.queryOneStaff(sfid, use.getUserid());
 
-        biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDateMin()));//添加足迹
+        biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDate()));//添加足迹
 
         request.setAttribute("staff", staff);
 

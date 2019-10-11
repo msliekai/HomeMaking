@@ -2,6 +2,8 @@ package com.hm.biz;
 
 import com.hm.entity.*;
 import com.hm.mapper.CompanyMapper;
+import org.apache.ibatis.annotations.Param;
+//import org.bouncycastle.util.Integers;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -88,6 +90,47 @@ public class CompanyBizImpl implements CompanyBiz {
     public List<Tbltritem> train(Integer page, Integer limit) {
         return companyMapper.train(page,limit);
     }
+
+    @Override
+    public Tblfirmacc queryfacard(Integer fid) {
+        return companyMapper.queryfacard(fid);
+    }
+
+    @Override
+    public Staff queryscard(String scard) {
+        return companyMapper.queryscard(scard);
+    }
+
+    //入驻
+    @Override
+    public Integer infirm(String fname, String facc) {
+
+        return companyMapper.infirm(fname,facc);
+    }
+
+    //修改密码
+    @Override
+    public Integer changepwd(String fpwd, String facc) {
+        return companyMapper.changepwd(fpwd,facc);
+    }
+
+    //忘记密码
+    @Override
+    public Company forgotpwd(String facc) {
+        return companyMapper.forgotpwd(facc);
+    }
+
+    @Override
+    public Integer countcomment(Integer fid, Integer page, Integer limit,String date1,String date2) {
+        return companyMapper.countcomment(fid,page,limit,date1,date2);
+    }
+
+    //评价
+    @Override
+    public List<Tbleva> querycomment(Integer fid,Integer page,Integer limit,String date1,String date2) {
+        return companyMapper.querycomment(fid,page,limit,date1,date2);
+    }
+
     //    培训表总数
     @Override
     public Integer traincount() {
@@ -123,10 +166,86 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.checkcompwd(facard,compwd);
     }
 
+    @Override
+    public Integer countserve(Integer fid, Integer page, Integer limit) {
+        return companyMapper.countserve(fid,page,limit);
+    }
+
     //具体服务
     @Override
-    public List<TblCOS> service(Integer fid, Integer page, Integer limit) {
-        return null;
+    public List<Tblfc> queryserve(Integer fid, Integer page, Integer limit) {
+        return companyMapper.queryserve(fid,page,limit);
+    }
+
+    //员工新增
+    @Override
+    public Staff addStaff(Staff staff) {
+        Staff obj=staff;
+        companyMapper.addStaff(obj);
+        return obj;
+    }
+    //    抢单
+    @Override
+    public List<Tblorder> takeOrders(Integer osid,Integer page,Integer limit) {
+        return companyMapper.takeorders(osid,page,limit);
+    }
+    //--------查找用户
+    @Override
+    public TblUser findUser(Integer userid) {
+        return companyMapper.findUser(userid);
+    }
+    //--------查找用户
+    @Override
+    public List<Staff> findStaff(Integer fid) {
+        return companyMapper.findStaff(fid);
+    }
+    //----------抢单更新
+    @Override
+    public Integer addOrder(Tblorder tblorder) {
+
+
+        return companyMapper.addOrder(tblorder);
+    }
+    //---员工修改
+    @Override
+    public Integer staffFix(Staff staff) {
+        return companyMapper.staffFix(staff);
+    }
+    //---培训内容
+    @Override
+    public Tbltrain trainMsg(Integer trid) {
+        return companyMapper.trainMsg(trid);
+    }
+    //---员工评价
+    @Override
+    public List<Tbleva> findStaffEva(Integer sfid) {
+
+        return companyMapper.findStaffEva(sfid);
+    }
+    //----分配服务类型
+    @Override
+    public List<Tblfc> findCosStyle(Integer fid) {
+        return companyMapper.findCosStyle(fid);
+    }
+    //----分配服务
+    @Override
+    public List<TblCOS> findCos(Integer ctid) {
+        return companyMapper.findCos(ctid);
+    }
+    //---员工修改服务
+    @Override
+    public Integer fenPeiCos(Integer cosid,Integer sfid) {
+        return companyMapper.fenPeiCos(cosid,sfid);
+    }
+    //-----售后接受
+    @Override
+    public Integer after(Tblorder tblorder) {
+        return companyMapper.after(tblorder);
+    }
+    //-----拒绝售后
+    @Override
+    public Integer afterResult(Tblorder tblorder) {
+        return companyMapper.afterResult(tblorder);
     }
 
     //某个公司提供的服务数量
@@ -135,9 +254,14 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.countservicetype(fid,page,limit);
     }
 
+    @Override
+    public Company upcominfo(Integer fid) {
+        return companyMapper.upcominfo(fid);
+    }
+
     //某个公司提供的服务
     @Override
-    public List<TblCOStype> servicetype(Integer fid,Integer page,Integer limit) {
+    public List<Tblfc> servicetype(Integer fid,Integer page,Integer limit) {
         return companyMapper.servicetype(fid,page,limit);
     }
 

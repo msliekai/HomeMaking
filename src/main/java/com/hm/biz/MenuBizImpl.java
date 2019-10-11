@@ -16,7 +16,6 @@ public class MenuBizImpl implements MenuBiz {
     @Resource
     private MenuMapper menuMapper;
 
-
     @Override
     public boolean changePower(List<Tblpower> list, Integer rid) {
         boolean flag = false;
@@ -81,7 +80,7 @@ public class MenuBizImpl implements MenuBiz {
 
         return childList;
     }
-
+//权限管理
     @Override
     public  Object getPower(Integer rid){
         List<Tblmenu> list = menuMapper.getPower(rid);

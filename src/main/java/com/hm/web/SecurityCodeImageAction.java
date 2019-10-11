@@ -76,14 +76,16 @@ public class SecurityCodeImageAction {
     String sendSms(HttpServletRequest request, HttpSession session, String userphone) {
 
         String flog="";
-        Integer count=biz.queryphone(userphone);
-        if(count!=null||count>0){
+//        Integer count=biz.queryphone(userphone);
+//        if(count!=null){
             String code= ShortMessageUtil.vcode();
             session.setAttribute(userphone+"_code_req",code);
+
             flog=ShortMessageUtil.getVerificationCode(userphone,code);
-        }else{
-            flog="phoneerr";
-        }
+
+//        }else{
+//            flog="phoneerr";
+//        }
         return flog;
     }
 

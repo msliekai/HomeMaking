@@ -24,9 +24,7 @@ public class ShortMessageUtil {
         /**
          * 进行正则关系校验
          */
-        System.out.println(mobile);
         if (mobile == null || mobile == "") {
-            System.out.println("手机号为空");
             return "userPhoneIsNull";
         }
 
@@ -43,11 +41,9 @@ public class ShortMessageUtil {
         final String accessKeyId = ShortMessage.accessKeyId;// 你的accessKeyId,参考本文档步骤2
         final String accessKeySecret = ShortMessage.accessKeySecret;// 你的accessKeySecret，参考本文档步骤2
         // 初始化ascClient,暂时不支持多region
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
-                accessKeyId, accessKeySecret);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try {
-            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product,
-                    domain);
+            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         } catch (ClientException e1) {
             e1.printStackTrace();
         }
@@ -96,16 +92,7 @@ public class ShortMessageUtil {
 
         String templateParam = "{\"code\":"+code+"}";
         String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
-        if (result.equals("OK")){
-            // 请求成功
-            System.out.println("获取验证码成功！！！");
-//            return "OK";
-        }else{
-            //
-            System.out.println("获取验证码失败"+result);
-//            throw new ThirdPartException(result);
-//            return "ERR";
-        }
+
         return result;
     }
 
@@ -118,7 +105,6 @@ public class ShortMessageUtil {
         for (int i = 0; i < 6; i++) {
             vcode = vcode + (int)(Math.random() * 9);
         }
-        System.out.println("手机短信验证码为:"+vcode);
         return vcode;
     }
 

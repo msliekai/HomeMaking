@@ -19,14 +19,15 @@ public class Staff {
     private String sfgood;//擅长
     private String sfedu;//学历
     private String sfurl;
+    private String scard;
+    private Company company;//所属公司类
+    private Tblstate tblstate; //状态
     private String sftag;//阿姨类型
 
     private Integer page;
     private Integer limit=6;
 
     private Integer userid;
-    private Company company;//所属公司类
-    private Tblstate tblstate;//状态
     private TblCOS tblCOS;//服务
     private TblCOStype tblCOStype;
     private Tblsfcoll tblsfcoll;
@@ -34,5 +35,17 @@ public class Staff {
 
     public Staff() {
 
+    }
+
+    public Staff(Integer sfid, String sfname, String sfdob, String sfcos, String sfworkexp, String sfwant, String sfgood, String sfedu, String sftag) {
+        this.sfid = sfid;
+        this.sfname = sfname;
+        this.sfdob = sfdob;
+        this.sfcos = sfcos;
+        this.sfworkexp = sfworkexp;
+        this.sfwant = sfwant;
+        this.sfgood = sfgood;
+        this.sfedu = sfedu;
+        this.sftag = sftag;
     }
 }

@@ -17,7 +17,7 @@ public class SystemLogAspect {
 
 //    private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);
 
-    @Pointcut("execution(* com.hm.web..*.*(..))  ")
+    //@Pointcut("execution(* com.hm.web..*.*(..))  ")
     public void logPoint() {
     }
 
@@ -34,7 +34,7 @@ public class SystemLogAspect {
 //        }
 //    }
 
-    @After("logPoint()")
+    //@After("logPoint()")
     public void after(JoinPoint joinPoint) throws ClassNotFoundException {
         System.out.println("日志--------------");
 //        HttpServletRequest request=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -79,7 +79,7 @@ public class SystemLogAspect {
 ////        }
 //    }
 
-    @AfterThrowing(pointcut = "logPoint()", throwing="e")
+    //@AfterThrowing(pointcut = "logPoint()", throwing="e")
     public void  throwing(JoinPoint joinPoint, Throwable e){
         System.out.println("异常处理======");
         System.out.println(e.getClass().getName());

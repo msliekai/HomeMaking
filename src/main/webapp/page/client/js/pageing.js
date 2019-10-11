@@ -58,7 +58,7 @@ function getPageOfMemo(page) {
                         htm += "</div>";
                         htm += " </div>";
                         htm += "<div class='product-content'>";
-                        htm += "<h4><a href='#'> "+item.sfname+" </a></h4>";
+                        htm += "<h4><a href='../../admin/product-details.action?sfid="+item.sfid+"'> "+item.sfname+" </a></h4>";
                         htm += "<span>￥"+item.sfcos+"/天（次）</span>" +
                             "<p>服务经验："+item.sfexp+"年/擅长："+item.sfgood+"/公司："+item.company.fname+"</p>";
                         htm += "</div>";

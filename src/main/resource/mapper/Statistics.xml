@@ -49,20 +49,20 @@ then 1 else 0 end) AS six from tblfirm
 </select>
 <!--    订单统计-->
     <select id="getOrder" resultType="java.util.LinkedHashMap">
-select sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 6 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS first,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS second,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS third,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS fourth,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS fifth,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS six ,
-sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 DAY),'%Y-%m-%d')
-then 1 else 0 end) AS seven
+select  COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 6 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS first,
+COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 5 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS second,
+        COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 4 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS third,
+        COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 3 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS fourth,
+        COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 2 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS fifth,
+        COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 1 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS six ,
+        COALESCE(sum(case  when DATE_FORMAT(o.svtime,'%Y-%m-%d')=DATE_FORMAT(DATE_SUB(#{date}, INTERVAL 0 DAY),'%Y-%m-%d')
+then 1 else 0 end),0) AS seven
 from (SELECT svtime from (select * from tblorder where osid = 2 or osid =5) o,tblstaff s WHERE o.sfid = s.sfid
 <if test="fid!=0">
     AND s.fid = #{fid}

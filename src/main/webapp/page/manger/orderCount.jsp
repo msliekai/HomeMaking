@@ -68,25 +68,28 @@
     $(document).ready(function(){
         getHalfYear(new Date(),0);
         $('#changedate').val(new Date());
-        $.post("<%=path%>manager/getOrderCount.action",
+        $.post("<%=path%>manager/getCompany.action",
             function (data) {
             // 获取公司列表
-                // var x = "";
-                // var trs = "<option value='0'> 请选择公司</option>";
-                // if (null != data) {
-                //     $("#dselect").empty();
-                //     $.each(JSON.parse(data), function(i, value) {
-                //         trs += "<option value='"+value.bid+"'>"
-                //             + value.bname + "</option>";
-                //         x += trs;
-                //     });
-                // }
-                // $("#selectCompany").html(trs);
+                var x = "";
+                var trs = "<option value='0'> 请选择公司</option>";
+                if (null != data) {
+                    $("#selectCompany").empty();
+                    $.each(data, function(i, value) {
+                        trs += "<option value='"+value.fid+"'>"
+                            + value.fname + "</option>";
+                        x += trs;
+                    });
+                }
+                $("#selectCompany").html(trs);
         });
     });
 
     //近半年
     function getHalfYear(date,fid){
+        if (date.length==0){
+            date = new Date();
+        }
         var date1 = format(date,'yyyy-MM-dd');
         var date2 = getNextDate(date1,-1);
         var date3 = getNextDate(date2,-1);
@@ -190,7 +193,7 @@
         getHalfYear($('#changedate').val(),$('#selectCompany').val());
     })
     $('#reset').click(function () {
-        $('#changedate').val(null);
+        $('#changedate').val(new Date());
         $('#selectCompany').val(0);
         getHalfYear(new Date(),0);
     })

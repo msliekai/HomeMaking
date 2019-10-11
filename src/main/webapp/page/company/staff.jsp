@@ -9,6 +9,7 @@
 <%
     String path = request.getContextPath() + "/";
 %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>用户管控</title>
@@ -56,7 +57,7 @@
     </div>
 </div>
 <div id="addstaff" style="display: none">
-    <form class="layui-form" action="<%=path%>rrr/addStaff.action" method="post" lay-filter="example" enctype="multipart/form-data">
+    <form class="layui-form" action="<%=path%>admin/addStaff.action" method="post" lay-filter="example" enctype="multipart/form-data">
         <label class="layui-form-label">员工名称</label>
         <div class="layui-input-inline">
             <input type="text" name="sfname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
@@ -103,6 +104,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+        <label class="layui-form-label">标签/评价</label>
+        <div class="layui-input-inline">
+            <input type="text" name="sftag" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">学历</label>
             <div class="layui-input-inline">
                 <input type="text" name="sfedu" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
@@ -115,7 +122,7 @@
             </div>
         </div>
 <%--        员工所属公司id--%>
-        <input type="text" name="fid" value="" hidden="hidden">
+        <input type="text" name="fid" value="${sessionScope.company.fid}" hidden="hidden">
         <div class="layui-form-item">
             <div class="layui-input-block">
              <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
@@ -126,8 +133,8 @@
 </body>
 
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-xs " lay-event="usedeal">详情</a>
-    <a class="layui-btn layui-btn-xs " lay-event="usefix">修改</a>
+    <a class="layui-btn layui-btn-xs " lay-event="useDeal">详情</a>
+    <a class="layui-btn layui-btn-xs " lay-event="useFix">修改</a>
     <a class="layui-btn layui-btn-xs " lay-event="useDel">删除</a>
 </script>
 
@@ -158,6 +165,10 @@
                 , {field: 'sfdob', title: '出生年月', minWidth: 70}
                 , {field: 'sfedu', title: '学历', minWidth:70}
                 , {field: 'sfwant', title: '求职意向', minWidth: 70}
+                , {field: 'sfgood', title: '擅长', minWidth: 70,hide:true}
+                , {field: 'sfcos', title: '单次费用', minWidth: 70,hide:true}
+                , {field: 'sfworkexp', title: '工作经历', minWidth: 70,hide:true}
+                , {field: 'sftag', title: '标签/评价', minWidth: 70,hide:true}
                 , {field: 'stname', title: '状态', minWidth: 70,templet:function (d) {
                         return d.tblstate.stname
                     }}
@@ -178,15 +189,41 @@
         //监听行工具事件
         table.on('tool(test)', function(obj) {
             var data = obj.data;
-            if (obj.event === 'useEna') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>userManagement/useEna.action",data.uid);
-                    layer.close(index);
+            if (obj.event === 'useDeal') {
+                layer.open({
+                    type:2,
+                    title: "员工资料",
+                    area: ['500px', '600px'],
+                    content: "staffdetails.jsp"+
+                        "?sfid="+encodeURIComponent(data.sfid)+
+                        "&sfname="+encodeURIComponent(data.sfname)+
+                        "&sfage="+encodeURIComponent(data.sfage)+
+                        "&sfdob="+encodeURIComponent(data.sfdob)+
+                        "&sfcos="+encodeURIComponent(data.sfcos)+
+                        "&sfworkexp="+encodeURIComponent(data.sfworkexp)+
+                        "&sfgood="+encodeURIComponent(data.sfgood)+
+                        "&sftag="+encodeURIComponent(data.sftag)+
+                        "&sfedu="+encodeURIComponent(data.sfedu)+
+                        "&sfwant="+encodeURIComponent(data.sfwant)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.sfid);
-                    layer.close(index);
+            }else if(obj.event==="useFix"){
+                layer.open({
+                    type:2,
+                    title: "修改资料",
+                    area: ['500px', '600px'],
+                    content: "stafffix.jsp"+
+                        "?sfid="+encodeURIComponent(data.sfid)+
+                        "&sfname="+encodeURIComponent(data.sfname)+
+                        "&sfage="+encodeURIComponent(data.sfage)+
+                        "&sfdob="+encodeURIComponent(data.sfdob)+
+                        "&sfcos="+encodeURIComponent(data.sfcos)+
+                        "&sfworkexp="+encodeURIComponent(data.sfworkexp)+
+                        "&sfgood="+encodeURIComponent(data.sfgood)+
+                        "&sftag="+encodeURIComponent(data.sftag)+
+                        "&sfedu="+encodeURIComponent(data.sfedu)+
+                        "&sfwant="+encodeURIComponent(data.sfwant)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useDel"){
                 layer.confirm('确定禁用？员工ID:'+data.sfid, function (index) {

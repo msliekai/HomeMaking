@@ -73,7 +73,7 @@ $("#btn").click(function () {
                     if ("OK" == jso) {
                         layer.msg("验证码发送成功");
                     } else if ("phoneerr" == jso) {
-                        layer.msg("手机号未注册");
+                        layer.msg("手机号未能识别");
                         stopTime();
                     } else {
                         layer.msg("验证码发送失败");
@@ -92,19 +92,6 @@ $("#btn").click(function () {
     })
 })
 
-//电话表单
-function valname() {
-    var userphone = $("#userphone");
-    var uerr = $("#userphoneerr");
-    var az = /^1(3|4|5|7|8)\d{9}$/;
-    if (!az.test(userphone.val())) {
-            uerr.html("电话号码输入不正确");
-        return false;
-    } else {
-            uerr.html("");
-        return true;
-    }
-}
 
 //密码
 function valpass() {

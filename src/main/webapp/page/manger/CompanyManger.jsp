@@ -45,14 +45,16 @@
                 <div class="layui-card-body ">
 <%--                    <form class="layui-form layui-col-space5">--%>
                     <div class="demoTable">
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">--%>
+<%--                        </div>--%>
+<%--                        <div class="layui-inline layui-show-xs-block">--%>
+<%--                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">--%>
+<%--                        </div>--%>
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">
+                            <input type="text"  placeholder="请输入公司名" autocomplete="off" class="layui-input" name="fname" id="fname">
+                            <input type="text"  placeholder="请输入状态名" autocomplete="off" class="layui-input" name="stname" id="stname">
+
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
@@ -61,10 +63,10 @@
 <%--                    </form>--%>
                 </div>
 <%--                <s:property value="list"></s:property>--%>
-                <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
-                </div>
+<%--                <div class="layui-card-header">--%>
+<%--                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
+<%--                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>--%>
+<%--                </div>--%>
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
@@ -78,8 +80,8 @@
 </body>
 
 <script id="barDemo" type="text/html">
-<%--    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
-<%--    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>--%>
+    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>
+    <a class="layui-btn layui-btn-primary " lay-event="useDis">禁用</a>
     <a class="layui-btn layui-btn-normal" lay-event="userContext">查看详情</a>
 </script>
 
@@ -110,27 +112,29 @@
                 , {field: 'fname', title: '公司名', minWidth: 80}
                 , {field: 'flaw', title: '法人代表', minWidth: 80}
                 , {field: 'fsite', title: '公司地址', minWidth:50}
-                , {field: 'fphone', title: '公司电话', minWidth: 80}
+                , {field: 'flawphone', title: '公司电话', minWidth: 80}
                 , {field: 'ctname', title: '服务类别', minWidth: 80}
-                , {field: 'rname', title: '状态', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 120}
+                , {field: 'stname', title: '状态', minWidth: 80}
+                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
         //触发查询按钮
             var $ = layui.$, active = {
                 reload: function(){
-                    var uname = $('#uname');
-                    var cong=$('#cong');
-                    var dao=$('#dao');
+                    var fname = $('#fname');
+                    var stname = $('#stname');
+                    // var cong=$('#cong');
+                    // var dao=$('#dao');
                     //执行重载
                     table.reload('testReload', {
                         page: {
                             curr: 1 //重新从第 1 页开始
                         }
                         ,where: {
-                            uname: uname.val(),
-                            cong:cong.val(),
-                            dao:dao.val(),
+                            fname: fname.val(),
+                            stname: stname.val(),
+                            // cong:cong.val(),
+                            // dao:dao.val(),
                         }
                     }, 'data');
                 }
@@ -143,34 +147,45 @@
         })
 
         //监听行工具事件
-        <%--table.on('tool(test)', function(obj) {--%>
-        <%--    var data = obj.data;--%>
-        <%--    if (obj.event === 'userContext') {--%>
-        <%--        layer.confirm('查看详情', function (index) {--%>
-        <%--            fal("<%=path%>userManagement/useEna.action",data.uid);--%>
-        <%--            layer.close(index);--%>
-        <%--        });--%>
-        <%--    }--%>
-            <%--else if(obj.event==="useDis"){--%>
-            <%--    layer.confirm('确定禁用？', function (index) {--%>
-            <%--        fal("<%=path%>userManagement/useDis.action",data.uid);--%>
-            <%--        layer.close(index);--%>
-            <%--    });--%>
-            <%--} else if(obj.event==="useContext"){--%>
-            <%--    layer.confirm('查看详情？', function (index) {--%>
-            <%--        fal("<%=path%>userManagement/useResetPwd.action",data.uid);--%>
-            <%--        layer.close(index);--%>
-            <%--    });--%>
-            <%--}--%>
-        // });
+        table.on('tool(test)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'useEna') {
+                layer.confirm('确定启用？', function (index) {
+                    fal("<%=path%>manager/updateCompanyState2.action",data.fid);
+                    layer.close(index);
+                });
+            }
+            else if(obj.event==="useDis"){
+                layer.confirm('确定禁用？', function (index) {
+                    fal("<%=path%>manager/updateCompanyState.action",data.fid);
+                    layer.close(index);
+                });
+            } else if(obj.event==="userContext"){
+                layer.open({
+                    type:2,
+                    title: "家政公司详情",
+                    area: ['450px', '430px'],
+                    content: "CMContext.jsp"+
+                        "?fid="+encodeURIComponent(data.fid)+
+                        "&fname="+encodeURIComponent(data.fname)+
+                        "&flaw="+encodeURIComponent(data.flaw)+
+                        "&fsite="+encodeURIComponent(data.fsite)+
+                        "&stname="+encodeURIComponent(data.stname)+
+                        "&ftime="+encodeURIComponent(data.ftime)+
+                        "&flawphone="+encodeURIComponent(data.flawphone)+
+                        "&ctname="+encodeURIComponent(data.ctname)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }
+         });
 
-        function fal(url,uid) {
+        function fal(url,fid) {
             $.ajax({
                 async: true,
                 type: "post",
                 url: url,
                 dataType: "text",
-                data: {"uid":uid},
+                data: {"fid":fid},
                 success: function (dat) {
                     if(dat==1){
                         layer.msg("操作成功");
@@ -180,9 +195,8 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
+                            fname: fname.value,
+
                         }
                     }, 'data');
                 },
