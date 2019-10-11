@@ -56,80 +56,6 @@
         </div>
     </div>
 </div>
-<div id="addstaff" style="display: none">
-    <form class="layui-form" action="<%=path%>admin/addStaff.action" method="post" lay-filter="example" enctype="multipart/form-data">
-        <label class="layui-form-label">员工名称</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sfname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">员工头像</label>
-            <div class="layui-input-inline">
-                <input type="file"     name = "pictureFile" />
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">出生日期</label>
-            <div class="layui-input-inline">
-                <input type="text" name="sfdob" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-                <input type="radio" name="sfage" value="男" title="男" checked="">
-                <input type="radio" name="sfage" value="女" title="女">
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">服务经验</label>
-            <div class="layui-input-block">
-                <textarea placeholder="请输入内容" name="sfexp" class="layui-textarea"></textarea>
-            </div>
-        </div>
-        <label class="layui-form-label">单次费用</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sfcos" lay-verify="required" placeholder="元/次" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">工作经历</label>
-            <div class="layui-input-inline">
-                <input type="text" name="sfworkexp" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">擅长</label>
-            <div class="layui-input-inline">
-                <input type="text" name="sfgood" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-        <label class="layui-form-label">标签/评价</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sftag" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-        </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">学历</label>
-            <div class="layui-input-inline">
-                <input type="text" name="sfedu" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">求职意向</label>
-            <div class="layui-input-inline">
-                <input type="text" name="sfwant" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-<%--        员工所属公司id--%>
-        <input type="text" name="fid" value="${sessionScope.company.fid}" hidden="hidden">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-             <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-            </div>
-        </div>
-    </form>
-</div>
 </body>
 
 <script id="barDemo" type="text/html">
@@ -179,10 +105,10 @@
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
             layer.open({
-                type:1,
+                type:2,
                 title: "上传资料",
                 area: ['600px', '500px'],
-                content: $("#addstaff")//引用的弹出层的页面层的方式加载修改界面表单
+                content: "staffadd.jsp"//引用的弹出层的页面层的方式加载修改界面表单
             });
         })
 
@@ -260,21 +186,6 @@
 
 
 </script>
-<script src="<%=path%>page/layui/laydate.js"></script>
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
 
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-    });
-</script>
+
 </html>

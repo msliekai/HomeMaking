@@ -151,4 +151,12 @@ public interface CompanyMapper {
 
     //循环插入服务
     public Integer addserve(List list);
+    //----公司资料上传
+    public Integer companyCreUp(Tblfcc tblfcc);
+    //----公司资料上传
+    public Integer staffCreUp(Tblsfdata tblsfdata);
+    //---公司资料显示
+    public List<Tblfcc> findImg(@Param("fid") Integer fid,@Param("creid") Integer creid);
+    //---员工资料显示
+    public List<Tblsfdata> findStaffImg(@Param("fid") Integer fid,@Param("dataid")Integer dataid);
 }

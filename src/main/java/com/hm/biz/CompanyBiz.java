@@ -99,4 +99,12 @@ public interface CompanyBiz {
     public Integer changepwd(String fpwd,String facc);
     //入驻
     public Integer infirm(String fname,String facc);
+    //----公司资料上传
+    public Tblfcc companyCreUp(Tblfcc tblfcc);
+    //----公司资料上传
+    public Tblsfdata staffCreUp(Tblsfdata tblsfdata);
+    //---公司资料显示
+    public List<Tblfcc> findImg(Integer fid,Integer creid);
+    //---员工资料显示
+    public List<Tblsfdata> findStaffImg(Integer fid,Integer creid);
 }

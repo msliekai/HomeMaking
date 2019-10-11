@@ -608,4 +608,26 @@ public @ResponseBody String useDel(String sfid){
             return "0";
         }
     }
+    //---公司资料显示
+    @RequestMapping(value = "findImg")
+    public @ResponseBody List<Tblfcc> findImg(HttpSession session,String creid)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        Integer creid1=Integer.parseInt(creid);
+        List<Tblfcc> tblfcc=companyBiz.findImg(fid,creid1);
+
+        return  tblfcc;
+    }
+    //---员工资料显示
+    @RequestMapping(value = "findStaffImg")
+    public @ResponseBody List<Tblsfdata> findStaffImg(HttpSession session,String dataid)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        Integer dataid1=Integer.parseInt(dataid);
+        List<Tblsfdata> tblsfdata=companyBiz.findStaffImg(fid,dataid1);
+
+        return  tblsfdata;
+    }
 }

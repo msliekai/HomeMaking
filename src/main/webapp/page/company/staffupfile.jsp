@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2019/9/28
-  Time: 14:12
+  Date: 2019/10/11
+  Time: 11:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,20 +18,45 @@
 </head>
 <body>
 <%
-    String uu = request.getParameter("uu")==null?"":request.getParameter("uu");
+    String dataid = request.getParameter("dataid")==null?"":request.getParameter("dataid");
 %>
 <form id="file" action="" method="post" enctype="multipart/form-data">
+    请选择服务人员：<br/>
+    <select name="sfid" id="sfid" lay-search="" lay-verify="required">
+        <option></option>
+    </select>
+    <p/>
+    <input type="text" name="dataid" value="<%=dataid%>" hidden="hidden"/>
     图片： <input type="file"     name = "pictureFile" /><br>
-    <input type="text" value="<%=uu%>" name="creid" hidden="hidden">
     证书名：<input type="text" name="upname"/><p/>
     <input type = "button" value = "提交" onclick="tijiao()">
     <span></span>
 </form>
 </body>
 <script>
+
+    $(document).ready(function(){
+        $.ajax({
+            url:"<%=path%>page/findStaff.action",
+            type:"GET",
+            success:function(redata){
+                var aa= redata;
+                $("#sfid").empty();
+                $("#sfid").append(
+                    "<option>"+"请选择"+"</option>"
+                )
+                $.each(aa,function(idx,obj){
+                    $("#sfid").append(
+                        "<option value='"+obj.sfid+"'>"+obj.sfname+"</option>"
+                    )
+                })
+            }
+        })
+
+    });
     function tijiao() {
         $.ajax({
-            url:"<%=path%>admin/addComCre.action",
+            url:"<%=path%>admin/addStaffCre.action",
             type:"post",
             cache: false,
             processData: false,

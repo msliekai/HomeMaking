@@ -499,4 +499,32 @@ where ts.ctid=m.ctid
             (#{item.fid},#{item.ctid},#{item.stid})
         </foreach>
     </insert>
+<!--  公司资料上传-->
+    <insert id="companyCreUp" parameterType="com.hm.entity.Tblfcc">
+        insert into tblfcc
+        (fid,creid,upname,uptime,upurl)
+        values
+        (#{fid},#{creid},#{upname},#{uptime},#{upurl})
+        <selectKey resultType="java.lang.Integer" keyProperty="fccid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS fccid
+        </selectKey>
+    </insert>
+    <!--  员工资料上传-->
+    <insert id="staffCreUp" parameterType="com.hm.entity.Tblsfdata">
+        insert into tblsfdata
+        (sfid,dataid,upname,uptime,upurl,fid)
+        values
+        (#{sfid},#{dataid},#{upname},#{uptime},#{upurl},#{fid})
+        <selectKey resultType="java.lang.Integer" keyProperty="sfdid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS sfdid
+        </selectKey>
+    </insert>
+<!--    公司资料显示-->
+    <select id="findImg" resultType="com.hm.entity.Tblfcc">
+    SELECT * from tblfcc where creid=#{creid} and fid=#{fid}
+    </select>
+    <!--    员工资料显示-->
+    <select id="findStaffImg" resultType="com.hm.entity.Tblsfdata">
+    SELECT * from tblsfdata where dataid=#{dataid} and fid=#{fid}
+    </select>
 </mapper>

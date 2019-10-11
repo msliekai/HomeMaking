@@ -107,6 +107,30 @@ public class CompanyBizImpl implements CompanyBiz {
 
         return companyMapper.infirm(fname,facc);
     }
+    //----公司资料上传
+    @Override
+    public Tblfcc companyCreUp(Tblfcc tblfcc) {
+        Tblfcc obj=tblfcc;
+        companyMapper.companyCreUp(obj);
+        return obj;
+    }
+    //----公司资料上传
+    @Override
+    public Tblsfdata staffCreUp(Tblsfdata tblsfdata) {
+        Tblsfdata obj=tblsfdata;
+        companyMapper.staffCreUp(obj);
+        return obj;
+    }
+    //---资料显示
+    @Override
+    public List<Tblfcc> findImg(Integer fid, Integer creid) {
+        return companyMapper.findImg(fid,creid);
+    }
+    //---员工资料显示
+    @Override
+    public List<Tblsfdata> findStaffImg(Integer fid, Integer creid) {
+        return companyMapper.findStaffImg(fid,creid);
+    }
 
     //修改密码
     @Override
