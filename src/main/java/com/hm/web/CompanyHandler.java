@@ -580,7 +580,9 @@ public @ResponseBody String useDel(String sfid){
     @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
     public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
         Company company = (Company) httpSession.getAttribute("company");
+        System.out.println(company+"********");
         String facc = company.getFacc();
+        System.out.println(facc+"+++");
         Integer fid = company.getFid();
         System.out.println(ctids);
         System.out.println(ctidsAll);
@@ -600,8 +602,11 @@ public @ResponseBody String useDel(String sfid){
             }
             tblfcs.add(tblfc);
         }
+        Integer j = companyBiz.addserve(tblfcs);
+        System.out.println(j);
 
         Integer i = companyBiz.infirm(fname, facc);
+        System.out.println(i);
         if(i>0){
             return "1";
         }else {

@@ -99,4 +99,6 @@ public interface CompanyBiz {
     public Integer changepwd(String fpwd,String facc);
     //入驻
     public Integer infirm(String fname,String facc);
+    //循环插入服务
+    public Integer addserve(List list);
 }

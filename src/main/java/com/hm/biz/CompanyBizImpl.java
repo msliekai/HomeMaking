@@ -101,6 +101,11 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.queryscard(scard);
     }
 
+    @Override
+    public Integer addserve(List list) {
+        return companyMapper.addserve(list);
+    }
+
     //入驻
     @Override
     public Integer infirm(String fname, String facc) {
