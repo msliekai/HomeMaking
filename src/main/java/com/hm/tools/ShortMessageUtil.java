@@ -62,6 +62,9 @@ public class ShortMessageUtil {
         // 可选:模板中的变量替换JSON串,如模板内容为"亲爱的${code},您的验证码为${code}"时,此处的值为
         // 友情提示:如果JSON中需要带换行符,请参照标准的JSON协议对换行符的要求,比如短信内容中包含\r\n的情况在JSON中需要表示成\\r\\n,否则会导致JSON在服务端解析失败
         //request.setTemplateParam("{ \"code\":\""+code+"\"}");
+        if(null!=templateParam){
+
+        }
         request.setTemplateParam(templateParam);
         // 可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
         request.setOutId("yourOutId");
@@ -91,8 +94,37 @@ public class ShortMessageUtil {
     public static String getVerificationCode(String tel,String code) {
 
         String templateParam = "{\"code\":"+code+"}";
+        ShortMessage.TemplateCode="SMS_175240492";
         String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
 
+        return result;
+    }
+
+
+    /**
+     * 公司确认订单之后，给用户发短信
+     * @param tel
+     * @param gs
+     * @return
+     */
+    public static String sendInformationToUsers(String tel,String gs) {
+
+        String templateParam = "{\"code\":'"+gs+"'}";
+        ShortMessage.TemplateCode="SMS_175430145";
+        String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
+        return result;
+    }
+
+    /**
+     * 用户向公司发布订单，并发送信息
+     * @param tel
+     * @return
+     */
+    public static String sendInformationToCompany(String tel,String gu) {
+
+        String templateParam = "{\"code\":'"+gu+"'}";
+        ShortMessage.TemplateCode="SMS_175415409";
+        String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,null);
         return result;
     }
 

@@ -88,7 +88,7 @@
 
                             <div class="form-group">
                                 <label for="facc">家政公司账号(电话)</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号">
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号" value="13860811761">
                                 <input type="button" id="fbtn" value="点我发送短信验证码"></input>
                                 <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
@@ -100,19 +100,19 @@
 
                             <div class="form-group">
                                 <label for="fpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()">
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()" value="a12345">
                                 <span id="bbb"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="nfpwd">确认密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()">
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()" value="a12345">
                                 <span id="ccc"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="flaw">法人代表</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名">
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名" value="asdaf">
                                 <span id="ddd"></span><p/>
                             </div><!--/.form-group -->
 
@@ -123,7 +123,7 @@
 <%--                            </div><!--/.form-group -->--%>
                             <div class="form-group">
                                 <label for="ftime">注册时间</label>
-                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
+                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间" value="2019-05-05">
                                 <span id="fff" ></span><p/>
                             </div><!--/.form-group -->
 
@@ -167,7 +167,7 @@
                             <div class="form-group">
                                 <label for="scontext">详细地址</label>
                                 <input type="text" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="详细地址">
+                                       id="scontext" name="scontext" placeholder="详细地址" value="asdasf">
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
 
@@ -395,7 +395,7 @@
     if (request.getAttribute("flog")=="success") {%>
 <script>
     alert("注册成功");
-    location.href="<%=path%>CompanyLogin.jsp";
+    location.href="<%=path%>page/CompanyLogin.jsp";
 </script>
 <%} else if (request.getAttribute("flog")=="reqerr") {%>
 <script>

@@ -15,8 +15,7 @@
     <insert id="addCompany" parameterType="com.hm.entity.Company">
         INSERT into tblfirm
         (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid,rid) VALUES
-        (#{facc},#{fpwd},#{fname},#{flaw},
-        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
+        (#{facc},#{fpwd},#{fname},#{flaw},#{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
     </insert>
 <!--    公司证书资料-->
     <select id="findCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">

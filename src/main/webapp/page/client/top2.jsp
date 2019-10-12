@@ -52,7 +52,7 @@
                                         <%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
                                     </ul>
                                 </li>
-
+                                <li><a href="<%=path%>page/client/blog.jsp">资讯</a></li>
                             </ul>
 
                         </nav>

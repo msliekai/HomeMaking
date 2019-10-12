@@ -91,7 +91,8 @@ public class CompanyHandler {
         if (securityCode.equalsIgnoreCase(serverCode)) {
             String phcode_req = (String) session.getAttribute(company.getFacc() + "_code_req");
             if (phcode_req.equals(phcode)) {
-                company.setScontext(company.getSa() + "-" + company.getSb() + "-" + company.getSc() + "-" + company.getScontext());
+                company.setFsite(company.getSa() + "-" + company.getSb() + "-" + company.getSc() + "-" + company.getScontext());
+                company.setFphone(company.getFacc());
                 int addCompany = companyBiz.addCompany(company);
                 if (addCompany > 0) {
                     request.setAttribute("flog", "success");

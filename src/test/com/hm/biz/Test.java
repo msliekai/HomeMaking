@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.hm.entity.Staff;
 import com.hm.entity.Tblrole;
 import com.hm.tools.JsoupHelper;
+import com.hm.tools.ShortMessageUtil;
 import junit.framework.TestCase;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,13 @@ public class Test extends TestCase {
     @org.junit.Test
     public void chong() throws Exception {
 //            JsoupHelper.fecthByMap("http://www.jianshu.com/u/bf7b9c013c55","//ul[@class='note-list']/li//a[@class='title']");
-            JsoupHelper.fecthByMap("http://health.people.com.cn/GB/408565/index.html","/html/body/div/div[4]/div/div/div[1]/div[2]/ul/li ");
+            JsoupHelper.fecthByMap("http://health.people.com.cn/GB/408565/index.html",
+                    "/html/body/div/div[4]/div/div/div[1]/div[2]/ul/li//a[@target='_blank']");
     }
 
+    @org.junit.Test
+    public void senda() throws Exception {
+        ShortMessageUtil.sendInformationToCompany("13860811761","");
+
+    }
 }

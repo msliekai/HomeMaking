@@ -89,7 +89,7 @@
                         <div class="product-details-large tab-content">
                             <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                 <div >
-                                    <a href="<%=path%>page/client/shopgrid/img/product-details/bl1.jpg">
+                                    <a>
                                         <img src="<%=path%>${requestScope.staff.sfurl}" alt="">
                                     </a>
                                 </div>
@@ -191,6 +191,9 @@
                         <input type="hidden" id="sfid" name="sfid" value="${requestScope.staff.sfid}"/>
                         <input type="hidden" id="cosid" name="cosid" value="${requestScope.staff.tblCOS.cosid}"/>
                         <input type="hidden" id="money" name="money" value="${requestScope.staff.sfcos}"/>
+                        <input type="hidden" id="fphone" name="money" value="${requestScope.company.fphone}"/>
+                        <input type="hidden" id="fname" name="money" value="${  requestScope.staff.company.fname}"/>
+
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="sid">地址：</label>
@@ -222,7 +225,7 @@
         <div class="product-description-review text-center">
             <div class="description-review-title nav" role=tablist>
                 <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
-                    Description
+                    用户评价
                 </a>
 <%--                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">--%>
 <%--                    Reviews (0)--%>

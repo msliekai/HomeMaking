@@ -1,15 +1,13 @@
 package com.hm.tools;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import com.hm.entity.MyJsoup;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.DomSerializer;
 import org.htmlcleaner.HtmlCleaner;
@@ -48,8 +46,8 @@ public class JsoupHelper {
      * 获取xpath下的a标签的文本值及href属性值
      * /
      **/
-    public static Map<String, String> fecthByMap(String url, String xpath) throws Exception {
-        Map<String, String> nodeMap = new LinkedHashMap<>();
+    public static List<MyJsoup> fecthByMap(String url, String xpath) throws Exception {
+        List<MyJsoup> list = new LinkedList<>();
 
         Object result = fecthNode(url, xpath);
 
@@ -61,14 +59,16 @@ public class JsoupHelper {
                 if (node == null) {
                     continue;
                 }
-                nodeMap.put(node.getTextContent(), node.getAttributes().getNamedItem("href") != null ?
-                        node.getAttributes().getNamedItem("href").getTextContent() : "");
+                String href = node.getAttributes().getNamedItem("href") != null ? node.getAttributes().getNamedItem("href").getTextContent() : "";
 
-                System.out.println(node.getTextContent() + " : " + node.getAttributes().getNamedItem("href"));
+                list.add(new MyJsoup(node.getTextContent(), "http://health.people.com.cn"+href));
+
+                System.out.println(
+                        node.getTextContent() + " : " + "http://health.people.com.cn"+href);
             }
         }
 
-        return nodeMap;
+        return list;
     }
 
     /**
