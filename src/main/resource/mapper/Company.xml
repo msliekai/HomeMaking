@@ -47,7 +47,7 @@
     </select>
 <!--    查找公司订单表-->
     <select id="findCompanyOrder" parameterType="com.hm.entity.Company" resultMap="commap">
-        SELECT g.sfurl,g.sfname,ff.fname,p.*,g.sfcos,q.osname,u.username from
+        SELECT g.sfurl,g.sfname,ff.fname,p.*,g.sfcos,q.osname,u.username,u.userphone,u.userurl from
         tblfirm ff,tblorder p,tbloderstate q,tbluser u,(SELECT s.* from tblorder o,tblstaff s,tblfirm f where o.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g
         where  g.fid=ff.fid and g.sfid=p.sfid and p.osid=q.osid and p.userid=u.userid and p.osid !=6
         <if test="osname!=null and osname!=''">
@@ -85,6 +85,8 @@
         <association property="tblUser" column="tblUser" javaType="com.hm.entity.TblUser">
             <id property="userid" column="userid"/>
             <result property="username" column="username"/>
+            <result property="userphone" column="userphone"/>
+            <result property="userurl" column="userurl"/>
         </association>
     </resultMap>
 <!--查找订单表的总数-->

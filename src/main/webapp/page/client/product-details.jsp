@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/responsive.css">
     <%--layui--%>
     <link rel="stylesheet" href="<%=path%>page/src/css/layui.css" media="all">
-    <script src="<%=path%>page/src/layui.js"></script>
+    <script src="<%=path%>page/layui/layui.js"></script>
     <%--    我的css--%>
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
     <!-- all css here -->
@@ -167,7 +167,7 @@
                     <div class="product-details-cati-tag mtb-10">
                         <div class="layui-btn-group">
 
-                            <button class="layui-btn site-demo-layim" data-type="chat">咨询</button>
+                            <button class="layui-btn site-demo-layim" onclick="getChat()">咨询</button>
                             <c:if test="${requestScope.staff.tblsfcoll==null}">
                                 <button type="button" class="layui-btn layui-btn-warm" onclick="proCollections(${requestScope.staff.sfid})">收藏</button>
                             </c:if>
@@ -286,8 +286,6 @@
     <%--bootstrap分页--%>
     <script src="<%=path%>page/client/js/bootstrap-paginator.js"></script>
     <script src="<%=path%>page/client/js/pageing.js"></script>
-    <%--layui--%>
-    <script src="<%=path%>page/layui/layui.js"></script>
     <%--我的js--%>
     <script src="<%=path%>page/client/js/chome.js"></script>
 
@@ -417,98 +415,30 @@ var uname =  "${userbacc.username}";
 var avatar = "<%=path%>${userbacc.userurl}";
 var fname = "${requestScope.staff.company.fname}";
 var fphone = "${requestScope.staff.company.fphone}";
+function getChat(){
+    alert("++++");
+    alert(layim);
+    layim.chat({id: fphone, name: fname, type: "friend"});
+}
 
-var system ={};
-var p = navigator.platform;
-system.win = p.indexOf("Win") == 0;
-system.mac = p.indexOf("Mac") == 0;
-system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-// if (system.win||system.mac||system.xll) {
-var socket = null;
-//连接websocket的ip地址
-var ip = "crm.natapp1.cc";
-//动态修改查
-var im = {
-init: function () {
-if ('WebSocket' in window) {
-var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${userbacc.userphone}';
-socket = new WebSocket(socketUrl);
-im.startListener();
-} else {
-alert('当前浏览器不支持WebSocket功能，请更换浏览器访问。');
-}
-},
-startListener: function () {
-console.log(socket);
-if (socket) {
-// 连接发生错误的回调方法
-socket.onerror = function () {
-console.log("通讯连接失败!");
-};
-// 连接成功建立的回调方法
-socket.onopen = function (event) {
-console.log("通讯连接成功");
-}
-// 接收到消息的回调方法
-socket.onmessage = function (event) {
-console.log("通讯接收到消息");
-im.handleMessage(event.data);
-}
-// 连接关闭的回调方法
-socket.onclose = function () {
-console.log("通讯关闭连接！!");
-}
-}
-},
-handleMessage: function (msg) {
-console.log(msg);
-if(msg=="1"){
-layer.msg("该聊天对象不在线，请电话联系！"+fphone);
-}else {
-msg = JSON.parse(msg);
-layim.getMessage(msg);
-}
-}
-};
-im.init();
-
-layui.use('layim', function(layim){
-var $ = layui.jquery;
-window.layim = layim;
-layim.config({
-    //我的信息
-    mine: {
-        "username":uname  //我的昵称
-        ,"id": userid //我的ID
-        ,"avatar": avatar //我的头像
-    },
-brief: false //是否简约模式（如果true则不显示主面板）
-});
-layim.on('sendMessage', function(data){
-    console.log(layim.cache());
-    var To = data.to;
-if(To.type === 'friend'){
-// layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
-}
-socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname+"-f,t-"+avatar);
-});
-//面板外的操作
-var $ = layui.jquery, active = {
-chat: function(){
-//自定义会话
-layim.chat({
-name:" ${requestScope.staff.company.fname}"
-,type: 'friend'
-,avatar: '<%=path%>portrait/M.jpg'
-,id: "${requestScope.staff.company.fphone}"
-});
-}
-};
-$('.site-demo-layim').on('click', function(){
-var type = $(this).data('type');
-active[type] ? active[type].call(this) : '';
-});
-});
+<%--layui.use('layim', function(layim){--%>
+<%--//面板外的操作--%>
+<%--var $ = layui.jquery, active = {--%>
+<%--chat: function(){--%>
+<%--//自定义会话--%>
+<%--layim.chat({--%>
+<%--name:" ${requestScope.staff.company.fname}"--%>
+<%--,type: 'friend'--%>
+<%--,avatar: '<%=path%>portrait/M.jpg'--%>
+<%--,id: "${requestScope.staff.company.fphone}"--%>
+<%--});--%>
+<%--}--%>
+<%--};--%>
+<%--$('.site-demo-layim').on('click', function(){--%>
+<%--var type = $(this).data('type');--%>
+<%--active[type] ? active[type].call(this) : '';--%>
+<%--});--%>
+<%--});--%>
 </script>
 </html>
 

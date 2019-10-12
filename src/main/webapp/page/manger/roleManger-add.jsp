@@ -86,7 +86,6 @@
                     dataType: "json",
                     data: data.field,
                     success: function (map) {
-                        alert("+++"+map);
                         if (map == "1") {
                             layer.alert("添加成功", {
                                 icon: 6

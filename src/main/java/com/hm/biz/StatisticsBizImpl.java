@@ -1,5 +1,6 @@
 package com.hm.biz;
 
+import com.hm.entity.AllCompany;
 import com.hm.entity.Tblmenu;
 import com.hm.entity.Tblpower;
 import com.hm.mapper.MenuMapper;
@@ -40,4 +41,10 @@ public class StatisticsBizImpl implements StatisticsBiz {
     public Map getSendOrder(String date) {
         return statisticsMapper.getSendOrder(date);
     }
+
+    @Override
+    public List<AllCompany> getAllCompany() {
+        return statisticsMapper.getAllCompany();
+    }
+
 }

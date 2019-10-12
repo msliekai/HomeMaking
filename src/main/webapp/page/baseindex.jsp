@@ -121,6 +121,8 @@
 	<%--聊天--%>
 	var userid = "${company.fphone}";
 	var uname =  "${company.fname}";
+	var avatar = "<%=path%>page/img/company.jpg";
+	if (userid.length>0) {
 	var system ={};
 	var p = navigator.platform;
 	system.win = p.indexOf("Win") == 0;
@@ -136,6 +138,7 @@
 	if ('WebSocket' in window) {
 	var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${company.fphone}';
 	socket = new WebSocket(socketUrl);
+
 	im.startListener();
 	} else {
 	alert('当前浏览器不支持WebSocket功能，请更换浏览器访问。');
@@ -178,37 +181,32 @@
 	var $ = layui.jquery;
 	window.layim = layim;
 	layim.config({
-	brief: true //是否简约模式（如果true则不显示主面板）
+		init: {
+		mine: {
+			"username":uname  //我的昵称
+			,"id": userid //我的ID
+			,"avatar": avatar //我的头像
+		}
+			},
+	brief: false //是否简约模式（如果true则不显示主面板）
 	});
 	layim.on('sendMessage', function(data){
 	var To = data.to;
 	console.log(data);
 	console.log(data.to);
 	if(To.type === 'friend'){
-	// layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
+	layim.setChatStatus('<span style="color:#9408ff;">对方正在输入。。。</span>');
 	}
 	console.log(data.mine.content);
-	socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname);
+	socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname+"-f,t-"+avatar);
 	});
-	//面板外的操作
-	var $ = layui.jquery, active = {
-	chat: function(data){
-	alert(data);
-	var id =data;
-	//自定义会话
-	layim.chat({
-	name: id
-	,type: 'friend'
-	// ,avatar: '//tva3.sinaimg.cn/crop.0.0.180.180.180/7f5f6861jw1e8qgp5bmzyj2050050aa8.jpg'
-	,id: id
 	});
 	}
-	};
-	$('.site-demo-layim').on('click', function(){
-	var type = $(this).data('type');
-	active[type] ? active[type].call(this, $(this).data('toggle')) : '';
-	});
-	});
+	</script>
+	<script type="text/javascript">
+		function say() {
+			return layim;
+		}
 	</script>
 </body>
 </html>

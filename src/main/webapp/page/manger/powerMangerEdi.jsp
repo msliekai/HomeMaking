@@ -61,7 +61,6 @@
                 type: "post",
                 async:false,
                 success: function(resut){
-                    alert("data"+resut);
                     data =resut;
                 }
             });
@@ -82,8 +81,6 @@
                 layer.confirm('is not?', {icon: 3, title:'提示'}, function(index){
                     var checkedData = tree.getChecked('menu'); //获取选中节点的数据
                     var str = JSON.stringify(checkedData);    //转为json格式
-                    alert(getRid());
-                    alert(str);
                     if(that.roll == 1){
                         return;
                     }

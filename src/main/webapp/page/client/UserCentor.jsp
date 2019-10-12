@@ -27,6 +27,9 @@
 
     <!-- jquery-ui.min css -->
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
+    <%--layui--%>
+    <link rel="stylesheet" href="<%=path%>page/src/css/layui.css" media="all">
+    <script src="<%=path%>page/layui/layui.js"></script>
 </head>
 
 <body>
@@ -117,48 +120,14 @@
                 <div class="list-group list-group-root">
                     <a class="list-group-item" href="<%=path%>page/client/UserData.jsp" target="main">基本信息</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserBalance.jsp" target="main">我的账户</a>
-                    <%--<div class="list-group" id="myaccs" style="display: none">
-                        <a class="list-group-item" href="<%=path%>page/client/UserBalance.jsp" target="main">账户信息</a>
-                        <a class="list-group-item" href="#">我的积分</a>
-                        <a class="list-group-item" href="#" id="mycard" onClick="zhedie(this.id)">我的卡券</a>
-                        <div class="list-group" id="mycards" style="display: none">
-                            <a class="list-group-item" href="#">优惠券</a>
-                            <a class="list-group-item" href="#">保洁卡</a>
-                        </div>
-                        <!--class="list-group-item active"-->
-                    </div>--%>
-
                     <a class="list-group-item" href="<%=path%>page/client/UserOrder.jsp" target="main">我的订单</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">我的评价</a>
-                    <%--<div class="list-group" id="myapps" style="display: none">
-                        <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">待评价</a>
-                        <a class="list-group-item" href="<%=path%>page/client/UserAppraise2.jsp" target="main">已评价</a>
-                    </div>--%>
                     <a class="list-group-item" href="<%=path%>page/client/UserFoot.jsp" target="main">我的足迹</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserCollect.jsp" target="main">我的收藏</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserHistory.jsp" target="main">历史服务</a>
-                    <%--<div class="list-group" id="mysers" style="display: none">
-                        <a class="list-group-item" href="<%=path%>page/client/UserHistory.jsp" target="main">服务记录</a>
-                        <a class="list-group-item" href="<%=path%>page/client/UserOrder.jsp" target="main">售后记录</a>
-                    </div>--%>
                     <a class="list-group-item" href="<%=path%>page/client/UserSite.jsp" target="main">我的地址</a>
                 </div>
             </div>
-            <%--左侧菜单栏下的关于--%>
-            <%--<div class="sidebar-box sidebar-box-bg">
-                <h4>About us</h4>
-                <p>Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus. <a href="#" class="readmore">Read More &raquo;</a></p>
-            </div>--%>
-
-            <%--搜索栏--%>
-            <%--<div class="sidebar-box">
-                <h4>Search site</h4>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text"  placeholder="Search" aria-label="Search">
-                    <button class="btn my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>--%>
-
             <%--帮助小链接--%>
             <div class="sidebar-box">
                 <h4>Helpful Links</h4>
@@ -177,67 +146,6 @@
                 <article>
                     <iframe width="100%" align="center" height="100%" id="main" name="main" frameborder="no" boborder="0" src="<%=path%>page/client/UserData.jsp"></iframe>
                 </article>
-
-            <%--<article>
-                <h2 class="article-title">Introduction to pursuit</h2>
-
-                <p class="article-meta">Posted on <time datetime="2017-05-14">14 May</time> by <a href="#" rel="author">Joe Bloggs</a></p>
-
-                <p>Welcome to pursuit, a free CSS3 &amp; HTML5 responsive web template from <a href="#" title="ZyPOP">ZyPOP</a>. This template is completely <strong>free</strong> to use permitting a link remains back to  <a href="#" title="ZyPOP">zyPop</a>.</p>
-
-                <p> Should you wish to use this template unbranded you can buy a template license from our website for 8.00 GBP, this will allow you remove all branding related to our site, for more information about this see below.</p>
-
-                <p>This template has been tested in:</p>
-
-                <ul>
-                    <li>Firefox</li>
-                    <li>IE / Edge</li>
-                    <li>Chrome</li>
-                    <li>Safari</li>
-                    <li>iOS / Android</li>
-                </ul>
-
-                <a href="#" class="btn btn-primary">Read more</a>
-                <a href="#" class="btn btn-secondary">Comments</a>
-
-            </article>--%>
-            <%--主页2--%>
-           <%-- <article>
-
-                <h2 class="article-title">Buy unbranded</h2>
-                <p class="article-meta">Posted on <time datetime="2017-05-14">14 May</time> by <a href="#" rel="author">Joe Bloggs</a></p>
-
-                <p>Purchasing a template license for 8.00 GBP (at time of writing around 10 USD) gives you the right to remove any branding including links, logos and source tags relating to ZyPOP. As well as waiving the attribution requirement, your payment will also help us provide continued support for users as well as creating new web templates. Find out more about how to buy at the licensing page on our website which can be accessed at <a href="#licensing" title="template license">#licensing</a></p>
-
-                <h3>Lorem lipsum</h3>
-
-                <p>Morbi fermentum condimentum felis, commodo vestibulum sem mattis sed. Aliquam magna ante, mollis vitae tincidunt in, malesuada vitae turpis. Sed aliquam libero ut velit bibendum consectetur. Quisque sagittis, est in laoreet semper, enim dui consequat felis, faucibus ornare urna velit nec leo. Maecenas condimentum velit vitae est lobortis fermentum. In tristique sem vitae metus ornare luctus tempus nisl volutpat. Integer et est id nisi tempus pharetra sagittis et libero.</p>
-
-                <a href="#" class="btn btn-primary">Read more</a>
-                <a href="#" class="btn btn-secondary">Comments</a>
-            </article>--%>
-
-
-            <!-- Example pagination Bootstrap component 主页3 -->
-            <%--<nav>
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>--%>
         </div>
     </div>
 </main>
@@ -388,5 +296,88 @@
 
 </script>
 
+
+<script>
+    <%--聊天--%>
+    var userid = "${userbacc.userphone}";
+    var uuname =  "${userbacc.username}";
+    var avatar = "<%=path%>${userbacc.userurl}";
+    var system ={};
+    var p = navigator.platform;
+    system.win = p.indexOf("Win") == 0;
+    system.mac = p.indexOf("Mac") == 0;
+    system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+    // if (system.win||system.mac||system.xll) {
+    var socket = null;
+    //连接websocket的ip地址
+    var ip = "crm.natapp1.cc";
+    //动态修改查
+    var im = {
+        init: function () {
+            if ('WebSocket' in window) {
+                var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${userbacc.userphone}';
+                socket = new WebSocket(socketUrl);
+                im.startListener();
+            } else {
+                alert('当前浏览器不支持WebSocket功能，请更换浏览器访问。');
+            }
+        },
+        startListener: function () {
+            console.log(socket);
+            if (socket) {
+// 连接发生错误的回调方法
+                socket.onerror = function () {
+                    console.log("通讯连接失败!");
+                };
+// 连接成功建立的回调方法
+                socket.onopen = function (event) {
+                    console.log("通讯连接成功");
+                }
+// 接收到消息的回调方法
+                socket.onmessage = function (event) {
+                    console.log("通讯接收到消息");
+                    im.handleMessage(event.data);
+                }
+// 连接关闭的回调方法
+                socket.onclose = function () {
+                    console.log("通讯关闭连接！!");
+                }
+            }
+        },
+        handleMessage: function (msg) {
+            console.log(msg);
+            if(msg=="1"){
+                layer.msg("该聊天对象不在线，请电话联系！"+fphone);
+            }else {
+                msg = JSON.parse(msg);
+                layim.getMessage(msg);
+            }
+        }
+    };
+    im.init();
+
+    layui.use('layim', function(layim){
+        alert(uuname);
+        var $ = layui.jquery;
+        window.layim = layim;
+        layim.config({
+            //我的信息
+            mine: {
+                "username":uuname  //我的昵称
+                ,"id": userid //我的ID
+                ,"avatar": avatar //我的头像
+            },
+            brief: false //是否简约模式（如果true则不显示主面板）
+        });
+        layim.on('sendMessage', function(data){
+            // console.log(layim.cache());
+            var To = data.to;
+            if(To.type === 'friend'){
+                layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
+            }
+            socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uuname+"-f,t-"+avatar);
+        });
+    });
+</script>
 </body>
 </html>

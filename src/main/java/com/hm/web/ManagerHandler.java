@@ -5,10 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hm.biz.MangerBiz;
 import com.hm.biz.MenuBiz;
-import com.hm.biz.UserBiz;
 import com.hm.entity.*;
 import com.hm.biz.StatisticsBizImpl;
-import com.hm.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,9 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/manager")
@@ -224,6 +219,9 @@ public class ManagerHandler {
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
         count=mangerBizImpl.cFindServiceAll(null).size();
         List<TblCOS>list =mangerBizImpl.cFindServiceAll(tblCOS);
+        for (TblCOS cos : list) {
+            System.out.println(cos.getCoshot());
+        }
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -496,7 +494,11 @@ public class ManagerHandler {
     //修改育婴知识
     @RequestMapping("/updateKap.action")
     public @ResponseBody int updateKap(Tblkap tblkap){
-
         return mangerBizImpl.updateKap(tblkap);
+    }
+    //获取所有公司根据地区统计
+    @RequestMapping("/getAllCompany.action")
+    public @ResponseBody List<AllCompany> getAllCompany(){
+        return statisticsBizImpl.getAllCompany();
     }
 }
