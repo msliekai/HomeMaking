@@ -39,5 +39,5 @@ public class Transaction {
         System.out.println(methodName);
         System.out.println(method);
         System.out.println("银行交易日志操作");
-    }
+}
 }

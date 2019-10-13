@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="<%=path%>page/client/css/chome.css">
 
     <%--城市--%>
-    <link rel="stylesheet" type="text/css" href="<%=path%>page/client/css/city-picker.css">
+
     <style>
         span{color: red}
     </style>
@@ -83,29 +83,36 @@
                                 <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>
                             </div>--%>
                             <%--                            真头像在这--%>
-                            <input name="fileact" type="file" id="fileact" style="display: none"/>
+<%--                            <input name="fileact" type="file" id="fileact" style="display: none"/>--%>
+
 
                             <div class="form-group">
-                                <label for="facc">家政公司账号名</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号">
+                                <label for="facc">家政公司账号(电话)</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="facc" name="facc" placeholder="请输入手机号" value="13860811761">
+                                <input type="button" id="fbtn" value="点我发送短信验证码"></input>
                                 <span id="aaa"></span><p/>
                             </div><!--/.form-group -->
 
+                                <div class="form-group">
+                                    <label for="phcode">短信验证码：</label>
+                                    <input type="text" class="form-control" autocomplete="off" required="required" id="phcode" name="phcode" placeholder="请输入短信验证码" >
+                                </div><!--/.form-group -->
+
                             <div class="form-group">
                                 <label for="fpwd">密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()">
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="fpwd" name="fpwd" placeholder="请输入密码" onblur="checkfpwd()" value="a12345">
                                 <span id="bbb"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="nfpwd">确认密码</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()">
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="nfpwd" name="nfpwd" placeholder="再次输入" onblur="checknfpwd()" value="a12345">
                                 <span id="ccc"></span><p/>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="flaw">法人代表</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名">
+                                <input type="text" class="form-control" autocomplete="off" required="required" id="flaw" name="flaw" placeholder="请输入法人姓名" value="asdaf">
                                 <span id="ddd"></span><p/>
                             </div><!--/.form-group -->
 
@@ -116,7 +123,7 @@
 <%--                            </div><!--/.form-group -->--%>
                             <div class="form-group">
                                 <label for="ftime">注册时间</label>
-                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间">
+                                <input type="date" class="form-control" autocomplete="off" required="required" id="ftime" name="ftime" placeholder="请输入注册时间" value="2019-05-05">
                                 <span id="fff" ></span><p/>
                             </div><!--/.form-group -->
 
@@ -144,46 +151,23 @@
                             <br/>
                             <h3>默认地址</h3>
                             <br/>
-                            <div class="city-picker-selector" id="city-picker-selector">
-                                <div class="selector-item storey province">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sa" class="input-price val-error" value="110000"
-                                           data-required="userProvinceId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                            <li>天津市</li>
-                                            <li>河北省</li>
-                                            <li>山西省</li>
-                                        </ul>
+                                <div class="info">
+                                    <div>
+                                        <select id="s_province" name="sa"></select>  
+                                        <select id="s_city" name="sb"></select>  
+                                        <select id="s_county" name="sc"></select>
+                                        <%--加载城市下拉框--%>
+                                        <script class="resources library" src="<%=path%>page/client/js/city-data.js"
+                                                type="text/javascript"></script>
+
+                                        <script type="text/javascript">_init_area();</script>
                                     </div>
+                                    <div id="show"></div>
                                 </div>
-                                <div class="selector-item storey city">
-                                    <a href="javascript:;" class="selector-name reveal">北京市</a>
-                                    <input type="hidden" name="sb" class="input-price val-error" value="110100"
-                                           data-required="userCityId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>北京市</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="selector-item storey district">
-                                    <a href="javascript:;" class="selector-name reveal">海淀区</a>
-                                    <input type="hidden" name="sc" class="input-price val-error" value="110108"
-                                           data-required="userDistrictId">
-                                    <div class="selector-list listing hide">
-                                        <ul>
-                                            <li>东城区</li>
-                                            <li>西城区</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="scontext">详细地址</label>
-                                <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="详细地址">
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="scontext" name="scontext" placeholder="详细地址" value="asdasf">
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
 
@@ -287,10 +271,9 @@
             }
         }
         function checkflawphone(){
-            var flawphone=$("#flawphone").val();
+            var facc=$("#facc");
             var regular=new RegExp(/^1[3456789]\d{9}$/);
-
-            if(!(regular.test(flawphone))){
+            if(!(regular.test(facc.val()))){
                 $("#eee").html("手机号码有误，请重填");
                 return false;
             }else {
@@ -301,14 +284,14 @@
 
         $(document).ready(function () {
             $("#facc").blur(function () {
-                var facc=$("#facc").val();
+                var facc=$("#facc");
                 var regular=new RegExp(/^1[3456789]\d{9}$/);
-                if(!(regular.test(facc))){
+                if(!(regular.test(facc.val()))){
                     $("#aaa").html("手机号码有误，请重填");
                     return false;
                 }
                 $.post("<%=path%>page/checkfacc.action",
-                    {"facc":facc},
+                    {"facc":facc.val()},
                     function (data) {
                         if(data=="1"){
                             $("#aaa").html("该账号可用");
@@ -320,23 +303,86 @@
                 )
             });
         });
-        
 
+
+
+     /**
+     * <!-- 发送短信验证码倒计时-->
+     */
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function fsendMessage() {
+        curCount = count;
+        $("#fbtn").attr("disabled", "true");
+        $("#fbtn").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+
+        if (curCount == 0) {
+            stopTime();
+        } else {
+            curCount--;
+            $("#fbtn").val(curCount + "秒后可重新发送");
+        }
+    }
+
+    function stopTime() {
+        window.clearInterval(InterValObj);//停止计时器
+        $("#fbtn").removeAttr("disabled");//启用按钮
+        $("#fbtn").val("重新发送验证码");
+    }
+
+    /**
+     * //发送手机验证码
+     */
+    $("#fbtn").click(function () {
+        layui.use('layer', function () {
+            var facc=$("#facc").val();
+            var regular=new RegExp(/^1[3456789]\d{9}$/);
+            if(regular.test(facc)){
+
+                fsendMessage();
+                $.ajax({
+                    async: true, //true不异步，false异步
+                    type: "post", //提交方式
+                    url: "../../serial/sendSms.action",
+                    data: {
+                        "userphone": facc
+                    },
+                    // dataType:"text", //返回类型
+                    success: function (jso) {//执行结果
+                        if ("OK" == jso) {
+                            layer.msg("验证码发送成功");
+                        } else if ("phoneerr" == jso) {
+                            layer.msg("手机号未注册");
+                            stopTime();
+                        } else {
+                            layer.msg("验证码发送失败");
+                            stopTime();
+                        }
+                    },
+                    error: function (jso) {
+                        layer.msg("验证码发送失败");
+                        stopTime();
+                    }
+                });
+
+            } else {
+                layer.msg("手机号输入不正确");
+            }
+        })
+    })
 
 </script>
 
 
 
 <script type="text/javascript">
-    //触发隐藏的file表单
-    function makeThisfile() {
-        $('#fileact').click();
-    }
 
-    //file表单选中文件时,让file表单的val展示到showname这个展示框
-    $('#fileact').change(function () {
-        $('#showname').val($(this).val())
-    })
     //点击切换验证码
     $(function () {
         //点击图片更换验证码
@@ -349,17 +395,17 @@
     if (request.getAttribute("flog")=="success") {%>
 <script>
     alert("注册成功");
-    <%--location.href="<%=path%>ON/hha.jsp";--%>
+    location.href="<%=path%>page/CompanyLogin.jsp";
 </script>
 <%} else if (request.getAttribute("flog")=="reqerr") {%>
 <script>
     alert("注册失败");
 </script>
-<%}else if (request.getAttribute("flog")=="imgerr") {%>
+<%}else if (request.getAttribute("flog")=="phcodeErr") {%>
 <script>
-    alert("头像上传失败");
+    alert("短信验证码错误");
 </script>
-<%}else if (request.getAttribute("flog")=="codeerr") {%>
+<%}else if (request.getAttribute("flog")=="securityCodeErr") {%>
 <script>
     alert("验证码错误");
 </script>

@@ -9,14 +9,13 @@
     </select>
     <!--公司账号验证-->
     <select id="checkfacc" resultType="com.hm.entity.Company">
-        select * from tblfibrm where facc=#{facc}
+        select * from tblfirm where facc=#{facc}
     </select>
     <!--公司注册-->
     <insert id="addCompany" parameterType="com.hm.entity.Company">
         INSERT into tblfirm
         (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid,rid) VALUES
-        (#{facc},#{fpwd},#{fname},#{flaw},
-        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
+        (#{facc},#{fpwd},#{fname},#{flaw},#{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
     </insert>
 <!--    公司证书资料-->
     <select id="findCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">

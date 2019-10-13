@@ -42,8 +42,7 @@ public class Tblorder {
     private String start;
     private String end;
 
-
-
-
+    private Integer fid;
+    private String fphone;
 
 }

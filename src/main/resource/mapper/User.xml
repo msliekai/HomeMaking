@@ -697,5 +697,16 @@
         VALUES
         (#{userid},#{deid},sysdate(),#{dlcost},#{dltype});
     </insert>
+<!--服务热度+1-->
+    <update id="cosHotUp" >
+        UPDATE tblCOS SET coshot=coshot+1 WHERE cosid=#{cosid}
+    </update>
+
+    <insert id="adddeallog" parameterType="com.hm.entity.Tbldeallog">
+        INSERT INTO tbldeallog
+        (fid,userid,deid,dltime,dlcost,dltype)
+        VALUES
+        (#{fid},#{userid},6,#{dltime},#{dlcost},'支出')
+    </insert>
 </mapper>
 

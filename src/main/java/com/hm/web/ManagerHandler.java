@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,19 +40,26 @@ public class ManagerHandler {
     private StatisticsBizImpl statisticsBizImpl;
     private ModelAndView mav=null;
     @RequestMapping(value = "/adminLogin.action")
-    public ModelAndView userlogin(HttpServletRequest request, TblUser user)
+    public ModelAndView userlogin(HttpServletRequest request, HttpSession session, TblUser user, String securityCode)
     {
-        System.out.println("+++++");
-        TblUser u = mangerBizImpl.cUserLogin(user);
-        if(null!=u)
-        {
-            request.getSession().setAttribute("user",u);
-            System.out.println(u.getRid());
-            request.setAttribute("umenu",menuBizImpl.getMenu(u.getRid()));
-            mav = new ModelAndView();
-            mav.setViewName("baseindex");
-        }else {
-            return null;
+        String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
+        mav = new ModelAndView();
+        if (securityCode.equalsIgnoreCase(serverCode)) {
+            TblUser u = mangerBizImpl.cUserLogin(user);
+            if(null!=u)
+            {
+                request.getSession().setAttribute("user",u);
+                System.out.println(u.getRid());
+                request.setAttribute("umenu",menuBizImpl.getMenu(u.getRid()));
+
+                mav.setViewName("baseindex");
+            }else {
+                request.setAttribute("flog","loginErr");
+                mav.setViewName("ManagerLogin");
+            }
+        }else{
+            request.setAttribute("flog","securityCodeErr");
+            mav.setViewName("ManagerLogin");
         }
         return mav;
     }

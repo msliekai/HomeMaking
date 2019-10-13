@@ -287,5 +287,15 @@ public class UserBizImpl implements UserBiz
         return userMapper.addFoot(tblfoot);
     }
 
+    @Override
+    public Integer cosHotUp(Integer cosid) {
+        return userMapper.cosHotUp(cosid);
+    }
+
+    @Override
+    public Integer adddeallog(Tbldeallog tbldeallog) {
+        return userMapper.adddeallog(tbldeallog);
+    }
+
 
 }

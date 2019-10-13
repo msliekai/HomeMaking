@@ -24,9 +24,7 @@ public class ShortMessageUtil {
         /**
          * 进行正则关系校验
          */
-        System.out.println(mobile);
         if (mobile == null || mobile == "") {
-            System.out.println("手机号为空");
             return "userPhoneIsNull";
         }
 
@@ -43,11 +41,9 @@ public class ShortMessageUtil {
         final String accessKeyId = ShortMessage.accessKeyId;// 你的accessKeyId,参考本文档步骤2
         final String accessKeySecret = ShortMessage.accessKeySecret;// 你的accessKeySecret，参考本文档步骤2
         // 初始化ascClient,暂时不支持多region
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
-                accessKeyId, accessKeySecret);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try {
-            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product,
-                    domain);
+            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         } catch (ClientException e1) {
             e1.printStackTrace();
         }
@@ -66,6 +62,9 @@ public class ShortMessageUtil {
         // 可选:模板中的变量替换JSON串,如模板内容为"亲爱的${code},您的验证码为${code}"时,此处的值为
         // 友情提示:如果JSON中需要带换行符,请参照标准的JSON协议对换行符的要求,比如短信内容中包含\r\n的情况在JSON中需要表示成\\r\\n,否则会导致JSON在服务端解析失败
         //request.setTemplateParam("{ \"code\":\""+code+"\"}");
+        if(null!=templateParam){
+
+        }
         request.setTemplateParam(templateParam);
         // 可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
         request.setOutId("yourOutId");
@@ -95,19 +94,28 @@ public class ShortMessageUtil {
     public static String getVerificationCode(String tel,String code) {
 
         String templateParam = "{\"code\":"+code+"}";
+        ShortMessage.TemplateCode="SMS_175240492";
         String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
-        if (result.equals("OK")){
-            // 请求成功
-            System.out.println("获取验证码成功！！！");
-//            return "OK";
-        }else{
-            //
-            System.out.println("获取验证码失败"+result);
-//            throw new ThirdPartException(result);
-//            return "ERR";
-        }
+
         return result;
     }
+
+
+    /**
+     * 公司确认订单之后，给用户发短信
+     * @param tel
+     * @param gs
+     * @return
+     */
+    public static String sendInformationToUsers(String tel,String gs) {
+
+        String templateParam = "{\"code\":'"+gs+"'}";
+        ShortMessage.TemplateCode="SMS_175430145";
+        String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
+        return result;
+    }
+
+
 
     /**
      * 生成6位随机数验证码
@@ -118,7 +126,6 @@ public class ShortMessageUtil {
         for (int i = 0; i < 6; i++) {
             vcode = vcode + (int)(Math.random() * 9);
         }
-        System.out.println("手机短信验证码为:"+vcode);
         return vcode;
     }
 

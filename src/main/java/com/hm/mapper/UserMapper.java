@@ -141,4 +141,10 @@ public interface UserMapper {
 
     //添加足迹
     public Integer addFoot(Tblfoot tblfoot);
+
+    //服务热度
+    public Integer cosHotUp(@Param("cosid") Integer cosid);
+
+    //增加交易记录
+    public Integer adddeallog(Tbldeallog tbldeallog);
 }
