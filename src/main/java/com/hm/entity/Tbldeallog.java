@@ -15,6 +15,7 @@ public class Tbldeallog {
     private Tbldeal tbldeal;
     private Integer limit;
     private Integer page;
+    private String dltype;
 
     public Tbldeallog() {
     }

@@ -22,12 +22,13 @@
 </head>
 <body>
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+    <%--页眉导航栏--%>
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>我的评价</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
@@ -116,6 +117,7 @@
             , url: '<%=path%>admin/jUserAppraise.action' //数据接口
             , page: true //开启分页
             ,limit:2
+            , limits: [2,3,5,10]
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -194,7 +196,8 @@
                         "&money="+encodeURIComponent(data.tblorder.staff.sfcos)+
                         "&etime="+encodeURIComponent(data.etime)+
                         "&econtext="+encodeURIComponent(data.econtext)+
-                        "&econut="+encodeURIComponent(data.econut)
+                        "&econut="+encodeURIComponent(data.econut)+
+                        "&eid="+encodeURIComponent(data.eid)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useApp"){

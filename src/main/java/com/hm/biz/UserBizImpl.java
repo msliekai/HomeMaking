@@ -85,8 +85,8 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public List<UserMoney> jUserMoney(UserMoney userMoney) {
-        return userMapper.jUserMoney(userMoney);
+    public List<Tblorder> jUserMoney(Tblorder tblorder) {
+        return userMapper.jUserMoney(tblorder);
     }
 
     @Override
@@ -192,6 +192,16 @@ public class UserBizImpl implements UserBiz
     @Override
     public int jcorder(Integer oid,Integer state) {
         return userMapper.jcorder(oid,state);
+    }
+
+    @Override
+    public int jUserUpApp(Integer eid, String econtext) {
+        return userMapper.jUserUpApp(eid,econtext);
+    }
+
+    @Override
+    public int jUserAdddeallog(Tbldeallog tbldeallog) {
+        return userMapper.jUserAdddeallog(tbldeallog);
     }
 
 

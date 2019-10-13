@@ -88,7 +88,7 @@ public interface UserBiz {
     public Integer addOrder(Tblorder tblorder);
 
     //账户
-    public List<UserMoney> jUserMoney(UserMoney userMoney);
+    public List<Tblorder> jUserMoney(Tblorder tblorder);
     //评论
     public List<Tbleva> jUserAppraise(int page,int limit,Integer userid);
     //查看地址
@@ -132,6 +132,10 @@ public interface UserBiz {
     public int jUserAddAfter(Tblorder tblorder);
     //订单状态改变
     public int jcorder(@Param("oid") Integer oid,@Param("state") Integer state);
+    //评论内容改变
+    public int jUserUpApp(@Param("eid") Integer eid,@Param("econtext") String econtext);
+    //交易记录登记
+    public int jUserAdddeallog(Tbldeallog tbldeallog);
     //public Integer queryUserState(String userphone);
 
     /**

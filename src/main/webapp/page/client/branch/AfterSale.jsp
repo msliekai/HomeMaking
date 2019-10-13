@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>评价详情</title>
+    <title>售后详情</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -27,6 +27,8 @@
     String aftercontext =request.getParameter("aftercontext")==null?"":request.getParameter("aftercontext");
     String afterstaff =request.getParameter("afterstaff")==null?"":request.getParameter("afterstaff");
     String afterresult =request.getParameter("afterresult")==null?"":request.getParameter("afterresult");
+    String osname =request.getParameter("osname")==null?"":request.getParameter("osname");
+
 %>
 
 <div class="layui-fluid">
@@ -41,6 +43,14 @@
                 <div class="layui-input-inline">
                     <input type="text" id="onumber" name="onumber" required=""
                            autocomplete="off" class="layui-input" readonly="readonly" value="<%=onumber%>" style="width: 200px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="osname" class="layui-form-label">
+                    <span class="x-red">*</span>订单状态</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="osname" name="osname" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=osname%>" style="width: 200px">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -72,7 +82,7 @@
                     <span class="x-red">*</span>售后原因</label>
                 <div class="layui-input-inline">
                     <textarea id="aftercontext" name="aftercontext" required="" lay-verify="card"
-                              autocomplete="off" class="layui-input" readonly="readonly" style="width: 200px;height: 100px;resize:none;" ></textarea>
+                              autocomplete="off" class="layui-input" readonly="readonly" style="width: 200px;height: 100px;resize:none;"><%=aftercontext%></textarea>
                     <%--<input type="hidden" id="oid" name="oid" required=""
                            autocomplete="off" class="layui-input" value="<%=oid%>"/>--%>
                 </div>
@@ -87,7 +97,7 @@
             </div>
             <div class="layui-form-item">
                 <label for="afterresult" class="layui-form-label">
-                    <span class="x-red">*</span>售后回执</label>
+                    <span class="x-red">*</span>售后回复</label>
                 <div class="layui-input-inline">
                     <input type="text" id="afterresult" name="afterresult" required=""
                            autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterresult%>" style="width: 200px">

@@ -336,14 +336,15 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody
-    Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
-        userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        List<UserMoney> list = biz.jUserMoney(userMoney);
+    Map jUserMoney(HttpServletRequest request, Tblorder tblorder) {
+        Integer userid =((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        tblorder.setUserid(userid);
+        List<Tblorder> list = biz.jUserMoney(tblorder);
         System.out.println(list);//UserID
+        tblorder.setLimit(0);
+        tblorder.setPage(-1);
         map.put("code", 0);
-        UserMoney userMoney1 = new UserMoney();
-        userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        map.put("count", biz.jUserMoney(userMoney1).size());
+        map.put("count", biz.jUserMoney(tblorder).size());
         map.put("data", list);
         return map;
     }
@@ -455,8 +456,11 @@ public class UserHandler {
         userid =user.getUserid();
         System.out.println("充值的金额是："+usermoney);
         int a = biz.jUserPay(userid,usermoney,userpwd);
+        Tbldeallog tbldeallog = new Tbldeallog();
+        tbldeallog.setDeid(7);tbldeallog.setDlcost(String.valueOf(usermoney));tbldeallog.setUserid(userid);tbldeallog.setDltype("充值");
+        int c = biz.jUserAdddeallog(tbldeallog);
         String b =null;
-        if (0 < a){
+        if (0 < a&&0<c){
             b ="1";
             user.setUsermoney(user.getUsermoney()+usermoney);
             System.out.println("充值后的金额是："+user.getUsermoney());
@@ -606,6 +610,19 @@ public class UserHandler {
             }else{
                 b="0";
             }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+    @Log(operationType = "",operationName = "")
+    @RequestMapping(value = "/jUserUpApp.action")
+    public @ResponseBody String jUserUpApp(HttpServletRequest request, Tbleva tbleva){
+        System.out.println(tbleva);
+        int succ = biz.jUserUpApp(tbleva.getEid(),tbleva.getEcontext());
+        String b =null;
+        if (0<succ){
+                b="1";
         }else {
             b="0";
         }
