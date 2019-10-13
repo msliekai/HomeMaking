@@ -37,7 +37,6 @@
         url:"<%=path%>manager/getAllCompany.action",
         dataType:"json",
         success:function(dat){
-            alert("+++");
             getMap(dat);
         }
     }) ;

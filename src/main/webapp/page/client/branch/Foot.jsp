@@ -32,15 +32,6 @@
         <form class="layui-form" enctype="multipart/form-data">
 
             <input id="anotherAimg" name="aimg" type="hidden" value=""/>
-
-            <div class="layui-form-item">
-                <label for="footid" class="layui-form-label">
-                    <span class="x-red">*</span>序号</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="footid" name="footid" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=footid%>">
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label for="sfname" class="layui-form-label">
                     <span class="x-red">*</span>浏览阿姨</label>

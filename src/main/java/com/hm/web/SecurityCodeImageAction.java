@@ -24,8 +24,10 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 提供图片验证码
@@ -98,8 +100,19 @@ public class SecurityCodeImageAction {
     List<MyJsoup> getJsoup(HttpSession session) throws Exception {
         List<MyJsoup> list=new LinkedList<>();
 
-        list=JsoupHelper.fecthByMap("http://health.people.com.cn/GB/408565/index.html","/html/body/div/div[4]/div/div/div[1]/div[2]/ul/li//a[@target='_blank']");
-
+        list=JsoupHelper.fecthByMap("http://www.5m4.net/list/yuerbaike.html",
+                "/html/body/div[7]/div/div[1]/div/div[2]/div/ul//h2/a | //p[@class='detail']");
         return list;
+    }
+
+    @Log(operationType = "", operationName = "")
+    @RequestMapping(value = "/getArticle.action")
+    public @ResponseBody
+    Map<String,Object> getArticle(HttpSession session, String url) throws Exception {
+        Map<String,Object> map=new HashMap<>();
+
+        map=JsoupHelper.fecthArticle("http://www.5m4.net"+url,
+                "/html/body/div[7]/div/div[1]/div/div[2]/div//div[@class='hd']/h2 |//p");
+        return map;
     }
 }

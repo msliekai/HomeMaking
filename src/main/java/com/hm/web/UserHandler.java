@@ -238,8 +238,8 @@ public class UserHandler {
                 Integer num = biz.addOrder(tblorder);
                 if (num != null && num != 0) {
                     use.setUsermoney(money - ji);
-                    ShortMessageUtil.sendInformationToCompany(tblorder.getFphone(),tblorder.getFname());
-                    biz.cosHotUp(tblorder.getCosid());
+                    biz.cosHotUp(tblorder.getCosid());//增加热度
+                    biz.adddeallog(new Tbldeallog(tblorder.getFid(),use.getUserid(),TimeTools.getStringDate(),(money - ji)+""));//增加消费记录
                     session.setAttribute("userbacc", use);
                     map.put("flog", "addok");
                 } else {
@@ -340,14 +340,15 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserMoney.action")
     public @ResponseBody
-    Map jUserMoney(HttpServletRequest request, UserMoney userMoney) {
-        userMoney.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        List<UserMoney> list = biz.jUserMoney(userMoney);
+    Map jUserMoney(HttpServletRequest request, Tblorder tblorder) {
+        Integer userid =((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
+        tblorder.setUserid(userid);
+        List<Tblorder> list = biz.jUserMoney(tblorder);
         System.out.println(list);//UserID
+        tblorder.setLimit(0);
+        tblorder.setPage(-1);
         map.put("code", 0);
-        UserMoney userMoney1 = new UserMoney();
-        userMoney1.setUserid(((TblUser) request.getSession().getAttribute("userbacc")).getUserid());
-        map.put("count", biz.jUserMoney(userMoney1).size());
+        map.put("count", biz.jUserMoney(tblorder).size());
         map.put("data", list);
         return map;
     }
@@ -459,8 +460,11 @@ public class UserHandler {
         userid =user.getUserid();
         System.out.println("充值的金额是："+usermoney);
         int a = biz.jUserPay(userid,usermoney,userpwd);
+        Tbldeallog tbldeallog = new Tbldeallog();
+        tbldeallog.setDeid(7);tbldeallog.setDlcost(String.valueOf(usermoney));tbldeallog.setUserid(userid);tbldeallog.setDltype("充值");
+        int c = biz.jUserAdddeallog(tbldeallog);
         String b =null;
-        if (0 < a){
+        if (0 < a&&0<c){
             b ="1";
             user.setUsermoney(user.getUsermoney()+usermoney);
             System.out.println("充值后的金额是："+user.getUsermoney());
@@ -490,6 +494,31 @@ public class UserHandler {
         System.out.println(b);
         return b;
     }
+
+    @Log(operationType = "",operationName = "")
+    @RequestMapping("/jUserOrderOK.action")
+    public @ResponseBody String jUserOrderOK(HttpServletRequest request,Tblorder tblorder){
+        System.out.println("订单信息是："+tblorder);
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        Integer userid = user.getUserid();
+        int a = biz.jcorder(tblorder.getOid(),1);
+        Tbldeallog tbldeallog = new Tbldeallog();
+        tbldeallog.setDeid(6);tbldeallog.setDlcost(request.getParameter("allmoney"));tbldeallog.setUserid(userid);tbldeallog.setDltype("消费");
+        int c = biz.jUserAdddeallog(tbldeallog);
+        int d = biz.jUsercut(userid,Integer.valueOf(request.getParameter("allmoney")),user.getUserpwd());
+        String b =null;
+        if (0 < a&&0<c&&0<d){
+            b ="1";
+            user.setUsermoney(user.getUsermoney()-Integer.valueOf(request.getParameter("allmoney")));
+            System.out.println("交易后的后的金额是："+user.getUsermoney());
+            request.getSession().setAttribute("userbacc",user);
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
+
 
     @Log(operationType = "",operationName = "")
     @RequestMapping("/myMap.action")
@@ -610,6 +639,19 @@ public class UserHandler {
             }else{
                 b="0";
             }
+        }else {
+            b="0";
+        }
+        return b;
+    }
+    @Log(operationType = "",operationName = "")
+    @RequestMapping(value = "/jUserUpApp.action")
+    public @ResponseBody String jUserUpApp(HttpServletRequest request, Tbleva tbleva){
+        System.out.println(tbleva);
+        int succ = biz.jUserUpApp(tbleva.getEid(),tbleva.getEcontext());
+        String b =null;
+        if (0<succ){
+                b="1";
         }else {
             b="0";
         }

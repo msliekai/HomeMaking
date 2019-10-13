@@ -43,16 +43,6 @@
             <header class="col-6 text-left">
                 <h1>欢迎你 &nbsp ${sessionScope.userbacc.username}</h1>
             </header>
-
-            <!-- Right header box -->
-            <div class="col-6 text-right">
-                <p class="header-social-icons social-icons">
-                    <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
-                    <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-                    <a href="#"><i class="fa fa-youtube fa-2x"></i></a>
-                    <a href="#"><i class="fa fa-instagram fa-2x"></i></a>
-                </p>
-            </div>
         </div>
     </div>
 </div>
@@ -78,32 +68,35 @@
                 </li>
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Examples &amp; Pages</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">个人中心</a>
                     <div class="dropdown-menu navbar-dark bg-primary">
-                        <a class="dropdown-item" href="examples.html">Style Examples</a>
-                        <a class="dropdown-item" href="three-column.html">Three Column</a>
-                        <a class="dropdown-item" href="one-column.html">One column / no sidebar</a>
-                        <a class="dropdown-item active"  href="text.html">Text / left sidebar</a>
+                        <%--<a class="dropdown-item" href="examples.html">Style Examples</a>--%>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserData.jsp" target="main">基本信息</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserBalance.jsp" target="main">我的账户</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserOrder.jsp" target="main">我的订单</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">我的评价</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserFoot.jsp" target="main">我的足迹</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserCollect.jsp" target="main">我的收藏</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserHistory.jsp" target="main">历史服务</a>
+                        <a class="dropdown-item" href="<%=path%>page/client/UserSite.jsp" target="main">我的地址</a>
                     </div>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" onclick="exc()">退出登录</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-
-                <li class="nav-item">
+                <%--导航栏分支--%>
+                <%--<li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
-                </li>
+                </li>--%>
             </ul>
-            <form class="form-inline header-search-form my-2 my-lg-0">
+            <%--搜索栏--%>
+            <%--<form class="form-inline header-search-form my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" size="10"  placeholder="Search" aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            </form>--%>
         </div>
     </div>
 </nav>
@@ -120,6 +113,7 @@
                 <div class="list-group list-group-root">
                     <a class="list-group-item" href="<%=path%>page/client/UserData.jsp" target="main">基本信息</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserBalance.jsp" target="main">我的账户</a>
+
                     <a class="list-group-item" href="<%=path%>page/client/UserOrder.jsp" target="main">我的订单</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserAppraise.jsp" target="main">我的评价</a>
                     <a class="list-group-item" href="<%=path%>page/client/UserFoot.jsp" target="main">我的足迹</a>
@@ -140,9 +134,7 @@
         </aside>
 
         <!-- Main content 主页1 -->
-        <div class="col-sm-8" style="width: 100% ;height: 600px;">
-            <%--style="margin: 50px;width: 800px;  height: 500px"--%>
-           <%-- <iframe name="main" frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)"></iframe>--%>
+        <div class="col-sm-8" style="width: 100% ;height: 480px;">
                 <article>
                     <iframe width="100%" align="center" height="100%" id="main" name="main" frameborder="no" boborder="0" src="<%=path%>page/client/UserData.jsp"></iframe>
                 </article>
@@ -152,7 +144,7 @@
 
 
 <!-- Footer底部 -->
-<footer class="footer">
+<%--<footer class="footer">
     <div class="footer-lists">
         <div class="container">
             <div class="row">
@@ -169,6 +161,7 @@
                 <div class="col-sm">
                     <ul>
                         <li><h4>Condimentum</h4></li>
+
                         <li><a href="#">Curabitur sit amet tellus</a></li>
                         <li><a href="#">Morbi hendrerit libero </a></li>
                         <li><a href="#">Proin placerat accumsan</a></li>
@@ -203,12 +196,10 @@
 
 
     <div class="footer-bottom">
-        <p class="text-center">Free Bootstrap Template by <a href="#">ZyPop</a>.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-        </p>
         <p class="text-center"><a href="#">Back to top</a></p>
     </div>
 
-</footer>
+</footer>--%>
 
 
 
@@ -233,50 +224,6 @@
         }
 
     }
-/*暂时没卵用*/
-    function userMoney() {
-        layui.use('layer', function(){
-            var self=$("form");
-            $.ajax({
-                async:true, //true不异步，false异步
-                type:"post", //提交方式
-                url:self.attr("action"), //提交的地址（ self.attr("action")为form中的action地址）
-                data:self.serialize(), //获得表单的信息
-                // dataType:"text", //返回类型
-                success:function(logjson){//执行结果
-                    if(logjson.flog==="0"){
-                        layer.msg("账号不存在");
-
-                    }else if(logjson.flog==="2"){
-                        layer.msg("账号被禁用");
-
-                    }else if(logjson.flog==="3"){
-                        layer.msg("账号被删除");
-
-                    }else if(logjson.flog==="coderr"){
-                        layer.msg("验证码错误");
-
-                    }else if(logjson.flog==="success"){
-                        layer.msg("登陆成功，准备跳转", {
-                            time:2000
-                        }, function () {
-                            location.href="<%=path%>page/client/chome.jsp";
-                        });
-
-
-                    }else if(logjson.flog==="pw"){
-                        layer.msg("账号密码错误");
-
-                    }else if(logjson.flog==="errc"){
-                        layer.msg("登陆失败");
-
-                    }else{
-                        layer.msg("出现不可预估的问题，登陆失败");
-                    }
-                },
-            });
-        })
-    }
 </script>
 <script>
     function SetWinHeight(obj)
@@ -292,6 +239,25 @@
                     win.height = win.Document.body.scrollHeight;
             }
         }
+    }
+
+    function exc() {
+        var result = confirm('是否注销！');
+        if(result){
+            $.ajax({
+                url: "<%=path%>admin/userEsc.action",
+                type: "POST",
+                success: function (obj) {
+                    if (obj.flog == "by") {
+                        alert("已注销"),
+                            location.href="<%=path%>page/client/chome.jsp";
+                    }
+                }
+            })
+        }else{
+            alert('操作取消！');
+        }
+
     }
 
 </script>

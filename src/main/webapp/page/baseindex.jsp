@@ -55,7 +55,7 @@
 						</c:if>
 <%--						父级菜单无地址--%>
 						<c:if test="${map.mfid==0 and empty map.murl}">
-							<li class="layui-nav-item layui-nav-itemed">
+							<li class="layui-nav-item">
 								<a class="" href="javascript:;">${map.mname}</a>
 								<dl class="layui-nav-child">
 									<c:forEach items="${map.childTblmenus}" var="scm">

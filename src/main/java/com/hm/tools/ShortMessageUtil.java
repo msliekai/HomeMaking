@@ -115,18 +115,7 @@ public class ShortMessageUtil {
         return result;
     }
 
-    /**
-     * 用户向公司发布订单，并发送信息
-     * @param tel
-     * @return
-     */
-    public static String sendInformationToCompany(String tel,String gu) {
 
-        String templateParam = "{\"code\":'"+gu+"'}";
-        ShortMessage.TemplateCode="SMS_175415409";
-        String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,null);
-        return result;
-    }
 
     /**
      * 生成6位随机数验证码

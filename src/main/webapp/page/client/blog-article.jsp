@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -63,8 +64,8 @@
 
         <div class="row blog-single style-2">
             <div class="col-lg-6">
-                <div class="blog-desc">
-                    <h4><a onclick="settext()" id="geta">信息加载中</a></h4>
+                <div class="blog-desc" >
+                    <h4><a id="geta">信息加载中</a></h4>
                 </div>
             </div>
         </div>
@@ -111,26 +112,31 @@
 
 </body>
 <script>
+    <%
+    String url=request.getParameter("url");
+    %>
     function jsgo(){
         layui.use('layer', function () {
             var jsoupGO=$("#jsoupGO");
             var geta=$("#geta");
             $.ajax({
-                url: "<%=path%>serial/getJsoup.action",
+                url: "<%=path%>serial/getArticle.action",
                 type: "POST",
                 dataType: "json",
+                data:{
+                    "url":"<%=url%>",
+                },
                 success: function (obj) {
                     var htm="";
-                    if (obj.length>0) {
-                        $.each(obj,function (k,v) {
-                            htm+="<div class='row blog-single style-2'>";
-                            htm+="<div class='col-lg-6'>";
-                            htm+="<div class='blog-desc'>";
-                            htm+="<h4><a href='<%=path%>page/client/blog-article.jsp?url="+v.href+"'>"+v.title+"</a></h4>";
-                            htm+="<p>"+v.article+"</p>";
-                            htm+="</div></div></div>";
+                    if (obj.title!=null) {
+                        htm+="<div class='row blog-single style-2'>";
+                        htm+="<div class='col-lg-6'>";
+                        htm+="<div class='blog-desc'>";
+                        htm+="<h4>"+obj.title+"</h4>";
+                        $.each(obj.article,function (k,v) {
+                            htm+="<p>"+v+"</p>";
                         })
-
+                        htm+="</div></div></div>";
                     } else {
                         geta.text("加载失败。。。");
                         layer.msg("加载失败");

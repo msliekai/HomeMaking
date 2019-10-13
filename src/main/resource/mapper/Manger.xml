@@ -8,9 +8,9 @@
     </select>
 <!--    角色管理-->
     <select id="getRole" parameterType="com.hm.entity.Tblrole" resultType="com.hm.entity.Tblrole">
-        select * from tblrole
+        select * from tblrole where stid = 1
         <if test="rname!=null &amp; rname!=''">
-            where rname like "%"#{rname}"%"
+            and rname like "%"#{rname}"%"
         </if>
         <if test="0 &lt; page">
             <bind name="page" value="(page-1) * limit"/>
@@ -19,17 +19,17 @@
     </select>
 <!--    添加角色-->
     <insert id="addRole" parameterType="com.hm.entity.Tblrole">
-		INSERT into tblrole(rname,rdescribe)
-		VALUES (#{rname},#{rdescribe})
+		INSERT into tblrole(rname,rdescribe,stid)
+		VALUES (#{rname},#{rdescribe},1)
 	</insert>
 <!--    修改角色-->
 <update id="upRole" parameterType="com.hm.entity.Tblrole">
     UPDATE tblrole SET rdescribe = #{rdescribe} where rid = #{rid}
 </update>
 <!--    刪除角色-->
-    <delete id="delRole" parameterType="com.hm.entity.Tblrole">
-        delete from tblrole where  rid = #{rid}
-    </delete>
+    <update id="delRole" parameterType="com.hm.entity.Tblrole">
+        update tblrole set stid = 3 where  rid = #{rid}
+    </update>
 
 <!--    获取权限列表-->
 <!--    <select id="getPower"-->

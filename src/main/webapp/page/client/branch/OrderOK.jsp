@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>售后详情</title>
+    <title>订单详情</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -19,16 +19,14 @@
 </head>
 <body>
 <%
+    String ordernum = request.getParameter("ordernum")==null?"":request.getParameter("ordernum");
+    String ordertype = request.getParameter("ordertype")==null?"":request.getParameter("ordertype");
+    String cos = request.getParameter("cos")==null?"":request.getParameter("cos");
+    String costype = request.getParameter("costype")==null?"":request.getParameter("costype");
+    String oid = request.getParameter("oid")==null?"":request.getParameter("oid");
+    String fname = request.getParameter("fname")==null?"":request.getParameter("fname");
+    String allmoney = request.getParameter("allmoney")==null?"":request.getParameter("allmoney");
     String sfname = request.getParameter("sfname")==null?"":request.getParameter("sfname");
-    String cosname = request.getParameter("cosname")==null?"":request.getParameter("cosname");
-    String ctname = request.getParameter("ctname")==null?"":request.getParameter("ctname");
-    String onumber =request.getParameter("onumber")==null?"":request.getParameter("onumber");
-    String oid =request.getParameter("oid")==null?"":request.getParameter("oid");
-    String aftercontext =request.getParameter("aftercontext")==null?"":request.getParameter("aftercontext");
-    String afterstaff =request.getParameter("afterstaff")==null?"":request.getParameter("afterstaff");
-    String afterresult =request.getParameter("afterresult")==null?"":request.getParameter("afterresult");
-    String osname =request.getParameter("osname")==null?"":request.getParameter("osname");
-
 %>
 
 <div class="layui-fluid">
@@ -38,69 +36,59 @@
             <input id="anotherAimg" name="aimg" type="hidden" value=""/>
 
             <div class="layui-form-item">
-                <label for="onumber" class="layui-form-label">
-                    <span class="x-red">*</span>订单编号</label>
+                <label for="ordernum" class="layui-form-label">
+                    <span class="x-red">*</span>订单号码</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="onumber" name="onumber" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=onumber%>" style="width: 200px">
+                    <input type="text" id="ordernum" name="ordernum" required="" lay-verify="trtitle"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=ordernum%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="osname" class="layui-form-label">
+                <label for="ordertype" class="layui-form-label">
                     <span class="x-red">*</span>订单状态</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="osname" name="osname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=osname%>" style="width: 200px">
+                    <input type="text" id="ordertype" name="ordertype" required="" lay-verify="trcontext"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=ordertype%>">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="cos" class="layui-form-label">
+                    <span class="x-red">*</span>服务事项</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="cos" name="cos" required="" lay-verify="rname"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=cos%>">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="costype" class="layui-form-label">
+                    <span class="x-red">*</span>服务类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="costype" name="costype" required="" lay-verify="rname"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=costype%>">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label for="sfname" class="layui-form-label">
                     <span class="x-red">*</span>服务人员</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="sfname" name="sfname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=sfname%>" style="width: 200px">
+                    <input type="text" id="sfname" name="sfname" required="" lay-verify="rname"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=sfname%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="cosname" class="layui-form-label">
-                    <span class="x-red">*</span>服务事项</label>
+                <label for="fname" class="layui-form-label">
+                    <span class="x-red">*</span>商家名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="cosname" name="cosname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=cosname%>" style="width: 200px">
+                    <input type="text" id="fname" name="fname" required="" lay-verify="rname"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=fname%>">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="ctname" class="layui-form-label">
-                    <span class="x-red">*</span>服务类型</label>
+                <label for="allmoney" class="layui-form-label">
+                    <span class="x-red">*</span>消费金额</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="ctname" name="ctname" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=ctname%>" style="width: 200px">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="aftercontext" class="layui-form-label">
-                    <span class="x-red">*</span>售后原因</label>
-                <div class="layui-input-inline">
-                    <textarea id="aftercontext" name="aftercontext" required="" lay-verify="card"
-                              autocomplete="off" class="layui-input" readonly="readonly" style="width: 200px;height: 100px;resize:none;"><%=aftercontext%></textarea>
-                    <%--<input type="hidden" id="oid" name="oid" required=""
-                           autocomplete="off" class="layui-input" value="<%=oid%>"/>--%>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="afterstaff" class="layui-form-label">
-                    <span class="x-red">*</span>客服人员</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="afterstaff" name="afterstaff" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterstaff%>" style="width: 200px">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="afterresult" class="layui-form-label">
-                    <span class="x-red">*</span>售后回复</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="afterresult" name="afterresult" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=afterresult%>" style="width: 200px">
+                    <input type="text" id="allmoney" name="allmoney" required="" lay-verify="rname"
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=allmoney%>">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -110,6 +98,10 @@
                     <input type="hidden" id="oid" name="oid" required=""
                            autocomplete="off" class="layui-input" value="<%=oid%>"/>
                 </div>
+            </div>
+            <div align="center" class="layui-form-item">
+                <%--                <label for="L_repass" class="layui-form-label"></label>--%>
+                <button class="layui-btn" lay-filter="add" lay-submit="">确认订单</button>
             </div>
         </form>
     </div>
@@ -143,18 +135,18 @@
         });
 
         //监听提交
+        //监听提交
         form.on('submit(add)',
             function (data) {
-
+                console.log(data)
                 $.ajax({
                     async: false,
                     type: "post",
-                    url: "<%=path%>manager/addtrain.action",
-                    dataType: "json",
+                    url: "<%=path%>admin/jUserOrderOK.action",
                     data: data.field,
-                    success: function (map) {
-                        if (map == "1") {
-                            layer.alert("添加成功", {
+                    success: function (bac) {
+                        if (bac == "1") {
+                            layer.alert("确认成功", {
                                 icon: 6
                             }, function () {
                                 //关闭当前frame
@@ -163,7 +155,7 @@
                                 xadmin.father_reload();
                             });
                         } else {
-                            layer.msg("添加失败,稍后重试");
+                            layer.msg("确认失败");
                         }
                     }
                 })

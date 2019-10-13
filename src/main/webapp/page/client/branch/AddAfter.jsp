@@ -25,6 +25,7 @@
     String ctname = request.getParameter("ctname")==null?"":request.getParameter("ctname");
     String onumber =request.getParameter("onumber")==null?"":request.getParameter("onumber");
     String oid =request.getParameter("oid")==null?"":request.getParameter("oid");
+    String osname =request.getParameter("osname")==null?"":request.getParameter("osname");
 %>
 
 <div class="layui-fluid">
@@ -38,6 +39,14 @@
                 <div class="layui-input-inline">
                     <input type="text" id="onumber" name="onumber" required=""
                            autocomplete="off" class="layui-input" readonly="readonly" value="<%=onumber%>" style="width: 200px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="osname" class="layui-form-label">
+                    <span class="x-red">*</span>订单状态</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="osname" name="osname" required=""
+                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=osname%>" style="width: 200px">
                 </div>
             </div>
             <div class="layui-form-item">

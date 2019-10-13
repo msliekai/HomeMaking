@@ -22,12 +22,12 @@
 </head>
 <body>
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>我的足迹</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
@@ -117,6 +117,7 @@
             , url: '<%=path%>admin/jUserfoot.action' //数据接口
             , page: true //开启分页
             ,limit:2
+            ,limits: [2,3,5,10]
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -130,12 +131,12 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'footid', title: '序号', minWidth: 80}
-                , {field: 'sfname', title: '浏览阿姨', minWidth: 150,templet:function (d) {return d.staff.sfname}}
+                {field: 'footid', title: '序号', minWidth: 80,hide: true}
+                , {field: 'foottime', title: '浏览时间', minWidth: 150}
+                , {field: 'sfname', title: '浏览阿姨', minWidth: 80,templet:function (d) {return d.staff.sfname}}
                 , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.staff.tblCOS.cosname}}
                 , {field: 'ctname', title: '服务类别', minWidth:80,templet:function (d) {return d.staff.tblCOS.tblCOStype.ctname}}
                 , {field: 'fname', title: '所属公司', minWidth:80,templet:function (d) {return d.staff.company.fname}}
-                , {field: 'foottime', title: '浏览时间', minWidth: 80}
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}
             ]]
         });
@@ -169,7 +170,7 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             if (obj.event === 'useDel') {
-                layer.confirm('确定删除？ID:'+data.footid, function (index) {
+                layer.confirm('确定删除？', function (index) {
                     fal("<%=path%>admin/jdelfoot.action",data.footid);
                     layer.close(index);
                 });
