@@ -6,6 +6,7 @@ import com.hm.aoplog.Log;
 import com.hm.biz.UserBiz;
 import com.hm.entity.Staff;
 import com.hm.entity.*;
+import com.hm.tools.ShortMessageUtil;
 import com.hm.tools.TimeTools;
 import com.sun.javafx.collections.MappingChange;
 import org.springframework.stereotype.Component;
@@ -208,6 +209,7 @@ public class UserHandler {
         tblorder.setOnumber(TimeTools.getOrderIdByTime());
 
         Integer num = biz.addOrder(tblorder);
+        biz.cosHotUp(tblorder.getCosid());
         if (num != null && num != 0) {
             map.put("flog", "addok");
         } else {
@@ -236,6 +238,8 @@ public class UserHandler {
                 Integer num = biz.addOrder(tblorder);
                 if (num != null && num != 0) {
                     use.setUsermoney(money - ji);
+                    ShortMessageUtil.sendInformationToCompany(tblorder.getFphone(),tblorder.getFname());
+                    biz.cosHotUp(tblorder.getCosid());
                     session.setAttribute("userbacc", use);
                     map.put("flog", "addok");
                 } else {
@@ -285,7 +289,7 @@ public class UserHandler {
 
         Staff staff = biz.queryOneStaff(sfid, use.getUserid());
 
-        biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDateMin()));//添加足迹
+        biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDate()));//添加足迹
 
         request.setAttribute("staff", staff);
 

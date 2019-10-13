@@ -225,4 +225,11 @@ public interface UserBiz {
      * @return
      */
     public Integer addFoot(Tblfoot tblfoot);
+
+    /**
+     * 服务热度
+     * @param cosid
+     * @return
+     */
+    public Integer cosHotUp(@Param("cosid") Integer cosid);
 }

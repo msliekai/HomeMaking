@@ -685,5 +685,9 @@
         VALUES
         (#{userid},#{sfid},#{foottime});
     </insert>
+<!--服务热度+1-->
+    <update id="cosHotUp" >
+        UPDATE tblCOS SET coshot=coshot+1 WHERE cosid=#{cosid}
+    </update>
 </mapper>
 

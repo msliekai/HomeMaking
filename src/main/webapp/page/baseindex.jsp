@@ -187,17 +187,18 @@
 			,"id": userid //我的ID
 			,"avatar": avatar //我的头像
 		}
-			},
-	brief: false //是否简约模式（如果true则不显示主面板）
+			},uploadImage: {
+			url: '<%=path%>sns/uploadFile.action?userId='+userid
+		},uploadFile: {
+			url: '<%=path%>sns/uploadFile.action?userId='+userid
+		},
+		brief: false //是否简约模式（如果true则不显示主面板）
 	});
 	layim.on('sendMessage', function(data){
 	var To = data.to;
-	console.log(data);
-	console.log(data.to);
 	if(To.type === 'friend'){
 	layim.setChatStatus('<span style="color:#9408ff;">对方正在输入。。。</span>');
 	}
-	console.log(data.mine.content);
 	socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname+"-f,t-"+avatar);
 	});
 	});

@@ -13,13 +13,12 @@
 %>
 <%--<html>--%>
 <%--<head>--%>
+<%--    <title>-</title>--%>
 <%--</head>--%>
 <%--<body>--%>
 
 <%--<nav class="navbar navbar-inverse navbar-fixed-top">--%>
 <header>
-
-
     <div class="header-bottom-area" id="sticker">
         <div class="container">
             <!--mainmenu-->
@@ -41,6 +40,7 @@
                                         <%--                                        <li><a href="<%=path%>page/client/service-details.jsp">照顾宠物</a></li>--%>
                                     </ul>
                                 </li>
+                                <li><a href="<%=path%>page/client/blog.jsp">资讯</a></li>
 
                                 <li><a href="#" onclick="robot();return false;">联系客服</a></li>
 
@@ -80,13 +80,14 @@
 
                                 </li>
                             </c:if>
+
+
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </header>
 <%--</nav>--%>
 <%--</body>--%>
@@ -165,11 +166,16 @@
                         ,"id": userid //我的ID
                         ,"avatar": avatar //我的头像
                     }
+                },uploadImage: {
+                    url: '<%=path%>sns/uploadFile.action?userId='+userid
+                    // ,type: '' //默认post
+                } ,
+                uploadFile: {
+                    url: '<%=path%>sns/uploadFile.action?userId='+userid
                 },
                 brief: false //是否简约模式（如果true则不显示主面板）
             });
             layim.on('sendMessage', function(data){
-                // console.log(layim.cache());
                 var To = data.to;
                 if(To.type === 'friend'){
                     layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
@@ -212,7 +218,6 @@
         //layim.setChatMin(); //收缩聊天面板
         //监听发送消息
         layim1.on('sendMessage', function(data){
-            console.log(data);
             var mine = data.mine;
             layim1.setChatStatus('<span style="color:#FF5722;">在线</span>');
             var obj = {
@@ -230,7 +235,6 @@
         };
         //监听收到的消息
         socket1.onmessage = function(res){
-            console.log(res.data);
             layim1.getMessage({
                 username: '家政机器人',
                 avatar: '<%=path%>page/img/robot.jpg',

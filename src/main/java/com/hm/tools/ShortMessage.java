@@ -7,8 +7,8 @@ package com.hm.tools;
  */
 public class ShortMessage {
     // 设置超时时间-可自行调整
-    public final static String defaultConnectTimeout  = "sun.net.client.defaultConnectTimeout";
-    public final static String defaultReadTimeout = "sun.net.client.defaultReadTimeout";
+    public  static String defaultConnectTimeout  = "sun.net.client.defaultConnectTimeout";
+    public  static String defaultReadTimeout = "sun.net.client.defaultReadTimeout";
     public final static String Timeout = "30000";
     // 初始化ascClient需要的几个参数
     public final static String product = "Dysmsapi";// 短信API产品名称（短信产品名固定，无需修改）
@@ -19,6 +19,6 @@ public class ShortMessage {
     // 必填:短信签名-可在短信控制台中找到
     public final static String SignName = "lk家政";  // 阿里云配置自己的短信签名填入
     // 必填:短信模板-可在短信控制台中找到
-    public final static String TemplateCode= "SMS_174276801";
+    public  static String TemplateCode= "SMS_174276801";
 
 }

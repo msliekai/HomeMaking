@@ -28,6 +28,15 @@ public class Company {
     private String stname;
     private String ctname;
     private String rname;
+
+    //详细地址
+    private String scontext;
+    //省
+    private String sa;
+    //市
+    private String sb;
+    //区
+    private String sc;
     @Resource
     private List<CompanyService> list;//公司的服务类型
 
