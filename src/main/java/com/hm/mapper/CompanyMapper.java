@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface CompanyMapper {
@@ -159,4 +160,6 @@ public interface CompanyMapper {
     public List<Tblfcc> findImg(@Param("fid") Integer fid,@Param("creid") Integer creid);
     //---员工资料显示
     public List<Tblsfdata> findStaffImg(@Param("fid") Integer fid,@Param("dataid")Integer dataid);
+    //发布订单统计
+    public Map getSendOrder(@Param("date") String date,@Param("fid")Integer fid);
 }

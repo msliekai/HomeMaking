@@ -527,4 +527,16 @@ where ts.ctid=m.ctid
     <select id="findStaffImg" resultType="com.hm.entity.Tblsfdata">
     SELECT * from tblsfdata where dataid=#{dataid} and fid=#{fid}
     </select>
+    <!--    订单统计-->
+    <select id="getSendOrder" resultType="java.util.LinkedHashMap">
+       select  COALESCE(count(*),0) AS first,
+        COALESCE(sum(case  when o.osid=1
+        then 1 else 0 end),0) AS second,
+        COALESCE(sum(case  when o.osid=2
+        then 1 else 0 end),0) AS third,
+        COALESCE(sum(case  when o.osid=3
+        then 1 else 0 end),0) AS fourth
+        from (select o.* from tblorder o,(SELECT s.* from tblorder u,tblstaff s,tblfirm f where u.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g where g.sfid=o.sfid
+        and o.otime like #{date}"%" GROUP BY o.oid) o
+    </select>
 </mapper>

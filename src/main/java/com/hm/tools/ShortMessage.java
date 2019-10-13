@@ -19,6 +19,7 @@ public class ShortMessage {
     // 必填:短信签名-可在短信控制台中找到
     public final static String SignName = "lk家政";  // 阿里云配置自己的短信签名填入
     // 必填:短信模板-可在短信控制台中找到
-    public final static String TemplateCode= "SMS_174276801";
+    public static String TemplateCode= "SMS_174276801";
+
 
 }

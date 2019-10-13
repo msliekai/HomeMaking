@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service("companyBiz")
 public class CompanyBizImpl implements CompanyBiz {
@@ -130,6 +131,11 @@ public class CompanyBizImpl implements CompanyBiz {
     @Override
     public List<Tblsfdata> findStaffImg(Integer fid, Integer creid) {
         return companyMapper.findStaffImg(fid,creid);
+    }
+    //发布订单统计
+    @Override
+    public Map getSendOrder(String date,Integer fid) {
+        return companyMapper.getSendOrder(date,fid);
     }
 
     //修改密码

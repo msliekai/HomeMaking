@@ -4,6 +4,7 @@ import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CompanyBiz {
     public Company comlogin(String facc, String fpwd);
@@ -107,4 +108,6 @@ public interface CompanyBiz {
     public List<Tblfcc> findImg(Integer fid,Integer creid);
     //---员工资料显示
     public List<Tblsfdata> findStaffImg(Integer fid,Integer creid);
+    //发布订单统计
+    public Map getSendOrder(String date,Integer fid);
 }

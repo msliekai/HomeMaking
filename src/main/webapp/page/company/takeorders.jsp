@@ -109,7 +109,8 @@
                     type:2,
                     title: "请选择",
                     area: ['500px', '400px'],
-                    content: "qiangdan.jsp"+"?oid="+encodeURIComponent(data.oid)//引用的弹出层的页面层的方式加载修改界面表单
+                    content: "qiangdan.jsp"+"?oid="+encodeURIComponent(data.oid)+
+                        "&ophone="+encodeURIComponent(data.ophone)//引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });

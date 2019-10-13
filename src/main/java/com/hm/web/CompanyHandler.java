@@ -5,6 +5,7 @@ import com.hm.biz.CompanyBiz;
 import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
+import com.hm.tools.ShortMessageUtil;
 import com.hm.tools.TimeTools;
 import com.sun.deploy.ui.FancyButton;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
@@ -419,8 +420,11 @@ public @ResponseBody String useDel(String sfid){
     }
     //--------------接单
     @RequestMapping(value = "take",method = RequestMethod.GET,produces ="application/text;charset=utf-8" )
-    public @ResponseBody String take(Tblorder tblorder)
+    public @ResponseBody String take(HttpSession session,Tblorder tblorder)
     {
+        Company company = (Company) session.getAttribute("company");
+         String fname = company.getFname();//获取公司名称
+        String ophone=tblorder.getOphone();
 
         //---获取订单号
         Integer oid= tblorder.getOid();
@@ -441,6 +445,8 @@ public @ResponseBody String useDel(String sfid){
         Integer a = companyBiz.addOrder(tblorder);
         if(a>0)
         {
+            //----给用户发送接单短信
+            ShortMessageUtil.sendInformationToUsers(ophone,fname);
             return "ok";
         }else {
             return "no";
@@ -629,5 +635,13 @@ public @ResponseBody String useDel(String sfid){
         List<Tblsfdata> tblsfdata=companyBiz.findStaffImg(fid,dataid1);
 
         return  tblsfdata;
+    }
+    //获取订单统计
+    @RequestMapping(value = "getOrderCount")
+    public @ResponseBody  Map getOrderCount(HttpSession session,String date){
+        System.out.println("jianlai+1111111111");
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        return companyBiz.getSendOrder(date,fid);
     }
 }

@@ -122,5 +122,18 @@ public class ShortMessageUtil {
         return vcode;
     }
 
+    /**
+     * 公司确认订单之后，给用户发短信
+     * @param tel
+     * @param gs
+     * @return
+     */
+    public static String sendInformationToUsers(String tel,String gs) {
 
+        String templateParam = "{\"gs\":"+gs+"}";
+        ShortMessage.TemplateCode="SMS_175295057";
+        String result = ShortMessageUtil.getPhoneMsg(tel, ShortMessage.TemplateCode,templateParam);
+
+        return result;
+    }
 }
