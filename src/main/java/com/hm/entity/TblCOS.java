@@ -5,12 +5,13 @@ import lombok.Data;
 import java.util.List;
 //------服务事项表
 @Data
-public class TblCOS {
+public class    TblCOS {
 
     private Integer cosid;
     private String cosname;
     private String coscontext;
     private String costime;
+    private String cosdeta;
     private Integer ctid;
     private String coshot;
     private TblCOStype tblCOStype;

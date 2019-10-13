@@ -9,14 +9,14 @@
     </select>
     <!--公司账号验证-->
     <select id="checkfacc" resultType="com.hm.entity.Company">
-        select * from tblfibrm where facc=#{facc}
+        select * from tblfirm where facc=#{facc}
     </select>
     <!--公司注册-->
     <insert id="addCompany" parameterType="com.hm.entity.Company">
         INSERT into tblfirm
         (facc,fpwd,fname,flaw,fphone,flawphone,fsite,ftime,ctid,stid,rid) VALUES
         (#{facc},#{fpwd},#{fname},#{flaw},
-        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},3)
+        #{fphone},#{flawphone},#{fsite},#{ftime},#{ctid},#{stid},7)
     </insert>
 <!--    公司证书资料-->
     <select id="findCreList" parameterType="com.hm.entity.Credential" resultType="com.hm.entity.Credential">
@@ -110,24 +110,39 @@
 
     <!--交易记录-->
     <select id="querydeallog" resultMap="deallog" parameterType="java.lang.Integer">
-        select d.*,f.fname,u.username,e.dename
-        from tbldeallog d,tblfirm f,tbluser u,tbldeal e
-        where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid}
+        SELECT
+        tbldeallog.*,tblfirm.fname,
+        tbluser.username,tbldeal.dename
+        FROM
+        tbldeallog
+        INNER JOIN tbldeal ON tbldeallog.deid = tbldeal.deid
+
+        INNER JOIN tblfirm ON tbldeallog.fid = tblfirm.fid
+        LEFT JOIN tbluser ON tbldeallog.userid = tbluser.userid
+        where tblfirm.fid=#{fid}
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
     </select>
 
     <select id="countdeallog" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select count(*)
-        from tbldeallog d,tblfirm f,tbluser u,tbldeal e
-        where u.userid=d.userid and f.fid= d.fid and d.deid=e.deid and f.fid=#{fid};
+        SELECT
+        count(*)
+        FROM
+        tbldeallog
+        INNER JOIN tbldeal ON tbldeallog.deid = tbldeal.deid
+
+        INNER JOIN tblfirm ON tbldeallog.fid = tblfirm.fid
+        LEFT JOIN tbluser ON tbldeallog.userid = tbluser.userid
+        where tblfirm.fid=#{fid}
     </select>
 
 
     <resultMap id="deallog" type="com.hm.entity.Tbldeallog">
         <id property="dlid" column="dlid"/>
+        <result property="userid" column="userid"/>
         <result property="dltime" column="dltime"/>
         <result property="dlcost" column="dlcost"/>
+        <result property="dltype" column="dltype"/>
         <association property="company" column="fid" javaType="com.hm.entity.Company">
             <id property="fid" column="fid"/>
             <result property="fname" column="fname"/>
@@ -490,7 +505,7 @@ where ts.ctid=m.ctid
     </update>
     <!--入驻-->
    <update id="infirm" parameterType="java.lang.String">
-       update tblfirm set fname=#{fname},rid=3  where facc=#{facc}
+       update tblfirm set fname=#{fname},rid=4 where facc=#{facc}
    </update>
     <!--循环插入服务-->
     <insert id="addserve" parameterType="java.util.List">
@@ -498,6 +513,33 @@ where ts.ctid=m.ctid
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.fid},#{item.ctid},#{item.stid})
         </foreach>
+    </insert>
+
+    <!--入驻资料上传-->
+    <insert id="infileup" parameterType="com.hm.entity.Tblfcc">
+        insert into tblfcc
+        (fid,creid,upname,uptime,upurl)
+        values
+        (#{fid},2,"营业执照",#{uptime},#{upurl})
+        <selectKey resultType="java.lang.Integer" keyProperty="fccid" order="AFTER">
+            SELECT LAST_INSERT_ID() AS fccid
+        </selectKey>
+    </insert>
+
+    <!--交易明细插入转账-->
+    <insert id="transfer" parameterType="com.hm.entity.Tbldeallog">
+insert into tbldeallog (fid,userid,deid,dltime,dlcost,dltype)
+VALUES (#{fid},1,3,SYSDATE(),#{dlcost},'转账');
+    </insert>
+    <!--交易记录提现-->
+    <insert id="draw" parameterType="com.hm.entity.Tbldeallog">
+        insert into tbldeallog (fid,userid,deid,dltime,dlcost,dltype)
+        VALUES (#{fid},null,1,SYSDATE(),#{dlcost},'提现');
+    </insert>
+    <!--交易记录充值-->
+    <insert id="add" parameterType="com.hm.entity.Tbldeallog">
+insert into tbldeallog (fid,userid,deid,dltime,dlcost,dltype)
+        VALUES (#{fid},1,5,SYSDATE(),#{dlcost},'充值');
     </insert>
 <!--  公司资料上传-->
     <insert id="companyCreUp" parameterType="com.hm.entity.Tblfcc">

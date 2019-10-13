@@ -7,6 +7,8 @@ import com.hm.entity.Staff;
 import com.hm.entity.Tblfcc;
 import com.hm.entity.Tblsfdata;
 import com.hm.tools.TimeTools;
+import com.hm.entity.Tblfcc;
+import com.hm.tools.TimeTools;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -87,6 +89,42 @@ public class FileUpHandler {
         return flog;
     }
 
+
+    //----入驻公司资料上传
+    @RequestMapping(value = "infileup")
+    public @ResponseBody
+    String infileup(HttpServletRequest request, HttpSession session, MultipartFile pictureFile, Tblfcc tblfcc){
+
+        Company company= (Company) session.getAttribute("company");
+        //--获取公司id
+        Integer fid=company.getFid();
+        //使用UUID给图片重命名，并去掉四个“-”
+        String name = UUID.randomUUID().toString().replaceAll("-", "");
+        // 获取文件的扩展名
+        String ext = FilenameUtils.getExtension(pictureFile.getOriginalFilename());
+        // 设置图片上传路径
+        String url = request.getSession().getServletContext().getRealPath("/page/upload");
+        // 以绝对路径保存重名命后的图片
+        String url2 = "page/upload/" + name+ "." + ext;
+        String sfurl=url+"/"+name + "." + ext;
+        tblfcc.setUpurl(url2);
+        try {
+            pictureFile.transferTo(new File(sfurl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String uptime= TimeTools.getStringDateMin();
+        tblfcc.setUptime(uptime);
+        tblfcc.setFid(fid);
+        Tblfcc tblfcc1=companyBiz.infileup(tblfcc);
+        if(null!=tblfcc1)
+        {
+            return "ok";
+        }else{
+            return "no";
+        }
+
+    }
 //----公司资料上传
     @RequestMapping(value = "addStaffCre")
     public @ResponseBody String addStaffCre(HttpServletRequest request, HttpSession session, MultipartFile pictureFile, Tblsfdata tblsfdata){

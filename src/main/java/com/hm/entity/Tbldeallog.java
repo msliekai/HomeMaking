@@ -10,6 +10,7 @@ public class Tbldeallog {
     private Integer deid;
     private String dltime;
     private String dlcost;
+    private String dltype;
     private Company company;
     private TblUser tblUser;
     private Tbldeal tbldeal;

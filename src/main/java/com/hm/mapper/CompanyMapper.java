@@ -162,4 +162,14 @@ public interface CompanyMapper {
     public List<Tblsfdata> findStaffImg(@Param("fid") Integer fid,@Param("dataid")Integer dataid);
     //发布订单统计
     public Map getSendOrder(@Param("date") String date,@Param("fid")Integer fid);
+    //入驻上传资料
+    public Integer infileup(Tblfcc tblfcc);
+
+    //转账记录
+    public Integer transfer(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+    //提现记录
+    public Integer draw(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+// 充值
+    public Integer add(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+
 }

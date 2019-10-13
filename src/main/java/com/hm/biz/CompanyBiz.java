@@ -110,4 +110,14 @@ public interface CompanyBiz {
     public List<Tblsfdata> findStaffImg(Integer fid,Integer creid);
     //发布订单统计
     public Map getSendOrder(String date,Integer fid);
+    //循环插入服务
+    public Integer addserve(List list);
+    //入驻上传资料
+    public Tblfcc infileup(Tblfcc tblfcc);
+    //转账记录
+    public Integer transfer(Integer fid ,String dlcost);
+    //提现
+    public Integer draw(Integer fid ,String dlcost);
+    //充值
+    public Integer add(Integer fid ,String dlcost);
 }
