@@ -107,7 +107,7 @@ public class JsoupHelper {
                     key++;
                 }else
                 if(key!=1){
-                    article=node.getTextContent();
+                    article="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+node.getTextContent();
                     list.add(article);
                 }
             }
