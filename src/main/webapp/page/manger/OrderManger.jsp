@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HANG
-  Date: 2019/8/26
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -43,14 +37,8 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-<%--                    <form class="layui-form layui-col-space5">--%>
                     <div class="demoTable">
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">--%>
-<%--                        </div>--%>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">--%>
-<%--                        </div>--%>
+
                         <div class="layui-inline layui-show-xs-block">
                             <input type="text"  placeholder="根据家政公司查询" autocomplete="off" class="layui-input" name="fname" id="fname">
                         </div>
@@ -58,13 +46,9 @@
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
                         </div>
                     </div>
-<%--                    </form>--%>
+
                 </div>
-<%--                <s:property value="list"></s:property>--%>
-<%--                <div class="layui-card-header">--%>
-<%--                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
-<%--                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>--%>
-<%--                </div>--%>
+
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
@@ -78,9 +62,6 @@
 </body>
 
 <script id="barDemo" type="text/html">
-<%--    <a class="layui-btn layui-btn-xs " lay-event="tdel">删除</a>--%>
-<%--    <a class="layui-btn layui-btn-primary " lay-event="tupdate">修改</a>--%>
-    <a class="layui-btn layui-btn-normal" lay-event="OrderContext">查看详情</a>
 </script>
 
 <script>
@@ -112,7 +93,20 @@
                 , {field: 'fname', title: '所属公司', minWidth: 80}
                 , {field: 'otime', title: '订单时间', minWidth: 80}
                 , {field: 'osname', title: '状态', minWidth: 80}
-                , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
+                , {fixed: 'right',title: '操作', align:'center',minWidth:270,templet:function (item) {
+                        var tem = [];
+                        console.log(item)
+                        if (item.osid == "10") {
+                            if(item.visit !=null){
+                                tem.push('<a class="layui-btn layui-btn-disabled">已回访</a>');
+                            }else{
+                                tem.push('<a lay-event="OrderVisit" class="layui-btn layui-btn-normal">回访</a>');
+                            }
+
+                        }
+                        tem.push('<a lay-event="OrderContext" class="layui-btn layui-btn-normal">查看详情</a>');
+                        return tem.join(' <font></font> ')
+                    }}
             ]]
         });
         //触发查询按钮
@@ -156,6 +150,21 @@
                      //引用的弹出层的页面层的方式加载修改界面表单
                  });
              }
+             else if(obj.event==="OrderVisit"){
+                layer.open({
+                    type:2,
+                    title: "回访",
+                    area: ['450px', '430px'],
+                    content: "OrderVisit.jsp"+
+                        "?oid="+encodeURIComponent(data.oid)+
+                        "&username="+encodeURIComponent(data.username)+
+                        "&ophone="+encodeURIComponent(data.ophone)+
+                        "&sfname="+encodeURIComponent(data.sfname)+
+                        "&fname="+encodeURIComponent(data.fname)+
+                        "&visit="+encodeURIComponent(data.visit)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
+            }
         });
 
 

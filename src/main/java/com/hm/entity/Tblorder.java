@@ -41,6 +41,7 @@ public class Tblorder {
     private Integer limit;
     private String start;
     private String end;
+    private String visit;
 
 
 

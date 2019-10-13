@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HANG
-  Date: 2019/8/26
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -42,27 +36,8 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-<%--                <div class="layui-card-body ">--%>
-<%--&lt;%&ndash;                    <form class="layui-form layui-col-space5">&ndash;%&gt;--%>
-<%--                    <div class="demoTable">--%>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="cong" id="cong">--%>
-<%--                        </div>--%>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="dao" id="dao">--%>
-<%--                        </div>--%>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">--%>
-<%--                        </div>--%>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--&lt;%&ndash;                    </form>&ndash;%&gt;--%>
-<%--                </div>--%>
-<%--                <s:property value="list"></s:property>--%>
+
                 <div class="layui-card-header">
-<%--                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
                     <button class="layui-btn" onclick="xadmin.open('添加','<%=path%>page/manger/AddTrain.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>
 
@@ -206,83 +181,5 @@
 
 </script>
 
-<%--<script>--%>
-<%--    layui.use(['laydate','form'], function(){--%>
-<%--        var laydate = layui.laydate;--%>
-<%--        var  form = layui.form;--%>
 
-
-<%--        // 监听全选--%>
-<%--        form.on('checkbox(checkall)', function(data){--%>
-
-<%--            if(data.elem.checked){--%>
-<%--                $('tbody input').prop('checked',true);--%>
-<%--            }else{--%>
-<%--                $('tbody input').prop('checked',false);--%>
-<%--            }--%>
-<%--            form.render('checkbox');--%>
-<%--        });--%>
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#start' //指定元素--%>
-<%--        });--%>
-
-<%--        //执行一个laydate实例--%>
-<%--        laydate.render({--%>
-<%--            elem: '#end' //指定元素--%>
-<%--        });--%>
-<%--    });--%>
-
-
-<%--    /*用户-停用*/--%>
-<%--    function member_stop(obj,id){--%>
-<%--        layer.confirm('确认要停用吗？',function(index){--%>
-
-<%--            if($(obj).attr('title')=='启用'){--%>
-
-<%--                //发异步把用户状态进行更改--%>
-<%--                $(obj).attr('title','停用')--%>
-<%--                $(obj).find('i').html('&#xe62f;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');--%>
-<%--                layer.msg('已停用!',{icon: 5,time:1000});--%>
-
-<%--            }else{--%>
-<%--                $(obj).attr('title','启用')--%>
-<%--                $(obj).find('i').html('&#xe601;');--%>
-
-<%--                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');--%>
-<%--                layer.msg('已启用!',{icon: 5,time:1000});--%>
-<%--            }--%>
-
-<%--        });--%>
-<%--    }--%>
-
-<%--    /*用户-删除*/--%>
-<%--    function member_del(obj,id){--%>
-<%--        layer.confirm('确认要删除吗？',function(index){--%>
-<%--            //发异步删除数据--%>
-<%--            $(obj).parents("tr").remove();--%>
-<%--            layer.msg('已删除!',{icon:1,time:1000});--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function delAll (argument) {--%>
-<%--        var ids = [];--%>
-
-<%--        // 获取选中的id--%>
-<%--        $('tbody input').each(function(index, el) {--%>
-<%--            if($(this).prop('checked')){--%>
-<%--                ids.push($(this).val())--%>
-<%--            }--%>
-<%--        });--%>
-
-<%--        layer.confirm('确认要删除吗？'+ids.toString(),function(index){--%>
-<%--            //捉到所有被选中的，发异步进行删除--%>
-<%--            layer.msg('删除成功', {icon: 1});--%>
-<%--            $(".layui-form-checked").not('.header').parents('tr').remove();--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--</script>--%>
 </html>

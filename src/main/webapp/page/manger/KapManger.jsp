@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HANG
-  Date: 2019/8/26
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -43,10 +37,9 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-<%--                    <form class="layui-form layui-col-space5">--%>
-<%--                    </form>--%>
+
                 </div>
-<%--                <s:property value="list"></s:property>--%>
+
                 <div class="layui-card-header">
                     <button class="layui-btn" onclick="xadmin.open('添加','<%=path%>page/manger/AddKap.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>

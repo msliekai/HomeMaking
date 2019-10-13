@@ -16,14 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.LinkedList;
 
 @Controller
 @RequestMapping("/manager")
@@ -223,7 +220,11 @@ public class ManagerHandler {
     public  @ResponseBody
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
         count=mangerBizImpl.cFindServiceAll(null).size();
-        List<TblCOS>list =mangerBizImpl.cFindServiceAll(tblCOS);
+        List<TblCOS> list =mangerBizImpl.cFindServiceAll(tblCOS);
+        for (TblCOS cos : list) {
+            System.out.println(cos.getCoshot());
+        }
+
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -498,5 +499,11 @@ public class ManagerHandler {
     public @ResponseBody int updateKap(Tblkap tblkap){
 
         return mangerBizImpl.updateKap(tblkap);
+    }
+    //提交订单回访
+    @RequestMapping("/OrderVisit.action")
+    public @ResponseBody int OrderVisit(Tblorder tblorder){
+
+        return mangerBizImpl.OrderVisit(tblorder);
     }
 }

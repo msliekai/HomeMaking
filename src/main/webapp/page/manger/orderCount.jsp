@@ -12,7 +12,6 @@
     %>
     <link href="<%=path%>page/layui/css/layui.css" rel="stylesheet"
           type="text/css">
-<%--    <link href="<%=path%>css/form1.css" rel="stylesheet" type="text/css">--%>
     <link rel="stylesheet" href="<%=path%>page/jqueryui/jquery-ui.min.css">
     <script src="<%=path%>page/js/jquery.min.js"></script>
     <script src="<%=path%>page/jqueryui/jquery-ui.min.js"></script>
@@ -20,7 +19,6 @@
     <script src="<%=path%>page/js/admin.js"></script>
     <!-- 引入 echarts.js -->
     <script src="<%=path %>page/js/echarts.min.js"></script>
-<%--    <script src="<%=path%>page/layui/laydate/laydate.js"></script>--%>
 </head>
 
 <body>
