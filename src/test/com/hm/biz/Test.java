@@ -50,13 +50,9 @@ public class Test extends TestCase {
     @org.junit.Test
     public void chong() throws Exception {
 //            JsoupHelper.fecthByMap("http://www.jianshu.com/u/bf7b9c013c55","//ul[@class='note-list']/li//a[@class='title']");
-            JsoupHelper.fecthByMap("http://health.people.com.cn/GB/408565/index.html",
-                    "/html/body/div/div[4]/div/div/div[1]/div[2]/ul/li//a[@target='_blank']");
+            Object a=JsoupHelper.fecthArticle("http://www.5m4.net/yuerbaike/3783.html",
+                    "/html/body/div[7]/div/div[1]/div/div[2]/div//div[@class='hd']/h2 |//p");
+        System.out.println(new Gson().toJson(a));
     }
 
-    @org.junit.Test
-    public void senda() throws Exception {
-        ShortMessageUtil.sendInformationToCompany("13860811761","");
-
-    }
 }

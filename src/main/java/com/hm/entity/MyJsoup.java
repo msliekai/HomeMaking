@@ -14,11 +14,14 @@ public class MyJsoup {
 
     private String href;
 
+    private String article;
+
     public MyJsoup() {
     }
 
-    public MyJsoup(String title, String href) {
+    public MyJsoup(String title, String href,String article) {
         this.title = title;
         this.href = href;
+        this.article=article;
     }
 }

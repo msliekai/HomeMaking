@@ -7,7 +7,9 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import com.google.gson.Gson;
 import com.hm.entity.MyJsoup;
+import com.hm.entity.Tbldeallog;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.DomSerializer;
 import org.htmlcleaner.HtmlCleaner;
@@ -25,8 +27,8 @@ public class JsoupHelper {
         String html = null;
         try {
             Connection connect = Jsoup.connect(url);
-            html = connect.get().body().html();
-            System.out.println(html);
+            html = connect.get().body().html();//获得body里的全部标签
+//            System.out.println(html);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -53,22 +55,65 @@ public class JsoupHelper {
 
         if (result instanceof NodeList) {
             NodeList nodeList = (NodeList) result;
-
+            int key = 1;
+            String title="";
+            String href = "";
+            String article="";
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
                 if (node == null) {
                     continue;
                 }
-                String href = node.getAttributes().getNamedItem("href") != null ? node.getAttributes().getNamedItem("href").getTextContent() : "";
 
-                list.add(new MyJsoup(node.getTextContent(), "http://health.people.com.cn"+href));
-
-                System.out.println(
-                        node.getTextContent() + " : " + "http://health.people.com.cn"+href);
+                if (key == 1) {
+                    title=node.getTextContent();
+                    href = node.getAttributes().getNamedItem("href") != null ?  node.getAttributes().getNamedItem("href").getTextContent() : "";
+                    key++;
+                }else
+                if(key==2){
+                    article=node.getTextContent();
+                    list.add(new MyJsoup(title,href,article));
+                    key--;
+                }
             }
         }
 
         return list;
+    }
+
+    /**
+     * 获得文章信息
+     * /
+     **/
+    public static Map<String,Object> fecthArticle(String url, String xpath) throws Exception {
+        Map<String,Object>map=new HashMap();
+        List<String> list = new LinkedList<>();
+
+        Object result = fecthNode(url, xpath);
+
+        if (result instanceof NodeList) {
+            NodeList nodeList = (NodeList) result;
+            int key = 1;
+            String title="";
+            String article="";
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node == null) {
+                    continue;
+                }
+                if (key == 1) {
+                    title=node.getTextContent();
+                    map.put("title",title);
+                    key++;
+                }else
+                if(key!=1){
+                    article=node.getTextContent();
+                    list.add(article);
+                }
+            }
+            map.put("article",list);
+        }
+        return map;
     }
 
     /**
@@ -96,4 +141,6 @@ public class JsoupHelper {
 
         return list;
     }
+
+
 }

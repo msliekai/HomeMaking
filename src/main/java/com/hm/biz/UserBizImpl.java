@@ -282,5 +282,10 @@ public class UserBizImpl implements UserBiz
         return userMapper.cosHotUp(cosid);
     }
 
+    @Override
+    public Integer adddeallog(Tbldeallog tbldeallog) {
+        return userMapper.adddeallog(tbldeallog);
+    }
+
 
 }

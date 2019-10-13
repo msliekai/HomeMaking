@@ -141,5 +141,6 @@ public interface UserMapper {
     //服务热度
     public Integer cosHotUp(@Param("cosid") Integer cosid);
 
-
+    //增加交易记录
+    public Integer adddeallog(Tbldeallog tbldeallog);
 }

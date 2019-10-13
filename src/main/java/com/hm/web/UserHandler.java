@@ -238,8 +238,8 @@ public class UserHandler {
                 Integer num = biz.addOrder(tblorder);
                 if (num != null && num != 0) {
                     use.setUsermoney(money - ji);
-                    ShortMessageUtil.sendInformationToCompany(tblorder.getFphone(),tblorder.getFname());
-                    biz.cosHotUp(tblorder.getCosid());
+                    biz.cosHotUp(tblorder.getCosid());//增加热度
+                    biz.adddeallog(new Tbldeallog(tblorder.getFid(),use.getUserid(),TimeTools.getStringDate(),(money - ji)+""));//增加消费记录
                     session.setAttribute("userbacc", use);
                     map.put("flog", "addok");
                 } else {

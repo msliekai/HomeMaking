@@ -232,4 +232,11 @@ public interface UserBiz {
      * @return
      */
     public Integer cosHotUp(@Param("cosid") Integer cosid);
+
+    /**
+     * 增加交易记录
+     * @param tbldeallog
+     * @return
+     */
+    public Integer adddeallog(Tbldeallog tbldeallog);
 }

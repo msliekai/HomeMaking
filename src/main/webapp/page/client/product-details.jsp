@@ -188,11 +188,12 @@
                     <hr/>
                     <h3>我要预约</h3>
                     <form>
+                        <input type="hidden" id="fid" name="fid" value="${requestScope.staff.company.fid}"/>
                         <input type="hidden" id="sfid" name="sfid" value="${requestScope.staff.sfid}"/>
                         <input type="hidden" id="cosid" name="cosid" value="${requestScope.staff.tblCOS.cosid}"/>
                         <input type="hidden" id="money" name="money" value="${requestScope.staff.sfcos}"/>
-                        <input type="hidden" id="fphone" name="money" value="${requestScope.company.fphone}"/>
-                        <input type="hidden" id="fname" name="money" value="${  requestScope.staff.company.fname}"/>
+                        <input type="hidden" id="fphone" name="fphone" value="${requestScope.company.fphone}"/>
+                        <input type="hidden" id="fname" name="fname" value="${  requestScope.staff.company.fname}"/>
 
                     <div class="col-lg-12">
                         <div class="form-group">
