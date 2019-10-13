@@ -4,6 +4,7 @@ import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CompanyBiz {
     public Company comlogin(String facc, String fpwd);
@@ -99,4 +100,24 @@ public interface CompanyBiz {
     public Integer changepwd(String fpwd,String facc);
     //入驻
     public Integer infirm(String fname,String facc);
+    //----公司资料上传
+    public Tblfcc companyCreUp(Tblfcc tblfcc);
+    //----公司资料上传
+    public Tblsfdata staffCreUp(Tblsfdata tblsfdata);
+    //---公司资料显示
+    public List<Tblfcc> findImg(Integer fid,Integer creid);
+    //---员工资料显示
+    public List<Tblsfdata> findStaffImg(Integer fid,Integer creid);
+    //发布订单统计
+    public Map getSendOrder(String date,Integer fid);
+    //循环插入服务
+    public Integer addserve(List list);
+    //入驻上传资料
+    public Tblfcc infileup(Tblfcc tblfcc);
+    //转账记录
+    public Integer transfer(Integer fid ,String dlcost);
+    //提现
+    public Integer draw(Integer fid ,String dlcost);
+    //充值
+    public Integer add(Integer fid ,String dlcost);
 }

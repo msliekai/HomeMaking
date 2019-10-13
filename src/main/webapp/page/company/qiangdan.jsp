@@ -23,9 +23,11 @@
 <body>
 <%
     String oid = request.getParameter("oid")==null?"":request.getParameter("oid");
+    String ophone = request.getParameter("ophone")==null?"":request.getParameter("ophone");
 %>
 <form  id="form1" action="" method="get" lay-filter="example" >
     <input type="text" value="<%=oid%>" name="oid" hidden="hidden">
+    <input type="text" value="<%=ophone%>" name="ophone" hidden="hidden">
 请选择服务人员：<br/>
         <select name="sfid" id="sfid" lay-search="" lay-verify="required">
                 <option></option>

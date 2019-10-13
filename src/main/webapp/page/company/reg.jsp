@@ -184,7 +184,7 @@
 
                 <p>
                     已有账号 ?
-                    <a href="<%=path%>page/client/signin.jsp">点我登陆</a>
+                    <a href="<%=path%>page/CompanyLogin.jsp">点我登陆</a>
                 </p>
             </div><!--/.signin-footer -->
 
@@ -225,7 +225,6 @@
 <script>
 
     function reg() {
-
         if(!checkfpwd()){
             return false;
         }
@@ -238,6 +237,7 @@
         if(!$("#aaa").text()=='该账号可用'){
             return false;
         }
+        alert("注册成功");
         return true;
     }
         function checkfpwd(){

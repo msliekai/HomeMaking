@@ -174,7 +174,7 @@
         var paymentpwd=$("#paymentpwd").val();
         var transfermoney=$("#transfermoney").val();
         var zzm = /^\+?[1-9][0-9]{0,4}$/;//转账金额格式
-        var pattern = /^([1-9]{1})(\d{14}|\d{
+        var pattern = /^([1-9]{1})(\d{14}|\d{18})$/
         if(pattern.test(payeecount)&&pattern.test(collectcount)){
             if(zzm.test(transfermoney)){
                 $.post("<%=path%>page/transfer.action",{"collectcount":collectcount,

@@ -77,7 +77,7 @@
                 };
             }
             , cols: [[ //表头
-                {field: 'creid', title: '材料序号', minWidth: 80}
+                {field: 'creid', title: '材料序号', minWidth: 80,hide:true}
                 ,{field: 'crename', title: '材料名', minWidth: 80}
                 , {field: 'count', title: '份数', minWidth: 80}
                 , {field: 'right', fixed: 'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
@@ -91,15 +91,20 @@
             var tt =obj.data;
             var creid=tt.creid;
             if (obj.event === 'deal') {
-                alert(tt.crename)
-
+                layer.open({
+                    type:2,
+                    title: "上传资料",
+                    area: ['500px', '600px'],
+                    content: "comimg.jsp"+"?creid="+encodeURIComponent(creid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
             } else if(obj.event==="add"){
-                // alert(creid)
                 layer.open({
                     type:2,
                     title: "上传资料",
                     area: ['500px', '200px'],
-                    content: "upfile.jsp"+"?uu="+encodeURIComponent(creid)//引用的弹出层的页面层的方式加载修改界面表单
+                    content: "upfile.jsp"+"?uu="+encodeURIComponent(creid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });

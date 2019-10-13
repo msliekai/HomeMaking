@@ -5,6 +5,7 @@ import com.hm.biz.CompanyBiz;
 import com.hm.biz.MenuBiz;
 import com.hm.entity.*;
 
+import com.hm.tools.ShortMessageUtil;
 import com.hm.tools.TimeTools;
 import com.sun.deploy.ui.FancyButton;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
@@ -258,7 +259,8 @@ public class CompanyHandler {
             String money = sum + "";
             Company company = (Company) httpSession.getAttribute("company");
             Integer fid = company.getFid();
-            Integer row = companyBiz.addmoney(money, fid);
+            Integer row = companyBiz.addmoney(money,fid);
+            companyBiz.add(fid,addmoney);
             return "1";
         } else {
             return "0";
@@ -266,65 +268,60 @@ public class CompanyHandler {
     }
 
     //提现
-    @RequestMapping(value = "drawmoney", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    String drawmoney(HttpSession httpSession, String draw, String compwd) {
+    @RequestMapping(value = "drawmoney",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
+    public @ResponseBody String drawmoney(HttpSession httpSession,String draw,String compwd){
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
-        if (checkcompwd != null) {
+        if(checkcompwd!=null){
             String famoney = firmacc.getFamoney();
             int i = Integer.parseInt(draw);//提现
             int j = Integer.parseInt(famoney);//余额
-            if (i <= j) {
-                int sum = j - i;
-                String money = sum + "";
+            if(i<=j){
+                int sum=j-i;
+                String money=sum+"";
                 System.out.println(money);
                 Integer row = companyBiz.drawmoney(money, fid);
+                Integer draw1 = companyBiz.draw(fid,draw);
                 return "1";
 
-            } else {
+            }else{
                 return "0";//格式不正确
             }
 
-        } else {
+        }else{
             return "2";//密码错误
         }
     }
-
     //银行卡修改
-    @RequestMapping(value = "changefacard", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    String changefacard(HttpSession httpSession, String car) {
+    @RequestMapping(value = "changefacard",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public @ResponseBody String changefacard(HttpSession httpSession,String car){
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer row = companyBiz.changefacard(car, fid);
         return "1";
 
     }
-
     //公司服务类别
-    @RequestMapping(value = "servicetype", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    Map<String, Object> servicetype(HttpSession httpSession, Tblfc tblfc) {
+    @RequestMapping(value = "servicetype",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> servicetype(HttpSession httpSession,Tblfc tblfc){
         Integer page = tblfc.getPage();
         Integer limit = tblfc.getLimit();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        List<Tblfc> servicetype = companyBiz.servicetype(fid, page, limit);
-        int count = companyBiz.countservicetype(fid, page, limit);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("count", count);
-        map.put("data", servicetype);
+        List<Tblfc> servicetype = companyBiz.servicetype(fid,page,limit);
+        int count =companyBiz.countservicetype(fid,page,limit);
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",servicetype);
         return map;
     }
 
     //具体服务
-    @RequestMapping(value = "queryserve", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    Map<String, Object> queryserve(HttpSession httpSession, Tblfc tblfc) {
+    @RequestMapping(value = "queryserve",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> queryserve(HttpSession httpSession,Tblfc tblfc){
         System.out.println("具体服务");
         Integer page = tblfc.getPage();
         Integer limit = tblfc.getLimit();
@@ -334,66 +331,62 @@ public class CompanyHandler {
         System.out.println(page);
         System.out.println(limit);
         List<Tblfc> queryserve = companyBiz.queryserve(fid, page, limit);
-        System.out.println(queryserve + "********");
-        int count = companyBiz.countserve(fid, page, limit);
-        System.out.println(count + "+++++++++++");
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("count", count);
-        map.put("data", queryserve);
+        System.out.println(queryserve+"********");
+        int count = companyBiz.countserve(fid,page,limit);
+        System.out.println(count+"+++++++++++");
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",queryserve);
         return map;
     }
 
     //检测银行密码是否正确
-    @RequestMapping(value = "checkcompwd", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    String checkcompwd(HttpSession httpSession, String compwd) {
+    @RequestMapping(value = "checkcompwd",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
+    public @ResponseBody String checkcompwd(HttpSession httpSession,String compwd){
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
-        Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
-        if (checkcompwd != null) {
+        Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(),compwd);
+        if(checkcompwd!=null){
             return "1";
         }
         return "0";
     }
 
     //修改公司信息
-    @RequestMapping(value = "upcom", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    String upcom(HttpSession httpSession, HttpServletRequest req, String facc,
-                 String fname, String flaw, String flawphone, String fsite) {
+    @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
+    public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
+                                      String fname, String flaw, String flawphone, String fsite){
         Company company = (Company) httpSession.getAttribute("company");
-        int upcom = companyBiz.upcom(company.getFid(), facc, fname, flaw, flawphone, fsite);
+        int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,flawphone,fsite);
         Company upcominfo = companyBiz.upcominfo(company.getFid());
-        httpSession.setAttribute("company", upcominfo);
+        httpSession.setAttribute("company",upcominfo);
 //        req.getSession().setAttribute("company",company);
         return "1";
     }
 
     //评价
-    @RequestMapping(value = "querycomment", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    Map<String, Object> querycomment(HttpSession httpSession, Tbleva tbleva, String date1, String date2) {
+    @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
+    public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva,String date1,String date2){
         System.out.println("评价");
-        System.out.println(date1 + date2);
+        System.out.println(date1+date2);
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer page = tbleva.getPage();
         Integer limit = tbleva.getLimit();
-        List<Tbleva> querycomment = companyBiz.querycomment(fid, page, limit, date1, date2);
-        Map<String, Object> map = new HashMap<String, Object>();
+        List<Tbleva> querycomment = companyBiz.querycomment(fid,page,limit,date1,date2);
+        Map<String,Object> map=new HashMap<String,Object>();
 //        int count=0;
-        int count = companyBiz.countcomment(fid, page, limit, date1, date2);
-        map.put("code", 0);
-        map.put("count", count);
-        map.put("data", querycomment);
+        int count = companyBiz.countcomment(fid,page,limit,date1,date2);
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",querycomment);
         return map;
     }
-
     //银行转账
-    @RequestMapping(value = "transfer", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    String transfer(HttpSession httpSession, String collectcount,
-                    String collect, String payee, String paymentpwd, String transfermoney) {
+    @RequestMapping(value = "transfer",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
+    public @ResponseBody String transfer(HttpSession httpSession,String collectcount,
+                                         String collect,String payee,String paymentpwd,String transfermoney){
+        System.out.println("银行转账");
         Staff staff = companyBiz.queryscard(collectcount);
         String sfname = staff.getSfname();
         Company company = (Company) httpSession.getAttribute("company");
@@ -405,75 +398,77 @@ public class CompanyHandler {
         int j = Integer.parseInt(transfermoney);
         String flaw = queryfacard.getCompany().getFlaw();//法人
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(facard, paymentpwd);//验证支付密码是否正确
-        if (checkcompwd != null) {
-            if (sfname.equals(collect) && queryfacard != null && flaw.equals(payee)) {
-                if (j < i) {
-                    int sum = i - j;
-                    String money = sum + "";
-                    Integer drawmoney = companyBiz.drawmoney(money, fid);
-                    return "1";
-                } else {
-                    return "2";
-                }
-            } else {
-                return "0";
+        if(checkcompwd!=null){
+            if(sfname.equals(collect)&&queryfacard!=null&&flaw.equals(payee))
+        {
+            if(j<i){
+                int sum=i-j;
+                String money=sum+"";
+                Integer drawmoney = companyBiz.drawmoney(money, fid);
+                Integer transfer = companyBiz.transfer(fid,transfermoney);
+                return "1";
+            }else{
+                return "2";
             }
-        } else {
+        }else {
+            return "0";
+        }
+        }else{
             return "3";
         }
     }
 
 
-    //    抢单
-    @RequestMapping(value = "takeOrders", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    Map<String, Object> takeOrders(HttpSession httpSession, Tblorder tblorder) {
+//    抢单
+    @RequestMapping(value = "takeOrders",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody Map<String,Object> takeOrders(HttpSession httpSession,Tblorder tblorder)
+    {
         Integer page = tblorder.getPage();
         Integer limit = tblorder.getLimit();
-        Integer osid = 6;
-        List<Tblorder> list = companyBiz.takeOrders(osid, page, limit);
-        Integer count = list.size();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("count", count);
-        map.put("data", list);
+        Integer osid=6;
+        List<Tblorder> list = companyBiz.takeOrders(osid,page,limit);
+        Integer count=list.size();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
         return map;
     }
-
     //-----查找用户信息
-    @RequestMapping(value = "finduser", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    TblUser finduser(HttpSession httpSession, TblUser tblUser) {
+    @RequestMapping(value = "finduser",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody TblUser finduser(HttpSession httpSession,TblUser tblUser)
+    {
         Integer userid = tblUser.getUserid();
         TblUser user = companyBiz.findUser(userid);
         return user;
     }
-
     //--------查找员工信息
-    @RequestMapping(value = "findStaff", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    List<Staff> findStaff(HttpSession session) {
+    @RequestMapping(value = "findStaff",method = RequestMethod.GET,produces ="application/json;charset=utf-8" )
+    public @ResponseBody List<Staff> findStaff(HttpSession session)
+    {
         Company company = (Company) session.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        List<Staff> list = companyBiz.findStaff(fid);
+        List<Staff> list=companyBiz.findStaff(fid);
         return list;
     }
-
     //--------------接单
-    @RequestMapping(value = "take", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String take(Tblorder tblorder) {
+    @RequestMapping(value = "take",method = RequestMethod.GET,produces ="application/text;charset=utf-8" )
+    public @ResponseBody String take(HttpSession session,Tblorder tblorder)
+    {
+        Company company = (Company) session.getAttribute("company");
+         String fname = company.getFname();//获取公司名称
+        String ophone=tblorder.getOphone();
 
         //---获取订单号
-        Integer oid = tblorder.getOid();
+        Integer oid= tblorder.getOid();
         //--员工id
-        Integer sfid = tblorder.getSfid();
+        Integer sfid=tblorder.getSfid();
         //--服务时间
-        String svtime = tblorder.getSvtime();
+        String svtime=tblorder.getSvtime();
         //--订单时间
-        String otime = TimeTools.getStringDateMin();
+        String otime= TimeTools.getStringDateMin();
         //--更改状态
-        Integer osid = 7;
+        Integer osid=7;
         tblorder.setOid(oid);
         tblorder.setOsid(osid);
         tblorder.setSfid(sfid);
@@ -481,118 +476,118 @@ public class CompanyHandler {
         tblorder.setOtime(otime);
 
         Integer a = companyBiz.addOrder(tblorder);
-        if (a > 0) {
+        if(a>0)
+        {
+            //----给用户发送接单短信
+            ShortMessageUtil.sendInformationToUsers(ophone,fname);
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
-
     //------员工修改
-    @RequestMapping(value = "staffFix", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String staffFix(Staff staff) {
-        Staff staff1 = new Staff(staff.getSfid(), staff.getSfname(), staff.getSfdob(),
-                staff.getSfcos(), staff.getSfworkexp(), staff.getSfwant(),
-                staff.getSfgood(), staff.getSfedu(), staff.getSftag());
+    @RequestMapping(value = "staffFix",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String staffFix(Staff staff)
+    {
+        Staff staff1 = new Staff(staff.getSfid(),staff.getSfname(),staff.getSfdob(),
+                staff.getSfcos(),staff.getSfworkexp(),staff.getSfwant(),
+                staff.getSfgood(),staff.getSfedu(),staff.getSftag());
 
         Integer b = companyBiz.staffFix(staff1);
-        if (b > 0) {
+        if(b>0)
+        {
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
-
     //----查看培训详情
     @RequestMapping(value = "trainMsg")
-    public @ResponseBody
-    Tbltrain trainMsg(String trid) {
+    public @ResponseBody Tbltrain trainMsg(String trid)
+    {
 
-        Tbltrain tbltrain = companyBiz.trainMsg(Integer.parseInt(trid));
+      Tbltrain tbltrain=companyBiz.trainMsg(Integer.parseInt(trid));
 
-        return tbltrain;
+       return tbltrain;
     }
-
     //--查看员工评价信息
     @RequestMapping(value = "findStaffEva")
-    public @ResponseBody
-    List<Tbleva> findStaffEva(String sfid) {
+    public @ResponseBody List<Tbleva> findStaffEva(String sfid)
+    {
 
-        List<Tbleva> list = companyBiz.findStaffEva(Integer.parseInt(sfid));
+       List<Tbleva> list=companyBiz.findStaffEva(Integer.parseInt(sfid));
         System.out.println(list);
 
         return list;
     }
-
     //----分配服务类型
     @RequestMapping(value = "findCosStyle")
-    public @ResponseBody
-    List<Tblfc> findCosStyle(HttpSession session) {
+    public @ResponseBody List<Tblfc> findCosStyle(HttpSession session)
+    {
         Company company = (Company) session.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        List<Tblfc> list = companyBiz.findCosStyle(fid);
+        List<Tblfc> list=companyBiz.findCosStyle(fid);
         return list;
     }
-
     //-------分配
-    @RequestMapping(value = "fenPei", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String fenPei(HttpServletRequest request, TblCOStype tblCOStype) {
-        Integer ctid = tblCOStype.getCtid();
-        if (ctid != null) {
-            request.getSession().setAttribute("ctid", ctid);
+    @RequestMapping(value = "fenPei",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPei(HttpServletRequest request,TblCOStype tblCOStype)
+    {
+        Integer ctid=tblCOStype.getCtid();
+        if(ctid!=null)
+        {
+            request.getSession().setAttribute("ctid",ctid);
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
-
     //----分配服务
     @RequestMapping(value = "findCos")
-    public @ResponseBody
-    List<TblCOS> findCos(HttpSession session, String ctid) {
-        Integer ctid1 = Integer.parseInt(ctid);
-        List<TblCOS> list = companyBiz.findCos(ctid1);
+    public @ResponseBody List<TblCOS> findCos(HttpSession session,String ctid)
+    {
+       Integer ctid1=Integer.parseInt(ctid);
+        List<TblCOS> list =companyBiz.findCos(ctid1);
         return list;
     }
-
     //------修改员工服务
-    @RequestMapping(value = "fenPeiCos", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String fenPeiCos(String cosid, String sfid) {
-        Integer sfid1 = Integer.parseInt(sfid);
-        Integer cosid1 = Integer.parseInt(cosid);
-        Integer b = companyBiz.fenPeiCos(cosid1, sfid1);
-        if (b > 0) {
+    @RequestMapping(value = "fenPeiCos",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String fenPeiCos(String cosid,String sfid)
+    {
+        Integer sfid1=Integer.parseInt(sfid);
+        Integer cosid1=Integer.parseInt(cosid);
+        Integer b =companyBiz.fenPeiCos(cosid1,sfid1);
+        if(b>0)
+        {
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
 
     //-----售后接受
-    @RequestMapping(value = "after", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String after(Tblorder tblorder) {
+    @RequestMapping(value = "after",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String after(Tblorder tblorder)
+    {
         tblorder.setOsid(10);
         Integer b = companyBiz.after(tblorder);
-        if (b > 0) {
+        if(b>0)
+        {
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
-
     //-----拒绝售后
-    @RequestMapping(value = "afterResult", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String afterResult(Tblorder tblorder) {
+    @RequestMapping(value = "afterResult",method = RequestMethod.GET,produces ="application/text;charset=utf-8")
+    public @ResponseBody String afterResult(Tblorder tblorder)
+    {
         tblorder.setOsid(10);
         Integer b = companyBiz.afterResult(tblorder);
-        if (b > 0) {
+        if(b>0)
+        {
             return "ok";
-        } else {
+        }else {
             return "no";
         }
     }
@@ -630,36 +625,77 @@ public class CompanyHandler {
     }
 
     //入驻
-    @RequestMapping(value = "infirm", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
-    public @ResponseBody
-    String infirm(HttpSession httpSession, String fname, String ctids, String ctidsAll) {
+    @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
+    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
         Company company = (Company) httpSession.getAttribute("company");
         String facc = company.getFacc();
         Integer fid = company.getFid();
-        System.out.println(ctids);
-        System.out.println(ctidsAll);
-        System.out.println("公司入驻");
         List<Tblfc> tblfcs = new ArrayList<>();
         String[] ctidss = ctids.split(",");
         String[] ctidsAlls = ctidsAll.split(",");
-        for (String s : ctidsAlls) {
+        for (String s:ctidsAlls){
             Tblfc tblfc = new Tblfc();
             tblfc.setFid(fid);
             tblfc.setCtid(Integer.parseInt(s));
             tblfc.setStid(6);
-            for (String ss : ctidss) {
-                if (s.equals(ss)) {
+            for (String ss:ctidss){
+                if (s.equals(ss)){
                     tblfc.setStid(7);
                 }
             }
             tblfcs.add(tblfc);
         }
-
-        Integer i = companyBiz.infirm(fname, facc);
-        if (i > 0) {
-            return "1";
-        } else {
-            return "0";
+        if(company.getRid()==7){
+            Integer j = companyBiz.addserve(tblfcs);
+            System.out.println(j);
+            Integer i = companyBiz.infirm(fname, facc);
+            System.out.println(i);
+            if(i>0){
+                return "1";
+            }else {
+                return "0";
+            }
+        }else {
+            return "2";//该公司已经入驻
         }
+
+    }
+    //清除缓存
+    @RequestMapping(value = "clearSession",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
+    public @ResponseBody  String clearSession(HttpServletRequest request){
+        System.out.println("清理缓存");
+//        request.getSession().removeAttribute("company");
+        request.getSession().invalidate();
+        return "1";
+    }
+    //---公司资料显示
+    @RequestMapping(value = "findImg")
+    public @ResponseBody List<Tblfcc> findImg(HttpSession session,String creid)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        Integer creid1=Integer.parseInt(creid);
+        List<Tblfcc> tblfcc=companyBiz.findImg(fid,creid1);
+
+        return  tblfcc;
+    }
+    //---员工资料显示
+    @RequestMapping(value = "findStaffImg")
+    public @ResponseBody List<Tblsfdata> findStaffImg(HttpSession session,String dataid)
+    {
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        Integer dataid1=Integer.parseInt(dataid);
+        List<Tblsfdata> tblsfdata=companyBiz.findStaffImg(fid,dataid1);
+
+        return  tblsfdata;
+    }
+    //获取订单统计
+    @RequestMapping(value = "getOrderCount")
+    public @ResponseBody  Map getOrderCount(HttpSession session,String date){
+        System.out.println("jianlai+1111111111");
+        Company company = (Company) session.getAttribute("company");
+        Integer fid=company.getFid();
+        return companyBiz.getSendOrder(date,fid);
     }
 }

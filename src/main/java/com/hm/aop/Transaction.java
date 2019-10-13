@@ -37,7 +37,16 @@ public class Transaction {
         }*/
         System.out.println(aClass);
         System.out.println(methodName);
-        System.out.println(method);
-        System.out.println("银行交易日志操作");
-}
+        switch (methodName){
+            case "addmoney":
+                System.out.println("充值");
+                break;
+            case "drawmoney":
+                System.out.println("提现");
+                break;
+            case "transfer":
+                System.out.println("转账");
+        }
+
+    }
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface CompanyMapper {
@@ -151,4 +152,24 @@ public interface CompanyMapper {
 
     //循环插入服务
     public Integer addserve(List list);
+    //----公司资料上传
+    public Integer companyCreUp(Tblfcc tblfcc);
+    //----公司资料上传
+    public Integer staffCreUp(Tblsfdata tblsfdata);
+    //---公司资料显示
+    public List<Tblfcc> findImg(@Param("fid") Integer fid,@Param("creid") Integer creid);
+    //---员工资料显示
+    public List<Tblsfdata> findStaffImg(@Param("fid") Integer fid,@Param("dataid")Integer dataid);
+    //发布订单统计
+    public Map getSendOrder(@Param("date") String date,@Param("fid")Integer fid);
+    //入驻上传资料
+    public Integer infileup(Tblfcc tblfcc);
+
+    //转账记录
+    public Integer transfer(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+    //提现记录
+    public Integer draw(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+// 充值
+    public Integer add(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+
 }

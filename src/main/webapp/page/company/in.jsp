@@ -27,6 +27,7 @@
     <!-- title of site -->
     <title>入驻申请</title>
 
+    <script type="text/javascript" src="<%=path%>page/Xadmin/js/jquery.min.js"></script>
     <!-- For favicon png -->
     <link rel="shortcut icon" type="image/icon" href="<%=path%>page/client/css/logo/favicon.png"/>
 
@@ -85,11 +86,12 @@
 
                             </div><!--/.form-group -->
 
-<%--                                <div class="form-group">--%>
-<%--                                    <label for="fsite">资料上传:<input type="file" class="form-control" autocomplete="off" id="fsite" name="fsite"></label>--%>
-
-
-<%--                                </div>--%>
+                                <div class="form-group">
+                                    <form action="#" method="post" enctype="multipart/form-data" id="fileup">
+                                    <label for="fsite">资料上传:<input type="file" class="form-control" autocomplete="off" id="fsite" name="pictureFile"></label>
+                                        <input type="submit" value="确定" onclick="fileup()"/>
+                                     </form>
+                                </div>
 
                             <!--/.form-group -->
 
@@ -181,9 +183,11 @@
                 alert(ctids);
                 $.post("<%=path%>page/infirm.action",{"fname":fname,"ctids":ctids,"ctidsAll":ctidsAll},function (data) {
                     if(data=="1"){
-                        alert("入驻成功");
+                        alert("入驻成功，待后台审核");
                     }
-                    else {
+                    else if(data=="2"){
+                        alert("已入驻，待审核中");
+                    }else{
                         alert("入驻失败");
                     }
 
@@ -204,6 +208,31 @@
         }).get().join(",");
         return data;
     }
+    
+    
+    function fileup() {
+        $.ajax({
+            url:"<%=path%>admin/infileup.action",
+            type:"post",
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: "text",
+            data:new FormData($('#fileup')[0]),
+            success:function(redata){
+                var a = redata;
+                if(a=="ok")
+                {
+                    alert("提交成功");
+
+                }else
+                {
+                    alert("提交失败");
+                }
+            }
+        })
+    }
+
 </script>
 
 

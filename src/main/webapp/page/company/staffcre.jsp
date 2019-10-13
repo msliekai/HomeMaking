@@ -86,14 +86,20 @@
         table.on('tool(test2)', function(obj) {
             var data = obj.data;
             if (obj.event === 'staffdeal') {
-
+                layer.open({
+                    type:2,
+                    title: "上传资料",
+                    area: ['500px', '600px'],
+                    content: "staffimg.jsp"+"?dataid="+encodeURIComponent(data.dataid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
+                });
             } else if(obj.event==="staffadd"){
                 // alert(data.dataid)
                 layer.open({
                     type:2,
                     title: "上传资料",
                     area: ['500px', '200px'],
-                    content: "upfile.jsp"+"?uu="+encodeURIComponent(data.dataid)//引用的弹出层的页面层的方式加载修改界面表单
+                    content: "staffupfile.jsp"+"?dataid="+encodeURIComponent(data.dataid)//引用的弹出层的页面层的方式加载修改界面表单
                 });
             }
         });

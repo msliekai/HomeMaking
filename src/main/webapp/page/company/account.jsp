@@ -86,13 +86,6 @@
                                 <hr class="layui-bg-red">
                 </div>
 
-
-                <%--                <s:property value="list"></s:property>--%>
-                <%--<div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
-                </div>--%>
-
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
                     </table>
@@ -100,7 +93,8 @@
             </div>
         </div>
     </div>
-</div>
+<%--</div>--%>
+
 </body>
 <%--<script id="barDemo" type="text/html">--%>
 <%--    <a class="layui-btn layui-btn-xs " lay-event="useEna">启用</a>--%>
@@ -119,6 +113,7 @@
             , url: '<%=path%>page/querydeallog.action' //数据接口
             , page: true //开启分页
             ,limit:3
+            ,limits:[3,5,10,20]
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -133,15 +128,27 @@
             }
             , cols: [[ //表头
                 {field: 'dlid', title: '序号', minWidth: 100}
+                ,{field: 'userid', title: '用户id', minWidth: 100,hide:true}
                 , {field: 'dltime', title: '发生时间', minWidth: 80}
-                , {field: 'dename', title: '资金来源', minWidth: 80,templet:function (d) {return d.tbldeal.dename
-
+                , {field: 'dename1', title: '资金来源', minWidth: 80,templet:function (d){
+                        console.log(d)
+                        if (d.userid == null) {
+                            return d.tbldeal.dename;
+                        }else{
+                            return "--";
+                        }
                     }}
-                , {field: 'dename', title: '资金去向', minWidth:150,templet:function (d) {return d.tbldeal.dename
+                , {field: 'dename2', title: '资金去向', minWidth:150,templet:function (d){
+                        console.log(d)
 
+                        if (d.userid == null) {
+                            return "--";
+                        }else{
+                            return d.tbldeal.dename;
+                        }
                     }}
                 , {field: 'dlcost', title: '金额', minWidth: 80}
-                , {field: 'email', title: '操作类型', minWidth: 80}
+                , {field: 'dltype', title: '操作类型', minWidth: 80}
             ]]
         });
         //触发查询按钮

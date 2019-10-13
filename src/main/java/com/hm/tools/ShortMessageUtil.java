@@ -139,6 +139,4 @@ public class ShortMessageUtil {
         }
         return vcode;
     }
-
-
 }

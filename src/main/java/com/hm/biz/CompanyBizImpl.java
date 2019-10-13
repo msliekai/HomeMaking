@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service("companyBiz")
 public class CompanyBizImpl implements CompanyBiz {
@@ -101,11 +102,45 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.queryscard(scard);
     }
 
+    @Override
+    public Integer addserve(List list) {
+        return companyMapper.addserve(list);
+    }
+
     //入驻
     @Override
     public Integer infirm(String fname, String facc) {
 
         return companyMapper.infirm(fname,facc);
+    }
+    //----公司资料上传
+    @Override
+    public Tblfcc companyCreUp(Tblfcc tblfcc) {
+        Tblfcc obj=tblfcc;
+        companyMapper.companyCreUp(obj);
+        return obj;
+    }
+    //----公司资料上传
+    @Override
+    public Tblsfdata staffCreUp(Tblsfdata tblsfdata) {
+        Tblsfdata obj=tblsfdata;
+        companyMapper.staffCreUp(obj);
+        return obj;
+    }
+    //---资料显示
+    @Override
+    public List<Tblfcc> findImg(Integer fid, Integer creid) {
+        return companyMapper.findImg(fid,creid);
+    }
+    //---员工资料显示
+    @Override
+    public List<Tblsfdata> findStaffImg(Integer fid, Integer creid) {
+        return companyMapper.findStaffImg(fid,creid);
+    }
+    //发布订单统计
+    @Override
+    public Map getSendOrder(String date,Integer fid) {
+        return companyMapper.getSendOrder(date,fid);
     }
 
     //修改密码
@@ -142,6 +177,30 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.delStaff(sfid);
     }
 
+    //提现交易记录
+    @Override
+    public Integer draw(Integer fid,String dlcost) {
+        return companyMapper.draw(fid,dlcost);
+    }
+
+    //充值
+    @Override
+    public Integer add(Integer fid, String dlcost) {
+        return companyMapper.add(fid,dlcost);
+    }
+
+    //转账交易记录
+    @Override
+    public Integer transfer(Integer fid,String dlcost) {
+        return companyMapper.transfer(fid,dlcost);
+    }
+
+    @Override
+    public Tblfcc infileup(Tblfcc tblfcc) {
+        Tblfcc obj=tblfcc;
+        companyMapper.infileup(obj);
+        return obj;
+    }
 
     //------公司证书列表
     @Override
