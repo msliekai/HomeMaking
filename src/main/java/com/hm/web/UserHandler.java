@@ -496,6 +496,27 @@ public class UserHandler {
     }
 
     @Log(operationType = "",operationName = "")
+    @RequestMapping("/jUserOrderOK.action")
+    public @ResponseBody String jUserOrderOK(HttpServletRequest request,Tblorder tblorder){
+        System.out.println("订单信息是："+tblorder);
+        TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
+        Integer userid = user.getUserid();
+        int a = biz.jcorder(tblorder.getOid(),1);
+        Tbldeallog tbldeallog = new Tbldeallog();
+        tbldeallog.setDeid(6);tbldeallog.setDlcost(request.getParameter("allmoney"));tbldeallog.setUserid(userid);tbldeallog.setDltype("消费");
+        int c = biz.jUserAdddeallog(tbldeallog);
+        String b =null;
+        if (0 < a&&0<c){
+            b ="1";
+        }else {
+            b ="0";
+        }
+        System.out.println(b);
+        return b;
+    }
+
+
+    @Log(operationType = "",operationName = "")
     @RequestMapping("/myMap.action")
     public @ResponseBody
     Map myMap(HttpSession session, String csc) {

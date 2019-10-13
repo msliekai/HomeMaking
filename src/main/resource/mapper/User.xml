@@ -227,8 +227,8 @@
 
     <!--查询订单-->
     <select id="jUserMoney" resultMap="BalanceList">
-        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid} and o.osid !='8'
+        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,sf.sfcos,sf.sfname,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid  and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid} and o.osid !='8'
         <if test="null != osid">
             and o.osid =#{osid}
         </if>
@@ -246,19 +246,15 @@
         <result property="otitle" column="otitle"/>
         <result property="ocontext" column="ocontext"/>
         <result property="ophone" column="ophone"/>
-        <result property="money" column="money"/>
         <result property="osid" column="osid"/>
         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
             <id property="osid" column="osid"/>
             <result property="osname" column="osname"/>
         </association>
-        <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
-            <id property="hzid" column="hzid"/>
-            <result property="hzname" column="hzname"/>
-        </association>
         <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
             <id property="sfid" column="sfid"/>
             <result property="sfname" column="sfname"/>
+            <result property="sfcos" column="sfcos"/>
             <association property="company" column="company" javaType="com.hm.entity.Company">
                 <id property="fid" column="fid"/>
                 <result property="fname" column="fname"/>
