@@ -232,6 +232,7 @@ public @ResponseBody String useDel(String sfid){
             Company company = (Company) httpSession.getAttribute("company");
             Integer fid = company.getFid();
             Integer row = companyBiz.addmoney(money,fid);
+            companyBiz.add(fid,addmoney);
             return "1";
         }else{
             return "0";
@@ -253,6 +254,7 @@ public @ResponseBody String useDel(String sfid){
                 String money=sum+"";
                 System.out.println(money);
                 Integer row = companyBiz.drawmoney(money, fid);
+                Integer draw1 = companyBiz.draw(fid,draw);
                 return "1";
 
             }else{
@@ -354,6 +356,7 @@ public @ResponseBody String useDel(String sfid){
     @RequestMapping(value = "transfer",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
     public @ResponseBody String transfer(HttpSession httpSession,String collectcount,
                                          String collect,String payee,String paymentpwd,String transfermoney){
+        System.out.println("银行转账");
         Staff staff = companyBiz.queryscard(collectcount);
         String sfname = staff.getSfname();
         Company company = (Company) httpSession.getAttribute("company");
@@ -372,6 +375,7 @@ public @ResponseBody String useDel(String sfid){
                 int sum=i-j;
                 String money=sum+"";
                 Integer drawmoney = companyBiz.drawmoney(money, fid);
+                Integer transfer = companyBiz.transfer(fid,transfermoney);
                 return "1";
             }else{
                 return "2";
@@ -580,13 +584,8 @@ public @ResponseBody String useDel(String sfid){
     @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
     public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
         Company company = (Company) httpSession.getAttribute("company");
-        System.out.println(company+"********");
         String facc = company.getFacc();
-        System.out.println(facc+"+++");
         Integer fid = company.getFid();
-        System.out.println(ctids);
-        System.out.println(ctidsAll);
-        System.out.println("公司入驻");
         List<Tblfc> tblfcs = new ArrayList<>();
         String[] ctidss = ctids.split(",");
         String[] ctidsAlls = ctidsAll.split(",");
@@ -602,15 +601,27 @@ public @ResponseBody String useDel(String sfid){
             }
             tblfcs.add(tblfc);
         }
-        Integer j = companyBiz.addserve(tblfcs);
-        System.out.println(j);
-
-        Integer i = companyBiz.infirm(fname, facc);
-        System.out.println(i);
-        if(i>0){
-            return "1";
+        if(company.getRid()==7){
+            Integer j = companyBiz.addserve(tblfcs);
+            System.out.println(j);
+            Integer i = companyBiz.infirm(fname, facc);
+            System.out.println(i);
+            if(i>0){
+                return "1";
+            }else {
+                return "0";
+            }
         }else {
-            return "0";
+            return "2";//该公司已经入驻
         }
+
+    }
+    //清除缓存
+    @RequestMapping(value = "clearSession",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
+    public @ResponseBody  String clearSession(HttpServletRequest request){
+        System.out.println("清理缓存");
+//        request.getSession().removeAttribute("company");
+        request.getSession().invalidate();
+        return "1";
     }
 }

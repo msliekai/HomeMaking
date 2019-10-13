@@ -111,12 +111,20 @@
 		function tips(a) {
 			  if (confirm("确定要退出?")) {
 
+			      $.post("<%=path%>page/clearSession.action",
+                  function (data) {
+                      if(data=="1"){
+                          alert("已退出");
+                          location.href = "<%=path%>page/Wellcome.jsp";
+                      }else{
+                          alert("已取消");
+                      }
+                  });
 <%--			      <%--%>
 <%--			      request.getSession().removeAttribute("company");--%>
 <%--                  request.getSession().invalidate();--%>
 <%--			      %>--%>
-                  alert("已退出");
-			   location.href = "<%=path%>page/Wellcome.jsp";
+
 
 			  } else {
 			   alert("已取消");

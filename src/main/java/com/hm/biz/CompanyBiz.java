@@ -101,4 +101,12 @@ public interface CompanyBiz {
     public Integer infirm(String fname,String facc);
     //循环插入服务
     public Integer addserve(List list);
+    //入驻上传资料
+    public Tblfcc infileup(Tblfcc tblfcc);
+    //转账记录
+    public Integer transfer(Integer fid ,String dlcost);
+    //提现
+    public Integer draw(Integer fid ,String dlcost);
+    //充值
+    public Integer add(Integer fid ,String dlcost);
 }

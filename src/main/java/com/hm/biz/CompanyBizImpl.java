@@ -147,6 +147,30 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.delStaff(sfid);
     }
 
+    //提现交易记录
+    @Override
+    public Integer draw(Integer fid,String dlcost) {
+        return companyMapper.draw(fid,dlcost);
+    }
+
+    //充值
+    @Override
+    public Integer add(Integer fid, String dlcost) {
+        return companyMapper.add(fid,dlcost);
+    }
+
+    //转账交易记录
+    @Override
+    public Integer transfer(Integer fid,String dlcost) {
+        return companyMapper.transfer(fid,dlcost);
+    }
+
+    @Override
+    public Tblfcc infileup(Tblfcc tblfcc) {
+        Tblfcc obj=tblfcc;
+        companyMapper.infileup(obj);
+        return obj;
+    }
 
     //------公司证书列表
     @Override
