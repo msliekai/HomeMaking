@@ -106,6 +106,8 @@ public interface UserMapper {
 
     //充值
     public int jUserPay(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney,@Param("userpwd") String userpwd);
+    //充值
+    public int jUsercut(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney,@Param("userpwd") String userpwd);
     //修改卡号
     public int jUserCard(@Param("userid") Integer userid,@Param("usercard") String usercard,@Param("userpwd") String userpwd);
 

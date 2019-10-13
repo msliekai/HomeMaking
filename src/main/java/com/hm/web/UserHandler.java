@@ -505,9 +505,13 @@ public class UserHandler {
         Tbldeallog tbldeallog = new Tbldeallog();
         tbldeallog.setDeid(6);tbldeallog.setDlcost(request.getParameter("allmoney"));tbldeallog.setUserid(userid);tbldeallog.setDltype("消费");
         int c = biz.jUserAdddeallog(tbldeallog);
+        int d = biz.jUsercut(userid,Integer.valueOf(request.getParameter("allmoney")),user.getUserpwd());
         String b =null;
-        if (0 < a&&0<c){
+        if (0 < a&&0<c&&0<d){
             b ="1";
+            user.setUsermoney(user.getUsermoney()-Integer.valueOf(request.getParameter("allmoney")));
+            System.out.println("交易后的后的金额是："+user.getUsermoney());
+            request.getSession().setAttribute("userbacc",user);
         }else {
             b ="0";
         }

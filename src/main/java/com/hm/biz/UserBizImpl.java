@@ -140,6 +140,11 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
+    public int jUsercut(Integer userid, Integer money, String userpwd) {
+        return userMapper.jUsercut(userid,money,userpwd);
+    }
+
+    @Override
     public int jUserCard(Integer userid, String usercard, String userpwd) {
         return userMapper.jUserCard(userid,usercard,userpwd);
     }

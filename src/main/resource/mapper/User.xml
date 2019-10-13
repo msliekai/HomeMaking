@@ -610,6 +610,10 @@
     <update id="jUserPay">
      UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid} and userpwd= #{userpwd}
     </update>
+    <!--用户消费-->
+    <update id="jUsercut">
+     UPDATE tbluser SET usermoney = usermoney-#{usermoney} where userid = #{userid} and userpwd= #{userpwd}
+    </update>
     <!--修改卡号-->
     <update id="jUserCard">
      UPDATE tbluser SET usercard =#{usercard} where userid = #{userid} and userpwd= #{userpwd}

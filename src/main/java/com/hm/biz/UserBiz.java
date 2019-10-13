@@ -110,6 +110,8 @@ public interface UserBiz {
 
     //充值
     public int jUserPay(Integer userid,Integer money,String userpwd);
+    //消费
+    public int jUsercut(Integer userid,Integer money,String userpwd);
     //修改卡号
     public int jUserCard(Integer userid,String usercard,String userpwd);
     //删除订单
