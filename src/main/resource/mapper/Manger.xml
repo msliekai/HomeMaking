@@ -163,7 +163,7 @@
     </select>
     <!--  订单列表-->
     <select id="cFindOrderAll" parameterType="com.hm.entity.Tblorder" resultType="com.hm.entity.Tblorder">
-        SELECT o.oid,o.svtime,c.cosname,ct.ctname,o.sendtime,f.fname,z.hzname,u.username,e.osname,sf.sfname,o.otime
+        SELECT o.oid,o.svtime,c.cosname,ct.ctname,o.sendtime,f.fname,z.hzname,u.username,e.osname,sf.sfname,o.otime,o.osid,o.ophone,o.visit
         from tblorder o ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z,tbloderstate e
         WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid
         and c.ctid = ct.ctid and o.osid=e.osid
@@ -285,5 +285,9 @@
     <!--   修改育婴知识-->
     <update id="updateKap" parameterType="com.hm.entity.Tblkap">
 		update tblkap set ktitle=#{ktitle},ftid=#{ftid},ktime=#{ktime} where kid=#{kid}
+	</update>
+    <!--	提交订单回访-->
+    <update id="OrderVisit" parameterType="com.hm.entity.Tblorder">
+		update tblorder set visit=#{visit} where oid=#{oid}
 	</update>
 </mapper>

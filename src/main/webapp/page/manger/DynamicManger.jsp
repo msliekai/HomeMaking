@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HANG
-  Date: 2019/8/26
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -43,7 +37,6 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-<%--                    <form class="layui-form layui-col-space5">--%>
                     <div class="demoTable">
                         <div class="layui-inline layui-show-xs-block">
                             <input class="layui-input"  autocomplete="off" placeholder="开始日" type="date" name="start" id="start">
@@ -51,16 +44,14 @@
                         <div class="layui-inline layui-show-xs-block">
                             <input class="layui-input"  autocomplete="off" placeholder="截止日" type="date" name="end" id="end">
                         </div>
-<%--                        <div class="layui-inline layui-show-xs-block">--%>
-<%--                            <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" name="uname" id="uname">--%>
-<%--                        </div>--%>
+
                         <div class="layui-inline layui-show-xs-block">
                             <span><button class="layui-btn"  data-type="reload"><i class="layui-icon">&#xe615;</i></button></span>
                         </div>
                     </div>
-<%--                    </form>--%>
+
                 </div>
-<%--                <s:property value="list"></s:property>--%>
+
                 <div class="layui-card-header">
                     <button class="layui-btn" onclick="xadmin.open('添加','<%=path%>page/manger/AddDynamic.jsp',600,400)"><i class="layui-icon"></i>添加</button>
                 </div>

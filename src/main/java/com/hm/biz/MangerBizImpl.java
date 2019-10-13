@@ -8,6 +8,7 @@ import com.hm.mapper.MangerMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -70,6 +71,7 @@ public class MangerBizImpl implements MangerBiz {
     public List<TblCOS> cFindHotServiceAll(TblCOS tblCOS) {
         return mangerMapper.cFindHotServiceAll(tblCOS);
     }
+
 
     @Override
     public List<Tblorder> MserviceIfmationlist(Tblorder tblorder) {
@@ -224,6 +226,11 @@ public class MangerBizImpl implements MangerBiz {
     @Override
     public int updateKap(Tblkap tblkap) {
         return mangerMapper.updateKap(tblkap);
+    }
+
+    @Override
+    public int OrderVisit(Tblorder tblorder) {
+        return mangerMapper.OrderVisit(tblorder);
     }
 
 

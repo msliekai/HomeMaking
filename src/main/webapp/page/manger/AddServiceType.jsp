@@ -29,7 +29,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>服务类别名</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rname" name="ctname" required="" lay-verify="ctname"
+                    <input type="text" id="L_rname" name="ctname" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <label for="L_rdescribe" class="layui-form-label">
                     <span class="x-red">*</span>服务类别描述</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rdescribe" name="ctcontext" required="" lay-verify="ctcontext"
+                    <input type="text" id="L_rdescribe" name="ctcontext" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>更新时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="trsum" name="cttime" required="" lay-verify="cttime"
+                    <input type="text" id="trsum" name="cttime" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -65,20 +65,8 @@
 
         //自定义验证规则
         form.verify({
-            ctname: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            ctcontext: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, cttime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            card:[/^.{1,100}$/,'请输入内容']
+
         });
 
         //监听提交

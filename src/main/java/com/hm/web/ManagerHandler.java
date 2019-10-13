@@ -19,8 +19,12 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.LinkedList;
 
 @Controller
 @RequestMapping("/manager")
@@ -227,10 +231,11 @@ public class ManagerHandler {
     public  @ResponseBody
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
         count=mangerBizImpl.cFindServiceAll(null).size();
-        List<TblCOS>list =mangerBizImpl.cFindServiceAll(tblCOS);
+        List<TblCOS> list =mangerBizImpl.cFindServiceAll(tblCOS);
         for (TblCOS cos : list) {
             System.out.println(cos.getCoshot());
         }
+
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -503,18 +508,19 @@ public class ManagerHandler {
     //修改育婴知识
     @RequestMapping("/updateKap.action")
     public @ResponseBody int updateKap(Tblkap tblkap){
+
         return mangerBizImpl.updateKap(tblkap);
+    }
+    //提交订单回访
+    @RequestMapping("/OrderVisit.action")
+    public @ResponseBody int OrderVisit(Tblorder tblorder){
+
+        return mangerBizImpl.OrderVisit(tblorder);
     }
     //获取所有公司根据地区统计
     @RequestMapping("/getAllCompany.action")
     public @ResponseBody List<AllCompany> getAllCompany(){
         return statisticsBizImpl.getAllCompany();
-    }
-    //发送图片
-    @RequestMapping("/file.action")
-    public @ResponseBody List<AllCompany> getFile(ResourceLoader resourceLoader){
-        System.out.println(resourceLoader);
-        return null;
     }
 
 

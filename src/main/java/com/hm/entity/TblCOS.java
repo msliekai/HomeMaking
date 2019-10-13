@@ -16,8 +16,10 @@ public class TblCOS {
     private TblCOStype tblCOStype;
     private List<TblCOStype> listcos;
     private String ctname;
+    private String cosdeta;
     private Integer page;
     private Integer limit;
+
 
 
 

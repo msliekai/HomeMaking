@@ -29,7 +29,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>培训项目名</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rname" name="itname" required="" lay-verify="itname"
+                    <input type="text" id="L_rname" name="itname" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <label for="L_rdescribe" class="layui-form-label">
                     <span class="x-red">*</span>培训时长</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rdescribe" name="ittime" required="" lay-verify="ittime"
+                    <input type="text" id="L_rdescribe" name="ittime" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <label for="L_rdescribe" class="layui-form-label">
                     <span class="x-red">*</span>认证证书</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_itbook" name="itbook" required="" lay-verify="itbook"
+                    <input type="text" id="L_itbook" name="itbook" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -64,24 +64,8 @@
 
         //自定义验证规则
         form.verify({
-            trtitle: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            trcontext: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trsum: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trtime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            card:[/^.{1,100}$/,'请输入内容']
+
         });
 
         //监听提交

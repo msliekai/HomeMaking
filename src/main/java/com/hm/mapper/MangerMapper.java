@@ -7,6 +7,7 @@ import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -98,4 +99,6 @@ public interface MangerMapper {
     public int delKap(@Param("kid") int kid);
     //修改育婴公告
     public int updateKap(Tblkap tblkap);
+    //提交订单回访
+    public int OrderVisit(Tblorder tblorder);
 }
