@@ -634,7 +634,6 @@ public class CompanyHandler {
         if(company.getRid()==7){
             Integer j = companyBiz.addserve(tblfcs);
             Integer addcard = companyBiz.addcard(fid,card,fcpwd);
-
             Integer i = companyBiz.infirm(fname, facc);
             if(i>0){
                 return "1";

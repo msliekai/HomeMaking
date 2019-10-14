@@ -55,12 +55,9 @@ public class MenuBizImpl implements MenuBiz {
 
     //递归查询子菜单
     private List<Tblmenu> getChild(int mfid , List<Tblmenu> list){
-        System.out.println("获取子级");
-        System.out.println(mfid);
         List<Tblmenu> childList = new ArrayList<Tblmenu>();
         //获取子菜单
         for (Tblmenu tblmenu : list) {
-            System.out.println("isNotBlank+:"+ tblmenu.getMfid());
             if (tblmenu.getMfid()!=null){
                 if (tblmenu.getMfid().equals(mfid)){
                     childList.add(tblmenu);
@@ -84,11 +81,8 @@ public class MenuBizImpl implements MenuBiz {
     @Override
     public  Object getPower(Integer rid){
         List<Tblmenu> list = menuMapper.getPower(rid);
-
         List<Tblmenu> tblmenuList = new ArrayList<Tblmenu>();
         for (int i = 0; i <list.size() ; i++) {
-            System.out.println("原始版"+
-                    ((Tblmenu)list.get(i)).getRid());
             if (0==list.get(i).getMfid()){
                 tblmenuList.add(list.get(i));
             };
