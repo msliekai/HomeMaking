@@ -26,12 +26,12 @@
 </head>
 <body>
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>基本信息</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>

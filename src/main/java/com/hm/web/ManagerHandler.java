@@ -5,10 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hm.biz.MangerBiz;
 import com.hm.biz.MenuBiz;
-import com.hm.biz.UserBiz;
 import com.hm.entity.*;
 import com.hm.biz.StatisticsBizImpl;
-import com.hm.entity.*;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,14 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.LinkedList;
 
 @Controller
 @RequestMapping("/manager")
@@ -39,19 +40,26 @@ public class ManagerHandler {
     private StatisticsBizImpl statisticsBizImpl;
     private ModelAndView mav=null;
     @RequestMapping(value = "/adminLogin.action")
-    public ModelAndView userlogin(HttpServletRequest request, TblUser user)
+    public ModelAndView userlogin(HttpServletRequest request, HttpSession session, TblUser user, String securityCode)
     {
-        System.out.println("+++++");
-        TblUser u = mangerBizImpl.cUserLogin(user);
-        if(null!=u)
-        {
-            request.getSession().setAttribute("user",u);
-            System.out.println(u.getRid());
-            request.setAttribute("umenu",menuBizImpl.getMenu(u.getRid()));
-            mav = new ModelAndView();
-            mav.setViewName("baseindex");
-        }else {
-            return null;
+        String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
+        mav = new ModelAndView();
+        if (securityCode.equalsIgnoreCase(serverCode)) {
+            TblUser u = mangerBizImpl.cUserLogin(user);
+            if(null!=u)
+            {
+                request.getSession().setAttribute("user",u);
+                System.out.println(u.getRid());
+                request.setAttribute("umenu",menuBizImpl.getMenu(u.getRid()));
+
+                mav.setViewName("baseindex");
+            }else {
+                request.setAttribute("flog","loginErr");
+                mav.setViewName("ManagerLogin");
+            }
+        }else{
+            request.setAttribute("flog","securityCodeErr");
+            mav.setViewName("ManagerLogin");
         }
         return mav;
     }
@@ -223,7 +231,11 @@ public class ManagerHandler {
     public  @ResponseBody
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
         count=mangerBizImpl.cFindServiceAll(null).size();
-        List<TblCOS>list =mangerBizImpl.cFindServiceAll(tblCOS);
+        List<TblCOS> list =mangerBizImpl.cFindServiceAll(tblCOS);
+        for (TblCOS cos : list) {
+            System.out.println(cos.getCoshot());
+        }
+
         map.put("code",0);
         map.put("count",count);
         map.put("data",list);
@@ -499,4 +511,17 @@ public class ManagerHandler {
 
         return mangerBizImpl.updateKap(tblkap);
     }
+    //提交订单回访
+    @RequestMapping("/OrderVisit.action")
+    public @ResponseBody int OrderVisit(Tblorder tblorder){
+
+        return mangerBizImpl.OrderVisit(tblorder);
+    }
+    //获取所有公司根据地区统计
+    @RequestMapping("/getAllCompany.action")
+    public @ResponseBody List<AllCompany> getAllCompany(){
+        return statisticsBizImpl.getAllCompany();
+    }
+
+
 }

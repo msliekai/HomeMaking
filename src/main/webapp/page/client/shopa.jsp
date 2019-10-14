@@ -63,6 +63,8 @@
     <link rel="stylesheet" href="<%=path%>page/client/shopgrid/css/style.css">
     <link rel="stylesheet" href="<%=path%>page/client/shopgrid/css/responsive.css">
     <script src="<%=path%>page/client/shopgrid/js/vendor/modernizr-2.8.3.min.js"></script>
+    <%--layui--%>
+    <script src="<%=path%>page/layui/layui.js"></script>
 </head>
 <body>
 <!--header-top-->
@@ -87,158 +89,10 @@
                             %>
                             搜索：
                             <input placeholder="输入要搜索内容" type="text" value="<%=aunt%>" id="aunt">
-                            <%--                            价格：--%>
-                            <%--                            <input placeholder="输入最低价格" type="text" value="" id="aunt">--%>
-                            <%--                                至--%>
-                            <%--                            <input placeholder="输入最高价格" type="text" value="" id="aunt">--%>
-                            <%--                            </form>--%>
                         </div>
                         <button class="layui-btn layui-btn-normal" style="width: 100%;" onclick="getPageOfMemo(1)"><i
                                 class="ti-search"></i></button>
                     </div>
-                    <%--搜索产品 end--%>
-
-                    <%--&lt;%&ndash;价格筛选&ndash;%&gt;--%>
-                    <%--                    <div class="sidebar-widget mb-40">--%>
-                    <%--                        <h3 class="sidebar-title">价格筛选</h3>--%>
-                    <%--                        <div class="price_filter">--%>
-                    <%--                            <div id="slider-range"></div>--%>
-                    <%--                            <div class="price_slider_amount">--%>
-                    <%--                                <div class="label-input">--%>
-                    <%--                                    <label>价格 : </label>--%>
-                    <%--                                    <input type="text" id="amount" name="price" placeholder="Add Your Price"/>--%>
-                    <%--                                </div>--%>
-                    <%--                                <button type="button">查询</button>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--    &lt;%&ndash;价格筛选 end&ndash;%&gt;--%>
-
-                    <%--                    <div class="sidebar-widget mb-45">--%>
-                    <%--                        <h3 class="sidebar-title">服务事项表</h3>--%>
-                    <%--                        <div class="sidebar-categories">--%>
-                    <%--                            <ul>--%>
-                    <%--                                <li><a href="#">所有服务 <span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">擦玻璃<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">空调清洗<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">除螨清洁<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">冰箱清洁<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">洗衣机清洁<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">油烟机清洗<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">室内表面清洁<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">物品整理<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">基础除尘除垢<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">住家保姆<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">白班保姆<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">钟点工<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">菲佣式保姆<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">产后修复<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">生活照顾<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">启蒙教育<span>1</span></a></li>--%>
-                    <%--                                <li><a href="#">起居护理<span>1</span></a></li>--%>
-                    <%--                            </ul>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-
-                    <%--热门--%>
-                    <%--                    <div class="sidebar-widget mb-50">--%>
-                    <%--                        <h3 class="sidebar-title">TOP3</h3>--%>
-                    <%--                        <div class="sidebar-top-rated-all">--%>
-
-                    <%--                            <div class="sidebar-top-rated mb-30">--%>
-
-                    <%--                                <div class="single-top-rated">--%>
-                    <%--                                    <div class="top-rated-img">--%>
-                    <%--                                        <a href="#"><img--%>
-                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/1.jpg"--%>
-                    <%--                                                alt=""></a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="top-rated-text">--%>
-                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
-                    <%--                                        <div class="top-rated-rating">--%>
-                    <%--                                            <ul>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                            </ul>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <span>$140.00</span>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                            </div>--%>
-
-                    <%--                            <div class="sidebar-top-rated mb-30">--%>
-                    <%--                                <div class="single-top-rated">--%>
-                    <%--                                    <div class="top-rated-img">--%>
-                    <%--                                        <a href="#"><img--%>
-                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/2.jpg"--%>
-                    <%--                                                alt=""></a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="top-rated-text">--%>
-                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
-                    <%--                                        <div class="top-rated-rating">--%>
-                    <%--                                            <ul>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                            </ul>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <span>$140.00</span>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                            </div>--%>
-                    <%--                            <div class="sidebar-top-rated mb-30">--%>
-                    <%--                                <div class="single-top-rated">--%>
-                    <%--                                    <div class="top-rated-img">--%>
-                    <%--                                        <a href="#"><img--%>
-                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/3.jpg"--%>
-                    <%--                                                alt=""></a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="top-rated-text">--%>
-                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
-                    <%--                                        <div class="top-rated-rating">--%>
-                    <%--                                            <ul>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                            </ul>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <span>$140.00</span>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                            </div>--%>
-                    <%--                            <div class="sidebar-top-rated mb-30">--%>
-                    <%--                                <div class="single-top-rated">--%>
-                    <%--                                    <div class="top-rated-img">--%>
-                    <%--                                        <a href="#"><img--%>
-                    <%--                                                src="<%=path%>page/client/shopgrid/img/product/sidebar-product/4.jpg"--%>
-                    <%--                                                alt=""></a>--%>
-                    <%--                                    </div>--%>
-                    <%--                                    <div class="top-rated-text">--%>
-                    <%--                                        <h4><a href="#">Flying Drone</a></h4>--%>
-                    <%--                                        <div class="top-rated-rating">--%>
-                    <%--                                            <ul>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                                <li><i class="pe-7s-star"></i></li>--%>
-                    <%--                                            </ul>--%>
-                    <%--                                        </div>--%>
-                    <%--                                        <span>$140.00</span>--%>
-                    <%--                                    </div>--%>
-                    <%--                                </div>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--热门 end--%>
-
                 </div>
             </div>
             <div class="col-lg-9">
@@ -247,17 +101,6 @@
                         <div class="shop-bar pb-60">
                             <div class="shop-found-selector">
                                 <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
-                                <%--                                                                <div class="shop-found">--%>
-                                <%--                                                                    <p><span>23</span> Product Found of <span>50</span></p>--%>
-                                <%--                                                                </div>--%>
-                                <%--                                                                <div class="shop-selector">--%>
-                                <%--                                                                    <label>排序方式: </label>--%>
-                                <%--                                                                    <select name="select">--%>
-                                <%--                                                                        <option value="">默认</option>--%>
-                                <%--                                                                        <option value="">A to Z</option>--%>
-                                <%--                                                                        <option value=""> Z to A</option>--%>
-                                <%--                                                                    </select>--%>
-                                <%--                                                                </div>--%>
                             </div>
 
                         </div>
@@ -364,8 +207,6 @@
 <%--bootstrap分页--%>
 <script src="<%=path%>page/client/js/bootstrap-paginator.js"></script>
 <script src="<%=path%>page/client/js/pageing.js"></script>
-<%--layui--%>
-<script src="<%=path%>page/layui/layui.js"></script>
 <%--我的js--%>
 <script src="<%=path%>page/client/js/chome.js"></script>
 

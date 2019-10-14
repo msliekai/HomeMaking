@@ -29,7 +29,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>服务名</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rname" name="cosname" required="" lay-verify="cosname"
+                    <input type="text" id="L_rname" name="cosname" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <label for="L_rdescribe" class="layui-form-label">
                     <span class="x-red">*</span>服务描述</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rdescribe" name="cosdeta" required="" lay-verify="cosdeta"
+                    <input type="text" id="L_rdescribe" name="cosdeta" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>所属服务类别</label>
                 <div class="layui-input-inline">
-                    <select id="ctid" name="ctid" required="" lay-verify="ctid"
+                    <select id="ctid" name="ctid" required="" lay-verify="card"
                             autocomplete="off" class="layui-input" >
                         <option value="1">品类保洁</option>
                         <option value="2">日常保洁</option>
@@ -59,7 +59,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>更新时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="trtime" name="costime" required="" lay-verify="costime"
+                    <input type="text" id="trtime" name="costime" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -78,20 +78,8 @@
 
         //自定义验证规则
         form.verify({
-            cosname: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            cosdeta: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, costime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            card:[/^.{1,100}$/,'请输入内容']
+
         });
 
         //监听提交

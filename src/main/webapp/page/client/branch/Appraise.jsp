@@ -26,6 +26,7 @@
     String etime = request.getParameter("etime")==null?"":request.getParameter("etime");
     String econtext = request.getParameter("econtext")==null?"":request.getParameter("econtext");
     String econut = request.getParameter("econut")==null?"":request.getParameter("econut");
+    String eid = request.getParameter("eid")==null?"":request.getParameter("eid");
 %>
 
 <div class="layui-fluid">
@@ -78,8 +79,9 @@
                 <label for="econtext" class="layui-form-label">
                     <span class="x-red">*</span>评价内容</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="econtext" name="econtext" required=""
-                           autocomplete="off" class="layui-input" readonly="readonly" value="<%=econtext%>">
+                    <textarea id="econtext" name="econtext" required="" lay-verify="card" placeholder="感谢您真挚的评价，期待下次为您服务(100字以内)"
+                              autocomplete="off" class="layui-input"  style="width: 200px;height: 100px;resize:none;" ><%=econtext%></textarea>
+                    <%--<input type="hidden" value="<%=tblorder%>"/>--%>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -90,65 +92,67 @@
                            autocomplete="off" class="layui-input" readonly="readonly" value="<%=econut%>">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label for="eid" class="layui-form-label">
+                </label>
+                <div class="layui-input-inline">
+                    <input type="hidden" id="eid" name="eid" required=""
+                           autocomplete="off" class="layui-input" value="<%=eid%>"/>
+                </div>
+            </div>
+            <div align="center" class="layui-form-item">
+                <%--                <label for="L_repass" class="layui-form-label"></label>--%>
+                <button class="layui-btn" lay-filter="add" lay-submit="">修改评价</button>
+            </div>
         </form>
     </div>
 </div>
-<script>layui.use(['form', 'layer', 'jquery'],
-    function () {
-        $ = layui.jquery;
-        var form = layui.form,
-            layer = layui.layer;
+<script>
+    layui.use(['form', 'layer', 'jquery'],
+        function () {
+            var form = layui.form,
+                layer = layui.layer;
 
-        //自定义验证规则
-        form.verify({
-            trtitle: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            trcontext: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trsum: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }, trtime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            //自定义验证规则
+            form.verify({
+                card:[/^.{3,100}$/,'请输入3-100字符的评价']
+                ,pass: [
+                    /^[a-zA-Z]\w{5,17}$/
+                    ,'密码长度在6~18之间，只能包含字母、数字和下划线，必须以字母开头'
+                ]
+            });
+
+
+            //监听提交
+            form.on('submit(add)',
+                function (data) {
+                    console.log(data)
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "<%=path%>admin/jUserUpApp.action",
+                        data: data.field,
+                        success: function (bac) {
+                            if (bac == "1") {
+                                /*layer.msg("添加成功")*/
+                                layer.alert("保存成功", {
+                                    icon: 6
+                                }, function () {
+                                    //关闭当前frame
+                                    xadmin.close();
+                                    // 可以对父窗口进行刷新
+                                    xadmin.father_reload();
+                                });
+                            } else {
+                                layer.msg("保存失败");
+                            }
+                        }
+                    })
+                    return false;
+                });
         });
 
-        //监听提交
-        form.on('submit(add)',
-            function (data) {
 
-                $.ajax({
-                    async: false,
-                    type: "post",
-                    url: "<%=path%>manager/addtrain.action",
-                    dataType: "json",
-                    data: data.field,
-                    success: function (map) {
-                        if (map == "1") {
-                            layer.alert("添加成功", {
-                                icon: 6
-                            }, function () {
-                                //关闭当前frame
-                                xadmin.close();
-                                // 可以对父窗口进行刷新
-                                xadmin.father_reload();
-                            });
-                        } else {
-                            layer.msg("添加失败,稍后重试");
-                        }
-                    }
-                })
-                return false;
-            });
-    });
 </script>
 
 </body>

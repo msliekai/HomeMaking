@@ -21,12 +21,12 @@
 </head>
 <body>
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>我的收藏</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
@@ -113,7 +113,7 @@
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , page: true
                     , limit: 2
-                    , limits: [2,3,5]
+                    , limits: [2,3,5,10]
                     , id: 'testReload'
                     , parseData: function (res) {
                         return {

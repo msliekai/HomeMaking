@@ -69,7 +69,7 @@ public interface UserMapper {
     public Integer addOrder(Tblorder tblorder);
 
     //查询消费记录
-    public List<UserMoney> jUserMoney(UserMoney userMoney);
+    public List<Tblorder> jUserMoney(Tblorder tblorder);
 
     //查询评论
     public List<Tbleva> jUserAppraise(@Param("page") int page, @Param("limit") int limit, @Param("userid") Integer userid);
@@ -106,6 +106,8 @@ public interface UserMapper {
 
     //充值
     public int jUserPay(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney,@Param("userpwd") String userpwd);
+    //充值
+    public int jUsercut(@Param("userid") Integer userid,@Param("usermoney") Integer usermoney,@Param("userpwd") String userpwd);
     //修改卡号
     public int jUserCard(@Param("userid") Integer userid,@Param("usercard") String usercard,@Param("userpwd") String userpwd);
 
@@ -129,6 +131,10 @@ public interface UserMapper {
     public int jUserAddAfter(Tblorder tblorder);
     //订单状态改变
     public int jcorder(@Param("oid") Integer oid,@Param("state")Integer state);
+    //评论内容改变
+    public int jUserUpApp(@Param("eid") Integer eid,@Param("econtext") String econtext);
+    //添加交易记录
+    public int jUserAdddeallog(Tbldeallog tbldeallog);
     //修改用户信息
     public Integer upUser(TblUser tblUser);
 
@@ -137,4 +143,10 @@ public interface UserMapper {
 
     //添加足迹
     public Integer addFoot(Tblfoot tblfoot);
+
+    //服务热度
+    public Integer cosHotUp(@Param("cosid") Integer cosid);
+
+    //增加交易记录
+    public Integer adddeallog(Tbldeallog tbldeallog);
 }

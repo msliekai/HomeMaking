@@ -22,12 +22,12 @@
 </head>
 <body>
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>历史服务</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
@@ -116,6 +116,7 @@
             , url: '<%=path%>admin/jUserHistory.action' //数据接口
             , page: true //开启分页
             ,limit:2
+            ,limits: [2,3,5,10]
             // ,method:"get"
             , id: 'testReload'
             , parseData: function (res) {
@@ -143,11 +144,15 @@
                         console.log(item)
                         if (item.osid == "5"||item.osid=="2") {
                             tem.push('<a class="layui-btn layui-btn-normal" lay-event="useSQ">申请售后</a>');
-                        }
-                        if(item.osid == "9"||item.osid=="10"||item.osid=="11"){
+                            tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        }else if(item.osid=="10"||item.osid=="11"){
                             tem.push('<a class="layui-btn layui-btn-primary" lay-event="useCK">查看详情</a>');
+                            tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        }else if(item.osid == "9"){
+                            tem.push('<a class="layui-btn layui-btn-primary" lay-event="useCK">查看详情</a>');
+                            tem.push('<a class="layui-btn layui-btn-disabled"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         }
-                        tem.push('<a lay-event="useDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+
                         return tem.join(' <font></font> ')
                     }}
                 /*{field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}*/
@@ -196,8 +201,9 @@
                         "?sfname="+encodeURIComponent(data.staff.sfname)+
                         "&cosname="+encodeURIComponent(data.tblCOS.cosname)+
                         "&ctname="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
-                        "&onumber="+encodeURIComponent(data.onumber)
-                    +"&oid="+encodeURIComponent(data.oid)
+                        "&onumber="+encodeURIComponent(data.onumber) +
+                        "&oid="+encodeURIComponent(data.oid)+
+                        "&osname="+encodeURIComponent(data.tbloderstate.osname)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if (obj.event === 'useCK') {
@@ -209,11 +215,12 @@
                         "?sfname="+encodeURIComponent(data.staff.sfname)+
                         "&cosname="+encodeURIComponent(data.tblCOS.cosname)+
                         "&ctname="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
-                        "&onumber="+encodeURIComponent(data.onumber)
-                        +"&oid="+encodeURIComponent(data.oid)+
+                        "&onumber="+encodeURIComponent(data.onumber) +
+                        "&oid="+encodeURIComponent(data.oid)+
                         "&aftercontext="+encodeURIComponent(data.aftercontext)+
                         "&afterstaff="+encodeURIComponent(data.afterstaff)+
-                        "&afterresult="+encodeURIComponent(data.afterresult)
+                        "&afterresult="+encodeURIComponent(data.afterresult)+
+                        "&osname="+encodeURIComponent(data.tbloderstate.osname)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }

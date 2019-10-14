@@ -36,8 +36,8 @@
         <input name="userpwd" lay-verify="required" placeholder="密码" type="password" class="layui-input" value="">
         <hr class="hr15">
         <span>验证码：
-            <img src="serial/getimage.action" id="Verify" style="cursor:hand;" alt="看不清，换一张"/>
-            <span id="verclo">看不清，换一个</span>
+             <img src="<%=path%>serial/getimage.action" id="Verify"style="cursor:hand;" alt="看不清，换一张"/>
+				<span id="verclo" class="round-boarder1">看不清？换一张</span>
         </span>
         <input type="text" name="securityCode" placeholder="验证码" />
         <hr class="hr15">
@@ -49,62 +49,32 @@
 </div>
 
 <script>
-    <%--$(function () {--%>
-    <%--    layui.use('form', function () {--%>
-    <%--        var form = layui.form;--%>
-
-    <%--        //监听提交--%>
-    <%--        form.on('submit(login)', function (data) {--%>
-    <%--            var index = layer.load();//layui加载层--%>
-    <%--            $.ajax({--%>
-    <%--                async: true,--%>
-    <%--                type: "post",--%>
-    <%--                url: "manager/adminLogin.action",--%>
-    <%--                dataType: "text",--%>
-    <%--                data: data.field,--%>
-    <%--                success: function (dat) {--%>
-    <%--                    layer.close(index);//layui加载层关闭--%>
-
-    <%--                    if ("success" == dat) {--%>
-    <%--                        layer.msg('登陆成功(°ー°〃)', {--%>
-    <%--                            time: 2000--%>
-    <%--                        }, function () {--%>
-    <%--                            location.href = "<%=path%>index.jsp";--%>
-    <%--                        });--%>
-    <%--                    } else if ("fail" == dat) {--%>
-    <%--                        layer.msg('登陆失败(*/ω＼*)', {--%>
-    <%--                            time: 1000--%>
-    <%--                        }, function () {--%>
-    <%--                            layer.msg('你不会不知道密码吧(ಥ _ ಥ)', {--%>
-    <%--                                time: 2000--%>
-    <%--                            })--%>
-    <%--                        });--%>
-    <%--                    } else {--%>
-    <%--                        layer.msg('你干了什么，号是不是被封了');--%>
-    <%--                    }--%>
-
-    <%--                },--%>
-
-    <%--                error: function (dat) {--%>
-    <%--                    layer.close(index);//layui加载层关闭--%>
-    <%--                    layer.msg('裂开，你是不是把服务器炸了');--%>
-    <%--                }--%>
-    <%--            })--%>
-
-    <%--            return false;--%>
-    <%--        });--%>
-
-    <%--    });--%>
-    <%--})--%>
-    // 验证码
-    // $(function () {
-    //     //点击图片更换验证码
-    //     $("#verclo").click(function(){
-    //         $("#Verify").attr("src","serial/getimage.action?timestamp="+new Date().getTime());
-    //     });
-    // });
-
+    //点击切换验证码
+    $(function () {
+        //点击图片更换验证码
+        $("#verclo").click(function(){
+            $("#Verify").attr("src","<%=path%>serial/getimage.action?timestamp="+new Date().getTime());
+        });
+    });
 </script>
 
 </body>
 </html>
+
+<%
+    String flog=(String) request.getAttribute("flog");
+
+    if(flog=="loginErr"){
+%>
+<script>
+    alert("账号密码错误")
+</script>
+<%
+}else if(flog=="securityCodeErr"){
+%>
+<script>
+    alert("验证码错误")
+</script>
+<%
+    }
+%>

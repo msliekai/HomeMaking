@@ -29,7 +29,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>知识标题</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_rname" name="ktitle" required="" lay-verify="ktitle"
+                    <input type="text" id="L_rname" name="ktitle" required="" lay-verify="card"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <label for="L_rname" class="layui-form-label">
                     <span class="x-red">*</span>知识类别</label>
                 <div class="layui-input-inline">
-                    <select id="ftid" name="ftid" required="" lay-verify="ftid"
+                    <select id="ftid" name="ftid" required="" lay-verify="card"
                             autocomplete="off" class="layui-input" >
                         <option value="1">文章</option>
                         <option value="2">视频</option>
@@ -49,7 +49,7 @@
                     <label for="L_rname" class="layui-form-label">
                         <span class="x-red">*</span>添加时间</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_ktime" name="ktime" required="" lay-verify="ktime"
+                        <input type="text" id="L_ktime" name="ktime" required="" lay-verify="card"
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -69,16 +69,8 @@
 
         //自定义验证规则
         form.verify({
-            ktitle: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            },
-            ktime: function (value) {
-                if (value.length < 0) {
-                    return '内容不能为空';
-                }
-            }
+            card:[/^.{1,100}$/,'请输入内容']
+
         });
 
         //监听提交

@@ -22,12 +22,12 @@
 <body>
 
 <div class="x-nav">
-          <span class="layui-breadcrumb">
+          <%--<span class="layui-breadcrumb">
             <a href="">首页</a>
             <a href="">个人中心</a>
             <a>
               <cite>我的订单</cite></a>
-          </span>
+          </span>--%>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
@@ -36,30 +36,19 @@
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
+
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
 
-    订单记录<hr class="layui-bg-blue">
-
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <select name="osid" id="osid" >
-                                <option value="">全部</option>
-                                <option value="7">待确认</option>
-                                <option value="1">待处理</option>
-                                <option value="2">已处理</option>
-                                <option value="5">已评价</option>
-                            </select>
-                        </div>
-                    </div>
+    <select name="osid" id="osid">
+                <option value="">全部</option>
+                <option value="7">待确认</option>
+                <option value="1">待处理</option>
+                <option value="2">已处理</option>
+                <option value="5">已评价</option>
+            </select>订单记录<hr class="layui-bg-blue">
                 </div>
-<%--                <s:property value="list"></s:property>--%>
-
-                <%--<div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加管理员','<%=path%>page/Xadmin/member-add.jsp',600,400)"><i class="layui-icon"></i>添加管理员</button>
-                </div>--%>
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
@@ -94,9 +83,10 @@ function a(){
             // , height: 500
             , url: '<%=path%>admin/jUserMoney.action' //数据接口
             , page: true //开启分页
-            ,limit:3
+            ,limit:2
+            ,limits: [2,3,5,10]
             // ,method:"get"
-            , id: 'testReload'
+            , id: 'utable'
 
             , parseData: function (res) {
                     return {
@@ -108,27 +98,35 @@ function a(){
             }
             , cols: [[ //表头
                 {field: 'oid', title: '序号', minWidth: 80}
+                ,{field:'osid', width:80, title: 'ID', hide: true,templet:function (d) {return d.tbloderstate.osid}}
                 , {field: 'onumber', title: '订单号', minWidth: 150}
                 , {field: 'osname', title: '订单状态', minWidth: 80,templet:function (d) {return d.tbloderstate.osname}}
                 , {field: 'cosname', title: '服务事项', minWidth: 80,templet:function (d) {return d.tblCOS.cosname}}
                 , {field: 'ctname', title: '服务分类', minWidth:80,templet:function (d) {return d.tblCOS.tblCOStype.ctname}}
                 , {field: 'otime', title: '消费时间', minWidth: 100}
                 , {field: 'fname', title: '商家名称', minWidth: 80,templet:function (d) {return d.staff.company.fname}}
-                , {field: 'money', title: '消费金额', minWidth: 80}
+                , {field: 'sfcos', title: '消费金额', minWidth: 80,templet:function (d) {return d.staff.sfcos}}
+                , {field: 'sfname', title: '服务人员', minWidth: 80,hide: true,templet:function (d) {return d.staff.sfname}}
                 /*,{field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 180}*/
-                ,{fixed: 'right',title: '操作', align:'center',minWidth:150,templet:function (item) {
+                ,{fixed: 'right',title: '操作', align:'center',minWidth:170,templet:function (item) {
                         var tem = [];
                         console.log(item)
-                        if (item.osid == "1") {
-                            tem.push('<a lay-event="userCK" class="layui-btn layui-btn-normal">查看</a>');
+                        if (item.osid == "1"||item.osid == "3"||item.osid == "6"||item.osid == "9") {
+                            tem.push('<a lay-event="userCK" class="layui-btn layui-btn-normal">查看详情</a>');
+                            tem.push('<a class="layui-btn layui-btn-disabled"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        }else if (item.osid == "7") {
+                            tem.push('<a lay-event="userOK" class="layui-btn layui-btn-normal">确认订单</a>');
+                            tem.push('<a class="layui-btn layui-btn-disabled"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+                        }else {
+                            tem.push('<a lay-event="userCK" class="layui-btn layui-btn-normal">查看详情</a>');
+                            tem.push('<a lay-event="userDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
                         }
-                        if(item.osid == "2"){
-                            tem.push('<a lay-event="userEdit" class="layui-btn layui-btn-normal">编辑</a>');
-                        }
-                        tem.push('<a lay-event="userDel" class="layui-btn  layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>');
+
                         return tem.join(' <font></font> ')
                     }}
-            ]]
+            ]],done: function () {
+
+                $("[data-field='scoid']").css('display','none');}
         });
         //触发查询按钮
             var $ = layui.$, active = {
@@ -146,10 +144,18 @@ function a(){
                 }
         };
 
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
+        $('#osid').on('change', function(){
+            var osid = $('#osid').val();
+            console.log(osid)
+            table.reload('utable', {
+                method: 'post'
+                , where: {
+                    'osid': osid,
+                }
+                , page: {
+                    curr: 1
+                }
+            });
         })
 
 
@@ -169,13 +175,25 @@ function a(){
                         "&costype="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
                         "&otime="+encodeURIComponent(data.otime)+
                         "&fname="+encodeURIComponent(data.staff.company.fname)+
-                        "&allmoney="+encodeURIComponent(data.money)
+                        "&allmoney="+encodeURIComponent(data.staff.sfcos)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            } else if (obj.event === 'userEdit') {
-                layer.confirm('确定启用？', function (index) {
-                    fal("<%=path%>admin/jdel.action",data.oid);
-                    layer.close(index);
+            } else if (obj.event === 'userOK') {
+                layer.open({
+                    type:2,
+                    title: "详情",
+                    area: ['300px', '400px'],
+                    content: "<%=path%>page/client/branch/OrderOK.jsp"+
+                        "?ordernum="+encodeURIComponent(data.onumber)+
+                        "&ordertype="+encodeURIComponent(data.tbloderstate.osname)+
+                        "&cos="+encodeURIComponent(data.tblCOS.cosname)+
+                        "&costype="+encodeURIComponent(data.tblCOS.tblCOStype.ctname)+
+                        "&otime="+encodeURIComponent(data.otime)+
+                        "&fname="+encodeURIComponent(data.staff.company.fname)+
+                        "&allmoney="+encodeURIComponent(data.staff.sfcos)+
+                        "&sfname="+encodeURIComponent(data.staff.sfname)+
+                        "&oid="+encodeURIComponent(data.oid)
+                    //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="userDel"){
                 layer.confirm('确定删除？', function (index) {

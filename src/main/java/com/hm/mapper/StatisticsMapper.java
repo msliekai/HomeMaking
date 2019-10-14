@@ -1,5 +1,6 @@
 package com.hm.mapper;
 
+import com.hm.entity.AllCompany;
 import com.hm.entity.Tblmenu;
 import com.hm.entity.Tblpower;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,6 @@ public interface StatisticsMapper {
     //发布订单统计
     public Map getSendOrder(@Param("date") String date);
 
+    //所有公司量統計
+    public List<AllCompany> getAllCompany();
 }

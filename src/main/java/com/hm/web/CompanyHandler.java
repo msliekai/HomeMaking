@@ -37,41 +37,48 @@ import javax.servlet.http.HttpSession;
 public class CompanyHandler {
 
     //公司登录
-    private ModelAndView modelAndView=new ModelAndView();
-    private Map<String,Object> map = new HashMap<String,Object>();
-    private Integer flag=0;
+    private ModelAndView modelAndView = new ModelAndView();
+    private Map<String, Object> map = new HashMap<String, Object>();
+    private Integer flag = 0;
     @Resource
     private CompanyBiz companyBiz;
     @Resource
     private MenuBiz menuBizImpl;
-    @RequestMapping(value = "comlogin",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public ModelAndView comlogin(HttpServletRequest req, String facc, String fpwd){
 
-        Company company = companyBiz.comlogin(facc, fpwd);
+    @RequestMapping(value = "comlogin", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public ModelAndView comlogin(HttpServletRequest req, HttpSession session, String facc, String fpwd, String securityCode) {
 
-        if(company!=null){
-            req.getSession().setAttribute("company",company);
-            List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
-            for(Tblmenu menu1:menu){
-                System.out.println(menu1.getMname());
+        String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
+        if (securityCode.equalsIgnoreCase(serverCode)) {
+            Company company = companyBiz.comlogin(facc, fpwd);
+
+            if (company != null) {
+                req.getSession().setAttribute("company", company);
+                List<Tblmenu> menu = menuBizImpl.getMenu(company.getRid());
+                req.setAttribute("umenu", menu);
+                modelAndView.setViewName("baseindex");//成功后跳转的界面
+            } else {
+                req.setAttribute("flog", "pwderr");
+                modelAndView.setViewName("CompanyLogin");//失败返回登录页
             }
-            req.setAttribute("umenu", menu);
-            modelAndView.setViewName("baseindex");//成功后跳转的界面
-        }else{
+        } else {
+            req.setAttribute("flog", "securityCodeErr");
             modelAndView.setViewName("CompanyLogin");//失败返回登录页
         }
+
         return modelAndView;
 
     }
+
     //判断公司账号是否可用
-    @RequestMapping(value = "checkfacc",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "checkfacc.action")
     public @ResponseBody
-    String checkfacc(String facc){
+    String checkfacc(String facc) {
 
         Company company = companyBiz.checkfacc(facc);
-        if(company!=null){
+        if (company != null) {
             return "0";
-        }else{
+        } else {
             return "1";
         }
 
@@ -79,36 +86,50 @@ public class CompanyHandler {
 
     //公司注册
     @RequestMapping("addCompany")
-    public ModelAndView addCompany(Company company){
+    public ModelAndView addCompany(HttpServletRequest request, HttpSession session, Company company, String phcode, String securityCode) {
 
-        int addCompany = companyBiz.addCompany(company);
-        if(addCompany>0){
-
-            modelAndView.setViewName("CompanyLogin");
-        }else{
-
+        String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
+        if (securityCode.equalsIgnoreCase(serverCode)) {
+            String phcode_req = (String) session.getAttribute(company.getFacc() + "_code_req");
+            if (phcode_req.equals(phcode)) {
+                company.setFsite(company.getSa() + "-" + company.getSb() + "-" + company.getSc() + "-" + company.getScontext());
+                company.setFphone(company.getFacc());
+                int addCompany = companyBiz.addCompany(company);
+                if (addCompany > 0) {
+                    request.setAttribute("flog", "success");
+                    modelAndView.setViewName("company/reg");
+                } else {
+                    request.setAttribute("flog", "reqerr");
+                    modelAndView.setViewName("company/reg");
+                }
+            } else {
+                request.setAttribute("flog", "phcodeErr");
+                modelAndView.setViewName("company/reg");
+            }
+        } else {
+            request.setAttribute("flog", "securityCodeErr");
             modelAndView.setViewName("company/reg");
         }
         return modelAndView;
     }
+
     //公司证书列表
     @RequestMapping("Comcredential")
     public @ResponseBody
-    Map<String,Object> Comcredential(HttpServletRequest request, HttpSession session,Credential credential)
-    {
+    Map<String, Object> Comcredential(HttpServletRequest request, HttpSession session, Credential credential) {
         //---获取存的公司
         Company company = (Company) session.getAttribute("company");
-        Integer fid=company.getFid();
+        Integer fid = company.getFid();
         //----把得到的公司id赋值给资料表
         credential.setFid(fid);
         //数据库查出条数
-        int count=companyBiz.comCount();
-        List<Credential> list=companyBiz.findCreList(credential);
+        int count = companyBiz.comCount();
+        List<Credential> list = companyBiz.findCreList(credential);
         System.out.println(list);
-        session.setAttribute("comcre",list);
-        map.put("code",0);
-        map.put("count",count);
-        map.put("data",list);
+        session.setAttribute("comcre", list);
+        map.put("code", 0);
+        map.put("count", count);
+        map.put("data", list);
 
         return map;
     }
@@ -116,19 +137,18 @@ public class CompanyHandler {
     //员工证书列表
     @RequestMapping("Staffcredential")
     public @ResponseBody
-    Map<String,Object> Staffcredential(HttpServletRequest request, HttpSession session,Credential credential)
-    {
+    Map<String, Object> Staffcredential(HttpServletRequest request, HttpSession session, Credential credential) {
         //---获取存的公司
         Company company = (Company) session.getAttribute("company");
-        Integer fid=company.getFid();
+        Integer fid = company.getFid();
         //----把得到的公司id赋值给资料表
         credential.setFid(fid);
         //数据库查出条数
-        Integer count1=companyBiz.stfCount();
-        List<Credential> list1=companyBiz.findStfCreList(credential);
-        map.put("code",0);
-        map.put("count",count1);
-        map.put("data",list1);
+        Integer count1 = companyBiz.stfCount();
+        List<Credential> list1 = companyBiz.findStfCreList(credential);
+        map.put("code", 0);
+        map.put("count", count1);
+        map.put("data", list1);
 
         return map;
     }
@@ -136,16 +156,15 @@ public class CompanyHandler {
     //公司订单查询
     @RequestMapping("companyOrder")
     public @ResponseBody
-    Map<String,Object> companyOrder(HttpServletRequest request, HttpSession session,Order order)
-    {
+    Map<String, Object> companyOrder(HttpServletRequest request, HttpSession session, Order order) {
         //---获得登录的公司对象
         Company company = (Company) session.getAttribute("company");
-        Integer count=companyBiz.ordercount(company.getFid(),order.getOsname());
-        List<Tblorder> list=companyBiz.findCompanyOrder(company.getFid(),order.getPage(),order.getLimit(),order.getOsname());
-        request.getSession().setAttribute("aa",list);
-        map.put("code",0);
-        map.put("count",count);
-        map.put("data",list);
+        Integer count = companyBiz.ordercount(company.getFid(), order.getOsname());
+        List<Tblorder> list = companyBiz.findCompanyOrder(company.getFid(), order.getPage(), order.getLimit(), order.getOsname());
+        request.getSession().setAttribute("aa", list);
+        map.put("code", 0);
+        map.put("count", count);
+        map.put("data", list);
         return map;
     }
 
@@ -154,91 +173,100 @@ public class CompanyHandler {
     //----人员评价表
     @RequestMapping("staffList")
     public @ResponseBody
-    Map<String,Object> staffList(HttpServletRequest request, HttpSession session,Tblorder tblorder)
-    {
+    Map<String, Object> staffList(HttpServletRequest request, HttpSession session, Tblorder tblorder) {
         //---获得登录的公司对象
         Company company = (Company) session.getAttribute("company");
-        Integer count=companyBiz.staffCount(company.getFid());
-        List<Staff> list = companyBiz.staffList(company.getFid(),tblorder.getPage(),tblorder.getLimit());
-        map.put("code",0);
-        map.put("count",count);
-        map.put("data",list);
+        Integer count = companyBiz.staffCount(company.getFid());
+        List<Staff> list = companyBiz.staffList(company.getFid(), tblorder.getPage(), tblorder.getLimit());
+        map.put("code", 0);
+        map.put("count", count);
+        map.put("data", list);
         return map;
     }
+
     //-------培训表
     @RequestMapping("stafftrain")
     public @ResponseBody
-    Map<String,Object> stafftrain(HttpServletRequest request, HttpSession session,Tbltrain tbltrain)
-    {
-        Integer count=companyBiz.traincount();
-        List<Tbltritem> list = companyBiz.train(tbltrain.getPage(),tbltrain.getLimit());
-        map.put("code",0);
-        map.put("count",count);
-        map.put("data",list);
+    Map<String, Object> stafftrain(HttpServletRequest request, HttpSession session, Tbltrain tbltrain) {
+        Integer count = companyBiz.traincount();
+        List<Tbltritem> list = companyBiz.train(tbltrain.getPage(), tbltrain.getLimit());
+        map.put("code", 0);
+        map.put("count", count);
+        map.put("data", list);
         return map;
     }
 
-//    员工删除
-@RequestMapping(value = "useDel", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
-public @ResponseBody String useDel(String sfid){
-    flag=0;
-    Integer id=Integer.parseInt(sfid);
-    flag=companyBiz.delStaff(id);
-    return String.valueOf(flag);
-}
+    //    员工删除
+    @RequestMapping(value = "useDel", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+    public @ResponseBody
+    String useDel(String sfid) {
+        flag = 0;
+        Integer id = Integer.parseInt(sfid);
+        flag = companyBiz.delStaff(id);
+        return String.valueOf(flag);
+    }
+
     //公司交易
-    @RequestMapping(value = "querydeallog",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public @ResponseBody Map<String,Object>  querydeallog(HttpServletRequest request,HttpSession httpSession ,Tbldeallog tbldeallog){
+    @RequestMapping(value = "querydeallog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public @ResponseBody
+    Map<String, Object> querydeallog(HttpServletRequest request, HttpSession httpSession, Tbldeallog tbldeallog) {
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         int page = tbldeallog.getPage();
-        List<Tbldeallog> querydeallog = companyBiz.querydeallog(fid,page,tbldeallog.getLimit());
+        List<Tbldeallog> querydeallog = companyBiz.querydeallog(fid, page, tbldeallog.getLimit());
         int count = companyBiz.countdeallog(fid, page, tbldeallog.getLimit());
-        Map<String,Object> map=new HashMap<String,Object>();
-        map.put("code",0);
-        map.put("count",count);
-        map.put("data",querydeallog);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("count", count);
+        map.put("data", querydeallog);
         return map;
     }
+
     //提供给公司的所有服务
-    @RequestMapping(value = "querycostype",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public @ResponseBody List querycostype(HttpServletRequest request){
+    @RequestMapping(value = "querycostype", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public @ResponseBody
+    List querycostype(HttpServletRequest request) {
         List<TblCOStype> querycostype = companyBiz.querycostype();
-        request.setAttribute("costype",querycostype);
+        request.setAttribute("costype", querycostype);
         return querycostype;
 
     }
+
     //显示银行账户 余额 类型
-    @RequestMapping(value = "queryfirmacc",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
-    public @ResponseBody Tblfirmacc queryfirmacc(HttpServletRequest request,HttpSession httpSession){
+    @RequestMapping(value = "queryfirmacc", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public @ResponseBody
+    Tblfirmacc queryfirmacc(HttpServletRequest request, HttpSession httpSession) {
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         System.out.println(fid);
         Tblfirmacc queryfirmacc = companyBiz.queryfirmacc(fid);
-        request.getSession().setAttribute("firmacc",queryfirmacc);
+        request.getSession().setAttribute("firmacc", queryfirmacc);
         return queryfirmacc;
     }
+
     //充值
-    @TransLog(operationName = "充值",operationType = "银行卡")
-    @RequestMapping(value = "addmoney",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
-    public @ResponseBody String addmoney(HttpSession httpSession,String addmoney,String compwd){
+    @TransLog(operationName = "充值", operationType = "银行卡")
+    @RequestMapping(value = "addmoney", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public @ResponseBody
+    String addmoney(HttpSession httpSession, String addmoney, String compwd) {
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
-        if(checkcompwd!=null){
+        if (checkcompwd != null) {
             String famoney = firmacc.getFamoney();
             int i = Integer.parseInt(famoney);//余额
             int j = Integer.parseInt(addmoney);//充值
-            int sum=i+j;
-            String money=sum+"";
+            int sum = i + j;
+            String money = sum + "";
             Company company = (Company) httpSession.getAttribute("company");
             Integer fid = company.getFid();
             Integer row = companyBiz.addmoney(money,fid);
             companyBiz.add(fid,addmoney);
             return "1";
-        }else{
+        } else {
             return "0";
         }
     }
+
     //提现
     @RequestMapping(value = "drawmoney",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String drawmoney(HttpSession httpSession,String draw,String compwd){
@@ -323,6 +351,7 @@ public @ResponseBody String useDel(String sfid){
         }
         return "0";
     }
+
     //修改公司信息
     @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
@@ -565,27 +594,36 @@ public @ResponseBody String useDel(String sfid){
 
     //忘记密码
     @RequestMapping("forgotpwd")
-    public @ResponseBody String forgotpwd(HttpSession httpSession,String facc){
-        System.out.println("忘记密码");
+    public @ResponseBody
+    String forgotpwd(HttpSession httpSession, String facc, String phcode) {
+
         Company forgotpwd = companyBiz.forgotpwd(facc);
-        if(forgotpwd!=null){
+        if (forgotpwd != null) {
             return "1";
-        }else{
+        } else {
             return "0";
         }
 
     }
+
     //修改密码
     @RequestMapping("changepwd")
-    public @ResponseBody String changepwd(HttpSession httpSession,String facc,String fpwd){
-        Integer i = companyBiz.changepwd(fpwd, facc);
-        if(i>0){
-            return "1";
-        }else {
-            return "0";
+    public @ResponseBody
+    String changepwd(HttpSession httpSession, String facc, String fpwd, String phcode) {
+        String phcode_req = (String) httpSession.getAttribute(facc + "_code_req");
+        if (phcode_req.equals(phcode)) {
+            Integer i = companyBiz.changepwd(fpwd, facc);
+            if (i > 0) {
+                return "1";
+            } else {
+                return "0";
+            }
+        } else {
+            return "2";
         }
 
     }
+
     //入驻
     @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
     public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){

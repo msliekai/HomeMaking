@@ -85,8 +85,8 @@ public class UserBizImpl implements UserBiz
     }
 
     @Override
-    public List<UserMoney> jUserMoney(UserMoney userMoney) {
-        return userMapper.jUserMoney(userMoney);
+    public List<Tblorder> jUserMoney(Tblorder tblorder) {
+        return userMapper.jUserMoney(tblorder);
     }
 
     @Override
@@ -137,6 +137,11 @@ public class UserBizImpl implements UserBiz
     @Override
     public int jUserPay(Integer userid, Integer money,String userpwd) {
         return userMapper.jUserPay(userid,money,userpwd);
+    }
+
+    @Override
+    public int jUsercut(Integer userid, Integer money, String userpwd) {
+        return userMapper.jUsercut(userid,money,userpwd);
     }
 
     @Override
@@ -192,6 +197,16 @@ public class UserBizImpl implements UserBiz
     @Override
     public int jcorder(Integer oid,Integer state) {
         return userMapper.jcorder(oid,state);
+    }
+
+    @Override
+    public int jUserUpApp(Integer eid, String econtext) {
+        return userMapper.jUserUpApp(eid,econtext);
+    }
+
+    @Override
+    public int jUserAdddeallog(Tbldeallog tbldeallog) {
+        return userMapper.jUserAdddeallog(tbldeallog);
     }
 
 
@@ -275,6 +290,16 @@ public class UserBizImpl implements UserBiz
     @Override
     public Integer addFoot(Tblfoot tblfoot) {
         return userMapper.addFoot(tblfoot);
+    }
+
+    @Override
+    public Integer cosHotUp(Integer cosid) {
+        return userMapper.cosHotUp(cosid);
+    }
+
+    @Override
+    public Integer adddeallog(Tbldeallog tbldeallog) {
+        return userMapper.adddeallog(tbldeallog);
     }
 
 

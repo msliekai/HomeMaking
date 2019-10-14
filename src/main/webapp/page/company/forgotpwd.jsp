@@ -72,8 +72,9 @@
                         <form action="<%=path%>admin/userForgot.action" >
                             <div class="form-group">
                                 <label for="facc">手机号</label>
-                                <input type="number" class="form-control" id="facc" name="facc" placeholder="请输入手机号" onblur="infacc()"><span id="aaa"></span><p/>
-                                <input type="button" id="btn" value="点我发送短信验证码"></input>
+                                <input type="number" class="form-control" id="facc" name="facc" placeholder="请输入手机号" onblur="infacc()">
+                                <input type="button" id="fbtn" value="点我发送短信验证码"></input>
+                                <span id="aaa"></span><p/>
                                 <span id="userphoneerr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
@@ -151,9 +152,10 @@
         $.post("<%=path%>page/forgotpwd.action",{"facc":facc},
             function (data) {
                 if(data=="1"){
-                    $("#aaa").html("");
+                    $("#aaa").html("可发送信息");
                 }else{
                     $("#aaa").html("该手机未注册");
+
                 }
             }
         );
@@ -186,19 +188,110 @@
     }
 
     function forgot() {
+
         var facc=$("#facc").val();
         var fpwd=$("#fpwd").val();
-        $.post("<%=path%>page/changepwd.action",{"facc":facc,"fpwd":fpwd},
+        var phcode=$("#phcode").val();
+
+
+        if("可发送信息"!=$("#aaa").text()){
+            return false;
+        }
+        if(!addpwd()){
+            return false;
+        }
+        if(!addnpwd()){
+            return false;
+        }
+        $.post("<%=path%>page/changepwd.action",{"facc":facc,"fpwd":fpwd,"phcode":phcode},
        function (data) {
            if(data=="1"){
                alert("修改成功");
-           }else {
-               alert("修改失败");
-           }
+           }else if(data=="2") {
+               alert("短信验证码错误");
+           }else{
+                   alert("修改失败");
+               }
        } );
     }
-    
 
+
+    /**
+     * <!-- 发送短信验证码倒计时-->
+     */
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function fsendMessage() {
+        curCount = count;
+        $("#fbtn").attr("disabled", "true");
+        $("#fbtn").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+
+        if (curCount == 0) {
+            stopTime();
+        } else {
+            curCount--;
+            $("#fbtn").val(curCount + "秒后可重新发送");
+        }
+    }
+
+    function stopTime() {
+        window.clearInterval(InterValObj);//停止计时器
+        $("#fbtn").removeAttr("disabled");//启用按钮
+        $("#fbtn").val("重新发送验证码");
+    }
+
+    /**
+     * //发送手机验证码
+     */
+    $("#fbtn").click(function () {
+        layui.use('layer', function () {
+            var facc=$("#facc").val();
+            var regular=new RegExp(/^1[3456789]\d{9}$/);
+            var tex=$("#aaa").text();
+            if(tex=="可发送信息"){
+                if(regular.test(facc)){
+
+                    fsendMessage();
+                    $.ajax({
+                        async: true, //true不异步，false异步
+                        type: "post", //提交方式
+                        url: "../../serial/sendSms.action",
+                        data: {
+                            "userphone": facc
+                        },
+                        // dataType:"text", //返回类型
+                        success: function (jso) {//执行结果
+                            if ("OK" == jso) {
+                                layer.msg("验证码发送成功");
+                            } else if ("phoneerr" == jso) {
+                                layer.msg("手机号未注册");
+                                stopTime();
+                            } else {
+                                layer.msg("验证码发送失败");
+                                stopTime();
+                            }
+                        },
+                        error: function (jso) {
+                            layer.msg("验证码发送失败");
+                            stopTime();
+                        }
+                    });
+
+                } else {
+                    layer.msg("手机号输入不正确");
+                }
+            }else{
+                layer.msg("请稍后，如手机未注册则不能使用");
+            }
+
+        })
+    })
 
 
 </script>

@@ -65,10 +65,7 @@
                            autocomplete="off" class="layui-input"  disabled/>
                 </div>
             </div>
-<%--            <div align="center" class="layui-form-item">--%>
-<%--                &lt;%&ndash;                <label for="L_repass" class="layui-form-label"></label>&ndash;%&gt;--%>
-<%--                <button class="layui-btn" lay-filter="add" lay-submit="">修改</button>--%>
-<%--            </div>--%>
+
         </form>
     </div>
 </div>

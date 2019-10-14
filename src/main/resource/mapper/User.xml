@@ -227,14 +227,12 @@
 
     <!--查询订单-->
     <select id="jUserMoney" resultMap="BalanceList">
-        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,z.hzname,z.hzbei*sf.sfcos as money,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f ,tblHZ  z
-        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid and o.hzid = z.hzid and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid} and o.osid !='8'
-        order by o.oid
-
+        SELECT o.oid,o.onumber,c.cosname,ct.ctname,o.otime,o.otitle,o.ocontext,o.ophone,o.osid,f.fname,sf.sfcos,sf.sfname,os.osname from tblorder o ,tbloderstate os ,tbluser u ,tblCOS c ,tblCOStype ct ,tblstaff sf,tblfirm f
+        WHERE o.userid = u.userid and o.sfid = sf.sfid and sf.fid = f.fid  and o.cosid = c.cosid and c.ctid = ct.ctid and o.osid = os.osid  and u.userid = #{userid} and o.osid !='8'
         <if test="null != osid">
             and o.osid =#{osid}
         </if>
-
+        order by o.oid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -248,19 +246,15 @@
         <result property="otitle" column="otitle"/>
         <result property="ocontext" column="ocontext"/>
         <result property="ophone" column="ophone"/>
-        <result property="money" column="money"/>
         <result property="osid" column="osid"/>
         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
             <id property="osid" column="osid"/>
             <result property="osname" column="osname"/>
         </association>
-        <association property="tblHZ" column="hzid" javaType="com.hm.entity.TblHZ">
-            <id property="hzid" column="hzid"/>
-            <result property="hzname" column="hzname"/>
-        </association>
         <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
             <id property="sfid" column="sfid"/>
             <result property="sfname" column="sfname"/>
+            <result property="sfcos" column="sfcos"/>
             <association property="company" column="company" javaType="com.hm.entity.Company">
                 <id property="fid" column="fid"/>
                 <result property="fname" column="fname"/>
@@ -350,6 +344,7 @@
     <!--AppList-->
     <resultMap id="AppList" type="com.hm.entity.Tbleva">
         <id property="eid" column="eid"/>
+        <result property="eid" column="eid"/>
         <result property="econtext" column="econtext"/>
         <result property="econut" column="econut"/>
         <result property="etime" column="etime"/>
@@ -494,9 +489,9 @@
         tblorder.ophone,
         tblorder.onumber,
         tblorder.sid,
-        tblorder.aftercontext,
-        tblorder.afterstaff,
-        tblorder.afterresult,
+        CASE WHEN tblorder.aftercontext is null THEN '无' ELSE tblorder.aftercontext END as aftercontext,
+        CASE WHEN tblorder.afterstaff is null THEN 0 ELSE tblorder.afterstaff END as afterstaff,
+        CASE WHEN tblorder.afterresult is null THEN '无' ELSE tblorder.afterresult END as afterresult,
         tbloderstate.osname,
         tblCOS.cosname,
         tblCOS.cosdeta,
@@ -552,6 +547,7 @@
         <result property="afterresult" column="afterresult"/>
         <association property="tbloderstate" column="osid" javaType="com.hm.entity.Tbloderstate">
             <id property="osid" column="osid"/>
+            <result property="osname" column="osname"/>
         </association>
         <association property="staff" column="sfid" javaType="com.hm.entity.Staff">
             <id property="sfid" column="sfid"/>
@@ -580,7 +576,8 @@
     </resultMap>
     <!--足迹-->
     <select id="jUserfoot" resultMap="foot" >
-        SELECT ft.*,sf.sfname,cs.cosname,ct.ctname,f.fname  from tblfoot ft,tblstaff sf,tblfirm f,tbluser u ,tblCOS cs, tblCOStype ct where ft.sfid = sf.sfid and ft.userid = u.userid and sf.cosid = cs.cosid and cs.ctid = ct.ctid and sf.fid = f.fid and ft.userid = #{userid}
+        select m.* from(SELECT ft.*,sf.sfname,cs.cosname,ct.ctname,f.fname from tblfoot ft,tblstaff sf,tblfirm f,tbluser u ,tblCOS cs, tblCOStype ct where ft.sfid = sf.sfid and ft.userid = u.userid and sf.cosid = cs.cosid and cs.ctid = ct.ctid and sf.fid = f.fid
+        and ft.userid =#{userid} ORDER BY ft.foottime desc limit 0,50 )m
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit"/>
             limit #{page} ,#{limit}
@@ -612,6 +609,10 @@
     <!--充值-->
     <update id="jUserPay">
      UPDATE tbluser SET usermoney = usermoney+#{usermoney} where userid = #{userid} and userpwd= #{userpwd}
+    </update>
+    <!--用户消费-->
+    <update id="jUsercut">
+     UPDATE tbluser SET usermoney = usermoney-#{usermoney} where userid = #{userid} and userpwd= #{userpwd}
     </update>
     <!--修改卡号-->
     <update id="jUserCard">
@@ -654,6 +655,10 @@
     <update id="jcorder" parameterType="com.hm.entity.Tblorder">
        update tblorder set osid =#{state} where  oid = #{oid}
     </update>
+    <!--改变评价内容-->
+    <update id="jUserUpApp" parameterType="com.hm.entity.Tbleva">
+       update tbleva set econtext =#{econtext} where  eid = #{eid}
+    </update>
 
     <!--申请售后-->
     <update id="jUserAddAfter" parameterType="com.hm.entity.Tblorder">
@@ -684,6 +689,24 @@
         (userid,sfid,foottime)
         VALUES
         (#{userid},#{sfid},#{foottime});
+    </insert>
+    <!--增加交易记录-->
+    <insert id="jUserAdddeallog" parameterType="com.hm.entity.Tbldeallog" >
+        INSERT INTO tbldeallog
+        (userid,deid,dltime,dlcost,dltype)
+        VALUES
+        (#{userid},#{deid},sysdate(),#{dlcost},#{dltype});
+    </insert>
+<!--服务热度+1-->
+    <update id="cosHotUp" >
+        UPDATE tblCOS SET coshot=coshot+1 WHERE cosid=#{cosid}
+    </update>
+
+    <insert id="adddeallog" parameterType="com.hm.entity.Tbldeallog">
+        INSERT INTO tbldeallog
+        (fid,userid,deid,dltime,dlcost,dltype)
+        VALUES
+        (#{fid},#{userid},6,#{dltime},#{dlcost},'支出')
     </insert>
 </mapper>
 

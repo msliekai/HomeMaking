@@ -5,6 +5,7 @@ import com.hm.entity.Tblrole;
 import com.hm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public interface MangerBiz {
@@ -95,6 +96,8 @@ public interface MangerBiz {
     public int delKap(int kid);
     //修改育婴公告
     public int updateKap(Tblkap tblkap);
+    //提交订单回访
+    public int OrderVisit(Tblorder tblorder);
 
 
 }
