@@ -50,13 +50,15 @@
     </select>
     <!--    家政公司列表-->
     <select id="cFindCompanyAll" parameterType="com.hm.entity.Company" resultType="com.hm.entity.Company">
-        select u.*,c.ctname,e.stname from tblfirm u,tblCOStype c,tblstate e WHERE  u.ctid=c.ctid and u.stid = e.stid AND u.rid=3
+        select u.*,t.rname,GROUP_CONCAT(c.ctname) as ctname
+        from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid  and u.rid=3
         <if test="fname!=null and fname!=''">
             and u.fname like "%"#{fname}"%"
         </if>
         <if test="stname!=null and stname!=''">
             and e.stname like "%"#{stname}"%"
         </if>
+        GROUP BY u.fid
         ORDER BY u.fid
             <if test="0 &lt; page">
                 <bind name="page" value="(page-1)* limit "/>
@@ -65,13 +67,15 @@
     </select>
     <!--    家政公司入驻审核列表-->
     <select id="cmFindCompanyAll" parameterType="com.hm.entity.Company" resultType="com.hm.entity.Company">
-        select u.*,t.rname,c.ctname from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid AND u.ctid=c.ctid and u.rid=4
+        select u.*,t.rname,GROUP_CONCAT(c.ctname) as ctname
+        from tblfirm u,tblrole t,tblCOStype c WHERE u.rid=t.rid  and u.rid=4
         <if test="fname!=null and fname!=''">
             and u.fname like "%"#{fname}"%"
         </if>
         <if test="flaw!=null and flaw!=''">
             and u.flaw like "%"#{flaw}"%"
         </if>
+         GROUP BY u.fid
         ORDER BY u.fid
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>

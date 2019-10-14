@@ -89,7 +89,8 @@ from (SELECT svtime from (select * from tblorder where osid = 2 or osid =5) o,tb
     </select>
 <!--    查询公司统计-->
     <select id="getAllCompany" resultType="java.util.LinkedHashMap">
-       select SUBSTRING_INDEX(SUBSTRING_INDEX(fsite,'-',2),'-',-1) as name,count(*) as value
+       select left(SUBSTRING_INDEX(SUBSTRING_INDEX(fsite,'-',2),'-',-1),char_length(SUBSTRING_INDEX(SUBSTRING_INDEX(fsite,'-',2),'-',-1))-1)
+       as name,count(*) as value
         FROM tblfirm
         GROUP BY name
     </select>

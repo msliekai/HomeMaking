@@ -87,7 +87,17 @@
                 <li class="nav-item">
                     <a class="nav-link" onclick="exc()">退出登录</a>
                 </li>
+
+                <%--导航栏分支--%>
+                <%--<li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>--%>
             </ul>
+            <%--搜索栏--%>
+            <%--<form class="form-inline header-search-form my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" size="10"  placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>--%>
         </div>
     </div>
 </nav>
@@ -114,14 +124,14 @@
                 </div>
             </div>
             <%--帮助小链接--%>
-            <div class="sidebar-box">
+            <%--<div class="sidebar-box">
                 <h4>Helpful Links</h4>
                 <ul>
                     <li><a href="#" title="premium templates">Premium HTML web templates from $10</a></li>
                     <li><a href="#" title="web hosting">Cheap web hosting from Dreamhost</a></li>
                     <li><a href="#" title="Tux Themes">Premium WordPress themes</a></li>
                 </ul>
-            </div>
+            </div>--%>
         </aside>
 
         <!-- Main content 主页1 -->
@@ -252,6 +262,7 @@
     }
 
 </script>
+
 
 <script>
     <%--聊天--%>
