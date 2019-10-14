@@ -509,7 +509,7 @@ where ts.ctid=m.ctid
     </update>
     <!--入驻-->
    <update id="infirm" parameterType="java.lang.String">
-       update tblfirm set fname=#{fname},rid=3  where facc=#{facc}
+       update tblfirm set fname=#{fname},rid=4  where facc=#{facc}
    </update>
     <!--循环插入服务-->
     <insert id="addserve" parameterType="java.util.List">
