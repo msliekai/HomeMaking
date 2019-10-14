@@ -11,7 +11,7 @@ public interface CompanyBiz {
     public Company checkfacc(String facc);
     public int addCompany(Company company);
     //修改公司基本信息
-    public int upcom(Integer fid,String facc,String fname,String flaw,String flawphone,String fsite);
+    public int upcom(Integer fid,String facc,String fname,String flaw,String fphone,String fsite);
     public Company upcominfo(Integer fid);
     //------公司证书列表
     public List<Credential> findCreList(Credential credential);

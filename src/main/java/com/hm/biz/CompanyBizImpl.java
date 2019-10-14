@@ -222,8 +222,8 @@ public class CompanyBizImpl implements CompanyBiz {
     }
 
     @Override
-    public int upcom(Integer fid,String facc, String fname, String flaw, String flawphone, String fsite) {
-        return companyMapper.upcom(fid,facc,fname,flaw,flawphone,fsite);
+    public int upcom(Integer fid,String facc, String fname, String flaw, String fphone, String fsite) {
+        return companyMapper.upcom(fid,facc,fname,flaw,fphone,fsite);
     }
 
     //银行密码

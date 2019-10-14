@@ -160,7 +160,7 @@
         var facc=$("#facc").val();
         var fname=$("#fname").val();
         var flaw=$("#flaw").val();
-        var flawphone=$("#fphone").val();
+        var fphone=$("#fphone").val();
         var fsite=$("#fsite").val();
         $.post("<%=path%>page/upcom.action",
             {"facc":facc,"fname":fname,"flaw":flaw,"fphone":fphone,"fsite":fsite},
