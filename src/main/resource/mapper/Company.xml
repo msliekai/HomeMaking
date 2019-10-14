@@ -53,7 +53,7 @@
         <if test="osname!=null and osname!=''">
             and q.osname like "%"#{osname}"%"
         </if>
-        GROUP BY p.oid
+        GROUP BY p.oid ORDER BY p.otime DESC
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit};
     </select>
@@ -220,7 +220,7 @@
     </select>
 <!--    员工信息表-->
     <select id="staffList"  resultMap="staff">
-    SELECT f.sfid,f.sfname,f.sfcos,f.sfage,f.sfworkexp,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname
+    SELECT f.sfid,f.sfname,f.sfcos,f.sfage,f.sfworkexp,f.sftag,f.sfdob,f.sfgood,f.fid,f.sfedu,f.sfwant,s.stname,f.scard
     from tblstaff f,tblstate s,tblfirm i where f.stid=s.stid and f.fid=i.fid and i.fid=#{fid} and s.stid != 3
         <bind name="page" value="(page-1)*limit"/>
     limit #{page},#{limit}
@@ -237,6 +237,7 @@
         <result property="sftag" column="sftag"/>
         <result property="sfgood" column="sfgood"/>
         <result property="sfwant" column="sfwant"/>
+        <result property="scard" column="scard"/>
         <association property="tblstate" column="tblstate" javaType="com.hm.entity.Tblstate">
             <id property="stid" column="stid"/>
             <result property="stname" column="stname"/>
@@ -262,9 +263,9 @@
 <!--    新增员工-->
     <insert id="addStaff" parameterType="com.hm.entity.Staff">
         insert into tblstaff
-        (sfname,sfdob,sfage,sfexp,sfcos,sfworkexp,sfgood,sftag,sfedu,sfwant,sfurl,fid,stid)
+        (sfname,sfdob,sfage,sfexp,sfcos,sfworkexp,sfgood,sftag,sfedu,sfwant,sfurl,fid,stid,scard)
         values
-        (#{sfname},#{sfdob},#{sfage},#{sfexp},#{sfcos},#{sfworkexp},#{sfgood},#{sftag},#{sfedu},#{sfwant},#{sfurl},#{fid},4)
+        (#{sfname},#{sfdob},#{sfage},#{sfexp},#{sfcos},#{sfworkexp},#{sfgood},#{sftag},#{sfedu},#{sfwant},#{sfurl},#{fid},4,#{scard})
         <selectKey resultType="java.lang.Integer" keyProperty="sfid" order="AFTER">
             SELECT LAST_INSERT_ID() AS sfid
         </selectKey>
@@ -318,7 +319,7 @@
 <!--    员工修改-->
     <update id="staffFix" parameterType="com.hm.entity.Staff">
         update tblstaff set sfname=#{sfname},sfdob=#{sfdob},sfcos=#{sfcos},sfworkexp=#{sfworkexp},
-        sfgood=#{sfgood},sftag=#{sftag},sfedu=#{sfedu},sfwant=#{sfwant}
+        sfgood=#{sfgood},sftag=#{sftag},sfedu=#{sfedu},sfwant=#{sfwant},scard=#{scard}
         where sfid=#{sfid}
     </update>
 

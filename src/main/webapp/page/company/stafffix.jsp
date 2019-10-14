@@ -30,6 +30,7 @@
     String sftag = request.getParameter("sftag")==null?"":request.getParameter("sftag");
     String sfedu = request.getParameter("sfedu")==null?"":request.getParameter("sfedu");
     String sfwant = request.getParameter("sfwant")==null?"":request.getParameter("sfwant");
+    String scard = request.getParameter("scard")==null?"":request.getParameter("scard");
 
 %>
 <form id="form1" class="layui-form" action="" method="get" lay-filter="example" >
@@ -88,10 +89,17 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">银行卡</label>
+        <div class="layui-input-inline">
+            <input type="text" name="scard" lay-verify="required" value="<%=scard%>" autocomplete="off" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button type="button" class="layui-btn" onclick="tijiao()" lay-filter="demo1">立即提交</button>
         </div>
     </div>
+
 </form>
 <script src="<%=path%>page/layui/laydate.js"></script>
 <script>

@@ -49,7 +49,6 @@ public class ManagerHandler {
             if(null!=u)
             {
                 request.getSession().setAttribute("user",u);
-                System.out.println(u.getRid());
                 request.setAttribute("umenu",menuBizImpl.getMenu(u.getRid()));
 
                 mav.setViewName("baseindex");
@@ -70,8 +69,6 @@ public class ManagerHandler {
         Tblrole t = new Tblrole();
         t.setRname(tblrole.getRname());
         int count = mangerBizImpl.getRole(t).size();
-        System.out.println("+++"+mangerBizImpl.getRole(t).size());
-        System.out.println(mangerBizImpl.getRole(null).size());
         int page = count%limit==0?count/limit:(count/limit+1);
         if (page<tblrole.getPage()){
             tblrole.setPage(page);
@@ -101,8 +98,6 @@ public class ManagerHandler {
 
     @RequestMapping(value = "/getNewPower.action")
     public @ResponseBody  boolean getNewPower( Integer rid, String data){
-        System.out.println(rid);
-        System.out.println(data);
         ObjectMapper mapper = new ObjectMapper();
         //data为字符串json数据
         List<MenuTree> list = null;
@@ -111,10 +106,8 @@ public class ManagerHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(list);
         List<Tblpower> listMid = new ArrayList<>();
         getMid(list,listMid,rid);
-        System.out.println(listMid);
         return menuBizImpl.changePower(listMid,rid);
     }
     //通过递归获取mid
@@ -134,7 +127,7 @@ public class ManagerHandler {
     //獲取用戶統計
     @RequestMapping(value = "/getUserCount.action")
     public @ResponseBody  Map getUserCount( String date){
-        System.out.println(date);
+
         return statisticsBizImpl.getUser(date);
     }
     //獲取公司統計
@@ -232,9 +225,6 @@ public class ManagerHandler {
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
         count=mangerBizImpl.cFindServiceAll(null).size();
         List<TblCOS> list =mangerBizImpl.cFindServiceAll(tblCOS);
-        for (TblCOS cos : list) {
-            System.out.println(cos.getCoshot());
-        }
 
         map.put("code",0);
         map.put("count",count);

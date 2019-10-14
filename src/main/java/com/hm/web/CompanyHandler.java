@@ -125,7 +125,6 @@ public class CompanyHandler {
         //数据库查出条数
         int count = companyBiz.comCount();
         List<Credential> list = companyBiz.findCreList(credential);
-        System.out.println(list);
         session.setAttribute("comcre", list);
         map.put("code", 0);
         map.put("count", count);
@@ -238,7 +237,6 @@ public class CompanyHandler {
     Tblfirmacc queryfirmacc(HttpServletRequest request, HttpSession httpSession) {
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
-        System.out.println(fid);
         Tblfirmacc queryfirmacc = companyBiz.queryfirmacc(fid);
         request.getSession().setAttribute("firmacc", queryfirmacc);
         return queryfirmacc;
@@ -281,7 +279,6 @@ public class CompanyHandler {
             if(i<=j){
                 int sum=j-i;
                 String money=sum+"";
-                System.out.println(money);
                 Integer row = companyBiz.drawmoney(money, fid);
                 Integer draw1 = companyBiz.draw(fid,draw);
                 return "1";
@@ -322,18 +319,12 @@ public class CompanyHandler {
     //具体服务
     @RequestMapping(value = "queryserve",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
     public @ResponseBody Map<String,Object> queryserve(HttpSession httpSession,Tblfc tblfc){
-        System.out.println("具体服务");
         Integer page = tblfc.getPage();
         Integer limit = tblfc.getLimit();
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();//获取公司fid
-        System.out.println(fid);
-        System.out.println(page);
-        System.out.println(limit);
         List<Tblfc> queryserve = companyBiz.queryserve(fid, page, limit);
-        System.out.println(queryserve+"********");
         int count = companyBiz.countserve(fid,page,limit);
-        System.out.println(count+"+++++++++++");
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",0);
         map.put("count",count);
@@ -367,8 +358,6 @@ public class CompanyHandler {
     //评价
     @RequestMapping(value = "querycomment",method = RequestMethod.GET,produces ="application/json;charset=utf-8")
     public @ResponseBody Map<String,Object> querycomment(HttpSession httpSession,Tbleva tbleva,String date1,String date2){
-        System.out.println("评价");
-        System.out.println(date1+date2);
         Company company = (Company) httpSession.getAttribute("company");
         Integer fid = company.getFid();
         Integer page = tbleva.getPage();
@@ -386,7 +375,6 @@ public class CompanyHandler {
     @RequestMapping(value = "transfer",method = RequestMethod.POST,produces ="application/json;charset=utf-8")
     public @ResponseBody String transfer(HttpSession httpSession,String collectcount,
                                          String collect,String payee,String paymentpwd,String transfermoney){
-        System.out.println("银行转账");
         Staff staff = companyBiz.queryscard(collectcount);
         String sfname = staff.getSfname();
         Company company = (Company) httpSession.getAttribute("company");
@@ -456,7 +444,7 @@ public class CompanyHandler {
     public @ResponseBody String take(HttpSession session,Tblorder tblorder)
     {
         Company company = (Company) session.getAttribute("company");
-         String fname = company.getFname();//获取公司名称
+
         String ophone=tblorder.getOphone();
 
         //---获取订单号
@@ -479,7 +467,7 @@ public class CompanyHandler {
         if(a>0)
         {
             //----给用户发送接单短信
-            ShortMessageUtil.sendInformationToUsers(ophone,fname);
+           String aa= ShortMessageUtil.sendInformationToUsers(ophone,"XX");
             return "ok";
         }else {
             return "no";
@@ -491,7 +479,7 @@ public class CompanyHandler {
     {
         Staff staff1 = new Staff(staff.getSfid(),staff.getSfname(),staff.getSfdob(),
                 staff.getSfcos(),staff.getSfworkexp(),staff.getSfwant(),
-                staff.getSfgood(),staff.getSfedu(),staff.getSftag());
+                staff.getSfgood(),staff.getSfedu(),staff.getSftag(),staff.getScard());
 
         Integer b = companyBiz.staffFix(staff1);
         if(b>0)
@@ -516,8 +504,6 @@ public class CompanyHandler {
     {
 
        List<Tbleva> list=companyBiz.findStaffEva(Integer.parseInt(sfid));
-        System.out.println(list);
-
         return list;
     }
     //----分配服务类型
@@ -647,9 +633,7 @@ public class CompanyHandler {
         }
         if(company.getRid()==7){
             Integer j = companyBiz.addserve(tblfcs);
-            System.out.println(j);
             Integer i = companyBiz.infirm(fname, facc);
-            System.out.println(i);
             if(i>0){
                 return "1";
             }else {
@@ -663,7 +647,6 @@ public class CompanyHandler {
     //清除缓存
     @RequestMapping(value = "clearSession",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
     public @ResponseBody  String clearSession(HttpServletRequest request){
-        System.out.println("清理缓存");
 //        request.getSession().removeAttribute("company");
         request.getSession().invalidate();
         return "1";
@@ -693,7 +676,6 @@ public class CompanyHandler {
     //获取订单统计
     @RequestMapping(value = "getOrderCount")
     public @ResponseBody  Map getOrderCount(HttpSession session,String date){
-        System.out.println("jianlai+1111111111");
         Company company = (Company) session.getAttribute("company");
         Integer fid=company.getFid();
         return companyBiz.getSendOrder(date,fid);

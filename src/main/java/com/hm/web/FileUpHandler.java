@@ -7,8 +7,6 @@ import com.hm.entity.Staff;
 import com.hm.entity.Tblfcc;
 import com.hm.entity.Tblsfdata;
 import com.hm.tools.TimeTools;
-import com.hm.entity.Tblfcc;
-import com.hm.tools.TimeTools;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;

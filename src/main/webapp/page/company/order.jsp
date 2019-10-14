@@ -124,7 +124,6 @@
         var $ = layui.$, active = {
             reload: function(){
                 var osname = $('#osname');
-                alert(osname);
                 //执行重载
                 table.reload('testReload', {
                     page: {
