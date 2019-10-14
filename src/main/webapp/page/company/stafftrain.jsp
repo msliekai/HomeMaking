@@ -85,31 +85,6 @@
                 , {field: 'right',fixed:'right', title: '操作', toolbar: '#barDemo', minWidth: 270}
             ]]
         });
-        //触发查询按钮
-        var $ = layui.$, active = {
-            reload: function(){
-                var uname = $('#uname');
-                var cong=$('#cong');
-                var dao=$('#dao');
-                //执行重载
-                table.reload('testReload', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    ,where: {
-                        uname: uname.val(),
-                        cong:cong.val(),
-                        dao:dao.val(),
-                    }
-                }, 'data');
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            alert(type);
-            active[type] ? active[type].call(this) : '';
-        })
 
         //监听行工具事件
         table.on('tool(test)', function(obj) {
@@ -123,42 +98,12 @@
                         "?trid="+encodeURIComponent(data.trid)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
-            }else if(obj.event==="useDis"){
-                layer.confirm('确定禁用？', function (index) {
-                    fal("<%=path%>userManagement/useDis.action",data.uid);
-                    layer.close(index);
-                });
+            }else if(obj.event==="usedeal"){
+                alert("请联系管理员报名，谢谢！")
             }
         });
 
-        function fal(url,uid) {
-            $.ajax({
-                async: true,
-                type: "post",
-                url: url,
-                dataType: "text",
-                data: {"uid":uid},
-                success: function (dat) {
-                    if(dat==1){
-                        layer.msg("修改成功");
-                    }else{
-                        layer.msg("修改失败");
-                    }
-                    //执行重载
-                    table.reload('testReload', {
-                        where: {
-                            uname: uname.value,
-                            cong:cong.value,
-                            dao:dao.value,
-                        }
-                    }, 'data');
-                },
-                error: function (dat) {
-                    layer.msg('裂开');
-                }
-            })
 
-        }
     });
 
 </script>

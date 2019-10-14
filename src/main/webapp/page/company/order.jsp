@@ -124,6 +124,7 @@
         var $ = layui.$, active = {
             reload: function(){
                 var osname = $('#osname');
+                alert(osname);
                 //执行重载
                 table.reload('testReload', {
                     page: {
@@ -273,7 +274,7 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
+                            osname: osname.value,
                         }
                     }, 'data');
                 },
@@ -383,5 +384,8 @@
         //     active[type] ? active[type].call(this, $(this).data('toggle')) : '';
         // });
     });
+</script>
+<script>
+
 </script>
 </html>
