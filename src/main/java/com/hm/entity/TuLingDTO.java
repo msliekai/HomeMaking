@@ -6,7 +6,7 @@ package com.hm.entity;
 public class TuLingDTO {
 	private String code;
 	private String text;
-
+	private String url;
 	public String getCode() {
 		return code;
 	}
@@ -21,6 +21,14 @@ public class TuLingDTO {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
 

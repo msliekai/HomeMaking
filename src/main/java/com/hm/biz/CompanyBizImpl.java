@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+import static com.hm.utils.MD5Utils.md5;
+
 @Service("companyBiz")
 public class CompanyBizImpl implements CompanyBiz {
     @Resource
@@ -36,12 +38,16 @@ public class CompanyBizImpl implements CompanyBiz {
     //公司登陆
     @Override
     public Company comlogin(String facc, String fpwd) {
+        //fpwd = md5(fpwd);
         return companyMapper.comlogin(facc,fpwd);
     }
 
     //注册公司
     @Override
     public int addCompany(Company company) {
+        String fpwd = company.getFpwd();
+        fpwd = md5(fpwd);
+        company.setFpwd(fpwd);
         return companyMapper.addCompany(company);
     }
 
@@ -146,6 +152,7 @@ public class CompanyBizImpl implements CompanyBiz {
     //修改密码
     @Override
     public Integer changepwd(String fpwd, String facc) {
+        fpwd = md5(fpwd);
         return companyMapper.changepwd(fpwd,facc);
     }
 

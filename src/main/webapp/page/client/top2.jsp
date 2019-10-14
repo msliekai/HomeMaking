@@ -235,12 +235,14 @@
         };
         //监听收到的消息
         socket1.onmessage = function(res){
+                console.log(res);
             layim1.getMessage({
                 username: '家政机器人',
                 avatar: '<%=path%>page/img/robot.jpg',
                 id: 10010,
                 type: 'kefu',
-                content: res.data
+                content: res.data,
+                a:res.data
             });
         };
     });

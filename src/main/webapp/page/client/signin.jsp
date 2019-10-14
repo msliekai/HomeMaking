@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label for="userpwd">密码</label>
                                 <input type="password" class="form-control" autocomplete="off" required="required"
-                                       id="userpwd" name="userpwd" placeholder="请输入密码" value="a12345">
+                                       id="userpwd" name="userpwd" placeholder="请输入密码" value="a123456">
                                 <span id="passErr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">

@@ -128,7 +128,7 @@
 
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
-            alert(type);
+
             active[type] ? active[type].call(this) : '';
         })
 

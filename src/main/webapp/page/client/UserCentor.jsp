@@ -28,8 +28,9 @@
     <!-- jquery-ui.min css -->
     <link rel="stylesheet" href="<%=path%>page/client/assets/css/jquery-ui.min.css">
     <%--layui--%>
-    <link rel="stylesheet" href="<%=path%>page/src/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=path%>page/layui/css/layui.css" media="all">
     <script src="<%=path%>page/layui/layui.js"></script>
+
 </head>
 
 <body>
@@ -86,17 +87,7 @@
                 <li class="nav-item">
                     <a class="nav-link" onclick="exc()">退出登录</a>
                 </li>
-
-                <%--导航栏分支--%>
-                <%--<li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>--%>
             </ul>
-            <%--搜索栏--%>
-            <%--<form class="form-inline header-search-form my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" size="10"  placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>--%>
         </div>
     </div>
 </nav>
@@ -262,88 +253,100 @@
 
 </script>
 
-
 <script>
     <%--聊天--%>
     var userid = "${userbacc.userphone}";
     var uuname =  "${userbacc.username}";
     var avatar = "<%=path%>${userbacc.userurl}";
     var system ={};
-    var p = navigator.platform;
-    system.win = p.indexOf("Win") == 0;
-    system.mac = p.indexOf("Mac") == 0;
-    system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-    // if (system.win||system.mac||system.xll) {
-    var socket = null;
-    //连接websocket的ip地址
-    var ip = "crm.natapp1.cc";
-    //动态修改查
-    var im = {
-        init: function () {
-            if ('WebSocket' in window) {
-                var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${userbacc.userphone}';
-                socket = new WebSocket(socketUrl);
-                im.startListener();
-            } else {
-                alert('当前浏览器不支持WebSocket功能，请更换浏览器访问。');
-            }
-        },
-        startListener: function () {
-            console.log(socket);
-            if (socket) {
-// 连接发生错误的回调方法
-                socket.onerror = function () {
-                    console.log("通讯连接失败!");
-                };
-// 连接成功建立的回调方法
-                socket.onopen = function (event) {
-                    console.log("通讯连接成功");
+    if (userid.length>0) {
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") == 0;
+        system.mac = p.indexOf("Mac") == 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        // if (system.win||system.mac||system.xll) {
+        var socket = null;
+        //连接websocket的ip地址
+        var ip = "crm.natapp1.cc";
+        //动态修改查
+        var im = {
+            init: function () {
+                if ('WebSocket' in window) {
+                    var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${userbacc.userphone}';
+                    socket = new WebSocket(socketUrl);
+                    im.startListener();
+                } else {
+                    alert('当前浏览器不支持WebSocket功能，请更换浏览器访问。');
                 }
-// 接收到消息的回调方法
-                socket.onmessage = function (event) {
-                    console.log("通讯接收到消息");
-                    im.handleMessage(event.data);
-                }
-// 连接关闭的回调方法
-                socket.onclose = function () {
-                    console.log("通讯关闭连接！!");
-                }
-            }
-        },
-        handleMessage: function (msg) {
-            console.log(msg);
-            if(msg=="1"){
-                layer.msg("该聊天对象不在线，请电话联系！"+fphone);
-            }else {
-                msg = JSON.parse(msg);
-                layim.getMessage(msg);
-            }
-        }
-    };
-    im.init();
-
-    layui.use('layim', function(layim){
-        alert(uuname);
-        var $ = layui.jquery;
-        window.layim = layim;
-        layim.config({
-            //我的信息
-            mine: {
-                "username":uuname  //我的昵称
-                ,"id": userid //我的ID
-                ,"avatar": avatar //我的头像
             },
-            brief: false //是否简约模式（如果true则不显示主面板）
-        });
-        layim.on('sendMessage', function(data){
-            // console.log(layim.cache());
-            var To = data.to;
-            if(To.type === 'friend'){
-                layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
+            startListener: function () {
+                console.log(socket);
+                if (socket) {
+// 连接发生错误的回调方法
+                    socket.onerror = function () {
+                        console.log("通讯连接失败!");
+                    };
+// 连接成功建立的回调方法
+                    socket.onopen = function (event) {
+                        console.log("通讯连接成功");
+                    }
+// 接收到消息的回调方法
+                    socket.onmessage = function (event) {
+                        console.log("通讯接收到消息");
+                        im.handleMessage(event.data);
+                    }
+// 连接关闭的回调方法
+                    socket.onclose = function () {
+                        console.log("通讯关闭连接！!");
+                    }
+                }
+            },
+            handleMessage: function (msg) {
+                console.log(msg);
+                if(msg=="1"){
+                    if (fphone.length>0){
+                        layer.msg("该聊天对象不在线，请电话联系！"+fphone);
+                    } else {
+                        layer.msg("该聊天对象不在线，请电话联系！");
+                    }
+                }else {
+                    msg = JSON.parse(msg);
+                    layim.getMessage(msg);
+                }
             }
-            socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uuname+"-f,t-"+avatar);
+        };
+        im.init();
+
+        layui.use('layim', function(layim){
+            var $ = layui.jquery;
+            window.layim = layim;
+            layim.config({
+                init: {
+                    //配置客户信息
+                    mine: {
+                        "username":uuname  //我的昵称
+                        ,"id": userid //我的ID
+                        ,"avatar": avatar //我的头像
+                    }
+                },uploadImage: {
+                    url: '<%=path%>sns/uploadFile.action?userId='+userid
+                    // ,type: '' //默认post
+                } ,
+                uploadFile: {
+                    url: '<%=path%>sns/uploadFile.action?userId='+userid
+                },
+                brief: false //是否简约模式（如果true则不显示主面板）
+            });
+            layim.on('sendMessage', function(data){
+                var To = data.to;
+                if(To.type === 'friend'){
+                    layim.setChatStatus('<span style="color:#FF5722;">对方正在输入。。。</span>');
+                }
+                socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uuname+"-f,t-"+avatar);
+            });
         });
-    });
+
+    }
 </script>
 </body>
 </html>

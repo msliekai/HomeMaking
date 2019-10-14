@@ -6,26 +6,21 @@ import com.hm.entity.TblSite;
 import com.hm.entity.TblUser;
 import com.hm.entity.Tblfc;
 import com.hm.mapper.UserMapper;
-import org.apache.ibatis.annotations.Param;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import static com.hm.utils.MD5Utils.md5;
 
 @Service("biz")
 public class UserBizImpl implements UserBiz
 {
     @Resource
     private UserMapper userMapper;
-//    @Override
-//    public User userLogin(String userid, String pwd) {
-//        return null;
-//    }
 
     @Override
     public Integer queryphone(String userphone) {
@@ -34,6 +29,9 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public TblUser cUserReg(TblUser tblUser) {
+        String userpwd = tblUser.getUserpwd();
+        userpwd = md5(userpwd);
+        tblUser.setUserpwd(userpwd);
         Integer num=0;
         TblUser obj=tblUser;
         userMapper.cUserReg(obj);
@@ -60,6 +58,9 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public TblUser cUserLogin(TblUser tblUser) {
+        String userpwd = tblUser.getUserpwd();
+        userpwd = md5(userpwd);
+        tblUser.setUserpwd(userpwd);
         return userMapper.cUserLogin(tblUser);
     }
 
@@ -237,7 +238,7 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public Integer userForgetPassword(String userpwd, String userphone) {
-
+        userpwd = md5(userpwd);
         return userMapper.userForgetPassword(userpwd,userphone);
     }
 

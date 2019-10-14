@@ -106,7 +106,7 @@
         </if>
     </select>
     <!--  热门服务列表-->
-    <select id="cFindHotServiceAll" parameterType="com.hm.entity.TblCOS" resultType="java.util.List">
+    <select id="cFindHotServiceAll" parameterType="com.hm.entity.TblCOS" resultType="com.hm.entity.TblCOS">
         SELECT c.*,t.ctname FROM tblCOS c,tblCOStype t WHERE c.ctid=t.ctid ORDER BY c.coshot DESC
         <if test="0 &lt; page">
             <bind name="page" value="(page-1)* limit "/>

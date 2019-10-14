@@ -230,8 +230,8 @@ public class ManagerHandler {
     @RequestMapping(value ="/MHotservicelist.action")
     public  @ResponseBody
     Map hotservicelist(HttpServletRequest req, TblCOS tblCOS){
-        count=mangerBizImpl.cFindServiceAll(null).size();
-        List<TblCOS> list =mangerBizImpl.cFindServiceAll(tblCOS);
+        count=mangerBizImpl.cFindHotServiceAll(null).size();
+        List<TblCOS> list =mangerBizImpl.cFindHotServiceAll(tblCOS);
         for (TblCOS cos : list) {
             System.out.println(cos.getCoshot());
         }

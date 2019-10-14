@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.hm.utils.MD5Utils.md5;
+
 @Service
 public class MangerBizImpl implements MangerBiz {
     @Resource
@@ -18,7 +20,9 @@ public class MangerBizImpl implements MangerBiz {
 
     @Override
     public TblUser cUserLogin(TblUser tblUser) {
-
+        String userpwd = tblUser.getUserpwd();
+        userpwd = md5(userpwd);
+        tblUser.setUserpwd(userpwd);
         return mangerMapper.cUserLogin(tblUser);
     }
 
