@@ -41,10 +41,7 @@ public class Test extends TestCase {
 
     @org.junit.Test
     public void roleTest() {
-        System.out.println();
-        Tblrole tblrole = null;
-        //mangerBizImpl.getRole(tblrole);
-        System.out.println(mangerBizImpl.getRole(tblrole).size());
+        System.out.println(ShortMessageUtil.sendInformationToUsers("13860811761","gouzi"));
     }
 
     @org.junit.Test

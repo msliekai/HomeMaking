@@ -1,6 +1,7 @@
-package com.hm.aoplog;
+package com.hm.aop;
 
 
+import com.hm.aop.Log;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;

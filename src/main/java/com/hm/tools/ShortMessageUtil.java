@@ -9,6 +9,11 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 public class ShortMessageUtil {
 
     private static String code ;
@@ -123,9 +128,12 @@ public class ShortMessageUtil {
      */
     public static String vcode(){
         String vcode = "";
-        for (int i = 0; i < 6; i++) {
+        Random rd = new Random();
+        vcode = vcode+(rd.nextInt(9)+1);
+        for (int i = 0; i < 5; i++) {
             vcode = vcode + (int)(Math.random() * 9);
         }
         return vcode;
     }
+
 }

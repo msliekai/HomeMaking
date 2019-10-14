@@ -74,14 +74,13 @@
                         <form action="<%=path%>admin/cUserLogin.action" method="post">
                             <div class="form-group">
                                 <label for="userphone">电话</label>
-                                <input type="email" class="form-control" required="required" id="userphone"
-                                       name="userphone" placeholder="请输入手机号" value="13860811761">
+                                <input type="number" class="form-control" required="required" id="userphone"  name="userphone" placeholder="请输入手机号" >
                                 <span id="userphoneerr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="userpwd">密码</label>
                                 <input type="password" class="form-control" autocomplete="off" required="required"
-                                       id="userpwd" name="userpwd" placeholder="请输入密码" value="a12345">
+                                       id="userpwd" name="userpwd" placeholder="请输入密码">
                                 <span id="passErr"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">

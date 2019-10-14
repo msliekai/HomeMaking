@@ -1,14 +1,11 @@
 package com.hm.web;
 
 
-import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
-import com.hm.aoplog.Log;
+import com.hm.aop.Log;
 import com.hm.biz.UserBiz;
 import com.hm.entity.Staff;
 import com.hm.entity.*;
-import com.hm.tools.ShortMessageUtil;
 import com.hm.tools.TimeTools;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +37,7 @@ public class UserHandler {
     public String cUserReq(HttpServletRequest request, HttpSession session, MultipartFile fileact, TblUser tblUser, TblSite tblSite, String securityCode, String phcode)
             throws MalformedURLException, IllegalStateException, IOException {
         String flog = "";
-
+        if(!fileact.isEmpty()){
         String serverCode = (String) session.getAttribute("SESSION_SECURITY_CODE");
         if (securityCode.equalsIgnoreCase(serverCode)) {
             String phcode_req = (String) session.getAttribute(tblUser.getUserphone() + "_code_req");
@@ -81,6 +78,9 @@ public class UserHandler {
             }
         } else {
             flog = "codeerr";
+        }
+        }else{
+            flog = "imgeerr";
         }
         request.setAttribute("tblUser", tblUser);
         request.setAttribute("tblSite", tblSite);
@@ -284,21 +284,24 @@ public class UserHandler {
     @Log(operationType = "用户查服务人员详细信息，添加足迹",operationName = "用户端")
     @RequestMapping(value = "/product-details.action")
     public String productdetails(HttpServletRequest request, HttpSession session, Integer sfid) {
-
+        String url="";
         TblUser use = (TblUser) session.getAttribute("userbacc");
+        if(null==use){
+            request.setAttribute("flog", "plassLogin");
+            url="client/shopa";
+        }else{
+            Staff staff = biz.queryOneStaff(sfid, use.getUserid());
 
-        Staff staff = biz.queryOneStaff(sfid, use.getUserid());
+            biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDate()));//添加足迹
 
-        biz.addFoot(new Tblfoot(use.getUserid(),sfid,TimeTools.getStringDate()));//添加足迹
-
-        request.setAttribute("staff", staff);
-
-
+            request.setAttribute("staff", staff);
+            url="client/product-details";
+        }
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("client/product-details");
 //        modelAndView.addObject("staff", staff);
 
-        return "client/product-details";
+        return url;
     }
 
     //收藏阿姨
@@ -710,5 +713,18 @@ public class UserHandler {
         return map;
     }
 
+    @Log(operationType = "",operationName = "")
+    @RequestMapping("/queryphone.action")
+    public @ResponseBody
+    String queryphone(HttpServletRequest request, String userphone) {
+        Integer num=biz.queryphone(userphone);
+        String flog="";
+        if(num==null){
+            flog="OK";
+        }else{
+            flog="NO";
+        }
+        return flog;
+    }
 }
 

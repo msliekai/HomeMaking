@@ -110,6 +110,9 @@ public class JsoupHelper {
                     article="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+node.getTextContent();
                     list.add(article);
                 }
+                if(i == nodeList.getLength()-3){
+                    break;
+                }
             }
             map.put("article",list);
         }
