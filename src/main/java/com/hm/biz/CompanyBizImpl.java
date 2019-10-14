@@ -38,7 +38,7 @@ public class CompanyBizImpl implements CompanyBiz {
     //公司登陆
     @Override
     public Company comlogin(String facc, String fpwd) {
-        //fpwd = md5(fpwd);
+        fpwd = md5(fpwd);
         return companyMapper.comlogin(facc,fpwd);
     }
 
@@ -159,6 +159,7 @@ public class CompanyBizImpl implements CompanyBiz {
     //忘记密码
     @Override
     public Company forgotpwd(String facc) {
+
         return companyMapper.forgotpwd(facc);
     }
 
@@ -194,6 +195,7 @@ public class CompanyBizImpl implements CompanyBiz {
     @Override
     public Integer addcard(Integer fid,String facard,
                            String compwd) {
+        compwd = md5(compwd);
         return companyMapper.addcard(fid,facard,compwd);
     }
 
@@ -236,6 +238,7 @@ public class CompanyBizImpl implements CompanyBiz {
     //银行密码
     @Override
     public Tblfirmacc checkcompwd(String facard,String compwd) {
+        compwd = md5(compwd);
         return companyMapper.checkcompwd(facard,compwd);
     }
 

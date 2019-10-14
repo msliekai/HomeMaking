@@ -1,8 +1,6 @@
-package com.hm.aoplog;
+package com.hm.aop;
 
 
-import com.opensymphony.xwork2.util.logging.Logger;
-import com.opensymphony.xwork2.util.logging.LoggerFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -17,7 +15,7 @@ import java.lang.reflect.Method;
 @Component
 public class SystemLogAspect {
 
-    private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);
+//    private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);
 
     //@Pointcut("execution(* com.hm.web..*.*(..))  ")
     public void logPoint() {

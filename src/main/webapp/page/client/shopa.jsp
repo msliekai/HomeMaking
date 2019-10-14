@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath() + "/";
 %>
@@ -100,7 +101,10 @@
                     <div class="shop-bar-area">
                         <div class="shop-bar pb-60">
                             <div class="shop-found-selector">
-                                <a class="layui-btn layui-btn-normal" href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
+                                <c:if test="${null!=userbacc}">
+                                    <a class="layui-btn layui-btn-normal"
+                                       href="<%=path%>page/client/checkout.jsp"><span>我要预约</span></a>
+                                </c:if>
                             </div>
 
                         </div>
@@ -113,28 +117,9 @@
 
                                     <div class="col-md-6 col-xl-4">
                                         <div class="product-wrapper mb-30">
-                                            <div class="product-img">
-                                                <a href="<%=path%>admin/product-details.action">
-                                                    <img src=""
-                                                         alt="">
-                                                </a>
-                                                <span>hot</span>
-                                                <div class="product-action">
-                                                    <a class="animate-left" title="Wishlist" href="#">
-                                                        <i class="pe-7s-like"></i>
-                                                    </a>
-                                                    <a class="animate-top" title="Add To Cart" href="#">
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                    <a class="animate-right" title="Quick View" data-toggle="modal"
-                                                       data-target="#exampleModal" href="#">
-                                                        <i class="pe-7s-look"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
                                             <div class="product-content">
-                                                <h4><a href="#"> 我是某阿姨</a></h4>
-                                                <span>￥998.00</span>
+                                                <h4><a href="#"> 加载中。。。</a></h4>
+
                                             </div>
                                         </div>
                                     </div>
@@ -214,11 +199,138 @@
 <script src="<%=path%>page/client/js/baidumap.js"></script>
 </body>
 <script>
+    // 分页函数
+
+    function getPageOfMemo(page) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+
+        var index = layer.load(1);
+        
+        var anpage=page;
+        var aunt = $("#aunt").val();
+
+        var thispage=$("#thispage")
+        if(anpage==null){
+            anpage=thispage.val();
+        }else{
+            thispage.val(anpage);
+        }
+        // var endTime = $("#signDate1").val();
+        // var organId = $("#organId").val();
+        // var personName = $("#personName").val();
+        $.ajax({
+            url: "<%=path%>admin/classifyA.action",
+            type: "POST",
+            data: {
+                "page": anpage, // 初始页
+                "aunt": aunt,//以下是搜索相关的参数  input里面的时间人员参数可忽略注释，同上
+            },
+            dataType: "json",
+            success: function (obj) {
+                layer.close(index);
+                var htm = "";
+                if (obj != null) {
+                    // if(obj.length>0){
+                    // totalPages = data.returnData.totalPages;
+                    $.each(obj.data, function (i, item) {
+
+                        htm += "<div class='col-md-6 col-xl-4'>";
+                        htm += "<div class='product-wrapper mb-30'>";
+                        htm += "<div class='product-img'>";
+                        htm += "<a href='<%=path%>admin/product-details.action?sfid="+item.sfid+"'>";
+                        htm += "<img src='<%=path%>"+item.sfurl+"' alt=''>";
+                        htm += "</a>";
+                        if(i<2){
+                            htm += "<span>hot</span>";
+                        }
+                        htm += "<div class='product-action'>";
+                        if(item.tblsfcoll!=null){
+                            htm += "<a class='animate-left' title='Wishlist' onclick='delcollections("+item.tblsfcoll.scoid+")'>";
+                            htm += "<i class='layui-icon layui-icon-rate-solid' style='font-size: 35px; color: #FFFF00;'></i>";
+                            htm += "</a>";
+                        }else{
+                            htm += "<a class='animate-left' title='Wishlist' onclick='collections("+item.sfid+")'>";
+                            htm += "<i class='layui-icon layui-icon-rate' style='font-size: 35px;'></i>";
+                            htm += "</a>";
+                        }
+                        // htm += "<a class='animate-top' title='Add To Cart' href=''#'>";
+                        // htm += "<i class='pe-7s-cart'></i>";
+                        // htm += "</a>";
+                        // htm += " <a class='animate-right' title='Quick View' data-toggle='modal' data-target='#exampleModal' href='#'>";
+                        // htm += "<i class='pe-7s-look'></i>";
+                        // htm += "</a>";
+                        htm += "</div>";
+                        htm += " </div>";
+                        htm += "<div class='product-content'>";
+                        htm += "<h4><a href='<%=path%>admin/product-details.action?sfid="+item.sfid+"'> "+item.sfname+" </a></h4>";
+                        htm += "<span>￥"+item.sfcos+"/天（次）</span>" +
+                            "<p>服务经验："+item.sfexp+"年/擅长："+item.sfgood+"/公司："+item.company.fname+"</p>";
+                        htm += "</div>";
+                        htm += "</div>";
+                        htm += "</div>";
+                    });
+                    $('#ayitable').html(htm);
+
+                    var totalPages = obj.count;
+                    var limit=totalPages%6==0 ? totalPages/6:totalPages/6+1;
+
+                    var element = $('#pageButton');
+                    var options = {
+                        bootstrapMajorVersion: 3,
+                        currentPage: page, // 当前页数
+                        numberOfPages: 5, // 显示按钮的数量
+                        totalPages: limit, // 总页数
+                        itemTexts: function (type, page, current) {
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "<";
+                                case "next":
+                                    return ">";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+
+                        },
+                        // 点击事件，用于通过Ajax来刷新整个list列表
+                        onPageClicked: function (event, originalEvent, type, page) {
+                            getPageOfMemo(page);
+                        }
+                    };
+                    element.bootstrapPaginator(options);
+                }else{
+                    htm="<div align='center'>暂无服务</div>";
+                    $('#ayitable').html(htm);
+                }
+
+                // }else{
+                //     htm+="<div align='center'>暂无服务</div>";
+                //     $('#ayitable').html(htm);
+                // }
+            },
+            error:function () {
+                layer.close(index);
+                var htm="<div align='center'>暂无服务</div>";
+                $('#ayitable').html(htm);
+            }
+        });
+        });
+    };
     // 初始化页面
 
     // getPageOfMemo(1);
-    window.οnlοad=getPageOfMemo(1);
+    window.οnlοad = getPageOfMemo(1);
 </script>
 </html>
 
-
+<%
+    if (request.getAttribute("flog") == "plassLogin") {%>
+<script>
+    alert("请登陆后查看");
+    top.location.href="<%=path%>page/client/shopa.jsp";
+</script>
+<%}%>

@@ -58,36 +58,40 @@ $("#btn").click(function () {
     layui.use('layer', function () {
         var userphone = $("#userphone").val();
         var az = /^1(3|4|5|7|8)\d{9}$/;
-        if (az.test(userphone)) {
 
-            sendMessage();
-            $.ajax({
-                async: true, //true不异步，false异步
-                type: "post", //提交方式
-                url: "../../serial/sendSms.action",
-                data: {
-                    "userphone": userphone
-                },
-                // dataType:"text", //返回类型
-                success: function (jso) {//执行结果
-                    if ("OK" == jso) {
-                        layer.msg("验证码发送成功");
-                    } else if ("phoneerr" == jso) {
-                        layer.msg("手机号未能识别");
-                        stopTime();
-                    } else {
+        if( $("#userphoneerr").text()=="账号可用"){
+            if (az.test(userphone)) {
+                sendMessage();
+                $.ajax({
+                    async: true, //true不异步，false异步
+                    type: "post", //提交方式
+                    url: "../../serial/sendSms.action",
+                    data: {
+                        "userphone": userphone
+                    },
+                    // dataType:"text", //返回类型
+                    success: function (jso) {//执行结果
+                        if ("OK" == jso) {
+                            layer.msg("验证码发送成功");
+                        } else if ("phoneerr" == jso) {
+                            layer.msg("手机号未能识别");
+                            stopTime();
+                        } else {
+                            layer.msg("验证码发送失败");
+                            stopTime();
+                        }
+                    },
+                    error: function (jso) {
                         layer.msg("验证码发送失败");
                         stopTime();
                     }
-                },
-                error: function (jso) {
-                    layer.msg("验证码发送失败");
-                    stopTime();
-                }
-            });
+                });
 
-        } else {
-            layer.msg("手机号输入不正确");
+            } else {
+                layer.msg("手机号输入不正确");
+            }
+        }else{
+            layer.msg("手机号不可用");
         }
     })
 })
@@ -110,10 +114,11 @@ function valpass() {
 //二次密码
 function valpass2() {
 
-    var userpwd = $("#userpwd");
-    var userpwd2 = $("#userpwd2");
+    var userpwd = $("#userpwd").val();
+    var userpwd2 = $("#userpwd2").val();
+
     var passErr2 = $("#passErr2");
-    if (userpwd2.val() === userpwd.val()) {
+    if (userpwd2 === userpwd) {
         passErr2.html("");
         return true;
     } else {
@@ -191,20 +196,20 @@ function scity() {
 }
 
 function reqsubmit() {
-
-    if (!valname() == true) {
+    var userphoneerr=$("#userphoneerr").text();
+    if(!(userphoneerr=="账号可用")){
         return false;
     }
-    if (!uname == true) {
+    if (!uname() == true) {
         return false;
     }
     if (!valpass() == true) {
         return false;
     }
-    if (!valpass2 == true) {
+    if (!valpass2() == true) {
         return false;
     }
-    if (!bankcard == true) {
+    if (!bankcard() == true) {
         return false;
     }
     var flog = scity();
@@ -324,6 +329,7 @@ function addOrder() {
             success: function (jso) {//执行结果
                 if (jso.flog == "addok") {
                     layer.msg("发布成功")
+                    history.go(-1);
                 } else {
                     layer.msg("发布失败")
                 }

@@ -75,52 +75,52 @@
                 <div class=" ">
                     <div class=" ">
 
-                        <form action="<%=path%>admin/cUserReq.action" method="post" onsubmit="return reqsubmit()" enctype="multipart/form-data" >
+                        <form action="<%=path%>admin/cUserReq.action" method="post" onsubmit="return reqsubmit()"
+                              enctype="multipart/form-data">
                             <div>
-                                <label for="fileact"><span>头像：</span><input name="fileact" type="file" id="fileact" /></label>
-                                <!-- 用于展示上传文件名的表单 -->
-<%--                                <input id="showname" type="text" style="height:25px;" autocomplete="off" readonly="true">--%>
-<%--                                <!-- 点击触发按钮 -->--%>
-<%--                                <a class="layui-btn layui-btn-xs  layui-btn-normal" onclick="makeThisfile()" id="browse">选择图片</a>--%>
-                                <%-- 真头像在这--%>
+                                <label for="fileact"><span>头像：</span>
+                                    <input name="fileact" type="file" id="fileact"/></label>
 
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="userphone">手机号：</label>
                                 <input type="number" class="form-control" autocomplete="off" required="required"
-                                       id="userphone" name="userphone" placeholder="请输入手机号" >
+                                       id="userphone" name="userphone" placeholder="请输入手机号" onblur="vaint()">
+                                <input type="button" id="btn" value="点我发送短信验证码"/>
                                 <span id="userphoneerr"></span>
-                                <input type="button" id="btn" value="点我发送短信验证码"></input>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="phcode">短信验证码：</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="phcode" name="phcode" placeholder="请输入短信验证码" >
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="phcode" name="phcode" placeholder="请输入短信验证码">
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="username">用户名：</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="username" name="username" placeholder="请输入用户名"  >
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="username" name="username" placeholder="请输入用户名">
                                 <span id="useerr"></span>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="userpwd">密码：</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd" name="userpwd" placeholder="请输入密码" >
+                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                       id="userpwd" name="userpwd" placeholder="请输入密码">
                                 <span id="passErr"></span>
                             </div><!--/.form-group -->
 
                             <div class="form-group">
                                 <label for="userpwd2">确认密码：</label>
-                                <input type="password" class="form-control" autocomplete="off" required="required" id="userpwd2" name="userpwd2" placeholder="再次输入" >
+                                <input type="password" class="form-control" autocomplete="off" required="required"
+                                       id="userpwd2" name="userpwd2" placeholder="再次输入">
                                 <span id="passErr2"></span>
                             </div><!--/.form-group -->
                             <div class="form-group">
                                 <label for="usercard">银行卡号：</label>
-                                <input type="text" class="form-control" autocomplete="off" required="required" id="usercard" name="usercard" placeholder="请输入正确银行卡信息" >
+                                <input type="text" class="form-control" autocomplete="off" required="required"
+                                       id="usercard" name="usercard" placeholder="请输入正确银行卡信息">
                                 <span id="cardErr"></span>
                             </div><!--/.form-group -->
 
@@ -170,7 +170,7 @@
                                     <select id="s_province" name="sa"></select>  
                                     <select id="s_city" name="sb"></select>  
                                     <select id="s_county" name="sc"></select>
-<%--加载城市下拉框--%>
+                                    <%--加载城市下拉框--%>
                                     <script class="resources library" src="<%=path%>page/client/js/city-data.js"
                                             type="text/javascript"></script>
 
@@ -183,11 +183,12 @@
                             <div class="form-group">
                                 <label for="scontext">详细地址：</label>
                                 <input type="text" class="form-control" autocomplete="off" required="required"
-                                       id="scontext" name="scontext" placeholder="请输入详细地址" >
+                                       id="scontext" name="scontext" placeholder="请输入详细地址">
                                 <span id="scontexterr"></span>
                             </div><!--/.form-group -->
                             <!-- end .city-picker-selector -->
-                            <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal" data-target=".signin_modal" value="注册"/>
+                            <input type="submit" class="btn signin_btn signin_btn_two" data-toggle="modal"
+                                   data-target=".signin_modal" value="注册"/>
                         </form><!--/form -->
                     </div><!--/.col -->
                 </div><!--/.row -->
@@ -266,6 +267,31 @@
 
     })
 
+    function vaint() {
+        var userphone=$("#userphone").val();
+        var az = /^1(3|4|5|7|8)\d{9}$/;
+        if (az.test(userphone)) {
+            $.ajax({
+                async: true,
+                type: "post",
+                url: "<%=path%>admin/queryphone.action",
+                data: {
+                    "userphone": userphone
+                },
+                success: function (jso) {
+                    if (jso == "OK") {
+                        $("#userphoneerr").text("账号可用");
+                    } else {
+                        $("#userphoneerr").text("账号不可用");
+                    }
+                }
+            })
+        }else{
+            $("#userphoneerr").text("手机号不正确");
+        }
+
+    }
+
 </script>
 
 
@@ -273,7 +299,7 @@
     if (request.getAttribute("flog") == "success") {%>
 <script>
     alert("注册成功");
-    location.href="<%=path%>page/client/signin.jsp";
+    location.href = "<%=path%>page/client/signin.jsp";
 </script>
 <%} else if (request.getAttribute("flog") == "reqerr") {%>
 <script>
@@ -291,5 +317,11 @@
 <script>
     alert("短信验证码错误");
 </script>
-<%}%>
+<%}else if(request.getAttribute("flog") == "imgeerr"){
+%>
+<script>
+    alert("头像未上传");
+</script>
+<%
+}%>
 </html>
