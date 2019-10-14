@@ -452,6 +452,10 @@ function upuse() {
     if(!upname()){
         return false;
     }
+    if(!uppwd()){
+        return false;
+    }
+    alert("资料修改成功，将返回首页");
     return true;
 }
 
@@ -471,6 +475,17 @@ function upname() {
     var na = /^[\u4e00-\u9fa5]{0,}$/;
     if (!na.test(username.val())) {
         alert("用户名只能输入中文");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function uppwd() {
+    var userpwd = $("#userpwd");
+    var pz = /^[a-zA-Z]\w{5,17}$/;
+    if (!pz.test(userpwd.val())) {
+        alert("以字母开头，长度在6~18之间，只能包含字母、数字和下划线");
         return false;
     } else {
         return true;

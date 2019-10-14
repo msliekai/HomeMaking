@@ -123,14 +123,14 @@
                 </div>
             </div>
             <%--帮助小链接--%>
-            <div class="sidebar-box">
+            <%--<div class="sidebar-box">
                 <h4>Helpful Links</h4>
                 <ul>
                     <li><a href="#" title="premium templates">Premium HTML web templates from $10</a></li>
                     <li><a href="#" title="web hosting">Cheap web hosting from Dreamhost</a></li>
                     <li><a href="#" title="Tux Themes">Premium WordPress themes</a></li>
                 </ul>
-            </div>
+            </div>--%>
         </aside>
 
         <!-- Main content 主页1 -->
@@ -323,7 +323,6 @@
     im.init();
 
     layui.use('layim', function(layim){
-        alert(uuname);
         var $ = layui.jquery;
         window.layim = layim;
         layim.config({

@@ -665,27 +665,39 @@ public class UserHandler {
     public String upUser(HttpServletRequest request, HttpSession session, TblUser tblUser, MultipartFile fileact) throws IOException {
 
         TblUser use = (TblUser) session.getAttribute("userbacc");
-        if (null != fileact) {
+        if (null != fileact&&!(fileact.isEmpty())) {
             //保存头像
             String filename = fileact.getOriginalFilename();//获取到的文件名
             String upf = request.getServletContext().getResource("/").getPath();
 
             String url = "portrait/" + filename;
             tblUser.setUserurl(url);//抽象路径保存在实体类
-
+            use.setUserurl(url);
             File file = new File(upf + url);
             fileact.transferTo(file);//文件保存的路径
         }
         tblUser.setUserid(use.getUserid());
         Integer num = biz.upUser(tblUser);
+        String backurl = "";
         if (num == null || num == 0) {
             request.setAttribute("flog", "NO");
+            backurl="client/UserData";
         } else {
-            request.setAttribute("flog", "OK");
-            session.setAttribute("userbacc", use);
+            if (tblUser.getUserpwd().equals(use.getUserpwd())){
+                request.setAttribute("flog", "OK");
+                use.setUsersex(tblUser.getUsersex());use.setSid(tblUser.getSid());use.setUsername(tblUser.getUsername());
+                session.setAttribute("userbacc", use);
+                backurl="client/UserData";
+            }else{
+                request.setAttribute("flog", "ChangePWD");
+                request.getSession().removeAttribute("userbacc");//清空session信息
+                session.invalidate();//清除 session 中的所有信息
+                backurl="client/chome";
+            }
+
         }
 
-        return "client/UserData";
+        return backurl;
     }
 
     @Log(operationType = "",operationName = "")

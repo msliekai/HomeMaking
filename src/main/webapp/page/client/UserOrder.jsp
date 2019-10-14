@@ -36,24 +36,23 @@
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
-
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-
-    <select name="osid" id="osid">
-                <option value="">全部</option>
-                <option value="7">待确认</option>
-                <option value="1">待处理</option>
-                <option value="2">已处理</option>
-                <option value="5">已评价</option>
-            </select>订单记录<hr class="layui-bg-blue">
+                    <select name="osid" id="osid">
+                        <option value="">全部</option>
+                        <option value="7">待确认</option>
+                        <option value="1">待处理</option>
+                        <option value="2">已处理</option>
+                        <option value="5">已评价</option>
+                    </select>订单记录<hr class="layui-bg-blue">
                 </div>
 
                 <div class="layui-card-body" align="center" >
                     <table class="layui-table" lay-filter="test" id="utable" align="center">
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

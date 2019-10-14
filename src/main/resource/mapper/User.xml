@@ -666,7 +666,7 @@
     </update>
     <!--修改用户信息-->
     <update id="upUser" parameterType="com.hm.entity.TblUser">
-        UPDATE tbluser SET username=#{username},userphone=#{userphone} ,sid=#{sid},usersex=#{usersex}
+        UPDATE tbluser SET username=#{username},userphone=#{userphone} ,sid=#{sid},usersex=#{usersex},userpwd=#{userpwd}
         <if test="userurl!=null and userurl.length>0">
             ,userurl=#{userurl}
         </if>

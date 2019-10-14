@@ -15,8 +15,8 @@ public class TuLingRobot {
 	//e2decbba7aac4532a2e239e6e030bf08
 	//7d14fa4bc295404a9fced576c37453e5
 	//private final static String APIKEY = "7f00a489f3019ad3a5b642c95b0cf733";
-	//private final static String APIKEY = "8c6dbf8fa3884947a9fa7339206974d1";
-	private final static String APIKEY = "7d14fa4bc295404a9fced576c37453e5";
+	private final static String APIKEY = "8c6dbf8fa3884947a9fa7339206974d1";
+//	private final static String APIKEY = "7d14fa4bc295404a9fced576c37453e5";
 
 
 	public static String sendMessage(String message) throws Exception {
