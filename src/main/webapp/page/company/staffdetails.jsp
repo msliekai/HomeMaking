@@ -30,6 +30,7 @@
     String sftag = request.getParameter("sftag")==null?"":request.getParameter("sftag");
     String sfedu = request.getParameter("sfedu")==null?"":request.getParameter("sfedu");
     String sfwant = request.getParameter("sfwant")==null?"":request.getParameter("sfwant");
+    String scard = request.getParameter("scard")==null?"":request.getParameter("scard");
 
 %>
 <form class="layui-form" action="" method="post" lay-filter="example" >
@@ -91,6 +92,12 @@
         <label class="layui-form-label">求职意向</label>
         <div class="layui-input-inline">
             <input type="text" name="sfwant" lay-verify="required" value="<%=sfwant%>" autocomplete="off" class="layui-input" disabled/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">银行卡</label>
+        <div class="layui-input-inline">
+            <input type="text" name="scard" lay-verify="required" value="<%=scard%>" autocomplete="off" class="layui-input" disabled/>
         </div>
     </div>
 </form>

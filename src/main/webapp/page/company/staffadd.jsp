@@ -85,6 +85,12 @@
                 <input type="text" name="sfwant" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">银行卡号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="scard" lay-verify="required" placeholder="请输入正确卡号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <%--        员工所属公司id--%>
         <input type="text" name="fid" value="${sessionScope.company.fid}" hidden="hidden">
         <div class="layui-form-item">

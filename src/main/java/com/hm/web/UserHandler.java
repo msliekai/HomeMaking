@@ -231,7 +231,6 @@ public class UserHandler {
             tblorder.setUserid(use.getUserid());
             tblorder.setOsid(1);
             tblorder.setSendtime(TimeTools.getStringDateMin());
-            System.out.print("");
             tblorder.setOnumber(TimeTools.getOrderIdByTime());
             int num1 = biz.updateMoney(ji, use.getUserid());
             if (num1 > 0) {
@@ -344,7 +343,6 @@ public class UserHandler {
         Integer userid =((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
         tblorder.setUserid(userid);
         List<Tblorder> list = biz.jUserMoney(tblorder);
-        System.out.println(list);//UserID
         tblorder.setLimit(0);
         tblorder.setPage(-1);
         map.put("code", 0);
@@ -359,9 +357,6 @@ public class UserHandler {
     Map jUserAppraise(HttpServletRequest request, int page, int limit, Integer userid) {
         userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
         List<Tbleva> list = biz.jUserAppraise(page, limit, userid);
-        System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
-        System.out.println(list);
         map.put("code", 0);
         map.put("count", biz.jUserAppraise(-1, 0, userid).size());
         map.put("data", list);
@@ -375,9 +370,6 @@ public class UserHandler {
     Map jUserSite(HttpServletRequest request, int page, int limit, Integer userid) {
         userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
         List<TblSite> list = biz.jUserSite(page, limit, userid);
-        System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
-        System.out.println(list);
         map.put("code", 0);
         map.put("count", biz.jUserSite(-1, 0, userid).size());
         map.put("data", list);
@@ -389,24 +381,17 @@ public class UserHandler {
     public @ResponseBody
     Map jUsersfcoll(HttpServletRequest request, int page, int limit, Integer userid) {
         userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
-        System.out.println("传过来的值是：" + request.getParameter("status"));
         String status = request.getParameter("status");
         switch (status) {
             case "":
                 List<Tblsfcoll> list = biz.jUsersfcoll(page, limit, userid);
 
-                System.out.println(userid);
-                System.out.println("列表长度：" + list.size());
-                System.out.println(list);
                 map.put("code", 0);
                 map.put("count", biz.jUsersfcoll(-1, 0, userid).size());
                 map.put("data", list);
                 break;
             case "1":
                 List<Tblfcoll> list2 = biz.jUserfcoll(page, limit, userid);
-                System.out.println(userid);
-                System.out.println("列表长度：" + list2.size());
-                System.out.println(list2);
                 map.put("code", 0);
                 map.put("count", biz.jUserfcoll(-1, 0, userid).size());
                 map.put("data", list2);
@@ -414,9 +399,7 @@ public class UserHandler {
         }
         /*List<Tblsfcoll> list = biz.jUsersfcoll(page,limit,userid);
 
-        System.out.println(userid);
-        System.out.println("列表长度："+list.size());
-        System.out.println(list);
+
         map.put("code",0);
         map.put("count",biz.jUsersfcoll(-1,0,userid).size());
         map.put("data",list);*/
@@ -429,9 +412,6 @@ public class UserHandler {
     Map jUserHistory(HttpServletRequest request, int page, int limit, Integer userid) {
         userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
         List<Tblorder> list = biz.jUserHistory(page, limit, userid);
-        System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
-        System.out.println(list);
         map.put("code", 0);
         map.put("count", biz.jUserHistory(-1, 0, userid).size());
         map.put("data", list);
@@ -444,9 +424,6 @@ public class UserHandler {
     Map jUserfoot(HttpServletRequest request, int page, int limit, Integer userid) {
         userid = (Integer) ((TblUser) request.getSession().getAttribute("userbacc")).getUserid();
         List<Tblfoot> list = biz.jUserfoot(page, limit, userid);
-        System.out.println(userid);
-        System.out.println("列表长度：" + list.size());
-        System.out.println(list);
         map.put("code", 0);
         map.put("count", biz.jUserfoot(-1, 0, userid).size());
         map.put("data", list);
@@ -458,7 +435,6 @@ public class UserHandler {
     public @ResponseBody String jUserPay(HttpServletRequest request,Integer userid,Integer usermoney,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
         userid =user.getUserid();
-        System.out.println("充值的金额是："+usermoney);
         int a = biz.jUserPay(userid,usermoney,userpwd);
         Tbldeallog tbldeallog = new Tbldeallog();
         tbldeallog.setDeid(7);tbldeallog.setDlcost(String.valueOf(usermoney));tbldeallog.setUserid(userid);tbldeallog.setDltype("充值");
@@ -467,12 +443,10 @@ public class UserHandler {
         if (0 < a&&0<c){
             b ="1";
             user.setUsermoney(user.getUsermoney()+usermoney);
-            System.out.println("充值后的金额是："+user.getUsermoney());
             request.getSession().setAttribute("userbacc",user);
         }else {
             b ="0";
         }
-        System.out.println(b);
         return b;
     }
 
@@ -481,7 +455,6 @@ public class UserHandler {
     public @ResponseBody String jUserCard(HttpServletRequest request,Integer userid,String usercard,String userpwd){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
         userid = user.getUserid();
-        System.out.println("新的卡号是："+usercard);
         int a = biz.jUserCard(userid,usercard,userpwd);
         String b =null;
         if (0 < a){
@@ -491,14 +464,12 @@ public class UserHandler {
         }else {
             b ="0";
         }
-        System.out.println(b);
         return b;
     }
 
     @Log(operationType = "",operationName = "")
     @RequestMapping("/jUserOrderOK.action")
     public @ResponseBody String jUserOrderOK(HttpServletRequest request,Tblorder tblorder){
-        System.out.println("订单信息是："+tblorder);
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
         Integer userid = user.getUserid();
         int a = biz.jcorder(tblorder.getOid(),1);
@@ -510,12 +481,10 @@ public class UserHandler {
         if (0 < a&&0<c&&0<d){
             b ="1";
             user.setUsermoney(user.getUsermoney()-Integer.valueOf(request.getParameter("allmoney")));
-            System.out.println("交易后的后的金额是："+user.getUsermoney());
             request.getSession().setAttribute("userbacc",user);
         }else {
             b ="0";
         }
-        System.out.println(b);
         return b;
     }
 
@@ -555,14 +524,12 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelsfcoll.action")
     public @ResponseBody int jdelsfcoll( Tblsfcoll tblsfcoll){
-        System.out.println("删除的列是："+tblsfcoll.getScoid());
         return biz.jdelsfcoll(tblsfcoll);
     }
 
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelfcoll.action")
     public @ResponseBody int jdelfcoll( Tblfcoll tblfcoll){
-        System.out.println("删除的列是："+tblfcoll.getFcoid());
         return biz.jdelfcoll(tblfcoll);
     }
 
@@ -575,7 +542,6 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jdelsite.action")
     public @ResponseBody int jdelsite( TblSite tblSite){
-        System.out.println("删除的列是："+tblSite.getSid());
         return biz.jdelsite(tblSite);
     }
 
@@ -610,7 +576,6 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jUserAddApp.action")
     public @ResponseBody String jUserAddApp(HttpServletRequest request, Tbleva tbleva){
-        System.out.println(tbleva);
         tbleva.setEconut("5");
         int succ = biz.jUserAddApp(tbleva);
         String b =null;
@@ -629,7 +594,6 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jUserAddAfter.action")
     public @ResponseBody String jUserAddAfter(HttpServletRequest request, Tblorder tblorder){
-        System.out.println(tblorder);
         int succ = biz.jUserAddAfter(tblorder);
         String b =null;
         if (0<succ){
@@ -647,7 +611,6 @@ public class UserHandler {
     @Log(operationType = "",operationName = "")
     @RequestMapping(value = "/jUserUpApp.action")
     public @ResponseBody String jUserUpApp(HttpServletRequest request, Tbleva tbleva){
-        System.out.println(tbleva);
         int succ = biz.jUserUpApp(tbleva.getEid(),tbleva.getEcontext());
         String b =null;
         if (0<succ){

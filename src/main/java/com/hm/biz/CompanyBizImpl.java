@@ -190,6 +190,13 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.draw(fid,dlcost);
     }
 
+    //添加银行卡号
+    @Override
+    public Integer addcard(Integer fid,String facard,
+                           String compwd) {
+        return companyMapper.addcard(fid,facard,compwd);
+    }
+
     //充值
     @Override
     public Integer add(Integer fid, String dlcost) {
@@ -222,8 +229,8 @@ public class CompanyBizImpl implements CompanyBiz {
     }
 
     @Override
-    public int upcom(Integer fid,String facc, String fname, String flaw, String flawphone, String fsite) {
-        return companyMapper.upcom(fid,facc,fname,flaw,flawphone,fsite);
+    public int upcom(Integer fid,String facc, String fname, String flaw, String fphone, String fsite) {
+        return companyMapper.upcom(fid,facc,fname,flaw,fphone,fsite);
     }
 
     //银行密码

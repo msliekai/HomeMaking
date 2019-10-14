@@ -110,8 +110,8 @@
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="flawphone">法人电话:</label>
-                                <input type="number" class="form-control" autocomplete="off" id="flawphone" name="flawphone" value="${company.flawphone}"/>
+                                <label for="fphone">公司电话:</label>
+                                <input type="number" class="form-control" autocomplete="off" id="fphone" name="fphone" value="${company.fphone}"/>
 
                             </div><!--/.form-group -->
                                 <div class="form-group">
@@ -160,10 +160,10 @@
         var facc=$("#facc").val();
         var fname=$("#fname").val();
         var flaw=$("#flaw").val();
-        var flawphone=$("#flawphone").val();
+        var fphone=$("#fphone").val();
         var fsite=$("#fsite").val();
         $.post("<%=path%>page/upcom.action",
-            {"facc":facc,"fname":fname,"flaw":flaw,"flawphone":flawphone,"fsite":fsite},
+            {"facc":facc,"fname":fname,"flaw":flaw,"fphone":fphone,"fsite":fsite},
             function (data) {
                 if(data=="1"){
                     alert("修改成功");
@@ -201,7 +201,7 @@
         }
     }
     function checkflawphone(){
-        var flawphone=$("#flawphone").val();
+        var flawphone=$("#fphone").val();
         if(flawphone.length!=11){
             $("#eee").html("输入手机号有误");
             return false;

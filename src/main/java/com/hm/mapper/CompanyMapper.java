@@ -57,7 +57,7 @@ public interface CompanyMapper {
 
     //修改公司基本信息
     public int upcom(@Param("fid") Integer fid, @Param("facc") String facc, @Param("fname") String fname, @Param("flaw") String flaw,
-                     @Param("flawphone") String flawphone, @Param("fsite") String fsite);
+                     @Param("fphone") String fphone, @Param("fsite") String fsite);
 
     public Company upcominfo(@Param("fid") Integer fid);
 
@@ -171,5 +171,8 @@ public interface CompanyMapper {
     public Integer draw(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
 // 充值
     public Integer add(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+    //添加银行卡号
+    public Integer addcard(@Param("fid")Integer fid,@Param("facard")String facard,
+                           @Param("compwd")String compwd);
 
 }

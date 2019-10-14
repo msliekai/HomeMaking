@@ -68,7 +68,7 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>提现</h2>
+            <h2>转账</h2>
 
             <div class="signin-form">
                 <div class=" ">

@@ -130,7 +130,8 @@
                         "&sfgood="+encodeURIComponent(data.sfgood)+
                         "&sftag="+encodeURIComponent(data.sftag)+
                         "&sfedu="+encodeURIComponent(data.sfedu)+
-                        "&sfwant="+encodeURIComponent(data.sfwant)
+                        "&sfwant="+encodeURIComponent(data.sfwant)+
+                        "&scard="+encodeURIComponent(data.scard)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useFix"){
@@ -148,7 +149,8 @@
                         "&sfgood="+encodeURIComponent(data.sfgood)+
                         "&sftag="+encodeURIComponent(data.sftag)+
                         "&sfedu="+encodeURIComponent(data.sfedu)+
-                        "&sfwant="+encodeURIComponent(data.sfwant)
+                        "&sfwant="+encodeURIComponent(data.sfwant)+
+                        "&scard="+encodeURIComponent(data.scard)
                     //引用的弹出层的页面层的方式加载修改界面表单
                 });
             }else if(obj.event==="useDel"){

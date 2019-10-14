@@ -37,7 +37,7 @@ public class Staff {
 
     }
 
-    public Staff(Integer sfid, String sfname, String sfdob, String sfcos, String sfworkexp, String sfwant, String sfgood, String sfedu, String sftag) {
+    public Staff(Integer sfid, String sfname, String sfdob, String sfcos, String sfworkexp, String sfwant, String sfgood, String sfedu, String sftag,String scard) {
         this.sfid = sfid;
         this.sfname = sfname;
         this.sfdob = sfdob;
@@ -47,5 +47,7 @@ public class Staff {
         this.sfgood = sfgood;
         this.sfedu = sfedu;
         this.sftag = sftag;
+        this.scard = scard;
     }
+
 }

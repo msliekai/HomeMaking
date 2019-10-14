@@ -254,7 +254,7 @@
                     //执行重载
                     table.reload('testReload', {
                         where: {
-                            uname: uname.value,
+                            osname: osname.value,
                         }
                     }, 'data');
                 },
@@ -265,5 +265,8 @@
 
         }
     });
+</script>
+<script>
+
 </script>
 </html>

@@ -28,6 +28,7 @@ public class Company {
     private String stname;
     private String ctname;
     private String rname;
+    //----
 
     //详细地址
     private String scontext;
