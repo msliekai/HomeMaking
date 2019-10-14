@@ -57,7 +57,7 @@ public interface CompanyMapper {
 
     //修改公司基本信息
     public int upcom(@Param("fid") Integer fid, @Param("facc") String facc, @Param("fname") String fname, @Param("flaw") String flaw,
-                     @Param("flawphone") String flawphone, @Param("fsite") String fsite);
+                     @Param("fphone") String fphone, @Param("fsite") String fsite);
 
     public Company upcominfo(@Param("fid") Integer fid);
 
