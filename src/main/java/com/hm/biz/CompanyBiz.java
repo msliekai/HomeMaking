@@ -120,4 +120,7 @@ public interface CompanyBiz {
     public Integer draw(Integer fid ,String dlcost);
     //充值
     public Integer add(Integer fid ,String dlcost);
+    //添加银行卡号
+    public Integer addcard(Integer fid,String facard,
+                           String compwd);
 }

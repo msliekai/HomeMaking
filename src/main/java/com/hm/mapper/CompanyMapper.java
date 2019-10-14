@@ -171,5 +171,8 @@ public interface CompanyMapper {
     public Integer draw(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
 // 充值
     public Integer add(@Param("fid")Integer fid,@Param("dlcost")String dlcost);
+    //添加银行卡号
+    public Integer addcard(@Param("fid")Integer fid,@Param("facard")String facard,
+                           @Param("compwd")String compwd);
 
 }

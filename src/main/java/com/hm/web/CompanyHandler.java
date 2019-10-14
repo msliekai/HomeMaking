@@ -346,9 +346,9 @@ public class CompanyHandler {
     //修改公司信息
     @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
-                                      String fname, String flaw, String flawphone, String fsite){
+                                      String fname, String flaw, String fphone, String fsite){
         Company company = (Company) httpSession.getAttribute("company");
-        int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,flawphone,fsite);
+        int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,fphone,fsite);
         Company upcominfo = companyBiz.upcominfo(company.getFid());
         httpSession.setAttribute("company",upcominfo);
 //        req.getSession().setAttribute("company",company);
@@ -612,7 +612,7 @@ public class CompanyHandler {
 
     //入驻
     @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
-    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
+    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll,String card,String fcpwd){
         Company company = (Company) httpSession.getAttribute("company");
         String facc = company.getFacc();
         Integer fid = company.getFid();
@@ -633,6 +633,8 @@ public class CompanyHandler {
         }
         if(company.getRid()==7){
             Integer j = companyBiz.addserve(tblfcs);
+            Integer addcard = companyBiz.addcard(fid,card,fcpwd);
+
             Integer i = companyBiz.infirm(fname, facc);
             if(i>0){
                 return "1";
