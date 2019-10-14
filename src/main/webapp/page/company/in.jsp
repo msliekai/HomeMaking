@@ -86,6 +86,17 @@
 
                             </div><!--/.form-group -->
 
+                            <div class="form-group">
+                                <label for="card">银行卡号:</label>
+                                <input type="number" class="form-control" autocomplete="off" required="required" id="card" name="card" placeholder="绑定银行卡号" onblur="addcard()" >
+                                <span id="bbb"></span><p/>
+                            </div><!--/.form-group -->
+                            <div class="form-group">
+                                <label for="fcpwd">支付密码:</label>
+                                <input type="password" class="form-control" autocomplete="off" required="required" id="fcpwd" name="fcpwd" placeholder="设置支付密码" onblur="fcpwd()" >
+                                <span id="ccc"></span><p/>
+                            </div><!--/.form-group -->
+
                                 <div class="form-group">
                                     <form action="#" method="post" enctype="multipart/form-data" id="fileup">
                                     <label for="fsite">资料上传:<input type="file" class="form-control" autocomplete="off" id="fsite" name="pictureFile"></label>
@@ -106,6 +117,8 @@
                                     <input type="checkbox"  autocomplete="off" id="育儿嫂" name="ctid">育儿嫂--%>
                                     <p/>
                                 </label>
+
+
 
 
                                 <input type="button" value="提交" onclick="return infirm()"/>
@@ -140,6 +153,8 @@
 </body>
 
 <script>
+    
+    
 
     $(document).ready(function () {
         $.post("<%=path%>page/querycostype.action",
@@ -153,6 +168,30 @@
         });
     });
 
+    function addcard() {
+
+        var card=$("#card").val();
+        var pattern = /^([1-9]{1})(\d{14}|\d{18})$/
+        if(!pattern.test(card)){
+            $("#bbb").html("卡号格式错误");
+            return false;
+        }else {
+            $("#bbb").html("卡号可用");
+            return true;
+        }
+    }
+    function checkfcpwd() {
+
+        var reg=/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)\S{6,}$/
+        var fcpwd=$("#fcpwd").val();
+        if(!reg.test(fcpwd)){
+            $("#ccc").html("请输入英文加数字");
+            return false;
+        }else {
+            $("#ccc").html("支付密码设置成功");
+            return true;
+        }
+    }
 
     function checkfacc(){
         var fname=$("#fname").val();
@@ -174,14 +213,24 @@
         var ctids = getCheckBoxValueThree();
         var ctidsAll = getAllCheckBoxValueThree();
         var fname=$("#fname").val();
+        var card=$("#card").val();
+        var fcpwd=$("#fcpwd").val();
         if(!checkfacc()){
             alert("请使用中文名");
+            return false;
+        }
+        if(!checkfcpwd()){
+            alert("请重新设置支付密码");
+            return false;
+        }
+        if(!addcard()){
+            alert("请重新添加卡号");
             return false;
         }
         else
             {
                 alert(ctids);
-                $.post("<%=path%>page/infirm.action",{"fname":fname,"ctids":ctids,"ctidsAll":ctidsAll},function (data) {
+                $.post("<%=path%>page/infirm.action",{"fname":fname,"ctids":ctids,"ctidsAll":ctidsAll,"card":card,"fcpwd":fcpwd},function (data) {
                     if(data=="1"){
                         alert("入驻成功，待后台审核");
                     }

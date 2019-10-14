@@ -183,6 +183,13 @@ public class CompanyBizImpl implements CompanyBiz {
         return companyMapper.draw(fid,dlcost);
     }
 
+    //添加银行卡号
+    @Override
+    public Integer addcard(Integer fid,String facard,
+                           String compwd) {
+        return companyMapper.addcard(fid,facard,compwd);
+    }
+
     //充值
     @Override
     public Integer add(Integer fid, String dlcost) {

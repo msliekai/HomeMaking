@@ -98,7 +98,7 @@
     </select>
     <!--修改公司基本信息-->
     <update id="upcom" parameterType="com.hm.entity.Company">
-        update tblfirm set facc=#{facc},fname=#{fname},flaw=#{flaw},fsite=#{fsite},flawphone=#{flawphone} where fid=#{fid}
+        update tblfirm set facc=#{facc},fname=#{fname},flaw=#{flaw},fsite=#{fsite},fphone=#{fphone} where fid=#{fid}
     </update>
     <!--传入id查看公司信息-->
     <select id="upcominfo" resultType="com.hm.entity.Company">
@@ -122,8 +122,10 @@
         INNER JOIN tblfirm ON tbldeallog.fid = tblfirm.fid
         LEFT JOIN tbluser ON tbldeallog.userid = tbluser.userid
         where tblfirm.fid=#{fid}
+        ORDER BY tbldeallog.dltime DESC
         <bind name="page" value="(page-1)*limit"/>
         limit #{page},#{limit}
+
     </select>
 
     <select id="countdeallog" resultType="java.lang.Integer" parameterType="java.lang.Integer">
@@ -583,4 +585,9 @@ insert into tbldeallog (fid,userid,deid,dltime,dlcost,dltype)
         from (select o.* from tblorder o,(SELECT s.* from tblorder u,tblstaff s,tblfirm f where u.sfid=s.sfid and s.fid=f.fid and f.fid=#{fid})g where g.sfid=o.sfid
         and o.otime like #{date}"%" GROUP BY o.oid) o
     </select>
+    <!--添加银行卡号-->
+    <insert id="addcard" parameterType="com.hm.entity.Tblfirmacc">
+insert into tblfirmacc (fid,cardtype,facard,famoney,compwd)
+VALUES(#{fid},'公司账户',#{facard},'0',#{compwd});
+    </insert>
 </mapper>

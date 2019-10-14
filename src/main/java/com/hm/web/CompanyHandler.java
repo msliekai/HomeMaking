@@ -250,7 +250,9 @@ public class CompanyHandler {
     public @ResponseBody
     String addmoney(HttpSession httpSession, String addmoney, String compwd) {
         Tblfirmacc firmacc = (Tblfirmacc) httpSession.getAttribute("firmacc");
+        System.out.println(firmacc+"kkkkk");
         Tblfirmacc checkcompwd = companyBiz.checkcompwd(firmacc.getFacard(), compwd);
+        System.out.println(checkcompwd+"检测是否有实体密码");
         if (checkcompwd != null) {
             String famoney = firmacc.getFamoney();
             int i = Integer.parseInt(famoney);//余额
@@ -260,6 +262,7 @@ public class CompanyHandler {
             Company company = (Company) httpSession.getAttribute("company");
             Integer fid = company.getFid();
             Integer row = companyBiz.addmoney(money,fid);
+            System.out.println(row+"*************");
             companyBiz.add(fid,addmoney);
             return "1";
         } else {
@@ -355,9 +358,9 @@ public class CompanyHandler {
     //修改公司信息
     @RequestMapping(value = "upcom",method = RequestMethod.POST,produces ="application/json;charset=utf-8" )
     public @ResponseBody String upcom(HttpSession httpSession,HttpServletRequest req,String facc,
-                                      String fname, String flaw, String flawphone, String fsite){
+                                      String fname, String flaw, String fphone, String fsite){
         Company company = (Company) httpSession.getAttribute("company");
-        int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,flawphone,fsite);
+        int upcom = companyBiz.upcom(company.getFid(),facc,fname,flaw,fphone,fsite);
         Company upcominfo = companyBiz.upcominfo(company.getFid());
         httpSession.setAttribute("company",upcominfo);
 //        req.getSession().setAttribute("company",company);
@@ -626,7 +629,7 @@ public class CompanyHandler {
 
     //入驻
     @RequestMapping(value = "infirm",method = RequestMethod.POST,produces ="application/text;charset=utf-8")
-    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll){
+    public @ResponseBody String infirm(HttpSession httpSession,String fname,String ctids,String ctidsAll,String card,String fcpwd){
         Company company = (Company) httpSession.getAttribute("company");
         String facc = company.getFacc();
         Integer fid = company.getFid();
@@ -647,9 +650,9 @@ public class CompanyHandler {
         }
         if(company.getRid()==7){
             Integer j = companyBiz.addserve(tblfcs);
-            System.out.println(j);
+            Integer addcard = companyBiz.addcard(fid,card,fcpwd);
+            System.out.println(addcard+"******");
             Integer i = companyBiz.infirm(fname, facc);
-            System.out.println(i);
             if(i>0){
                 return "1";
             }else {

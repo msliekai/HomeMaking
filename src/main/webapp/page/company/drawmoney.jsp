@@ -68,7 +68,7 @@
     <div class="container">
 
         <div class="sign-content">
-            <h2>转账</h2>
+            <h2>提现</h2>
 
             <div class="signin-form">
                 <div class=" ">
@@ -152,8 +152,10 @@
                         if(data=="1"){
                             alert("提现成功");
                             window.location.href="<%=path%>page/company/account.jsp";
+                        }else if(data=="2") {
+                            alert("支付密码不正确，提现失败");
                         }else {
-                            alert("支付密码不正确，充值失败");
+                            alert("余额不足，提现失败");
                         }
                     });
                 }
