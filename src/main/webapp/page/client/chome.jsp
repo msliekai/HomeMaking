@@ -66,11 +66,8 @@
 <%--后续这里改掉img的地址--%>
 <div class="layui-carousel divimg" lay-filter="test1" id="sliderarea">
     <div carousel-item>
-        <div><img src="<%=path%>page/client/img/weixin01.jpg"></div>
-        <div><img src="<%=path%>page/client/img/M.jpg"></div>
-        <div><img src="<%=path%>page/client/img/qq01.png"></div>
-        <div><img src="<%=path%>page/client/img/M.jpg"></div>
-        <div><img src="<%=path%>page/client/img/M.jpg"></div>
+        <div><img src="<%=path%>page/client/img/01.jpg"></div>
+        <div><img src="<%=path%>page/client/img/02.jpg"></div>
     </div>
 </div>
 <!--轮播 end-->

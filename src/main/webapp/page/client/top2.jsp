@@ -110,7 +110,7 @@
         var im = {
             init: function () {
                 if ('WebSocket' in window) {
-                    var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${userbacc.userphone}';
+                    var socketUrl = "ws://localhost:8080<%=path%>websocketTest/" + '${userbacc.userphone}';
                     socket = new WebSocket(socketUrl);
                     im.startListener();
                 } else {
@@ -174,6 +174,8 @@
                     url: '<%=path%>sns/uploadFile.action?userId='+userid
                 },
                 brief: false //是否简约模式（如果true则不显示主面板）
+                ,title:"我的通讯"
+                ,min:true
             });
             layim.on('sendMessage', function(data){
                 var To = data.to;
@@ -190,8 +192,9 @@
 <script>
     function robot(){
     layui.use('layim', function(layim){
+        alert("<%=path%>");
         //建立websoket
-        var socket1 = new WebSocket('ws://localhost:8080/HomeMaking_war_exploded/chat');
+        var socket1 = new WebSocket('ws://localhost:8080<%=path%>chat');
 
         var layim1 = layui.layim;
         layim1.config({
@@ -241,11 +244,24 @@
                 avatar: '<%=path%>page/img/robot.jpg',
                 id: 10010,
                 type: 'kefu',
-                content: res.data,
-                a:res.data
+                content: res.data
             });
         };
     });
     }
 </script>
+<%--<script>--%>
+<%--    (function(w, d, s, g, o) {--%>
+<%--        var x = document.createElement(s)--%>
+<%--            ,s = document.getElementsByTagName(s)[0];--%>
+<%--        w[g] = o;--%>
+<%--        x.async = true;--%>
+<%--        x.charset = 'utf-8';--%>
+<%--        x.src = 'https://cdn.xiankefu.com/dist/xiankefu.js';--%>
+<%--        s.parentNode.insertBefore(x, s);--%>
+<%--    })(window, document, 'script', 'XIANKEFU_GLOBAL', {--%>
+<%--        bid: 'a2549272c84a3206250dcdcff8fada3f'--%>
+<%--        // ,csid: 'a0cdb56bbfe13f03bdcedff6aad0f4c4'--%>
+<%--    });--%>
+<%--</script>--%>
 <%--</html>--%>

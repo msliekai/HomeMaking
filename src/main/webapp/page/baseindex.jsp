@@ -150,7 +150,7 @@
 	var im = {
 	init: function () {
 	if ('WebSocket' in window) {
-	var socketUrl = "ws://localhost:8080/HomeMaking_war_exploded/websocketTest/" + '${company.fphone}';
+	var socketUrl = "ws://localhost:8080<%=path%>websocketTest/" + '${company.fphone}';
 	socket = new WebSocket(socketUrl);
 
 	im.startListener();
@@ -207,11 +207,15 @@
 			url: '<%=path%>sns/uploadFile.action?userId='+userid
 		},
 		brief: false //是否简约模式（如果true则不显示主面板）
+		,isVideo:true
+		,title:"我的通讯"
+		,min:true
+		// ,notice:true
 	});
 	layim.on('sendMessage', function(data){
 	var To = data.to;
 	if(To.type === 'friend'){
-	layim.setChatStatus('<span style="color:#9408ff;">对方正在输入。。。</span>');
+	// layim.setChatStatus('<span style="color:#9408ff;">在线</span>');
 	}
 	socket.send(To.id+"-f,t-"+data.mine.content+"-f,t-"+userid+"-f,t-"+uname+"-f,t-"+avatar);
 	});
@@ -223,5 +227,19 @@
 			return layim;
 		}
 	</script>
+<%--	<script>--%>
+<%--		(function(w, d, s, g, o) {--%>
+<%--			var x = document.createElement(s)--%>
+<%--					,s = document.getElementsByTagName(s)[0];--%>
+<%--			w[g] = o;--%>
+<%--			x.async = true;--%>
+<%--			x.charset = 'utf-8';--%>
+<%--			x.src = 'https://cdn.xiankefu.com/dist/xiankefu.js';--%>
+<%--			s.parentNode.insertBefore(x, s);--%>
+<%--		})(window, document, 'script', 'XIANKEFU_GLOBAL', {--%>
+<%--			bid: 'a2549272c84a3206250dcdcff8fada3f'--%>
+<%--			,csid: 'a0cdb56bbfe13f03bdcedff6aad0f4c4'--%>
+<%--		});--%>
+<%--	</script>--%>
 </body>
 </html>
