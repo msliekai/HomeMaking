@@ -475,18 +475,22 @@ public class UserHandler {
     public @ResponseBody String jUserOrderOK(HttpServletRequest request,Tblorder tblorder){
         TblUser user = (TblUser) request.getSession().getAttribute("userbacc");
         Integer userid = user.getUserid();
-        int a = biz.jcorder(tblorder.getOid(),1);
-        Tbldeallog tbldeallog = new Tbldeallog();
-        tbldeallog.setDeid(6);tbldeallog.setDlcost(request.getParameter("allmoney"));tbldeallog.setUserid(userid);tbldeallog.setDltype("消费");
-        int c = biz.jUserAdddeallog(tbldeallog);
-        int d = biz.jUsercut(userid,Integer.valueOf(request.getParameter("allmoney")),user.getUserpwd());
         String b =null;
-        if (0 < a&&0<c&&0<d){
-            b ="1";
-            user.setUsermoney(user.getUsermoney()-Integer.valueOf(request.getParameter("allmoney")));
-            request.getSession().setAttribute("userbacc",user);
-        }else {
-            b ="0";
+        if(user.getUsermoney()>Integer.valueOf(request.getParameter("allmoney"))){
+            int a = biz.jcorder(tblorder.getOid(),1);
+            Tbldeallog tbldeallog = new Tbldeallog();
+            tbldeallog.setDeid(6);tbldeallog.setDlcost(request.getParameter("allmoney"));tbldeallog.setUserid(userid);tbldeallog.setDltype("消费");
+            int c = biz.jUserAdddeallog(tbldeallog);
+            int d = biz.jUsercut(userid,Integer.valueOf(request.getParameter("allmoney")),user.getUserpwd());//扣钱
+            if (0 < a&&0<c&&0<d){
+                user.setUsermoney(user.getUsermoney()-Integer.valueOf(request.getParameter("allmoney")));
+                request.getSession().setAttribute("userbacc",user);
+                b ="1";
+             }else {
+                b ="0";
+            }
+        }else{
+            b="2";
         }
         return b;
     }
