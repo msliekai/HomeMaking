@@ -12,6 +12,12 @@
 <meta charset="UTF-8">
 <title>后台管理</title>
 <%String path = request.getContextPath() + "/";%>
+	<%
+		String sn = request.getServerName() ;
+	%>
+	<%
+		String port = request.getServerPort() +"";
+	%>
 <link rel="stylesheet" type="text/css" href="<%=path%>page/layui/css/layui.css">
 <%--	<link rel="stylesheet" href="<%=path%>page/src/css/layui.css" media="all">--%>
 <%--	<script src="<%=path%>page/src/layui.js"></script>--%>
@@ -150,7 +156,7 @@
 	var im = {
 	init: function () {
 	if ('WebSocket' in window) {
-	var socketUrl = "ws://localhost:8080<%=path%>websocketTest/" + '${company.fphone}';
+	var socketUrl = "ws://<%=sn%>:<%=port%><%=path%>websocketTest/" + '${company.fphone}';
 	socket = new WebSocket(socketUrl);
 
 	im.startListener();

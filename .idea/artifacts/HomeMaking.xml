@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="HomeMaking">
-    <output-path>$USER_HOME$/Desktop/四阶项目</output-path>
-    <root id="archive" name="HomeMaking_war.war">
-      <element id="artifact" artifact-name="HomeMaking:war exploded" />
-    </root>
-  </artifact>
-</component>

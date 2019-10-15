@@ -11,6 +11,12 @@
 <%
     String path = request.getContextPath() + "/";
 %>
+<%
+    String sn = request.getServerName() ;
+%>
+<%
+    String port = request.getServerPort() +"";
+%>
 <%--<html>--%>
 <%--<head>--%>
 <%--    <title>-</title>--%>
@@ -110,7 +116,7 @@
         var im = {
             init: function () {
                 if ('WebSocket' in window) {
-                    var socketUrl = "ws://localhost:8080<%=path%>websocketTest/" + '${userbacc.userphone}';
+                    var socketUrl = "ws://<%=sn%>:<%=port%><%=path%>websocketTest/" + '${userbacc.userphone}';
                     socket = new WebSocket(socketUrl);
                     im.startListener();
                 } else {
@@ -192,9 +198,8 @@
 <script>
     function robot(){
     layui.use('layim', function(layim){
-        alert("<%=path%>");
         //建立websoket
-        var socket1 = new WebSocket('ws://localhost:8080<%=path%>chat');
+        var socket1 = new WebSocket('ws://<%=sn%>:<%=port%><%=path%>chat');
 
         var layim1 = layui.layim;
         layim1.config({
