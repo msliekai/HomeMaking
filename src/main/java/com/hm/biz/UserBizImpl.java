@@ -137,6 +137,7 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public int jUserPay(Integer userid, Integer money,String userpwd) {
+        userpwd = md5(userpwd);
         return userMapper.jUserPay(userid,money,userpwd);
     }
 
@@ -280,6 +281,9 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public Integer upUser(TblUser tblUser) {
+        String userpwd = tblUser.getUserpwd();
+        userpwd = md5(userpwd);
+        tblUser.setUserpwd(userpwd);
         return userMapper.upUser(tblUser);
     }
 

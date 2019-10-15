@@ -154,7 +154,10 @@
                                 // 可以对父窗口进行刷新
                                 xadmin.father_reload();
                             });
-                        } else {
+                        }else if(bac == "2"){
+                            layer.msg("余额不足，请前往充值！");
+                        }
+                        else {
                             layer.msg("确认失败");
                         }
                     }
