@@ -143,7 +143,6 @@ public class UserBizImpl implements UserBiz
 
     @Override
     public int jUsercut(Integer userid, Integer money, String userpwd) {
-        userpwd = md5(userpwd);
         return userMapper.jUsercut(userid,money,userpwd);
     }
 
